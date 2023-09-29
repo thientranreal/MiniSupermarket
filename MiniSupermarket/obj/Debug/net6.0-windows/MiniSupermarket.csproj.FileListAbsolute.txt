@@ -1,0 +1,17 @@
+D:\Programs\GitHubProject\MiniSupermarket\MiniSupermarket\bin\Debug\net6.0-windows\MiniSupermarket.exe
+D:\Programs\GitHubProject\MiniSupermarket\MiniSupermarket\bin\Debug\net6.0-windows\MiniSupermarket.deps.json
+D:\Programs\GitHubProject\MiniSupermarket\MiniSupermarket\bin\Debug\net6.0-windows\MiniSupermarket.runtimeconfig.json
+D:\Programs\GitHubProject\MiniSupermarket\MiniSupermarket\bin\Debug\net6.0-windows\MiniSupermarket.dll
+D:\Programs\GitHubProject\MiniSupermarket\MiniSupermarket\bin\Debug\net6.0-windows\MiniSupermarket.pdb
+D:\Programs\GitHubProject\MiniSupermarket\MiniSupermarket\obj\Debug\net6.0-windows\MiniSupermarket.Views.ProductTypeForm.resources
+D:\Programs\GitHubProject\MiniSupermarket\MiniSupermarket\obj\Debug\net6.0-windows\MiniSupermarket.csproj.GenerateResource.cache
+D:\Programs\GitHubProject\MiniSupermarket\MiniSupermarket\obj\Debug\net6.0-windows\MiniSupermarket.GeneratedMSBuildEditorConfig.editorconfig
+D:\Programs\GitHubProject\MiniSupermarket\MiniSupermarket\obj\Debug\net6.0-windows\MiniSupermarket.AssemblyInfoInputs.cache
+D:\Programs\GitHubProject\MiniSupermarket\MiniSupermarket\obj\Debug\net6.0-windows\MiniSupermarket.AssemblyInfo.cs
+D:\Programs\GitHubProject\MiniSupermarket\MiniSupermarket\obj\Debug\net6.0-windows\MiniSupermarket.csproj.CoreCompileInputs.cache
+D:\Programs\GitHubProject\MiniSupermarket\MiniSupermarket\obj\Debug\net6.0-windows\MiniSupermarket.dll
+D:\Programs\GitHubProject\MiniSupermarket\MiniSupermarket\obj\Debug\net6.0-windows\refint\MiniSupermarket.dll
+D:\Programs\GitHubProject\MiniSupermarket\MiniSupermarket\obj\Debug\net6.0-windows\MiniSupermarket.pdb
+D:\Programs\GitHubProject\MiniSupermarket\MiniSupermarket\obj\Debug\net6.0-windows\MiniSupermarket.genruntimeconfig.cache
+D:\Programs\GitHubProject\MiniSupermarket\MiniSupermarket\obj\Debug\net6.0-windows\ref\MiniSupermarket.dll
+D:\Programs\GitHubProject\MiniSupermarket\MiniSupermarket\obj\Debug\net6.0-windows\MiniSupermarket.Views.MenuForm.resources
