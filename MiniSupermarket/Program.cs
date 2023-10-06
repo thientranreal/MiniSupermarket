@@ -1,4 +1,3 @@
-using MiniSupermarket.Views;
 
 namespace MiniSupermarket
 {

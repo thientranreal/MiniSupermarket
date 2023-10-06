@@ -10,14 +10,11 @@ using System.Windows.Forms;
 
 namespace MiniSupermarket.Views
 {
-    public partial class ProductTypeForm : Form
+    public partial class ProductTypeManage : Form
     {
-        public ProductTypeForm()
+        public ProductTypeManage()
         {
             InitializeComponent();
-            cb_search_type.DropDownStyle = ComboBoxStyle.DropDownList;
-            cb_search_type.Items.Add("Mã loại");
-            cb_search_type.Items.Add("Tên loại");
         }
     }
 }

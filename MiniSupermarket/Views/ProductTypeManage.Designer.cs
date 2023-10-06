@@ -1,6 +1,6 @@
-﻿namespace MiniSupermarket
+﻿namespace MiniSupermarket.Views
 {
-    partial class MenuForm
+    partial class ProductTypeManage
     {
         /// <summary>
         /// Required designer variable.
@@ -28,41 +28,32 @@
         /// </summary>
         private void InitializeComponent()
         {
-            pnl_top = new Panel();
-            pnl_feature = new Panel();
+            label1 = new Label();
             SuspendLayout();
             // 
-            // pnl_top
+            // label1
             // 
-            pnl_top.Dock = DockStyle.Top;
-            pnl_top.Location = new Point(0, 0);
-            pnl_top.Name = "pnl_top";
-            pnl_top.Size = new Size(800, 138);
-            pnl_top.TabIndex = 0;
+            label1.AutoSize = true;
+            label1.Location = new Point(138, 109);
+            label1.Name = "label1";
+            label1.Size = new Size(87, 20);
+            label1.TabIndex = 0;
+            label1.Text = "Hello world";
             // 
-            // pnl_feature
-            // 
-            pnl_feature.Dock = DockStyle.Fill;
-            pnl_feature.Location = new Point(0, 138);
-            pnl_feature.Name = "pnl_feature";
-            pnl_feature.Size = new Size(800, 312);
-            pnl_feature.TabIndex = 1;
-            // 
-            // MenuForm
+            // ProductTypeManage
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(pnl_feature);
-            Controls.Add(pnl_top);
-            Name = "MenuForm";
-            Text = "MenuForm";
+            Controls.Add(label1);
+            Name = "ProductTypeManage";
+            Text = "ProductTypeManage";
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
-        private Panel pnl_top;
-        private Panel pnl_feature;
+        private Label label1;
     }
 }
