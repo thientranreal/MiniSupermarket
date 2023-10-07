@@ -13,23 +13,30 @@ namespace MiniSupermarket
 {
     public partial class MenuForm : Form
     {
-        Form currentForm;
+        private string currentForm = "";
 
-        String TreeViewVisible = "";
+        private string TreeViewVisible = "";
 
-        TreeView treeView;
-        TabControl tabControl;
+        private TreeView treeView;
+        private TabControl tabControl;
 
         // Tạo các TabPage
-        TabPage tabProStorageManage = new TabPage("Quản lý sản phẩm và kho hàng");
-        TabPage tabCustomerSellManage = new TabPage("Quản lý khách hàng và bán hàng");
-        TabPage tabEmployeeRoleManage = new TabPage("Quản lý nhân viên và quyền");
-        TabPage tabStatistic = new TabPage("Thống kê");
+        private TabPage tabProStorageManage = new TabPage("Quản lý sản phẩm và kho hàng");
+        private TabPage tabCustomerSellManage = new TabPage("Quản lý khách hàng và bán hàng");
+        private TabPage tabEmployeeRoleManage = new TabPage("Quản lý nhân viên và quyền");
+        private TabPage tabStatistic = new TabPage("Thống kê");
         //
+
+        // Tạo dictionary để lưu các form
+        private Dictionary<string, Form> formsManage = new Dictionary<string, Form>();
+        
 
         public MenuForm()
         {
             InitializeComponent();
+            // Thêm các form vào dictionary
+            formsManage.Add("Quản lý loại sản phẩm", new ProductTypeManage());
+            //
             treeView = new TreeView();
             treeView.Dock = DockStyle.Fill;
             // Form ở giữa màn hình, không cho resize, và để autosize, chứa form con
@@ -38,7 +45,7 @@ namespace MiniSupermarket
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.IsMdiContainer = true;
             //
-            
+
             InitializeTabControl();
         }
         // Tao cac tab control
@@ -67,14 +74,14 @@ namespace MiniSupermarket
         private void TreeViewHandler(object sender, TreeViewEventArgs e)
         {
             // Nếu form hiện tại tồn tại thì đóng form đó lại để tạo form mới
-            if (currentForm != null)
+            if (currentForm != "")
             {
-                currentForm.Close();
+                formsManage[currentForm].Hide();
             }
             switch (e.Node.Text)
             {
                 case "Quản lý loại sản phẩm":
-                    currentForm = new ProductTypeManage();
+                    currentForm = e.Node.Text;
                     showCurrentForm();
                     break;
             }
@@ -97,11 +104,13 @@ namespace MiniSupermarket
                         treeView.Nodes.Add("Quản lý nhà cung cấp");
                         tabProStorageManage.Controls.Add(treeView);
                         TreeViewVisible = "Quản lý sản phẩm và kho hàng";
+                        pnl_top.Size = new Size(1101, 146);
                     }
                     else // Nếu mà chọn lại tab này thì sẽ xóa treeview
                     {
                         tabProStorageManage.Controls.Remove(treeView);
                         TreeViewVisible = "";
+                        pnl_top.Size = new Size(1101, 43);
                     }
                     break;
 
@@ -114,11 +123,13 @@ namespace MiniSupermarket
                         treeView.Nodes.Add("Quản lý chương trình khuyến mãi");
                         tabCustomerSellManage.Controls.Add(treeView);
                         TreeViewVisible = "Quản lý khách hàng và bán hàng";
+                        pnl_top.Size = new Size(1101, 146);
                     }
                     else
                     {
                         tabCustomerSellManage.Controls.Remove(treeView);
                         TreeViewVisible = "";
+                        pnl_top.Size = new Size(1101, 43);
                     }
                     break;
 
@@ -130,11 +141,13 @@ namespace MiniSupermarket
                         treeView.Nodes.Add("Quản lý nhóm quyền");
                         tabEmployeeRoleManage.Controls.Add(treeView);
                         TreeViewVisible = "Quản lý nhân viên và quyền";
+                        pnl_top.Size = new Size(1101, 146);
                     }
                     else
                     {
                         tabEmployeeRoleManage.Controls.Remove(treeView);
                         TreeViewVisible = "";
+                        pnl_top.Size = new Size(1101, 43);
                     }
                     break;
 
@@ -146,11 +159,13 @@ namespace MiniSupermarket
                         treeView.Nodes.Add("Thống kê doanh thu, lợi nhuận");
                         tabStatistic.Controls.Add(treeView);
                         TreeViewVisible = "Thống kê";
+                        pnl_top.Size = new Size(1101, 146);
                     }
                     else
                     {
                         tabStatistic.Controls.Remove(treeView);
                         TreeViewVisible = "";
+                        pnl_top.Size = new Size(1101, 43);
                     }
                     break;
             }
@@ -160,11 +175,11 @@ namespace MiniSupermarket
 
         private void showCurrentForm()
         {
-            currentForm.MdiParent = this;
-            pnl_feature.Controls.Add(currentForm);
-            currentForm.Dock = DockStyle.Fill;
-            currentForm.FormBorderStyle = FormBorderStyle.None;
-            currentForm.Show();
+            formsManage[currentForm].MdiParent = this;
+            pnl_feature.Controls.Add(formsManage[currentForm]);
+            formsManage[currentForm].Dock = DockStyle.Fill;
+            formsManage[currentForm].FormBorderStyle = FormBorderStyle.None;
+            formsManage[currentForm].Show();
         }
     }
 }

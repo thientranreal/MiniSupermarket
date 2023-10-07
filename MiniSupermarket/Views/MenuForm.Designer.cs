@@ -37,22 +37,22 @@
             pnl_top.Dock = DockStyle.Top;
             pnl_top.Location = new Point(0, 0);
             pnl_top.Name = "pnl_top";
-            pnl_top.Size = new Size(800, 138);
+            pnl_top.Size = new Size(1101, 101);
             pnl_top.TabIndex = 0;
             // 
             // pnl_feature
             // 
             pnl_feature.Dock = DockStyle.Fill;
-            pnl_feature.Location = new Point(0, 138);
+            pnl_feature.Location = new Point(0, 101);
             pnl_feature.Name = "pnl_feature";
-            pnl_feature.Size = new Size(800, 312);
+            pnl_feature.Size = new Size(1101, 555);
             pnl_feature.TabIndex = 1;
             // 
             // MenuForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(1101, 656);
             Controls.Add(pnl_feature);
             Controls.Add(pnl_top);
             Name = "MenuForm";

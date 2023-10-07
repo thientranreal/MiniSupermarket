@@ -1,4 +1,6 @@
 
+using MiniSupermarket.Views;
+
 namespace MiniSupermarket
 {
     internal static class Program
