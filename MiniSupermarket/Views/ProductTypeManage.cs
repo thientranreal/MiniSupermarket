@@ -49,8 +49,49 @@ namespace MiniSupermarket.Views
 
             // Đổi màu mặc định của data grid view
             dgv_qllsp.BackgroundColor = Color.White;
-           
 
+
+        }
+
+        private void dgv_qllsp_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0) // make sure user select at least 1 row 
+            {
+                DataGridViewRow row = dgv_qllsp.Rows[e.RowIndex];
+                txt_idType.Text = row.Cells["TypeID"].Value.ToString();
+                txt_nameType.Text = row.Cells["Name"].Value.ToString();
+            }
+        }
+
+        private void btn_add_Click(object sender, EventArgs e)
+        {
+            string id = txt_idType.Text.Trim();
+            string name = txt_nameType.Text.Trim();
+            // Nếu mà mã loại rỗng
+            if (id.Length == 0)
+            {//Nếu tên loại rỗng thì hiện thông báo warning
+                if (name.Length == 0)
+                {
+                    MessageBox.Show(
+                        "Không được bỏ trống tên loại sản phẩm",
+                        "Warning",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning // cho cảnh báo
+                    );
+                }
+                else
+                {// Nếu tên loại đã tồn tại trong hệ thống thì hiện lỗi
+                    if (ptController.checkNameExist(name))
+                    {
+                        MessageBox.Show(
+                        "Tên loại đã tồn tại trong hệ thống",
+                        "Warning",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning // cho cảnh báo
+                    );
+                    }
+                }
+            }
         }
     }
 }

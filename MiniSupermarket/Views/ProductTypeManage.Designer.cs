@@ -124,6 +124,7 @@
             btn_add.TabIndex = 2;
             btn_add.Text = "Thêm";
             btn_add.UseVisualStyleBackColor = true;
+            btn_add.Click += btn_add_Click;
             // 
             // txt_nameType
             // 
@@ -203,6 +204,7 @@
             dgv_qllsp.RowTemplate.Height = 29;
             dgv_qllsp.Size = new Size(617, 413);
             dgv_qllsp.TabIndex = 0;
+            dgv_qllsp.CellClick += dgv_qllsp_CellClick;
             // 
             // ProductTypeManage
             // 

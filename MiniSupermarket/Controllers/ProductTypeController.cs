@@ -16,5 +16,9 @@ namespace MiniSupermarket.Controllers
         {
             return model.getAllProducts();
         }
+
+        public bool checkIdExist(string id) { return model.checkIdExist(id);}
+        public bool checkNameExist(string name) { return model.checkNameExist(name);}
+
     }
 }
