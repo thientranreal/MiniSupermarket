@@ -216,6 +216,7 @@
             Controls.Add(pnl_top);
             Name = "ProductTypeManage";
             Text = "ProductTypeManage";
+            Load += ProductTypeManage_Load;
             pnl_top.ResumeLayout(false);
             pnl_left.ResumeLayout(false);
             grb_textField.ResumeLayout(false);

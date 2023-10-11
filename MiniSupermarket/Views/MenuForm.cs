@@ -1,10 +1,12 @@
-﻿using MiniSupermarket.Views;
+﻿using MiniSupermarket.ImageAndFont;
+using MiniSupermarket.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,173 +15,145 @@ namespace MiniSupermarket
 {
     public partial class MenuForm : Form
     {
-        private string currentForm = "";
+        //Fields
+        private Button currentButton;
+        private Random random;
+        private int tempIndex;
+        private Form activeForm;
 
-        private string TreeViewVisible = "";
+        // Lưu dictionary cho các forms
+        Dictionary<string, Form> forms;
 
-        private TreeView treeView;
-        private TabControl tabControl;
 
-        // Tạo các TabPage
-        private TabPage tabProStorageManage = new TabPage("Quản lý sản phẩm và kho hàng");
-        private TabPage tabCustomerSellManage = new TabPage("Quản lý khách hàng và bán hàng");
-        private TabPage tabEmployeeRoleManage = new TabPage("Quản lý nhân viên và quyền");
-        private TabPage tabStatistic = new TabPage("Thống kê");
-        //
-
-        // Tạo dictionary để lưu các form
-        private Dictionary<string, Form> formsManage = new Dictionary<string, Form>();
-        
-
+        //Constructor
         public MenuForm()
         {
             InitializeComponent();
-            // Thêm các form vào dictionary
-            formsManage.Add("Quản lý loại sản phẩm", new ProductTypeManage());
-            //
-            treeView = new TreeView();
-            treeView.Dock = DockStyle.Fill;
-            // Form ở giữa màn hình, không cho resize, và để autosize, chứa form con
-            this.StartPosition = FormStartPosition.CenterScreen;
-            this.AutoSize = true;
-            this.FormBorderStyle = FormBorderStyle.FixedSingle;
-            this.IsMdiContainer = true;
-            //
+            random = new Random();
+            btnCloseChildForm.Visible = false;
+            this.Text = string.Empty;
+            this.ControlBox = false;
+            this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
 
-            InitializeTabControl();
+            // Khởi tạo giá trị cho dictionary
+            forms = new Dictionary<string, Form>();
+            forms.Add("Quản lý sản phẩm", new ProductTypeManage());
         }
-        // Tao cac tab control
-        private void InitializeTabControl()
+        // Function dùng để kéo form
+        [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
+        private extern static void ReleaseCapture();
+
+        [DllImport("user32.DLL", EntryPoint = "SendMessage")]
+        private extern static void SendMessage(System.IntPtr hWnd, int wMsg, int wParam, int lParam);
+
+        //Methods
+        private Color SelectThemeColor()
         {
-            // Tạo TabControl
-            tabControl = new TabControl();
-            tabControl.Dock = DockStyle.Fill;
-
-            // Thêm các TabPage vào TabControl
-            tabControl.TabPages.Add(tabProStorageManage);
-            tabControl.TabPages.Add(tabCustomerSellManage);
-            tabControl.TabPages.Add(tabEmployeeRoleManage);
-            tabControl.TabPages.Add(tabStatistic);
-            //
-
-            // Thêm TabControl vào panel top
-            pnl_top.Controls.Add(tabControl);
-
-            // Thêm sự kiện click cho tab control
-            tabControl.Click += TabPageClickHandler;
-
-
-        }
-
-        private void TreeViewHandler(object sender, TreeViewEventArgs e)
-        {
-            // Nếu form hiện tại tồn tại thì đóng form đó lại để tạo form mới
-            if (currentForm != "")
+            int index = random.Next(ThemeColor.ColorList.Count);
+            while (tempIndex == index)
             {
-                formsManage[currentForm].Hide();
+                index = random.Next(ThemeColor.ColorList.Count);
             }
-            switch (e.Node.Text)
+            tempIndex = index;
+            string color = ThemeColor.ColorList[index];
+            return ColorTranslator.FromHtml(color);
+        }
+        // Hiển thị nút được click
+        private void ActivateButton(object btnSender)
+        {
+            if (btnSender != null)
             {
-                case "Quản lý loại sản phẩm":
-                    currentForm = e.Node.Text;
-                    showCurrentForm();
-                    break;
+                if (currentButton != (Button)btnSender)
+                {
+                    DisableButton();
+                    Color color = SelectThemeColor();
+                    currentButton = (Button)btnSender;
+                    currentButton.BackColor = color;
+                    currentButton.ForeColor = Color.White;
+                    currentButton.Font = new System.Drawing.Font("Microsoft Sans Serif", 12.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                    panelTitleBar.BackColor = color;
+                    panelLogo.BackColor = ThemeColor.ChangeColorBrightness(color, -0.3);
+                    ThemeColor.PrimaryColor = color;
+                    ThemeColor.SecondaryColor = ThemeColor.ChangeColorBrightness(color, -0.3);
+                    btnCloseChildForm.Visible = true;
+                }
             }
         }
 
-        private void TabPageClickHandler(object sender, EventArgs e)
+        private void DisableButton()
         {
-            treeView.Nodes.Clear();
-            TabPage selectedTab = tabControl.SelectedTab;
-            // Thêm các node tương ứng với từng TabPage
-            switch (selectedTab.Text)
+            foreach (Control previousBtn in panelMenu.Controls)
             {
-                case "Quản lý sản phẩm và kho hàng":
-                    if (TreeViewVisible != "Quản lý sản phẩm và kho hàng")
-                    {
-                        // Tạo TreeView cho tabProStorageManage
-                        treeView.Nodes.Add("Quản lý sản phẩm");
-                        treeView.Nodes.Add("Quản lý loại sản phẩm");
-                        treeView.Nodes.Add("Quản lý kho hàng");
-                        treeView.Nodes.Add("Quản lý nhà cung cấp");
-                        tabProStorageManage.Controls.Add(treeView);
-                        TreeViewVisible = "Quản lý sản phẩm và kho hàng";
-                        pnl_top.Size = new Size(1101, 146);
-                    }
-                    else // Nếu mà chọn lại tab này thì sẽ xóa treeview
-                    {
-                        tabProStorageManage.Controls.Remove(treeView);
-                        TreeViewVisible = "";
-                        pnl_top.Size = new Size(1101, 43);
-                    }
-                    break;
-
-                case "Quản lý khách hàng và bán hàng":
-                    if (TreeViewVisible != "Quản lý khách hàng và bán hàng")
-                    {
-                        // Tạo TreeView cho tabCustomerSellManage
-                        treeView.Nodes.Add("Quản lý khách hàng");
-                        treeView.Nodes.Add("Quản lý bán hàng");
-                        treeView.Nodes.Add("Quản lý chương trình khuyến mãi");
-                        tabCustomerSellManage.Controls.Add(treeView);
-                        TreeViewVisible = "Quản lý khách hàng và bán hàng";
-                        pnl_top.Size = new Size(1101, 146);
-                    }
-                    else
-                    {
-                        tabCustomerSellManage.Controls.Remove(treeView);
-                        TreeViewVisible = "";
-                        pnl_top.Size = new Size(1101, 43);
-                    }
-                    break;
-
-                case "Quản lý nhân viên và quyền":
-                    if (TreeViewVisible != "Quản lý nhân viên và quyền")
-                    {
-                        // Tạo TreeView cho tabEmployeeRoleManage
-                        treeView.Nodes.Add("Quản lý nhân viên");
-                        treeView.Nodes.Add("Quản lý nhóm quyền");
-                        tabEmployeeRoleManage.Controls.Add(treeView);
-                        TreeViewVisible = "Quản lý nhân viên và quyền";
-                        pnl_top.Size = new Size(1101, 146);
-                    }
-                    else
-                    {
-                        tabEmployeeRoleManage.Controls.Remove(treeView);
-                        TreeViewVisible = "";
-                        pnl_top.Size = new Size(1101, 43);
-                    }
-                    break;
-
-                case "Thống kê":
-                    if (TreeViewVisible != "Thống kê")
-                    {
-                        // Tạo TreeView cho tabCustomerSellManage
-                        treeView.Nodes.Add("Thống kê sản phẩm bán chạy");
-                        treeView.Nodes.Add("Thống kê doanh thu, lợi nhuận");
-                        tabStatistic.Controls.Add(treeView);
-                        TreeViewVisible = "Thống kê";
-                        pnl_top.Size = new Size(1101, 146);
-                    }
-                    else
-                    {
-                        tabStatistic.Controls.Remove(treeView);
-                        TreeViewVisible = "";
-                        pnl_top.Size = new Size(1101, 43);
-                    }
-                    break;
+                if (previousBtn.GetType() == typeof(Button))
+                {
+                    previousBtn.BackColor = Color.FromArgb(51, 51, 76);
+                    previousBtn.ForeColor = Color.Gainsboro;
+                    previousBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+                }
             }
-            // Sự kiện click cho quản lý loại sản phẩm
-            treeView.AfterSelect += TreeViewHandler;
+        }
+        // Mở form con từ form menu
+        private void OpenChildForm(Form childForm, object btnSender)
+        {
+            if (activeForm != null)
+                activeForm.Hide();
+            ActivateButton(btnSender);
+            activeForm = childForm;
+            childForm.TopLevel = false;
+            childForm.FormBorderStyle = FormBorderStyle.None;
+            childForm.Dock = DockStyle.Fill;
+            this.panelDesktopPane.Controls.Add(childForm);
+            this.panelDesktopPane.Tag = childForm;
+            childForm.BringToFront();
+            childForm.Show();
+            lblTitle.Text = childForm.Text;
+
         }
 
-        private void showCurrentForm()
+        private void Reset()
         {
-            formsManage[currentForm].MdiParent = this;
-            pnl_feature.Controls.Add(formsManage[currentForm]);
-            formsManage[currentForm].Dock = DockStyle.Fill;
-            formsManage[currentForm].FormBorderStyle = FormBorderStyle.None;
-            formsManage[currentForm].Show();
+            DisableButton();
+            lblTitle.Text = "HOME";
+            panelTitleBar.BackColor = Color.FromArgb(0, 150, 136);
+            panelLogo.BackColor = Color.FromArgb(39, 39, 58);
+            currentButton = null;
+            btnCloseChildForm.Visible = false;
+        }
+
+        private void btnProducts_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(forms["Quản lý sản phẩm"], sender);
+        }
+
+        private void btnCloseChildForm_Click(object sender, EventArgs e)
+        {
+            if (activeForm != null)
+                activeForm.Hide();
+            Reset();
+        }
+
+        private void panelTitleBar_MouseMove(object sender, MouseEventArgs e)
+        {
+            ReleaseCapture();
+            SendMessage(this.Handle, 0x112, 0xf012, 0);
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
+
+        private void btnMaximize_Click(object sender, EventArgs e)
+        {
+            if (WindowState == FormWindowState.Normal)
+                this.WindowState = FormWindowState.Maximized;
+            else
+                this.WindowState = FormWindowState.Normal;
+        }
+
+        private void bntMinimize_Click(object sender, EventArgs e)
+        {
+            this.WindowState = FormWindowState.Minimized;
         }
     }
 }

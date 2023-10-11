@@ -8,8 +8,8 @@ namespace MiniSupermarket.ImageAndFont
 {
     internal static class ProjectFont
     {
-        private static Font titleFont = new Font("Arial", 16);
-        private static Font normalFont = new Font("Arial", 12);
+        private static Font titleFont = new Font("microsoft sans serif", 16);
+        private static Font normalFont = new Font("microsoft sans serif", 12);
 
         public static Font getTitleFont()
         {

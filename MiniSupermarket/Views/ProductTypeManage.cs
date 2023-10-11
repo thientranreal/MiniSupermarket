@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection.Emit;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -36,21 +37,10 @@ namespace MiniSupermarket.Views
             cb_search.SelectedIndex = 0;
             // Cho hiển thị hết chiều dài của bảng
             dgv_qllsp.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
-            // Tải dữ liệu lên data grid view
-            dgv_qllsp.DataSource = ptController.getAllProducts();
-
-            // Chỉ cho đọc data grid view
-            dgv_qllsp.ReadOnly = true;
-
-            // Đổi tên cột
-            dgv_qllsp.Columns["TypeID"].HeaderText = "Mã loại";
-            dgv_qllsp.Columns["Name"].HeaderText = "Tên loại";
-
             // Đổi màu mặc định của data grid view
             dgv_qllsp.BackgroundColor = Color.White;
-
-
+            // Chỉ cho đọc data grid view
+            dgv_qllsp.ReadOnly = true;
         }
 
         private void dgv_qllsp_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -92,6 +82,34 @@ namespace MiniSupermarket.Views
                     }
                 }
             }
+        }
+
+        private void LoadTheme()
+        {
+            foreach (Control btns in this.Controls)
+            {
+                if (btns.GetType() == typeof(Button))
+                {
+                    Button btn = (Button)btns;
+                    btn.BackColor = ThemeColor.PrimaryColor;
+                    btn.ForeColor = Color.White;
+                    btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
+                }
+            }
+            lb_idType.ForeColor = ThemeColor.SecondaryColor;
+            lb_typeName.ForeColor = ThemeColor.PrimaryColor;
+            lb_QLLSP.ForeColor = ThemeColor.PrimaryColor;
+        }
+
+        private void ProductTypeManage_Load(object sender, EventArgs e)
+        {
+            // Tải dữ liệu lên data grid view
+            dgv_qllsp.DataSource = ptController.getAllProducts();
+            // Đổi tên cột
+            dgv_qllsp.Columns["TypeID"].HeaderText = "Mã loại";
+            dgv_qllsp.Columns["Name"].HeaderText = "Tên loại";
+
+            LoadTheme();
         }
     }
 }
