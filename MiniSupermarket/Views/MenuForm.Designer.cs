@@ -29,12 +29,12 @@
         private void InitializeComponent()
         {
             panelMenu = new Panel();
-            button5 = new Button();
-            button4 = new Button();
-            button3 = new Button();
-            button2 = new Button();
-            button1 = new Button();
+            btnEmployees = new Button();
+            btnImport = new Button();
+            btnSale = new Button();
+            btnCustomers = new Button();
             btnProducts = new Button();
+            btnProductType = new Button();
             panelLogo = new Panel();
             label1 = new Label();
             panelTitleBar = new Panel();
@@ -44,6 +44,10 @@
             btnCloseChildForm = new Button();
             lblTitle = new Label();
             panelDesktopPane = new Panel();
+            btnRoles = new Button();
+            btnPromotions = new Button();
+            btnSuppliers = new Button();
+            btnStatistic = new Button();
             panelMenu.SuspendLayout();
             panelLogo.SuspendLayout();
             panelTitleBar.SuspendLayout();
@@ -52,108 +56,94 @@
             // panelMenu
             // 
             panelMenu.BackColor = Color.FromArgb(51, 51, 76);
-            panelMenu.Controls.Add(button5);
-            panelMenu.Controls.Add(button4);
-            panelMenu.Controls.Add(button3);
-            panelMenu.Controls.Add(button2);
-            panelMenu.Controls.Add(button1);
+            panelMenu.Controls.Add(btnStatistic);
+            panelMenu.Controls.Add(btnSuppliers);
+            panelMenu.Controls.Add(btnPromotions);
+            panelMenu.Controls.Add(btnRoles);
+            panelMenu.Controls.Add(btnEmployees);
+            panelMenu.Controls.Add(btnImport);
+            panelMenu.Controls.Add(btnSale);
+            panelMenu.Controls.Add(btnCustomers);
             panelMenu.Controls.Add(btnProducts);
+            panelMenu.Controls.Add(btnProductType);
             panelMenu.Controls.Add(panelLogo);
             panelMenu.Dock = DockStyle.Left;
             panelMenu.Location = new Point(0, 0);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(220, 488);
+            panelMenu.Size = new Size(220, 686);
             panelMenu.TabIndex = 0;
             // 
-            // button5
+            // btnEmployees
             // 
-            button5.Dock = DockStyle.Top;
-            button5.FlatAppearance.BorderSize = 0;
-            button5.FlatStyle = FlatStyle.Flat;
-            button5.ForeColor = Color.Gainsboro;
-            button5.Image = Properties.Resources.iconProduct;
-            button5.ImageAlign = ContentAlignment.MiddleLeft;
-            button5.Location = new Point(0, 380);
-            button5.Name = "button5";
-            button5.Padding = new Padding(12, 0, 0, 0);
-            button5.Size = new Size(220, 60);
-            button5.TabIndex = 6;
-            button5.Text = "Sản phẩm";
-            button5.TextAlign = ContentAlignment.MiddleLeft;
-            button5.TextImageRelation = TextImageRelation.ImageBeforeText;
-            button5.UseVisualStyleBackColor = true;
+            btnEmployees.Dock = DockStyle.Top;
+            btnEmployees.FlatAppearance.BorderSize = 0;
+            btnEmployees.FlatStyle = FlatStyle.Flat;
+            btnEmployees.ForeColor = Color.Gainsboro;
+            btnEmployees.Image = Properties.Resources.iconProduct;
+            btnEmployees.ImageAlign = ContentAlignment.MiddleLeft;
+            btnEmployees.Location = new Point(0, 380);
+            btnEmployees.Name = "btnEmployees";
+            btnEmployees.Padding = new Padding(12, 0, 0, 0);
+            btnEmployees.Size = new Size(220, 60);
+            btnEmployees.TabIndex = 6;
+            btnEmployees.Text = "Nhân viên";
+            btnEmployees.TextAlign = ContentAlignment.MiddleLeft;
+            btnEmployees.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnEmployees.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btnImport
             // 
-            button4.Dock = DockStyle.Top;
-            button4.FlatAppearance.BorderSize = 0;
-            button4.FlatStyle = FlatStyle.Flat;
-            button4.ForeColor = Color.Gainsboro;
-            button4.Image = Properties.Resources.iconProduct;
-            button4.ImageAlign = ContentAlignment.MiddleLeft;
-            button4.Location = new Point(0, 320);
-            button4.Name = "button4";
-            button4.Padding = new Padding(12, 0, 0, 0);
-            button4.Size = new Size(220, 60);
-            button4.TabIndex = 5;
-            button4.Text = "Sản phẩm";
-            button4.TextAlign = ContentAlignment.MiddleLeft;
-            button4.TextImageRelation = TextImageRelation.ImageBeforeText;
-            button4.UseVisualStyleBackColor = true;
+            btnImport.Dock = DockStyle.Top;
+            btnImport.FlatAppearance.BorderSize = 0;
+            btnImport.FlatStyle = FlatStyle.Flat;
+            btnImport.ForeColor = Color.Gainsboro;
+            btnImport.Image = Properties.Resources.iconProduct;
+            btnImport.ImageAlign = ContentAlignment.MiddleLeft;
+            btnImport.Location = new Point(0, 320);
+            btnImport.Name = "btnImport";
+            btnImport.Padding = new Padding(12, 0, 0, 0);
+            btnImport.Size = new Size(220, 60);
+            btnImport.TabIndex = 5;
+            btnImport.Text = "Nhập hàng";
+            btnImport.TextAlign = ContentAlignment.MiddleLeft;
+            btnImport.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnImport.UseVisualStyleBackColor = true;
             // 
-            // button3
+            // btnSale
             // 
-            button3.Dock = DockStyle.Top;
-            button3.FlatAppearance.BorderSize = 0;
-            button3.FlatStyle = FlatStyle.Flat;
-            button3.ForeColor = Color.Gainsboro;
-            button3.Image = Properties.Resources.iconProduct;
-            button3.ImageAlign = ContentAlignment.MiddleLeft;
-            button3.Location = new Point(0, 260);
-            button3.Name = "button3";
-            button3.Padding = new Padding(12, 0, 0, 0);
-            button3.Size = new Size(220, 60);
-            button3.TabIndex = 4;
-            button3.Text = "Sản phẩm";
-            button3.TextAlign = ContentAlignment.MiddleLeft;
-            button3.TextImageRelation = TextImageRelation.ImageBeforeText;
-            button3.UseVisualStyleBackColor = true;
+            btnSale.Dock = DockStyle.Top;
+            btnSale.FlatAppearance.BorderSize = 0;
+            btnSale.FlatStyle = FlatStyle.Flat;
+            btnSale.ForeColor = Color.Gainsboro;
+            btnSale.Image = Properties.Resources.iconProduct;
+            btnSale.ImageAlign = ContentAlignment.MiddleLeft;
+            btnSale.Location = new Point(0, 260);
+            btnSale.Name = "btnSale";
+            btnSale.Padding = new Padding(12, 0, 0, 0);
+            btnSale.Size = new Size(220, 60);
+            btnSale.TabIndex = 4;
+            btnSale.Text = "Bán hàng";
+            btnSale.TextAlign = ContentAlignment.MiddleLeft;
+            btnSale.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnSale.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnCustomers
             // 
-            button2.Dock = DockStyle.Top;
-            button2.FlatAppearance.BorderSize = 0;
-            button2.FlatStyle = FlatStyle.Flat;
-            button2.ForeColor = Color.Gainsboro;
-            button2.Image = Properties.Resources.iconProduct;
-            button2.ImageAlign = ContentAlignment.MiddleLeft;
-            button2.Location = new Point(0, 200);
-            button2.Name = "button2";
-            button2.Padding = new Padding(12, 0, 0, 0);
-            button2.Size = new Size(220, 60);
-            button2.TabIndex = 3;
-            button2.Text = "Sản phẩm";
-            button2.TextAlign = ContentAlignment.MiddleLeft;
-            button2.TextImageRelation = TextImageRelation.ImageBeforeText;
-            button2.UseVisualStyleBackColor = true;
-            // 
-            // button1
-            // 
-            button1.Dock = DockStyle.Top;
-            button1.FlatAppearance.BorderSize = 0;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.ForeColor = Color.Gainsboro;
-            button1.Image = Properties.Resources.iconProduct;
-            button1.ImageAlign = ContentAlignment.MiddleLeft;
-            button1.Location = new Point(0, 140);
-            button1.Name = "button1";
-            button1.Padding = new Padding(12, 0, 0, 0);
-            button1.Size = new Size(220, 60);
-            button1.TabIndex = 2;
-            button1.Text = "Sản phẩm";
-            button1.TextAlign = ContentAlignment.MiddleLeft;
-            button1.TextImageRelation = TextImageRelation.ImageBeforeText;
-            button1.UseVisualStyleBackColor = true;
+            btnCustomers.Dock = DockStyle.Top;
+            btnCustomers.FlatAppearance.BorderSize = 0;
+            btnCustomers.FlatStyle = FlatStyle.Flat;
+            btnCustomers.ForeColor = Color.Gainsboro;
+            btnCustomers.Image = Properties.Resources.iconProduct;
+            btnCustomers.ImageAlign = ContentAlignment.MiddleLeft;
+            btnCustomers.Location = new Point(0, 200);
+            btnCustomers.Name = "btnCustomers";
+            btnCustomers.Padding = new Padding(12, 0, 0, 0);
+            btnCustomers.Size = new Size(220, 60);
+            btnCustomers.TabIndex = 3;
+            btnCustomers.Text = "Khách hàng";
+            btnCustomers.TextAlign = ContentAlignment.MiddleLeft;
+            btnCustomers.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnCustomers.UseVisualStyleBackColor = true;
             // 
             // btnProducts
             // 
@@ -163,16 +153,35 @@
             btnProducts.ForeColor = Color.Gainsboro;
             btnProducts.Image = Properties.Resources.iconProduct;
             btnProducts.ImageAlign = ContentAlignment.MiddleLeft;
-            btnProducts.Location = new Point(0, 80);
+            btnProducts.Location = new Point(0, 140);
             btnProducts.Name = "btnProducts";
             btnProducts.Padding = new Padding(12, 0, 0, 0);
             btnProducts.Size = new Size(220, 60);
-            btnProducts.TabIndex = 1;
+            btnProducts.TabIndex = 2;
             btnProducts.Text = "Sản phẩm";
             btnProducts.TextAlign = ContentAlignment.MiddleLeft;
             btnProducts.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnProducts.UseVisualStyleBackColor = true;
             btnProducts.Click += btnProducts_Click;
+            // 
+            // btnProductType
+            // 
+            btnProductType.Dock = DockStyle.Top;
+            btnProductType.FlatAppearance.BorderSize = 0;
+            btnProductType.FlatStyle = FlatStyle.Flat;
+            btnProductType.ForeColor = Color.Gainsboro;
+            btnProductType.Image = Properties.Resources.iconProduct;
+            btnProductType.ImageAlign = ContentAlignment.MiddleLeft;
+            btnProductType.Location = new Point(0, 80);
+            btnProductType.Name = "btnProductType";
+            btnProductType.Padding = new Padding(12, 0, 0, 0);
+            btnProductType.Size = new Size(220, 60);
+            btnProductType.TabIndex = 1;
+            btnProductType.Text = "Loại sản phẩm";
+            btnProductType.TextAlign = ContentAlignment.MiddleLeft;
+            btnProductType.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnProductType.UseVisualStyleBackColor = true;
+            btnProductType.Click += btnProductType_Click;
             // 
             // panelLogo
             // 
@@ -206,7 +215,7 @@
             panelTitleBar.Dock = DockStyle.Top;
             panelTitleBar.Location = new Point(220, 0);
             panelTitleBar.Name = "panelTitleBar";
-            panelTitleBar.Size = new Size(758, 80);
+            panelTitleBar.Size = new Size(945, 80);
             panelTitleBar.TabIndex = 1;
             panelTitleBar.MouseMove += panelTitleBar_MouseMove;
             // 
@@ -217,7 +226,7 @@
             bntMinimize.FlatStyle = FlatStyle.Flat;
             bntMinimize.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
             bntMinimize.ForeColor = Color.White;
-            bntMinimize.Location = new Point(656, 0);
+            bntMinimize.Location = new Point(843, 0);
             bntMinimize.Name = "bntMinimize";
             bntMinimize.Size = new Size(30, 30);
             bntMinimize.TabIndex = 4;
@@ -232,7 +241,7 @@
             btnMaximize.FlatStyle = FlatStyle.Flat;
             btnMaximize.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnMaximize.ForeColor = Color.White;
-            btnMaximize.Location = new Point(692, 0);
+            btnMaximize.Location = new Point(879, 0);
             btnMaximize.Name = "btnMaximize";
             btnMaximize.Size = new Size(30, 30);
             btnMaximize.TabIndex = 3;
@@ -247,7 +256,7 @@
             btnClose.FlatStyle = FlatStyle.Flat;
             btnClose.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnClose.ForeColor = Color.White;
-            btnClose.Location = new Point(728, 0);
+            btnClose.Location = new Point(915, 0);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(30, 30);
             btnClose.TabIndex = 2;
@@ -275,7 +284,7 @@
             lblTitle.AutoSize = true;
             lblTitle.Font = new Font("Microsoft Sans Serif", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
             lblTitle.ForeColor = Color.White;
-            lblTitle.Location = new Point(338, 23);
+            lblTitle.Location = new Point(431, 23);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(98, 32);
             lblTitle.TabIndex = 0;
@@ -286,14 +295,86 @@
             panelDesktopPane.Dock = DockStyle.Fill;
             panelDesktopPane.Location = new Point(220, 80);
             panelDesktopPane.Name = "panelDesktopPane";
-            panelDesktopPane.Size = new Size(758, 408);
+            panelDesktopPane.Size = new Size(945, 606);
             panelDesktopPane.TabIndex = 2;
+            // 
+            // btnRoles
+            // 
+            btnRoles.Dock = DockStyle.Top;
+            btnRoles.FlatAppearance.BorderSize = 0;
+            btnRoles.FlatStyle = FlatStyle.Flat;
+            btnRoles.ForeColor = Color.Gainsboro;
+            btnRoles.Image = Properties.Resources.iconProduct;
+            btnRoles.ImageAlign = ContentAlignment.MiddleLeft;
+            btnRoles.Location = new Point(0, 440);
+            btnRoles.Name = "btnRoles";
+            btnRoles.Padding = new Padding(12, 0, 0, 0);
+            btnRoles.Size = new Size(220, 60);
+            btnRoles.TabIndex = 7;
+            btnRoles.Text = "Quyền";
+            btnRoles.TextAlign = ContentAlignment.MiddleLeft;
+            btnRoles.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnRoles.UseVisualStyleBackColor = true;
+            // 
+            // btnPromotions
+            // 
+            btnPromotions.Dock = DockStyle.Top;
+            btnPromotions.FlatAppearance.BorderSize = 0;
+            btnPromotions.FlatStyle = FlatStyle.Flat;
+            btnPromotions.ForeColor = Color.Gainsboro;
+            btnPromotions.Image = Properties.Resources.iconProduct;
+            btnPromotions.ImageAlign = ContentAlignment.MiddleLeft;
+            btnPromotions.Location = new Point(0, 500);
+            btnPromotions.Name = "btnPromotions";
+            btnPromotions.Padding = new Padding(12, 0, 0, 0);
+            btnPromotions.Size = new Size(220, 60);
+            btnPromotions.TabIndex = 8;
+            btnPromotions.Text = "Chương trình khuyến mãi";
+            btnPromotions.TextAlign = ContentAlignment.MiddleLeft;
+            btnPromotions.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnPromotions.UseVisualStyleBackColor = true;
+            // 
+            // btnSuppliers
+            // 
+            btnSuppliers.Dock = DockStyle.Top;
+            btnSuppliers.FlatAppearance.BorderSize = 0;
+            btnSuppliers.FlatStyle = FlatStyle.Flat;
+            btnSuppliers.ForeColor = Color.Gainsboro;
+            btnSuppliers.Image = Properties.Resources.iconProduct;
+            btnSuppliers.ImageAlign = ContentAlignment.MiddleLeft;
+            btnSuppliers.Location = new Point(0, 560);
+            btnSuppliers.Name = "btnSuppliers";
+            btnSuppliers.Padding = new Padding(12, 0, 0, 0);
+            btnSuppliers.Size = new Size(220, 60);
+            btnSuppliers.TabIndex = 9;
+            btnSuppliers.Text = "Nhà cung cấp";
+            btnSuppliers.TextAlign = ContentAlignment.MiddleLeft;
+            btnSuppliers.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnSuppliers.UseVisualStyleBackColor = true;
+            // 
+            // btnStatistic
+            // 
+            btnStatistic.Dock = DockStyle.Top;
+            btnStatistic.FlatAppearance.BorderSize = 0;
+            btnStatistic.FlatStyle = FlatStyle.Flat;
+            btnStatistic.ForeColor = Color.Gainsboro;
+            btnStatistic.Image = Properties.Resources.iconProduct;
+            btnStatistic.ImageAlign = ContentAlignment.MiddleLeft;
+            btnStatistic.Location = new Point(0, 620);
+            btnStatistic.Name = "btnStatistic";
+            btnStatistic.Padding = new Padding(12, 0, 0, 0);
+            btnStatistic.Size = new Size(220, 60);
+            btnStatistic.TabIndex = 10;
+            btnStatistic.Text = "Thống kê";
+            btnStatistic.TextAlign = ContentAlignment.MiddleLeft;
+            btnStatistic.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btnStatistic.UseVisualStyleBackColor = true;
             // 
             // MenuForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(978, 488);
+            ClientSize = new Size(1165, 686);
             Controls.Add(panelDesktopPane);
             Controls.Add(panelTitleBar);
             Controls.Add(panelMenu);
@@ -311,12 +392,12 @@
 
         private Panel panelMenu;
         private Panel panelLogo;
+        private Button btnProductType;
+        private Button btnEmployees;
+        private Button btnImport;
+        private Button btnSale;
+        private Button btnCustomers;
         private Button btnProducts;
-        private Button button5;
-        private Button button4;
-        private Button button3;
-        private Button button2;
-        private Button button1;
         private Panel panelTitleBar;
         private Label lblTitle;
         private Label label1;
@@ -325,5 +406,9 @@
         private Button btnClose;
         private Button btnMaximize;
         private Button bntMinimize;
+        private Button btnSuppliers;
+        private Button btnPromotions;
+        private Button btnRoles;
+        private Button btnStatistic;
     }
 }

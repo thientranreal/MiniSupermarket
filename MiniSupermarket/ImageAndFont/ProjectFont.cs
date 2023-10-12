@@ -20,5 +20,12 @@ namespace MiniSupermarket.ImageAndFont
         {
             return normalFont;
         }
+
+        // Viết hoa chữ cái đầu
+        public static string upperFirstLetter(string str)
+        {
+            string temp = str.Trim();
+            return Char.ToUpper(temp[0]) + temp.Substring(1).ToLower();
+        }
     }
 }

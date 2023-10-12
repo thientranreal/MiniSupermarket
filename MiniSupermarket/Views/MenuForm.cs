@@ -37,7 +37,7 @@ namespace MiniSupermarket
 
             // Khởi tạo giá trị cho dictionary
             forms = new Dictionary<string, Form>();
-            forms.Add("Quản lý sản phẩm", new ProductTypeManage());
+            forms.Add("Quản lý loại sản phẩm", new ProductTypeManage());
         }
         // Function dùng để kéo form
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
@@ -93,7 +93,7 @@ namespace MiniSupermarket
             }
         }
         // Mở form con từ form menu
-        private void OpenChildForm(Form childForm, object btnSender)
+        private void OpenChildForm(Form childForm, object btnSender, string title)
         {
             if (activeForm != null)
                 activeForm.Hide();
@@ -106,8 +106,7 @@ namespace MiniSupermarket
             this.panelDesktopPane.Tag = childForm;
             childForm.BringToFront();
             childForm.Show();
-            lblTitle.Text = childForm.Text;
-
+            lblTitle.Text = title;
         }
 
         private void Reset()
@@ -118,11 +117,6 @@ namespace MiniSupermarket
             panelLogo.BackColor = Color.FromArgb(39, 39, 58);
             currentButton = null;
             btnCloseChildForm.Visible = false;
-        }
-
-        private void btnProducts_Click(object sender, EventArgs e)
-        {
-            OpenChildForm(forms["Quản lý sản phẩm"], sender);
         }
 
         private void btnCloseChildForm_Click(object sender, EventArgs e)
@@ -154,6 +148,16 @@ namespace MiniSupermarket
         private void bntMinimize_Click(object sender, EventArgs e)
         {
             this.WindowState = FormWindowState.Minimized;
+        }
+
+        private void btnProductType_Click(object sender, EventArgs e)
+        {
+            OpenChildForm(forms["Quản lý loại sản phẩm"], sender, "Quản lý loại sản phẩm");
+        }
+
+        private void btnProducts_Click(object sender, EventArgs e)
+        {
+            //OpenChildForm(forms["Quản lý loại sản phẩm"], sender, "Quản lý loại sản phẩm");
         }
     }
 }
