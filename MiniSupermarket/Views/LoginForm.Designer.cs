@@ -151,7 +151,8 @@
             // 
             // pbxImage
             // 
-            pbxImage.Image = Properties.Resources.miniMarketLogo;
+            pbxImage.BackgroundImageLayout = ImageLayout.None;
+            pbxImage.Image = Properties.Resources.miniMarketLogo3;
             pbxImage.Location = new Point(-8, -8);
             pbxImage.Name = "pbxImage";
             pbxImage.Size = new Size(519, 436);
