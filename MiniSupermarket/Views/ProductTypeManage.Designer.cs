@@ -28,8 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            pnl_top = new Panel();
-            lb_QLLSP = new Label();
             pnl_left = new Panel();
             grb_textField = new GroupBox();
             btn_mod = new Button();
@@ -44,7 +42,6 @@
             cb_search = new ComboBox();
             pnl_right = new Panel();
             dgv_qllsp = new DataGridView();
-            pnl_top.SuspendLayout();
             pnl_left.SuspendLayout();
             grb_textField.SuspendLayout();
             grb_search.SuspendLayout();
@@ -52,33 +49,14 @@
             ((System.ComponentModel.ISupportInitialize)dgv_qllsp).BeginInit();
             SuspendLayout();
             // 
-            // pnl_top
-            // 
-            pnl_top.Controls.Add(lb_QLLSP);
-            pnl_top.Dock = DockStyle.Top;
-            pnl_top.Location = new Point(0, 0);
-            pnl_top.Name = "pnl_top";
-            pnl_top.Size = new Size(1034, 125);
-            pnl_top.TabIndex = 0;
-            // 
-            // lb_QLLSP
-            // 
-            lb_QLLSP.Dock = DockStyle.Fill;
-            lb_QLLSP.Location = new Point(0, 0);
-            lb_QLLSP.Name = "lb_QLLSP";
-            lb_QLLSP.Size = new Size(1034, 125);
-            lb_QLLSP.TabIndex = 0;
-            lb_QLLSP.Text = "Quản lý loại sản phẩm";
-            lb_QLLSP.TextAlign = ContentAlignment.MiddleCenter;
-            // 
             // pnl_left
             // 
             pnl_left.Controls.Add(grb_textField);
             pnl_left.Controls.Add(grb_search);
             pnl_left.Dock = DockStyle.Left;
-            pnl_left.Location = new Point(0, 125);
+            pnl_left.Location = new Point(0, 0);
             pnl_left.Name = "pnl_left";
-            pnl_left.Size = new Size(417, 413);
+            pnl_left.Size = new Size(417, 538);
             pnl_left.TabIndex = 1;
             // 
             // grb_textField
@@ -93,37 +71,46 @@
             grb_textField.Dock = DockStyle.Fill;
             grb_textField.Location = new Point(0, 125);
             grb_textField.Name = "grb_textField";
-            grb_textField.Size = new Size(417, 288);
+            grb_textField.Size = new Size(417, 413);
             grb_textField.TabIndex = 1;
             grb_textField.TabStop = false;
             grb_textField.Text = "Thông tin";
             // 
             // btn_mod
             // 
+            btn_mod.FlatAppearance.BorderSize = 0;
+            btn_mod.FlatStyle = FlatStyle.Flat;
             btn_mod.Location = new Point(316, 153);
             btn_mod.Name = "btn_mod";
             btn_mod.Size = new Size(94, 29);
             btn_mod.TabIndex = 2;
             btn_mod.Text = "Sửa";
             btn_mod.UseVisualStyleBackColor = true;
+            btn_mod.Click += btn_mod_Click;
             // 
             // btn_del
             // 
+            btn_del.FlatAppearance.BorderSize = 0;
+            btn_del.FlatStyle = FlatStyle.Flat;
             btn_del.Location = new Point(164, 153);
             btn_del.Name = "btn_del";
             btn_del.Size = new Size(94, 29);
             btn_del.TabIndex = 2;
             btn_del.Text = "Xóa";
             btn_del.UseVisualStyleBackColor = true;
+            btn_del.Click += btn_del_Click;
             // 
             // btn_add
             // 
+            btn_add.FlatAppearance.BorderSize = 0;
+            btn_add.FlatStyle = FlatStyle.Flat;
             btn_add.Location = new Point(12, 153);
             btn_add.Name = "btn_add";
             btn_add.Size = new Size(94, 29);
             btn_add.TabIndex = 2;
             btn_add.Text = "Thêm";
             btn_add.UseVisualStyleBackColor = true;
+            btn_add.Click += btn_add_Click;
             // 
             // txt_nameType
             // 
@@ -175,6 +162,8 @@
             txt_search.Name = "txt_search";
             txt_search.Size = new Size(242, 27);
             txt_search.TabIndex = 1;
+            txt_search.TextChanged += txt_search_TextChanged;
+            txt_search.KeyDown += txt_search_KeyDown;
             // 
             // cb_search
             // 
@@ -183,14 +172,15 @@
             cb_search.Name = "cb_search";
             cb_search.Size = new Size(151, 28);
             cb_search.TabIndex = 0;
+            cb_search.SelectedIndexChanged += cb_search_SelectedIndexChanged;
             // 
             // pnl_right
             // 
             pnl_right.Controls.Add(dgv_qllsp);
             pnl_right.Dock = DockStyle.Fill;
-            pnl_right.Location = new Point(417, 125);
+            pnl_right.Location = new Point(417, 0);
             pnl_right.Name = "pnl_right";
-            pnl_right.Size = new Size(617, 413);
+            pnl_right.Size = new Size(617, 538);
             pnl_right.TabIndex = 2;
             // 
             // dgv_qllsp
@@ -201,8 +191,10 @@
             dgv_qllsp.Name = "dgv_qllsp";
             dgv_qllsp.RowHeadersWidth = 51;
             dgv_qllsp.RowTemplate.Height = 29;
-            dgv_qllsp.Size = new Size(617, 413);
+            dgv_qllsp.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgv_qllsp.Size = new Size(617, 538);
             dgv_qllsp.TabIndex = 0;
+            dgv_qllsp.CellClick += dgv_qllsp_CellClick;
             // 
             // ProductTypeManage
             // 
@@ -211,10 +203,9 @@
             ClientSize = new Size(1034, 538);
             Controls.Add(pnl_right);
             Controls.Add(pnl_left);
-            Controls.Add(pnl_top);
             Name = "ProductTypeManage";
             Text = "ProductTypeManage";
-            pnl_top.ResumeLayout(false);
+            Load += ProductTypeManage_Load;
             pnl_left.ResumeLayout(false);
             grb_textField.ResumeLayout(false);
             grb_textField.PerformLayout();
@@ -226,9 +217,6 @@
         }
 
         #endregion
-
-        private Panel pnl_top;
-        private Label lb_QLLSP;
         private Panel pnl_left;
         private Panel pnl_right;
         private DataGridView dgv_qllsp;
