@@ -98,6 +98,8 @@
             btnLogin.Size = new Size(164, 40);
             btnLogin.TabIndex = 5;
             btnLogin.UseVisualStyleBackColor = false;
+            btnLogin.Click += btnLogin_Click;
+            btnLogin.KeyPress += btnLogin_KeyPress;
             // 
             // label3
             // 

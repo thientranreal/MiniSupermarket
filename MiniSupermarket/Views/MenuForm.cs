@@ -20,13 +20,14 @@ namespace MiniSupermarket
         private Random random;
         private int tempIndex;
         private Form activeForm;
+        private List<string> funcs;
 
         // Lưu dictionary cho các forms
         Dictionary<string, Form> forms;
 
 
         //Constructor
-        public MenuForm()
+        public MenuForm(string username, List<string> funcs)
         {
             InitializeComponent();
             random = new Random();
@@ -34,10 +35,59 @@ namespace MiniSupermarket
             this.Text = string.Empty;
             this.ControlBox = false;
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
+            this.funcs = funcs;
 
             // Khởi tạo giá trị cho dictionary
             forms = new Dictionary<string, Form>();
             forms.Add("Quản lý loại sản phẩm", new ProductTypeManage());
+
+            // Ẩn nút chức năng
+            foreach (var control in panelMenu.Controls)
+            {
+                if (control.GetType() == typeof(Button))
+                {
+                    Button button = (Button) control;
+                    button.Visible = false;
+                }
+            }
+
+            // Chỉ hiển thị những chức năng có trong danh sách chức năng của người dùng
+            foreach (string func in funcs)
+            {
+                switch (func)
+                {
+                    case "Quản lý sản phẩm":
+                        btnProducts.Visible = true;
+                        break;
+                    case "Quản lý loại sản phẩm":
+                        btnProductType.Visible = true;
+                        break;
+                    case "Quản lý khách hàng":
+                        btnCustomers.Visible = true;
+                        break;
+                    case "Quản lý nhập hàng":
+                        btnImport.Visible = true;
+                        break;
+                    case "Quản lý bán hàng":
+                        btnSale.Visible = true;
+                        break;
+                    case "Quản lý nhân viên":
+                        btnEmployees.Visible = true;
+                        break;
+                    case "Quản lý quyền":
+                        btnRoles.Visible = true;
+                        break;
+                    case "Quản lý chương trình khuyến mãi":
+                        btnPromotions.Visible = true;
+                        break;
+                    case "Quản lý nhà cung cấp":
+                        btnSuppliers.Visible = true;
+                        break;
+                    case "Thống kê":
+                        btnStatistic.Visible = true;
+                        break;
+                }
+            }
         }
         // Function dùng để kéo form
         [DllImport("user32.DLL", EntryPoint = "ReleaseCapture")]
