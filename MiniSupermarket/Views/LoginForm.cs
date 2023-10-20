@@ -21,6 +21,7 @@ namespace MiniSupermarket
             this.FormBorderStyle = FormBorderStyle.FixedSingle;
             this.MaximizeBox = false;
             this.MinimizeBox = false;
+            this.txtPassword.PasswordChar = '*';
         }
 
         int intImage = 0;
@@ -58,24 +59,21 @@ namespace MiniSupermarket
                         MessageBoxIcon.Warning); // Mật khẩu không được bỏ trống
                 return;
             }
-            switch (controller.countAccount(username, password))
+            List<string> list = controller.getFunctionFromAccount(username, password);
+            switch (controller.countAccount())
             {
-                case -1:
-                    MessageBox.Show("Lỗi hệ thống",
-                        "Thông báo",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error); // Lỗi hệ thống
-                    break;
                 case 0:
                     MessageBox.Show("Tài khoản không có trong hệ thống",
                         "Thông báo",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning); // Tài khoản không có trong hệ thống
+                    txtUsername.Select();
                     break;
                 default:
-                    MenuForm menu = new MenuForm(this, username, controller.getFunctionFromAccount(username));
+                    MenuForm menu = new MenuForm(this, username, list);
                     this.Hide();
                     menu.Show();
+                    clearText();
                     break;
             }
         }
@@ -90,7 +88,6 @@ namespace MiniSupermarket
         private void btnLogin_Click(object sender, EventArgs e)
         {
             login(txtUsername.Text, txtPassword.Text);
-            clearText();
         }
 
         private void btnLogin_KeyPress(object sender, KeyPressEventArgs e)
@@ -100,7 +97,6 @@ namespace MiniSupermarket
                 // Gọi hàm đăng nhập
                 login(txtUsername.Text, txtPassword.Text);
             }
-            clearText();
         }
     }
 }

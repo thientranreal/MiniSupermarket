@@ -113,6 +113,7 @@
             btnAccount.TextAlign = ContentAlignment.MiddleLeft;
             btnAccount.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnAccount.UseVisualStyleBackColor = true;
+            btnAccount.Click += btnAccount_Click;
             // 
             // btnStatistic
             // 

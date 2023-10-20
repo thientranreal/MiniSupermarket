@@ -45,6 +45,7 @@ namespace MiniSupermarket
             forms = new Dictionary<string, Form>();
             forms.Add("Quản lý loại sản phẩm", new ProductTypeManage());
             forms.Add("Quản lý bán hàng", new SaleForm());
+            forms.Add("Tài khoản", new UserAccount(username));
 
             // Ẩn nút chức năng
             foreach (var control in panelMenu.Controls)
@@ -232,6 +233,13 @@ namespace MiniSupermarket
         {
             loginForm.Show();
             this.Close();
+        }
+
+        private void btnAccount_Click(object sender, EventArgs e)
+        {
+            UserAccount temp = (UserAccount)forms["Tài khoản"];
+            OpenChildForm(temp, sender, "Tài khoản");
+            temp.LoadTheme();
         }
     }
 }
