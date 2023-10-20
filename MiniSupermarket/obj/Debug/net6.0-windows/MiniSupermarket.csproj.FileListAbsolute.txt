@@ -52,3 +52,4 @@ C:\Users\PC\Documents\GitHub\MiniSupermarket\MiniSupermarket\obj\Debug\net6.0-wi
 C:\Users\PC\Documents\GitHub\MiniSupermarket\MiniSupermarket\obj\Debug\net6.0-windows\MiniSupermarket.genruntimeconfig.cache
 C:\Users\PC\Documents\GitHub\MiniSupermarket\MiniSupermarket\obj\Debug\net6.0-windows\ref\MiniSupermarket.dll
 D:\Programs\GitHubProject\MiniSupermarket\MiniSupermarket\obj\Debug\net6.0-windows\MiniSupermarket.formLogin.resources
+D:\Programs\GitHubProject\MiniSupermarket\MiniSupermarket\obj\Debug\net6.0-windows\MiniSupermarket.Views.SaleForm.resources

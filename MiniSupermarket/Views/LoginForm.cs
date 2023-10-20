@@ -41,6 +41,23 @@ namespace MiniSupermarket
         // Hàm login cho form
         private void login(string username, string password)
         {
+            // Kiểm tra tên đăng nhập có bỏ trống không
+            if (username.Trim().Length == 0)
+            {
+                MessageBox.Show("Tên đăng nhập không được bỏ trống",
+                        "Thông báo",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning); // Tên đăng nhập không được bỏ trống
+                return;
+            }
+            if (password.Trim().Length == 0)
+            {
+                MessageBox.Show("Mật khẩu không được bỏ trống",
+                        "Thông báo",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning); // Mật khẩu không được bỏ trống
+                return;
+            }
             switch (controller.countAccount(username, password))
             {
                 case -1:
@@ -56,16 +73,24 @@ namespace MiniSupermarket
                         MessageBoxIcon.Warning); // Tài khoản không có trong hệ thống
                     break;
                 default:
-                    MenuForm menu = new MenuForm(username, controller.getFunctionFromAccount(username));
+                    MenuForm menu = new MenuForm(this, username, controller.getFunctionFromAccount(username));
                     this.Hide();
                     menu.Show();
                     break;
             }
         }
 
+        private void clearText()
+        {
+            txtPassword.Text = string.Empty;
+            txtUsername.Text = string.Empty;
+            txtUsername.Select();
+        }
+
         private void btnLogin_Click(object sender, EventArgs e)
         {
             login(txtUsername.Text, txtPassword.Text);
+            clearText();
         }
 
         private void btnLogin_KeyPress(object sender, KeyPressEventArgs e)
@@ -75,6 +100,7 @@ namespace MiniSupermarket
                 // Gọi hàm đăng nhập
                 login(txtUsername.Text, txtPassword.Text);
             }
+            clearText();
         }
     }
 }

@@ -148,7 +148,7 @@ namespace MiniSupermarket.Views
             dgv_qllsp.DataSource = ptController.getAllProducts();
         }
 
-        private void LoadTheme()
+        public void LoadTheme()
         {
             foreach (Control btns in this.grb_textField.Controls)
             {
@@ -162,6 +162,7 @@ namespace MiniSupermarket.Views
             }
             lb_idType.ForeColor = ThemeColor.SecondaryColor;
             lb_typeName.ForeColor = ThemeColor.SecondaryColor;
+            cb_search.ForeColor = ThemeColor.SecondaryColor;
         }
 
         private void ProductTypeManage_Load(object sender, EventArgs e)

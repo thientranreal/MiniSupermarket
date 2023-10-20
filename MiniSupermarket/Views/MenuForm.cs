@@ -21,13 +21,15 @@ namespace MiniSupermarket
         private int tempIndex;
         private Form activeForm;
         private List<string> funcs;
+        private string userName;
+        private Form loginForm;
 
         // Lưu dictionary cho các forms
         Dictionary<string, Form> forms;
 
 
         //Constructor
-        public MenuForm(string username, List<string> funcs)
+        public MenuForm(Form loginForm, string username, List<string> funcs)
         {
             InitializeComponent();
             random = new Random();
@@ -36,17 +38,24 @@ namespace MiniSupermarket
             this.ControlBox = false;
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
             this.funcs = funcs;
+            this.userName = username;
+            this.loginForm = loginForm;
 
             // Khởi tạo giá trị cho dictionary
             forms = new Dictionary<string, Form>();
             forms.Add("Quản lý loại sản phẩm", new ProductTypeManage());
+            forms.Add("Quản lý bán hàng", new SaleForm());
 
             // Ẩn nút chức năng
             foreach (var control in panelMenu.Controls)
             {
                 if (control.GetType() == typeof(Button))
                 {
-                    Button button = (Button) control;
+                    Button button = (Button)control;
+                    if (button.Text == "Đăng xuất" || button.Text == "Tài khoản")
+                    {
+                        continue;
+                    }
                     button.Visible = false;
                 }
             }
@@ -202,12 +211,27 @@ namespace MiniSupermarket
 
         private void btnProductType_Click(object sender, EventArgs e)
         {
-            OpenChildForm(forms["Quản lý loại sản phẩm"], sender, "Quản lý loại sản phẩm");
+            ProductTypeManage temp = (ProductTypeManage)forms["Quản lý loại sản phẩm"];
+            OpenChildForm(temp, sender, "Quản lý loại sản phẩm");
+            temp.LoadTheme();
         }
 
         private void btnProducts_Click(object sender, EventArgs e)
         {
             //OpenChildForm(forms["Quản lý loại sản phẩm"], sender, "Quản lý loại sản phẩm");
+        }
+
+        private void btnSale_Click(object sender, EventArgs e)
+        {
+            SaleForm temp = (SaleForm)forms["Quản lý bán hàng"];
+            OpenChildForm(temp, sender, "Quản lý bán hàng");
+            temp.LoadTheme();
+        }
+
+        private void btnLogout_Click(object sender, EventArgs e)
+        {
+            loginForm.Show();
+            this.Close();
         }
     }
 }
