@@ -22,6 +22,7 @@ namespace MiniSupermarket
         private Form activeForm;
         private List<string> funcs;
         private string userName;
+        private string password;
         private Form loginForm;
 
         // Lưu dictionary cho các forms
@@ -29,7 +30,7 @@ namespace MiniSupermarket
 
 
         //Constructor
-        public MenuForm(Form loginForm, string username, List<string> funcs)
+        public MenuForm(Form loginForm, string username, string password, List<string> funcs)
         {
             InitializeComponent();
             random = new Random();
@@ -39,13 +40,14 @@ namespace MiniSupermarket
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
             this.funcs = funcs;
             this.userName = username;
+            this.password = password;
             this.loginForm = loginForm;
 
             // Khởi tạo giá trị cho dictionary
             forms = new Dictionary<string, Form>();
             forms.Add("Quản lý loại sản phẩm", new ProductTypeManage());
             forms.Add("Quản lý bán hàng", new SaleForm());
-            forms.Add("Tài khoản", new UserAccount(username));
+            forms.Add("Tài khoản", new UserAccount(username, password));
 
             // Ẩn nút chức năng
             foreach (var control in panelMenu.Controls)

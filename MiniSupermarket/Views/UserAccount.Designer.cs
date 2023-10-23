@@ -29,9 +29,10 @@
         private void InitializeComponent()
         {
             pnlLeft = new Panel();
+            txtPhone = new TextBox();
+            btnReload = new Button();
             btnUpdate = new Button();
             txtEmail = new TextBox();
-            txtPhone = new TextBox();
             txtAddress = new TextBox();
             txtEmName = new TextBox();
             txtEmID = new TextBox();
@@ -56,9 +57,10 @@
             // 
             // pnlLeft
             // 
+            pnlLeft.Controls.Add(txtPhone);
+            pnlLeft.Controls.Add(btnReload);
             pnlLeft.Controls.Add(btnUpdate);
             pnlLeft.Controls.Add(txtEmail);
-            pnlLeft.Controls.Add(txtPhone);
             pnlLeft.Controls.Add(txtAddress);
             pnlLeft.Controls.Add(txtEmName);
             pnlLeft.Controls.Add(txtEmID);
@@ -74,44 +76,63 @@
             pnlLeft.Size = new Size(412, 450);
             pnlLeft.TabIndex = 0;
             // 
+            // txtPhone
+            // 
+            txtPhone.Location = new Point(151, 238);
+            txtPhone.Name = "txtPhone";
+            txtPhone.Size = new Size(241, 27);
+            txtPhone.TabIndex = 2;
+            txtPhone.KeyPress += txtPhone_KeyPress;
+            // 
+            // btnReload
+            // 
+            btnReload.FlatAppearance.BorderSize = 0;
+            btnReload.FlatStyle = FlatStyle.Flat;
+            btnReload.Location = new Point(225, 351);
+            btnReload.Name = "btnReload";
+            btnReload.Size = new Size(151, 50);
+            btnReload.TabIndex = 12;
+            btnReload.TabStop = false;
+            btnReload.Text = "Tải lại";
+            btnReload.UseVisualStyleBackColor = true;
+            btnReload.Click += btnReload_Click;
+            // 
             // btnUpdate
             // 
             btnUpdate.FlatAppearance.BorderSize = 0;
             btnUpdate.FlatStyle = FlatStyle.Flat;
-            btnUpdate.Location = new Point(125, 347);
+            btnUpdate.Location = new Point(38, 351);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(151, 50);
             btnUpdate.TabIndex = 11;
+            btnUpdate.TabStop = false;
             btnUpdate.Text = "Cập nhật";
             btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // txtEmail
             // 
-            txtEmail.Location = new Point(151, 289);
+            txtEmail.Location = new Point(151, 288);
             txtEmail.Name = "txtEmail";
             txtEmail.Size = new Size(241, 27);
-            txtEmail.TabIndex = 10;
-            // 
-            // txtPhone
-            // 
-            txtPhone.Location = new Point(151, 233);
-            txtPhone.Name = "txtPhone";
-            txtPhone.Size = new Size(241, 27);
-            txtPhone.TabIndex = 9;
+            txtEmail.TabIndex = 3;
+            txtEmail.KeyPress += txtEmail_KeyPress;
             // 
             // txtAddress
             // 
-            txtAddress.Location = new Point(151, 177);
+            txtAddress.Location = new Point(151, 165);
+            txtAddress.Multiline = true;
             txtAddress.Name = "txtAddress";
-            txtAddress.Size = new Size(241, 27);
-            txtAddress.TabIndex = 8;
+            txtAddress.Size = new Size(241, 50);
+            txtAddress.TabIndex = 1;
             // 
             // txtEmName
             // 
-            txtEmName.Location = new Point(151, 121);
+            txtEmName.Location = new Point(151, 115);
             txtEmName.Name = "txtEmName";
             txtEmName.Size = new Size(241, 27);
             txtEmName.TabIndex = 7;
+            txtEmName.TabStop = false;
             // 
             // txtEmID
             // 
@@ -119,6 +140,7 @@
             txtEmID.Name = "txtEmID";
             txtEmID.Size = new Size(241, 27);
             txtEmID.TabIndex = 6;
+            txtEmID.TabStop = false;
             // 
             // lbEmail
             // 
@@ -198,8 +220,10 @@
             btnChangePass.Name = "btnChangePass";
             btnChangePass.Size = new Size(151, 50);
             btnChangePass.TabIndex = 12;
+            btnChangePass.TabStop = false;
             btnChangePass.Text = "Đổi mật khẩu";
             btnChangePass.UseVisualStyleBackColor = true;
+            btnChangePass.Click += btnChangePass_Click;
             // 
             // lbChangePass
             // 
@@ -215,21 +239,21 @@
             txtConfirmPass.Location = new Point(214, 177);
             txtConfirmPass.Name = "txtConfirmPass";
             txtConfirmPass.Size = new Size(241, 27);
-            txtConfirmPass.TabIndex = 17;
+            txtConfirmPass.TabIndex = 6;
             // 
             // txtOldPass
             // 
             txtOldPass.Location = new Point(214, 65);
             txtOldPass.Name = "txtOldPass";
             txtOldPass.Size = new Size(241, 27);
-            txtOldPass.TabIndex = 15;
+            txtOldPass.TabIndex = 4;
             // 
             // txtNewPass
             // 
             txtNewPass.Location = new Point(214, 121);
             txtNewPass.Name = "txtNewPass";
             txtNewPass.Size = new Size(241, 27);
-            txtNewPass.TabIndex = 16;
+            txtNewPass.TabIndex = 5;
             // 
             // lbOldPass
             // 
@@ -286,7 +310,6 @@
         private Label lbEmName;
         private Label lbEmID;
         private TextBox txtEmail;
-        private TextBox txtPhone;
         private TextBox txtAddress;
         private TextBox txtEmName;
         private TextBox txtEmID;
@@ -299,5 +322,7 @@
         private Label lbComfirmPass;
         private Label lbChangePass;
         private Button btnChangePass;
+        private Button btnReload;
+        private TextBox txtPhone;
     }
 }

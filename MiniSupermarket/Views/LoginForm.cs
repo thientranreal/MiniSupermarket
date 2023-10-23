@@ -70,7 +70,7 @@ namespace MiniSupermarket
                     txtUsername.Select();
                     break;
                 default:
-                    MenuForm menu = new MenuForm(this, username, list);
+                    MenuForm menu = new MenuForm(this, username, password, list);
                     this.Hide();
                     menu.Show();
                     clearText();
