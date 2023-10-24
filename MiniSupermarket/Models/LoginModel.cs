@@ -13,39 +13,11 @@ namespace MiniSupermarket.Models
         // Tạo kết nối SQL
         private SqlConnection conn = Connection.GetConnection();
 
-        public int countAccount(string username, string password)
-        {
-            int count = -1;
-            try
-            {
-                conn.Open();
-                using (SqlCommand cmd = new SqlCommand("SELECT COUNT(*) FROM Employee " +
-                    "WHERE UserName = @UserName " +
-                    "AND Password = @Password AND isDeleted = 1", conn))
-                {
-                    cmd.Parameters.AddWithValue("@UserName", username);
-                    cmd.Parameters.AddWithValue("@Password", password);
-                    count = (int)cmd.ExecuteScalar();
-                }
-            }
-            catch (Exception ex)
-            {
-                // Xử lý lỗi
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                // Đảm bảo đóng kết nối
-                conn.Close();
-            }
-            return count;
-        }
-
-        public List<string> getFunctionFromAccount(string username)
+        public DataTable getFunctionsFromAccount(string username, string password)
         {
             // Tạo đối tượng DataTable
             DataTable table = new DataTable();
-            List<string> funcs = new List<string>();
+            
             try
             {
                 // Mở kết nối
@@ -57,24 +29,19 @@ namespace MiniSupermarket.Models
                     "AND EmployeeRole.RoleID = Role.RoleID " +
                     "AND Role.RoleID = RoleFunction.RoleID " +
                     "AND RoleFunction.FunctionID = Functions.FunctionID " +
-                    "AND UserName = @userName AND IsDeleted = 1";
+                    "AND UserName = @userName AND Password = @Password" +
+                    " AND Employee.IsDeleted = 1";
                 using (SqlCommand cmd = new SqlCommand(sqlQuery, conn))
                 {
                     cmd.Parameters.AddWithValue("@userName", username);
+                    cmd.Parameters.AddWithValue("@Password", password);
                     // Tạo đối tượng SqlDataAdapter
                     SqlDataAdapter adapter = new SqlDataAdapter(cmd);
 
                     // Đổ dữ liệu vào DataTable
                     adapter.Fill(table);
-
-                    // Lấy các tên chức năng
-                    foreach (DataRow row in table.Rows)
-                    {
-                        string temp = row[0].ToString();
-                        funcs.Add(temp);
-                    }
                 }
-                
+
             }
             catch (Exception ex)
             {
@@ -86,7 +53,7 @@ namespace MiniSupermarket.Models
                 // Đảm bảo đóng kết nối
                 conn.Close();
             }
-            return funcs;
+            return table;
         }
     }
 }

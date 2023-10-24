@@ -25,7 +25,11 @@ namespace MiniSupermarket.ImageAndFont
         public static string upperFirstLetter(string str)
         {
             string temp = str.Trim();
-            return Char.ToUpper(temp[0]) + temp.Substring(1).ToLower();
+            if (temp.Length > 0)
+            {
+                return Char.ToUpper(temp[0]) + temp.Substring(1).ToLower();
+            }
+            return temp;
         }
     }
 }
