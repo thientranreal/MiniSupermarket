@@ -1,0 +1,86 @@
+﻿using MiniSupermarket.ImageAndFont;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace MiniSupermarket.Views
+{
+    public partial class PromotionForm : Form
+    {
+        public PromotionForm()
+        {
+            InitializeComponent();
+            this.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
+        }
+
+        public void LoadTheme()
+        {
+            // Thêm màu cho tất cả các nút ở panel top
+            foreach (Control btns in this.pnlInformation.Controls)
+            {
+                if (btns.GetType() == typeof(Button))
+                {
+                    Button btn = (Button)btns;
+                    btn.BackColor = ThemeColor.PrimaryColor;
+                    btn.ForeColor = Color.White;
+                    btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
+                }
+                else if (btns.GetType() == typeof(Label))
+                {
+                    Label lb = (Label)btns;
+                    lb.ForeColor = ThemeColor.SecondaryColor;
+                    lb.Font = ProjectFont.getNormalFont();
+                }
+            }
+
+            // Thêm màu cho group box tìm kiếm
+            foreach (Control control in this.grbPriceFilter.Controls)
+            {
+                // Nếu control là label thì thêm màu và chỉnh font
+                if (control.GetType() == typeof(Label))
+                {
+                    Label lb = (Label)control;
+                    lb.ForeColor = ThemeColor.SecondaryColor;
+                    lb.Font = ProjectFont.getNormalFont();
+                }
+
+            }
+            foreach (Control control in this.grbDateFilter.Controls)
+            {
+                // Nếu control là label thì thêm màu và chỉnh font
+                if (control.GetType() == typeof(Label))
+                {
+                    Label lb = (Label)control;
+                    lb.ForeColor = ThemeColor.SecondaryColor;
+                    lb.Font = ProjectFont.getNormalFont();
+                }
+
+            }
+        }
+
+        private void groupBox3_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox4_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+        }
+
+        private void PromotionForm_Load(object sender, EventArgs e)
+        {
+            LoadTheme();
+        }
+    }
+}
