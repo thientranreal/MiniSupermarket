@@ -70,7 +70,7 @@ namespace MiniSupermarket.Views
                     btn.ForeColor = Color.White;
                     btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
                 }
-                else if (control.GetType() == typeof(Label))
+                else if (control.GetType() == typeof(Label) && control.Name != "lbInfor")
                 {
                     Label lb = (Label)control;
                     lb.ForeColor = ThemeColor.SecondaryColor;
@@ -88,13 +88,19 @@ namespace MiniSupermarket.Views
                     btn.ForeColor = Color.White;
                     btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
                 }
-                else if (control.GetType() == typeof(Label))
+                else if (control.GetType() == typeof(Label) && control.Name != "lbChangePass")
                 {
                     Label lb = (Label)control;
                     lb.ForeColor = ThemeColor.SecondaryColor;
                     lb.Font = ProjectFont.getNormalFont();
                 }
             }
+
+            // Thêm size chữ cho label tiêu đề
+            lbInfor.ForeColor = ThemeColor.SecondaryColor;
+            lbInfor.Font = ProjectFont.getTitleFont();
+            lbChangePass.ForeColor = ThemeColor.SecondaryColor;
+            lbChangePass.Font = ProjectFont.getTitleFont();
         }
 
         private void UserAccount_Load(object sender, EventArgs e)

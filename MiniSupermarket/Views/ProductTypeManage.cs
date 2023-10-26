@@ -150,6 +150,13 @@ namespace MiniSupermarket.Views
 
         public void LoadTheme()
         {
+            // Thêm màu và chỉnh font cho các tiêu đề group box
+            grb_search.ForeColor = ThemeColor.SecondaryColor;
+            grb_search.Font = ProjectFont.getTitleFont();
+            grb_textField.ForeColor = ThemeColor.SecondaryColor;
+            grb_textField.Font = ProjectFont.getTitleFont();
+
+            // Thêm màu và chỉnh font cho các nút
             foreach (Control btns in this.grb_textField.Controls)
             {
                 if (btns.GetType() == typeof(Button))
@@ -158,11 +165,15 @@ namespace MiniSupermarket.Views
                     btn.BackColor = ThemeColor.PrimaryColor;
                     btn.ForeColor = Color.White;
                     btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
+                    btn.Font = ProjectFont.getNormalFont();
                 }
             }
-            lb_idType.ForeColor = ThemeColor.SecondaryColor;
-            lb_typeName.ForeColor = ThemeColor.SecondaryColor;
-            cb_search.ForeColor = ThemeColor.SecondaryColor;
+            // Thêm màu và chỉnh font cho các label
+            lb_idType.Font = ProjectFont.getNormalFont();
+
+            lb_typeName.Font = ProjectFont.getNormalFont();
+
+            cb_search.Font = ProjectFont.getNormalFont();
         }
 
         private void ProductTypeManage_Load(object sender, EventArgs e)

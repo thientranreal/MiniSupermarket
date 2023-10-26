@@ -80,9 +80,9 @@
             // 
             btn_mod.FlatAppearance.BorderSize = 0;
             btn_mod.FlatStyle = FlatStyle.Flat;
-            btn_mod.Location = new Point(316, 153);
+            btn_mod.Location = new Point(304, 153);
             btn_mod.Name = "btn_mod";
-            btn_mod.Size = new Size(94, 29);
+            btn_mod.Size = new Size(106, 49);
             btn_mod.TabIndex = 2;
             btn_mod.Text = "Sửa";
             btn_mod.UseVisualStyleBackColor = true;
@@ -92,9 +92,9 @@
             // 
             btn_del.FlatAppearance.BorderSize = 0;
             btn_del.FlatStyle = FlatStyle.Flat;
-            btn_del.Location = new Point(164, 153);
+            btn_del.Location = new Point(158, 153);
             btn_del.Name = "btn_del";
-            btn_del.Size = new Size(94, 29);
+            btn_del.Size = new Size(106, 49);
             btn_del.TabIndex = 2;
             btn_del.Text = "Xóa";
             btn_del.UseVisualStyleBackColor = true;
@@ -106,7 +106,7 @@
             btn_add.FlatStyle = FlatStyle.Flat;
             btn_add.Location = new Point(12, 153);
             btn_add.Name = "btn_add";
-            btn_add.Size = new Size(94, 29);
+            btn_add.Size = new Size(106, 49);
             btn_add.TabIndex = 2;
             btn_add.Text = "Thêm";
             btn_add.UseVisualStyleBackColor = true;
@@ -188,6 +188,7 @@
             dgv_qllsp.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_qllsp.Dock = DockStyle.Fill;
             dgv_qllsp.Location = new Point(0, 0);
+            dgv_qllsp.MultiSelect = false;
             dgv_qllsp.Name = "dgv_qllsp";
             dgv_qllsp.RowHeadersWidth = 51;
             dgv_qllsp.RowTemplate.Height = 29;

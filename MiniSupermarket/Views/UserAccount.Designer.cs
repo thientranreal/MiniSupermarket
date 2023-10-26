@@ -190,7 +190,7 @@
             // lbInfor
             // 
             lbInfor.AutoSize = true;
-            lbInfor.Location = new Point(125, 32);
+            lbInfor.Location = new Point(125, 19);
             lbInfor.Name = "lbInfor";
             lbInfor.Size = new Size(127, 20);
             lbInfor.TabIndex = 0;
@@ -228,7 +228,7 @@
             // lbChangePass
             // 
             lbChangePass.AutoSize = true;
-            lbChangePass.Location = new Point(160, 32);
+            lbChangePass.Location = new Point(160, 19);
             lbChangePass.Name = "lbChangePass";
             lbChangePass.Size = new Size(98, 20);
             lbChangePass.TabIndex = 12;
