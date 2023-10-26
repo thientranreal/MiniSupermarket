@@ -18,5 +18,4 @@ TestResults/
 *.cache
 *.bak
 .vs/
-MiniSupermarket/Models/Connection.cs
 *.csproj.user
