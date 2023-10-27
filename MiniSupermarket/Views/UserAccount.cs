@@ -60,7 +60,7 @@ namespace MiniSupermarket.Views
         // Hàm tải màu cho label và nút
         public void LoadTheme()
         {
-            // Thêm màu cho tất cả các nút và label ở panel top
+            // Thêm màu cho tất cả các nút và label ở panel left
             foreach (Control control in this.pnlLeft.Controls)
             {
                 if (control.GetType() == typeof(Button))
@@ -78,7 +78,7 @@ namespace MiniSupermarket.Views
                 }
             }
 
-            // Thêm màu cho tất cả các nút và label ở panel top
+            // Thêm màu cho tất cả các nút và label ở panel right
             foreach (Control control in this.pnlRight.Controls)
             {
                 if (control.GetType() == typeof(Button))
@@ -101,6 +101,10 @@ namespace MiniSupermarket.Views
             lbInfor.Font = ProjectFont.getTitleFont();
             lbChangePass.ForeColor = ThemeColor.SecondaryColor;
             lbChangePass.Font = ProjectFont.getTitleFont();
+
+            // Thêm màu cho check box hiện mật khẩu
+            chkShowPassword.ForeColor = ThemeColor.SecondaryColor;
+            chkShowPassword.Font = ProjectFont.getNormalFont();
         }
 
         private void UserAccount_Load(object sender, EventArgs e)
@@ -324,6 +328,13 @@ namespace MiniSupermarket.Views
             txtConfirmPass.Clear();
             this.btnChangePass.Enabled = false;
             txtAddress.Focus();
+        }
+
+        private void chkShowPassword_CheckedChanged(object sender, EventArgs e)
+        {
+            txtOldPass.PasswordChar = chkShowPassword.Checked ? '\0' : '*';
+            txtNewPass.PasswordChar = chkShowPassword.Checked ? '\0' : '*';
+            txtConfirmPass.PasswordChar = chkShowPassword.Checked ? '\0' : '*';
         }
     }
 }

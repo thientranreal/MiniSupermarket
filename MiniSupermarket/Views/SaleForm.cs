@@ -169,7 +169,7 @@ namespace MiniSupermarket.Views
                     return;
                 }
                 // Kiểm tra số điện thoại có hợp lệ
-                if (!ProjectRegex.IsPhoneNumber(txtPhone.Text.Trim()))
+                if (!ProjectRegex.IsPhoneNumber(txtPhone.Text))
                 {
                     // Hiện thông báo
                     MessageBox.Show("Số điện thoại không hợp lệ",

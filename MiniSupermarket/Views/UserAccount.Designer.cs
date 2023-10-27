@@ -43,6 +43,7 @@
             lbEmID = new Label();
             lbInfor = new Label();
             pnlRight = new Panel();
+            chkShowPassword = new CheckBox();
             btnChangePass = new Button();
             lbChangePass = new Label();
             txtConfirmPass = new TextBox();
@@ -198,6 +199,7 @@
             // 
             // pnlRight
             // 
+            pnlRight.Controls.Add(chkShowPassword);
             pnlRight.Controls.Add(btnChangePass);
             pnlRight.Controls.Add(lbChangePass);
             pnlRight.Controls.Add(txtConfirmPass);
@@ -212,11 +214,22 @@
             pnlRight.Size = new Size(483, 450);
             pnlRight.TabIndex = 1;
             // 
+            // chkShowPassword
+            // 
+            chkShowPassword.AutoSize = true;
+            chkShowPassword.Location = new Point(84, 246);
+            chkShowPassword.Name = "chkShowPassword";
+            chkShowPassword.Size = new Size(127, 24);
+            chkShowPassword.TabIndex = 15;
+            chkShowPassword.Text = "Hiện mật khẩu";
+            chkShowPassword.UseVisualStyleBackColor = true;
+            chkShowPassword.CheckedChanged += chkShowPassword_CheckedChanged;
+            // 
             // btnChangePass
             // 
             btnChangePass.FlatAppearance.BorderSize = 0;
             btnChangePass.FlatStyle = FlatStyle.Flat;
-            btnChangePass.Location = new Point(160, 233);
+            btnChangePass.Location = new Point(259, 232);
             btnChangePass.Name = "btnChangePass";
             btnChangePass.Size = new Size(151, 50);
             btnChangePass.TabIndex = 12;
@@ -324,5 +337,6 @@
         private Button btnChangePass;
         private Button btnReload;
         private TextBox txtPhone;
+        private CheckBox chkShowPassword;
     }
 }

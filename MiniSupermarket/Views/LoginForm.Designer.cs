@@ -74,6 +74,7 @@
             chbxShowPassword.TabIndex = 7;
             chbxShowPassword.Text = "Show password";
             chbxShowPassword.UseVisualStyleBackColor = true;
+            chbxShowPassword.CheckedChanged += chbxShowPassword_CheckedChanged;
             // 
             // pictureBox1
             // 

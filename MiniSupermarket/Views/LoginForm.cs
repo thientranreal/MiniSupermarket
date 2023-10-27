@@ -98,5 +98,10 @@ namespace MiniSupermarket
                 login(txtUsername.Text, txtPassword.Text);
             }
         }
+
+        private void chbxShowPassword_CheckedChanged(object sender, EventArgs e)
+        {
+            txtPassword.PasswordChar = chbxShowPassword.Checked ? '\0' : '*';
+        }
     }
 }
