@@ -28,13 +28,15 @@ namespace MiniSupermarket.Models
                 conn.Open();
                 // Tạo đối tượng SqlCommand
                 string sqlQuery = "SELECT TypeID, Name FROM ProductType Where isDeleted = 1";
-                SqlCommand command = new SqlCommand(sqlQuery, conn);
-
-                // Tạo đối tượng SqlDataAdapter
-                SqlDataAdapter adapter = new SqlDataAdapter(command);
-
-                // Đổ dữ liệu vào DataTable
-                adapter.Fill(table);
+                using (SqlCommand command = new SqlCommand(sqlQuery, conn))
+                {
+                    // Tạo đối tượng SqlDataAdapter
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(command))
+                    {
+                        // Đổ dữ liệu vào DataTable
+                        adapter.Fill(table);
+                    }
+                }
             }
             catch (Exception ex)
             {

@@ -61,12 +61,13 @@ create table Product(
 	Unit nvarchar(20) not null,
 	[Image] varchar(50),
 	isDeleted tinyint not null default(1),
+	PromotionID varchar(10),
 	primary key (ProductID)
 )
 GO
 
 -- Rot du lieu bang san pham	
-insert into Product(ProductID,Name,TypeID,Quantity,CurrentPrice,Description,Unit,Image)
+insert into Product(ProductID,[Name],TypeID,Quantity,CurrentPrice,[Description],Unit,[Image])
 values
 	('P0001',N'Mì Kokomi','PT0001',100,2000,N'Mì Kokomi tôm chua cay 100g',N'Gói','.'),
 	('P0002',N'Sữa Milo','PT0002',100,4000,N'Sữa Milo vị ca cao lúa mạch 100ml',N'Hộp','.'),
@@ -81,44 +82,37 @@ create table Promotion(
 	StartDate datetime not null,
 	EndDate datetime not null,
 	Discount float(50) not null,
-	DiscountUnit varchar(20) not null,
-	MinimumPayment float(50) not null,
-	MaximumDiscount float(50) not null,
-	RequiredPoint float(50) not null,
 	isDeleted tinyint not null default(1),
 	primary key (PromotionID)
 )
 GO
 
 -- Rot du lieu vao bang khuyen mai
-INSERT INTO Promotion (PromotionID, Name, StartDate, EndDate, Discount, DiscountUnit, MinimumPayment, MaximumDiscount, RequiredPoint)
+INSERT INTO Promotion (PromotionID, [Name], StartDate, EndDate, Discount)
 VALUES
-    ('PM0001', N'Khuyến mãi giờ vàng', '2023-9-24', '2023-11-24', 50000, 'VND', 200000, 50000, 0),
-    ('PM0002', N'Khuyến mãi lễ 2/9', '2023-08-30', '2023-09-03', 20, '%', 100000, 200000, 0),
-    ('PM0003', N'Khuyến mãi điểm tích luỹ', '2023-03-01', '2040-03-01', 1000, 'VND', 10000, 200000000, 0.0001);
+    ('PM0001', N'Khuyến mãi giờ vàng', '2023-9-24', '2023-11-24', 10),
+    ('PM0002', N'Khuyến mãi lễ 2/9', '2023-08-30', '2023-09-03', 20),
+    ('PM0003', N'Khuyến mãi điểm tích luỹ', '2023-03-01', '2040-03-01', 10);
 GO
 
 --Tao bang khach hang
 create table Customer(
 	CustomerID varchar(10) not null,
 	[Name] nvarchar(50) not null,
-	[Address] nvarchar(100),
 	PhoneNumber varchar(50) not null,
-	Email varchar(50),
 	Sex nvarchar(10) not null,
-	MemberID varchar(20),
-	Point int,
+	Point int default(0),
 	isDeleted tinyint not null default(1),
 	primary key (CustomerID)
 )
 GO
 
 -- Rot du lieu vao bang khach hang
-INSERT INTO Customer (CustomerID, Name, Address, PhoneNumber, Email, Sex, MemberID, Point)
+INSERT INTO Customer (CustomerID, [Name], PhoneNumber, Sex)
 VALUES
-    ('C0001', N'Trần Thị D', N'987 Nguyễn Huệ, Phường 4, Quận 12, TPHCM', '0123456789', 'Tranthid@gmail.com', N'Nữ', 'M0001', 100),
-    ('C0002', N'Lê Hữu E', N'654 3/2, Phường 5, Quận Phú Nhuận, TPHCM', '09876543321', 'LehuuE@egmail.com', N'Nam', 'M0002', 200),
-    ('C0003', N'Võ Thị Vân F', N'321 Lê Lợi, Phường 6, Quận Tân Bình, TPHCM', '0206521773', 'VothivanF@gmail.com', N'Nữ', 'M0003', 300);
+    ('C0001', N'Trần Thị D', '0123456789', N'Nữ'),
+    ('C0002', N'Lê Hữu E', '09876543321', N'Nam'),
+    ('C0003', N'Võ Thị Vân F', '0206521773', N'Nữ');
 GO
 
 --Tao bang hoa don
@@ -127,7 +121,8 @@ create table Bill(
 	[Date] datetime not null,
 	EmployeeID varchar(10) not null,
 	CustomerID varchar(10) not null,
-	PromotionID varchar(10),
+	EstimatedPrice float(50) not null,
+	ReducePrice float(50) not null,
 	TotalPrice float(50) not null,
 	[Status] tinyint not null default(0),
 	isDeleted tinyint not null default(1),
@@ -136,11 +131,11 @@ create table Bill(
 GO
 
 -- Rot du lieu vao bang hoa don
-INSERT INTO Bill (BillID, Date, EmployeeID, CustomerID, TotalPrice)
+INSERT INTO Bill (BillID, [Date], EmployeeID, CustomerID, EstimatedPrice, ReducePrice, TotalPrice)
 VALUES
-    ('B0001', '2023-09-23', 'E0001', 'C0001', 100.0),
-    ('B0002', '2023-09-23', 'E0002', 'C0002', 200.0),
-    ('B0003', '2023-09-23', 'E0003', 'C0003', 300.0);
+    ('B0001', '2023-09-23', 'E0001', 'C0001', 100.0, 0, 100.0),
+    ('B0002', '2023-09-23', 'E0002', 'C0002', 200.0, 0, 200.0),
+    ('B0003', '2023-09-23', 'E0003', 'C0003', 300.0, 0, 300.0);
 GO
 
 --Tao bang nha cung cap
@@ -344,6 +339,9 @@ GO
 alter table Product
 add constraint fk_Product_ProductType foreign key (TypeID) references ProductType (TypeID)
 GO
+alter table Product
+add constraint fk_Product_Promotion foreign key (PromotionID) references Promotion (PromotionID)
+GO
 
 --Bang Bill
 alter table Bill
@@ -351,9 +349,6 @@ add constraint fk_Bill_Customer foreign key (CustomerID) references Customer (Cu
 GO
 alter table Bill
 add constraint fk_Bill_Employee foreign key (EmployeeID) references Employee (EmployeeID)
-GO
-alter table Bill
-add constraint fk_Bill_Promotion foreign key (PromotionID) references Promotion (PromotionID)
 GO
 
 --Bang phieu nhap

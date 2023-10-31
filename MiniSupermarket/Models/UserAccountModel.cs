@@ -33,10 +33,11 @@ namespace MiniSupermarket.Models
                 {
                     cmd.Parameters.AddWithValue("@userName", username);
                     // Tạo đối tượng SqlDataAdapter
-                    SqlDataAdapter adapter = new SqlDataAdapter(cmd);
-
-                    // Đổ dữ liệu vào DataTable
-                    adapter.Fill(table);
+                    using (SqlDataAdapter adapter = new SqlDataAdapter(cmd))
+                    {
+                        // Đổ dữ liệu vào DataTable
+                        adapter.Fill(table);
+                    }
                 }
 
             }

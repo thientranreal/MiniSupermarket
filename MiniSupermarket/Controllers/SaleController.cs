@@ -14,10 +14,32 @@ namespace MiniSupermarket.Controllers
         // Chứa dữ liệu lấy lên từ database
         private DataTable bills;
 
+        public SaleController()
+        {
+            updateBills();
+        }
+
         public DataTable getAllBills()
         {
-            bills = model.getAllBills();
             return bills;
+        }
+
+        public void updateBills()
+        {
+            bills = model.getAllBills();
+            // Clone DataTable
+            DataTable dtCloned = bills.Clone();
+
+            // Thay đổi kiểu dữ liệu của cột
+            dtCloned.Columns["Status"].DataType = typeof(bool);
+
+            // Import dữ liệu từ DataTable cũ
+            foreach (DataRow row in bills.Rows)
+            {
+                dtCloned.ImportRow(row);
+            }
+
+            bills = dtCloned;
         }
     }
 }

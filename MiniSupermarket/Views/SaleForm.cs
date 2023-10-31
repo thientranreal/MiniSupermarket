@@ -51,7 +51,7 @@ namespace MiniSupermarket.Views
             dgv_bill.Columns["CustomerName"].HeaderText = "Tên KH";
             dgv_bill.Columns["PromotionName"].HeaderText = "CTKM";
             dgv_bill.Columns["TotalPrice"].HeaderText = "Tổng tiền";
-            dgv_bill.Columns["Status"].HeaderText = "Trạng thái";
+            dgv_bill.Columns["Status"].HeaderText = "Thanh toán";
         }
 
         public void LoadTheme()
