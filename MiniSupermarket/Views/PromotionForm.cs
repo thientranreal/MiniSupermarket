@@ -62,6 +62,7 @@ namespace MiniSupermarket.Views
                 }
 
             }
+            lblTitle.Font = ProjectFont.getTitleFont();
         }
 
         private void groupBox3_Enter(object sender, EventArgs e)
@@ -81,6 +82,11 @@ namespace MiniSupermarket.Views
         private void PromotionForm_Load(object sender, EventArgs e)
         {
             LoadTheme();
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

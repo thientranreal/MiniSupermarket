@@ -24,11 +24,10 @@ namespace MiniSupermarket.Models
                 // Tạo đối tượng SqlCommand
                 string sqlQuery = "SELECT Bill.BillID, Bill.Date, Bill.EmployeeID, " +
                     "Employee.Name AS EmployeeName, Bill.CustomerID, " +
-                    "Customer.Name AS CustomerName, Promotion.Name AS PromotionName, " +
+                    "Customer.Name AS CustomerName," +
                     "Bill.TotalPrice, Bill.Status FROM Bill INNER JOIN " +
                     "Employee ON Bill.EmployeeID = Employee.EmployeeID " +
                     "INNER JOIN Customer ON Bill.CustomerID = Customer.CustomerID " +
-                    "LEFT JOIN Promotion ON Promotion.PromotionID = Bill.PromotionID " +
                     "WHERE Bill.isDeleted = 1;";
 
                 using (SqlCommand command = new SqlCommand(sqlQuery, conn))
