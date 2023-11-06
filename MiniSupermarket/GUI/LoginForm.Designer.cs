@@ -1,4 +1,4 @@
-﻿namespace MiniSupermarket
+﻿namespace MiniSupermarket.GUI
 {
     partial class formLogin
     {

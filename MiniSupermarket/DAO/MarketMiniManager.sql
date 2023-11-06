@@ -409,3 +409,59 @@ GO
 alter table RoleFunction
 add constraint fk_RoleFunction_Functions foreign key (FunctionID) references Functions (FunctionID)
 GO
+
+-- Tạo các procedures
+-- Select * from ProductType
+CREATE PROCEDURE SelectAllFromProductType
+AS
+BEGIN
+    SELECT TypeID, [Name] FROM ProductType Where isDeleted = 1
+END;
+GO
+
+-- Insert Into ProductType
+CREATE PROCEDURE InsertIntoProductType
+    @TypeID varchar(10),
+	@Name nvarchar(50)
+AS
+BEGIN
+    INSERT INTO ProductType(TypeID, [Name])
+    VALUES (@TypeID, @Name)
+END;
+GO
+
+-- Delete ProductType
+CREATE PROCEDURE DeleteProductType
+    @TypeID varchar(10)
+AS
+BEGIN
+	UPDATE ProductType SET isDeleted = 0 WHERE TypeID = @TypeID
+END;
+GO
+
+-- Update ProductType
+CREATE PROCEDURE UpdateProductType
+    @TypeID varchar(10),
+	@Name nvarchar(50)
+AS
+BEGIN
+	UPDATE ProductType SET [Name] = @Name WHERE TypeID = @TypeID
+END;
+GO
+
+-- Lấy các chức năng từ account
+CREATE PROCEDURE SelectFunctionNameFromAccount
+    @userName varchar(50),
+	@Password varchar(50)
+AS
+BEGIN
+	SELECT Functions.[Name]
+	FROM Employee, EmployeeRole, [Role], RoleFunction, Functions
+    Where Employee.EmployeeID = EmployeeRole.EmployeeID 
+	AND EmployeeRole.RoleID = [Role].RoleID
+    AND [Role].RoleID = RoleFunction.RoleID
+    AND RoleFunction.FunctionID = Functions.FunctionID
+    AND UserName = @userName AND [Password] = @Password
+    AND Employee.IsDeleted = 1
+END;
+GO

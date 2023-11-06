@@ -1,4 +1,4 @@
-﻿namespace MiniSupermarket.Views
+﻿namespace MiniSupermarket.GUI
 {
     partial class PromotionForm
     {

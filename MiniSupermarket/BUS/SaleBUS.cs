@@ -1,4 +1,4 @@
-﻿using MiniSupermarket.Models;
+﻿using MiniSupermarket.DAO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,15 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MiniSupermarket.Controllers
+namespace MiniSupermarket.BUS
 {
-    internal class SaleController
+    internal class SaleBUS
     {
         private SaleModel model = new SaleModel();
         // Chứa dữ liệu lấy lên từ database
         private DataTable bills;
 
-        public SaleController()
+        public SaleBUS()
         {
             updateBills();
         }

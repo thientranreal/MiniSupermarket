@@ -1,4 +1,4 @@
-﻿using MiniSupermarket.Controllers;
+﻿using MiniSupermarket.BUS;
 using MiniSupermarket.ImageAndFont;
 using MiniSupermarket.RegularExpression;
 using System;
@@ -13,7 +13,7 @@ using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using Timer = System.Windows.Forms.Timer;
 
-namespace MiniSupermarket.Views
+namespace MiniSupermarket.GUI
 {
     public partial class UserAccount : Form
     {
@@ -27,7 +27,7 @@ namespace MiniSupermarket.Views
         private Timer timer = new Timer();
         private Timer timerPassword = new Timer();
 
-        private UserAccountController controller = new UserAccountController();
+        private UserAccountBUS userAccountBus = new UserAccountBUS();
         public UserAccount(string userName, string password)
         {
             InitializeComponent();
@@ -111,7 +111,7 @@ namespace MiniSupermarket.Views
         {
             LoadTheme();
             // Tải thông tin nhân viên
-            DataTable employInfor = controller.getInforFromAccount(userName);
+            DataTable employInfor = userAccountBus.getInforFromAccount(userName);
             DataRow row = employInfor.Rows[0];
             // Set những trường để theo dõi trạng thái
             EmployeeID = row["EmployeeID"].ToString();
@@ -259,7 +259,7 @@ namespace MiniSupermarket.Views
             this.btnReload.Enabled = false;
 
             // Nếu cập nhật thành công thì set thuộc tính thành thuộc tính mới
-            if (controller.updateAccountInfor(txtEmID.Text, txtAddress.Text.Trim(), txtPhone.Text, txtEmail.Text.Trim()))
+            if (userAccountBus.updateAccountInfor(txtEmID.Text, txtAddress.Text.Trim(), txtPhone.Text, txtEmail.Text.Trim()))
             {
                 EmployeeAddress = txtAddress.Text.Trim();
                 EmployeePhone = txtPhone.Text;
@@ -303,7 +303,7 @@ namespace MiniSupermarket.Views
         private void btnChangePass_Click(object sender, EventArgs e)
         {
             // update lại giá trị password
-            if (controller.updateAccountPassword(EmployeeID, txtNewPass.Text))
+            if (userAccountBus.updateAccountPassword(EmployeeID, txtNewPass.Text))
             {
                 this.password = txtNewPass.Text;
                 // Hiện thông báo

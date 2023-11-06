@@ -1,4 +1,4 @@
-﻿using MiniSupermarket.Models;
+﻿using MiniSupermarket.DAO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MiniSupermarket.Controllers
+namespace MiniSupermarket.BUS
 {
-    internal class UserAccountController
+    internal class UserAccountBUS
     {
         private UserAccountModel model = new UserAccountModel();
 

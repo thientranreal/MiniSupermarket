@@ -1,4 +1,4 @@
-﻿using MiniSupermarket.Controllers;
+﻿using MiniSupermarket.BUS;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -9,11 +9,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MiniSupermarket
+namespace MiniSupermarket.GUI
 {
     public partial class formLogin : Form
     {
-        private LoginController controller = new LoginController();
+        private LoginBUS loginBus = new LoginBUS();
 
         public formLogin()
         {
@@ -59,8 +59,8 @@ namespace MiniSupermarket
                         MessageBoxIcon.Warning); // Mật khẩu không được bỏ trống
                 return;
             }
-            List<string> list = controller.getFunctionFromAccount(username, password);
-            switch (controller.countAccount())
+            List<string> list = loginBus.getFunctionFromAccount(username, password);
+            switch (loginBus.countAccount())
             {
                 case 0:
                     MessageBox.Show("Tài khoản không có trong hệ thống",

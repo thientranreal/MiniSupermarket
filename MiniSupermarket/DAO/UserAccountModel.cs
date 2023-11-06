@@ -10,7 +10,7 @@ using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.ListView;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
-namespace MiniSupermarket.Models
+namespace MiniSupermarket.DAO
 {
     internal class UserAccountModel
     {
