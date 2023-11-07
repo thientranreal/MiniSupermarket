@@ -465,3 +465,53 @@ BEGIN
     AND Employee.IsDeleted = 1
 END;
 GO
+
+-- Lấy thông tin tài khoản từ username
+CREATE PROCEDURE SelectInfoFromAccount
+    @userName varchar(50)
+AS
+BEGIN
+	SELECT EmployeeID, [Name], [Address], PhoneNumber, Email
+    FROM Employee Where UserName = @userName
+    AND Employee.IsDeleted = 1
+END;
+GO
+
+-- Cập nhật thông tin tài khoản
+CREATE PROCEDURE UpdateAccountInfor
+    @EmployeeId varchar(10),
+	@address nvarchar(50),
+	@phone varchar(50),
+	@email varchar(50)
+AS
+BEGIN
+	UPDATE Employee SET [Address] = @address, PhoneNumber = @phone, Email = @email
+    WHERE EmployeeID = @EmployeeId
+END;
+GO
+
+-- Cập nhật mật khẩu tài khoản
+CREATE PROCEDURE UpdateAccountPassword
+    @EmployeeId varchar(10),
+	@Password varchar(50)
+AS
+BEGIN
+	UPDATE Employee SET Password = @Password
+    WHERE EmployeeID = @EmployeeId
+END;
+GO
+
+-- Lấy tất cả thông tin hóa đơn
+CREATE PROCEDURE SelectAllBills
+AS
+BEGIN
+	SELECT Bill.BillID, Bill.[Date], Bill.EmployeeID,
+    Employee.[Name] AS EmployeeName, Bill.CustomerID,
+    Customer.[Name] AS CustomerName, 
+    Bill.TotalPrice, Bill.[Status] FROM Bill INNER JOIN Employee
+	ON Bill.EmployeeID = Employee.EmployeeID INNER JOIN Customer
+	ON Bill.CustomerID = Customer.CustomerID
+    WHERE Bill.isDeleted = 1
+END;
+GO
+

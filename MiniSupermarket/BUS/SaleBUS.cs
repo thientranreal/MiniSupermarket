@@ -10,7 +10,6 @@ namespace MiniSupermarket.BUS
 {
     internal class SaleBUS
     {
-        private SaleModel model = new SaleModel();
         // Chứa dữ liệu lấy lên từ database
         private DataTable bills;
 
@@ -26,20 +25,27 @@ namespace MiniSupermarket.BUS
 
         public void updateBills()
         {
-            bills = model.getAllBills();
-            // Clone DataTable
-            DataTable dtCloned = bills.Clone();
+            string procedureName = "SelectAllBills";
 
-            // Thay đổi kiểu dữ liệu của cột
-            dtCloned.Columns["Status"].DataType = typeof(bool);
+            bills = Connection.Execute(procedureName, null);
 
-            // Import dữ liệu từ DataTable cũ
-            foreach (DataRow row in bills.Rows)
+            // Nếu bills có dữ liệu
+            if (bills != null)
             {
-                dtCloned.ImportRow(row);
-            }
+                // Clone DataTable
+                DataTable dtCloned = bills.Clone();
 
-            bills = dtCloned;
+                // Thay đổi kiểu dữ liệu của cột
+                dtCloned.Columns["Status"].DataType = typeof(bool);
+
+                // Import dữ liệu từ DataTable cũ
+                foreach (DataRow row in bills.Rows)
+                {
+                    dtCloned.ImportRow(row);
+                }
+
+                bills = dtCloned;
+            }
         }
     }
 }
