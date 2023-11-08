@@ -82,6 +82,7 @@ create table Promotion(
 	StartDate datetime not null,
 	EndDate datetime not null,
 	Discount float(50) not null,
+	[Status] tinyint not null default(0),
 	isDeleted tinyint not null default(1),
 	primary key (PromotionID)
 )
