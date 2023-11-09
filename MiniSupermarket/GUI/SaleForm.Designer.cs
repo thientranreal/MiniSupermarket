@@ -33,6 +33,9 @@
             pnlAddBtn = new Panel();
             btnAddBill = new Button();
             grbCustomerInfo = new GroupBox();
+            btnReset = new Button();
+            ckNewCustomer = new CheckBox();
+            txtSearchCustomer = new TextBox();
             rdFemale = new RadioButton();
             rdMale = new RadioButton();
             txtPhone = new TextBox();
@@ -43,6 +46,7 @@
             cbChooseCustomer = new ComboBox();
             lbChooseCustomer = new Label();
             gbSearch = new GroupBox();
+            btnSearch = new Button();
             cbNotPay = new CheckBox();
             cbPay = new CheckBox();
             txtEmployeeSearch = new TextBox();
@@ -71,7 +75,7 @@
             pnl_top.Dock = DockStyle.Top;
             pnl_top.Location = new Point(0, 0);
             pnl_top.Name = "pnl_top";
-            pnl_top.Size = new Size(955, 310);
+            pnl_top.Size = new Size(1117, 352);
             pnl_top.TabIndex = 0;
             // 
             // pnlAddBill
@@ -81,16 +85,16 @@
             pnlAddBill.Dock = DockStyle.Fill;
             pnlAddBill.Location = new Point(0, 0);
             pnlAddBill.Name = "pnlAddBill";
-            pnlAddBill.Size = new Size(399, 310);
+            pnlAddBill.Size = new Size(692, 352);
             pnlAddBill.TabIndex = 2;
             // 
             // pnlAddBtn
             // 
             pnlAddBtn.Controls.Add(btnAddBill);
             pnlAddBtn.Dock = DockStyle.Fill;
-            pnlAddBtn.Location = new Point(0, 241);
+            pnlAddBtn.Location = new Point(0, 273);
             pnlAddBtn.Name = "pnlAddBtn";
-            pnlAddBtn.Size = new Size(399, 69);
+            pnlAddBtn.Size = new Size(692, 79);
             pnlAddBtn.TabIndex = 2;
             // 
             // btnAddBill
@@ -100,7 +104,7 @@
             btnAddBill.FlatStyle = FlatStyle.Flat;
             btnAddBill.Location = new Point(0, 0);
             btnAddBill.Name = "btnAddBill";
-            btnAddBill.Size = new Size(399, 69);
+            btnAddBill.Size = new Size(692, 79);
             btnAddBill.TabIndex = 0;
             btnAddBill.Text = "Thêm hóa đơn";
             btnAddBill.UseVisualStyleBackColor = true;
@@ -108,6 +112,9 @@
             // 
             // grbCustomerInfo
             // 
+            grbCustomerInfo.Controls.Add(btnReset);
+            grbCustomerInfo.Controls.Add(ckNewCustomer);
+            grbCustomerInfo.Controls.Add(txtSearchCustomer);
             grbCustomerInfo.Controls.Add(rdFemale);
             grbCustomerInfo.Controls.Add(rdMale);
             grbCustomerInfo.Controls.Add(txtPhone);
@@ -120,15 +127,45 @@
             grbCustomerInfo.Dock = DockStyle.Top;
             grbCustomerInfo.Location = new Point(0, 0);
             grbCustomerInfo.Name = "grbCustomerInfo";
-            grbCustomerInfo.Size = new Size(399, 241);
+            grbCustomerInfo.Size = new Size(692, 273);
             grbCustomerInfo.TabIndex = 1;
             grbCustomerInfo.TabStop = false;
             grbCustomerInfo.Text = "Thông tin khách hàng";
             // 
+            // btnReset
+            // 
+            btnReset.FlatAppearance.BorderSize = 0;
+            btnReset.FlatStyle = FlatStyle.Flat;
+            btnReset.Location = new Point(427, 204);
+            btnReset.Name = "btnReset";
+            btnReset.Size = new Size(92, 38);
+            btnReset.TabIndex = 2;
+            btnReset.Text = "Reset";
+            btnReset.UseVisualStyleBackColor = true;
+            // 
+            // ckNewCustomer
+            // 
+            ckNewCustomer.AutoSize = true;
+            ckNewCustomer.Location = new Point(12, 92);
+            ckNewCustomer.Name = "ckNewCustomer";
+            ckNewCustomer.Size = new Size(165, 24);
+            ckNewCustomer.TabIndex = 9;
+            ckNewCustomer.Text = "Tạo khách hàng mới";
+            ckNewCustomer.UseVisualStyleBackColor = true;
+            ckNewCustomer.CheckedChanged += ckNewCustomer_CheckedChanged;
+            // 
+            // txtSearchCustomer
+            // 
+            txtSearchCustomer.Location = new Point(111, 35);
+            txtSearchCustomer.Name = "txtSearchCustomer";
+            txtSearchCustomer.Size = new Size(158, 27);
+            txtSearchCustomer.TabIndex = 8;
+            txtSearchCustomer.TextChanged += txtSearchCustomer_TextChanged;
+            // 
             // rdFemale
             // 
             rdFemale.AutoSize = true;
-            rdFemale.Location = new Point(219, 186);
+            rdFemale.Location = new Point(219, 218);
             rdFemale.Name = "rdFemale";
             rdFemale.Size = new Size(50, 24);
             rdFemale.TabIndex = 7;
@@ -139,7 +176,7 @@
             // rdMale
             // 
             rdMale.AutoSize = true;
-            rdMale.Location = new Point(111, 186);
+            rdMale.Location = new Point(111, 218);
             rdMale.Name = "rdMale";
             rdMale.Size = new Size(62, 24);
             rdMale.TabIndex = 7;
@@ -149,7 +186,7 @@
             // 
             // txtPhone
             // 
-            txtPhone.Location = new Point(111, 135);
+            txtPhone.Location = new Point(111, 167);
             txtPhone.Name = "txtPhone";
             txtPhone.Size = new Size(240, 27);
             txtPhone.TabIndex = 6;
@@ -157,7 +194,7 @@
             // 
             // txtCustomerName
             // 
-            txtCustomerName.Location = new Point(111, 85);
+            txtCustomerName.Location = new Point(111, 128);
             txtCustomerName.Name = "txtCustomerName";
             txtCustomerName.Size = new Size(240, 27);
             txtCustomerName.TabIndex = 5;
@@ -165,7 +202,7 @@
             // lbSex
             // 
             lbSex.AutoSize = true;
-            lbSex.Location = new Point(12, 188);
+            lbSex.Location = new Point(12, 220);
             lbSex.Name = "lbSex";
             lbSex.Size = new Size(65, 20);
             lbSex.TabIndex = 4;
@@ -174,7 +211,7 @@
             // lbPhone
             // 
             lbPhone.AutoSize = true;
-            lbPhone.Location = new Point(12, 138);
+            lbPhone.Location = new Point(12, 170);
             lbPhone.Name = "lbPhone";
             lbPhone.Size = new Size(49, 20);
             lbPhone.TabIndex = 3;
@@ -183,7 +220,7 @@
             // lbCustomerName
             // 
             lbCustomerName.AutoSize = true;
-            lbCustomerName.Location = new Point(12, 88);
+            lbCustomerName.Location = new Point(12, 131);
             lbCustomerName.Name = "lbCustomerName";
             lbCustomerName.Size = new Size(54, 20);
             lbCustomerName.TabIndex = 2;
@@ -191,8 +228,9 @@
             // 
             // cbChooseCustomer
             // 
+            cbChooseCustomer.DropDownStyle = ComboBoxStyle.DropDownList;
             cbChooseCustomer.FormattingEnabled = true;
-            cbChooseCustomer.Location = new Point(111, 34);
+            cbChooseCustomer.Location = new Point(279, 34);
             cbChooseCustomer.Name = "cbChooseCustomer";
             cbChooseCustomer.Size = new Size(240, 28);
             cbChooseCustomer.TabIndex = 1;
@@ -208,6 +246,7 @@
             // 
             // gbSearch
             // 
+            gbSearch.Controls.Add(btnSearch);
             gbSearch.Controls.Add(cbNotPay);
             gbSearch.Controls.Add(cbPay);
             gbSearch.Controls.Add(txtEmployeeSearch);
@@ -219,12 +258,23 @@
             gbSearch.Controls.Add(lbToDate);
             gbSearch.Controls.Add(lbFromDate);
             gbSearch.Dock = DockStyle.Right;
-            gbSearch.Location = new Point(399, 0);
+            gbSearch.Location = new Point(692, 0);
             gbSearch.Name = "gbSearch";
-            gbSearch.Size = new Size(556, 310);
+            gbSearch.Size = new Size(425, 352);
             gbSearch.TabIndex = 1;
             gbSearch.TabStop = false;
             gbSearch.Text = "Tìm kiếm";
+            // 
+            // btnSearch
+            // 
+            btnSearch.FlatAppearance.BorderSize = 0;
+            btnSearch.FlatStyle = FlatStyle.Flat;
+            btnSearch.Location = new Point(296, 250);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(116, 54);
+            btnSearch.TabIndex = 9;
+            btnSearch.Text = "Tìm kiếm";
+            btnSearch.UseVisualStyleBackColor = true;
             // 
             // cbNotPay
             // 
@@ -312,9 +362,9 @@
             // 
             pnl_bottom.Controls.Add(dgv_bill);
             pnl_bottom.Dock = DockStyle.Fill;
-            pnl_bottom.Location = new Point(0, 310);
+            pnl_bottom.Location = new Point(0, 352);
             pnl_bottom.Name = "pnl_bottom";
-            pnl_bottom.Size = new Size(955, 220);
+            pnl_bottom.Size = new Size(1117, 218);
             pnl_bottom.TabIndex = 1;
             // 
             // dgv_bill
@@ -327,14 +377,14 @@
             dgv_bill.RowHeadersWidth = 51;
             dgv_bill.RowTemplate.Height = 29;
             dgv_bill.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv_bill.Size = new Size(955, 220);
+            dgv_bill.Size = new Size(1117, 218);
             dgv_bill.TabIndex = 0;
             // 
             // SaleForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(955, 530);
+            ClientSize = new Size(1117, 570);
             Controls.Add(pnl_bottom);
             Controls.Add(pnl_top);
             Name = "SaleForm";
@@ -381,5 +431,9 @@
         private TextBox txtCustomerName;
         private RadioButton rdFemale;
         private RadioButton rdMale;
+        private TextBox txtSearchCustomer;
+        private Button btnSearch;
+        private CheckBox ckNewCustomer;
+        private Button btnReset;
     }
 }

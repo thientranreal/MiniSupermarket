@@ -6,17 +6,21 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
 namespace MiniSupermarket.BUS
 {
     internal class LoginBUS
     {
-        private DataTable funcs;
-        
-
-        public int countAccount()
+        public int countAccount(string username, string password)
         {
-            return funcs.Rows.Count;
+            string storedProcedureName = "CountAccount";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@userName", username),
+                new SqlParameter("@Password", password)
+            };
+            return int.Parse(Connection.Execute(storedProcedureName, parameters).Rows[0][0].ToString());
         }
 
         public List<string> getFunctionFromAccount(string username, string password)
@@ -27,7 +31,7 @@ namespace MiniSupermarket.BUS
                 new SqlParameter("@userName", username),
                 new SqlParameter("@Password", password)
             };
-            funcs = Connection.Execute(storedProcedureName, parameters);
+            DataTable funcs = Connection.Execute(storedProcedureName, parameters);
             List<string> functions = new List<string>();
             foreach (DataRow row in funcs.Rows)
             {

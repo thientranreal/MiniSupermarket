@@ -122,9 +122,9 @@ create table Bill(
 	[Date] datetime not null,
 	EmployeeID varchar(10) not null,
 	CustomerID varchar(10) not null,
-	EstimatedPrice float(50) not null,
-	ReducePrice float(50) not null,
-	TotalPrice float(50) not null,
+	EstimatedPrice float(50) not null default(0),
+	ReducePrice float(50) not null default(0),
+	TotalPrice float(50) not null default(0),
 	[Status] tinyint not null default(0),
 	isDeleted tinyint not null default(1),
 	primary key(BillID)
@@ -450,6 +450,17 @@ BEGIN
 END;
 GO
 
+-- Đếm số account
+CREATE PROCEDURE CountAccount
+    @userName varchar(50),
+	@Password varchar(50)
+AS
+BEGIN
+	Select COUNT(*) from Employee
+	Where UserName = @userName and [Password] = @Password
+END;
+GO
+
 -- Lấy các chức năng từ account
 CREATE PROCEDURE SelectFunctionNameFromAccount
     @userName varchar(50),
@@ -516,3 +527,25 @@ BEGIN
 END;
 GO
 
+-- Lấy mã KH và tên KH
+CREATE PROCEDURE SelectCustomerIdAndName
+AS
+BEGIN
+	SELECT CustomerID, [Name]
+	FROM Customer
+    WHERE isDeleted = 1
+END;
+GO
+
+-- Thêm một bill mới
+CREATE PROCEDURE InsertIntoBill
+	@BillID varchar(10),
+	@Date datetime,
+	@EmployeeID varchar(10),
+	@CustomerID varchar(10)
+AS
+BEGIN
+	INSERT INTO Bill(BillID, [Date], EmployeeID, CustomerID)
+	VALUES (@BillID, @Date, @EmployeeID, @CustomerID)
+END;
+GO

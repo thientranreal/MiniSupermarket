@@ -8,6 +8,7 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -33,8 +34,6 @@ namespace MiniSupermarket.GUI
         private void SaleForm_Load(object sender, EventArgs e)
         {
             LoadTheme();
-
-            dgv_bill.DataSource = saleBus.getAllBills();
             // Cho hiển thị hết chiều dài của bảng
             dgv_bill.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             // Đổi màu mặc định của data grid view
@@ -50,6 +49,12 @@ namespace MiniSupermarket.GUI
             dgv_bill.Columns["CustomerName"].HeaderText = "Tên KH";
             dgv_bill.Columns["TotalPrice"].HeaderText = "Tổng tiền";
             dgv_bill.Columns["Status"].HeaderText = "Thanh toán";
+
+            // Vô hiệu hóa các trường nhập của text box khách hàng mới
+            txtCustomerName.Enabled = false;
+            txtPhone.Enabled = false;
+            rdFemale.Enabled = false;
+            rdMale.Enabled = false;
         }
 
         public void LoadTheme()
@@ -65,6 +70,16 @@ namespace MiniSupermarket.GUI
             btnAddBill.ForeColor = Color.White;
             btnAddBill.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
             btnAddBill.Font = ProjectFont.getNormalFont();
+
+            btnSearch.BackColor = ThemeColor.PrimaryColor;
+            btnSearch.ForeColor = Color.White;
+            btnSearch.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
+            btnSearch.Font = ProjectFont.getNormalFont();
+
+            btnReset.BackColor = ThemeColor.PrimaryColor;
+            btnReset.ForeColor = Color.White;
+            btnReset.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
+            btnReset.Font = ProjectFont.getNormalFont();
 
             // Thêm màu cho group box tìm kiếm
             foreach (Control control in this.gbSearch.Controls)
@@ -122,6 +137,12 @@ namespace MiniSupermarket.GUI
                     RadioButton radio = (RadioButton)control;
                     radio.Font = ProjectFont.getNormalFont();
                 }
+                // Nếu control là check box thì chỉnh font
+                else if (control.GetType() == typeof(CheckBox))
+                {
+                    CheckBox checkBox = (CheckBox)control;
+                    checkBox.Font = ProjectFont.getNormalFont();
+                }
             }
 
             // Chỉnh size chữ cho date time picker
@@ -131,8 +152,8 @@ namespace MiniSupermarket.GUI
 
         private void btnAddBill_Click(object sender, EventArgs e)
         {
-            // Nếu chưa chọn khách hàng thì phải nhập đầy đủ thông tin khách hàng
-            if (cbChooseCustomer.Text.Trim().Length == 0)
+            // Nếu chọn khách hàng mới thì phải nhập đầy đủ thông tin khách hàng
+            if (ckNewCustomer.Checked)
             {
                 // Yêu cầu nhập tên khách hàng
                 if (txtCustomerName.Text.Trim().Length == 0)
@@ -180,6 +201,33 @@ namespace MiniSupermarket.GUI
             else
             {
                 // Nếu đã chọn khách hàng
+                string input = cbChooseCustomer.Text.Trim();
+                string customerId = "";
+                Match match = Regex.Match(input, @"\[(C\d+)\]");
+                if (match.Success)
+                {
+                    customerId = match.Groups[1].Value;
+                }
+                string currentDate = DateTime.Now.ToString("yyyy-MM-dd");
+
+                if (saleBus.InsertIntoBill(GlobalState.employeeId, customerId, currentDate))
+                {
+                    // Hiện thông báo thành công
+                    MessageBox.Show("Tạo hóa đơn thành công",
+                            "Thông báo",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Information);
+                    return;
+                }
+                else
+                {
+                    // Hiện thông báo thất bại
+                    MessageBox.Show("Tạo hóa đơn thất bại",
+                            "Thông báo",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Error);
+                    return;
+                }
             }
         }
 
@@ -188,6 +236,45 @@ namespace MiniSupermarket.GUI
             if (char.IsWhiteSpace(e.KeyChar) || !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
+            }
+        }
+
+        public void updateDateForSaleForm()
+        {
+            cbChooseCustomer.Items.Clear();
+            saleBus.updateData();
+            // Thêm danh sách khách hàng cho combo box
+            cbChooseCustomer.Items.AddRange(saleBus.getCustomers().ToArray());
+            dgv_bill.DataSource = saleBus.getAllBills();
+        }
+
+        // Khi text change của combo box thì lựa chọn sẽ hiển thị tương ứng
+        private void txtSearchCustomer_TextChanged(object sender, EventArgs e)
+        {
+            string typedText = txtSearchCustomer.Text.ToLower();
+            List<string> filteredItems = saleBus.getCustomers().Where(item => item.ToLower().Contains(typedText)).ToList();
+
+            cbChooseCustomer.Items.Clear();
+            cbChooseCustomer.Items.AddRange(filteredItems.ToArray());
+        }
+
+        private void ckNewCustomer_CheckedChanged(object sender, EventArgs e)
+        {
+            CheckBox newCustomer = (CheckBox)sender;
+            if (newCustomer.Checked)
+            {
+                txtCustomerName.Enabled = true;
+                txtPhone.Enabled = true;
+                rdFemale.Enabled = true;
+                rdMale.Enabled = true;
+            }
+            else
+            {
+                txtCustomerName.Enabled = false;
+                txtPhone.Enabled = false;
+                rdFemale.Enabled = false;
+                rdMale.Enabled = false;
+
             }
         }
     }

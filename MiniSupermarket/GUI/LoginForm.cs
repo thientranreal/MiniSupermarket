@@ -59,8 +59,8 @@ namespace MiniSupermarket.GUI
                         MessageBoxIcon.Warning); // Mật khẩu không được bỏ trống
                 return;
             }
-            List<string> list = loginBus.getFunctionFromAccount(username, password);
-            switch (loginBus.countAccount())
+            
+            switch (loginBus.countAccount(username, password))
             {
                 case 0:
                     MessageBox.Show("Tài khoản không có trong hệ thống",
@@ -70,7 +70,13 @@ namespace MiniSupermarket.GUI
                     txtUsername.Select();
                     break;
                 default:
-                    MenuForm menu = new MenuForm(this, username, password, list);
+                    // Lưu các chức năng của user này vào biến toàn cục
+                    GlobalState.funcs = loginBus.getFunctionFromAccount(username, password);
+                    // Lưu username này vào biến toàn cục
+                    GlobalState.username = username;
+                    // Lưu password của user này vào biến toàn cục
+                    GlobalState.password = password;
+                    MenuForm menu = new MenuForm(this);
                     this.Hide();
                     menu.Show();
                     clearText();

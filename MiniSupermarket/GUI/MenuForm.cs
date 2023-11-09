@@ -19,9 +19,6 @@ namespace MiniSupermarket.GUI
         private Random random;
         private int tempIndex;
         private Form activeForm;
-        private List<string> funcs;
-        private string userName;
-        private string password;
         private Form loginForm;
 
         // Lưu dictionary cho các forms
@@ -29,7 +26,7 @@ namespace MiniSupermarket.GUI
 
 
         //Constructor
-        public MenuForm(Form loginForm, string username, string password, List<string> funcs)
+        public MenuForm(Form loginForm)
         {
             InitializeComponent();
             random = new Random();
@@ -37,9 +34,6 @@ namespace MiniSupermarket.GUI
             this.Text = string.Empty;
             this.ControlBox = false;
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
-            this.funcs = funcs;
-            this.userName = username;
-            this.password = password;
             this.loginForm = loginForm;
 
             // Khởi tạo giá trị cho dictionary
@@ -49,7 +43,7 @@ namespace MiniSupermarket.GUI
 
             forms.Add("Quản lý chương trình khuyến mãi", new PromotionForm());
 
-            forms.Add("Tài khoản", new UserAccount(username, password));
+            forms.Add("Tài khoản", new UserAccount());
 
 
             // Ẩn nút chức năng
@@ -67,7 +61,7 @@ namespace MiniSupermarket.GUI
             }
 
             // Chỉ hiển thị những chức năng có trong danh sách chức năng của người dùng
-            foreach (string func in funcs)
+            foreach (string func in GlobalState.funcs)
             {
                 switch (func)
                 {
@@ -230,6 +224,7 @@ namespace MiniSupermarket.GUI
         private void btnSale_Click(object sender, EventArgs e)
         {
             SaleForm temp = (SaleForm)forms["Quản lý bán hàng"];
+            temp.updateDateForSaleForm();
             OpenChildForm(temp, sender, "Quản lý bán hàng");
             temp.LoadTheme();
         }
