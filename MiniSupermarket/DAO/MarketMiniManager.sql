@@ -121,7 +121,7 @@ create table Bill(
 	BillID varchar(10) not null,
 	[Date] datetime not null,
 	EmployeeID varchar(10) not null,
-	CustomerID varchar(10) not null,
+	CustomerID varchar(10),
 	EstimatedPrice float(50) not null default(0),
 	ReducePrice float(50) not null default(0),
 	TotalPrice float(50) not null default(0),
@@ -130,6 +130,7 @@ create table Bill(
 	primary key(BillID)
 )
 GO
+
 
 -- Rot du lieu vao bang hoa don
 INSERT INTO Bill (BillID, [Date], EmployeeID, CustomerID, EstimatedPrice, ReducePrice, TotalPrice)
@@ -521,7 +522,7 @@ BEGIN
     Employee.[Name] AS EmployeeName, Bill.CustomerID,
     Customer.[Name] AS CustomerName, 
     Bill.TotalPrice, Bill.[Status] FROM Bill INNER JOIN Employee
-	ON Bill.EmployeeID = Employee.EmployeeID INNER JOIN Customer
+	ON Bill.EmployeeID = Employee.EmployeeID LEFT JOIN Customer
 	ON Bill.CustomerID = Customer.CustomerID
     WHERE Bill.isDeleted = 1
 END;
@@ -542,7 +543,7 @@ CREATE PROCEDURE InsertIntoBill
 	@BillID varchar(10),
 	@Date datetime,
 	@EmployeeID varchar(10),
-	@CustomerID varchar(10)
+	@CustomerID varchar(10) = NULL
 AS
 BEGIN
 	INSERT INTO Bill(BillID, [Date], EmployeeID, CustomerID)

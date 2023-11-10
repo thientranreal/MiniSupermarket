@@ -108,6 +108,7 @@ namespace MiniSupermarket.BUS
         // Thêm bill mới vào csdl
         public bool InsertIntoBill(string EmployeeId, string CustomerId, string date)
         {
+            DataTable temp = bills;
             string storedProcudure = "InsertIntoBill";
             string billId = generateBillID();
             SqlParameter[] parameters = new SqlParameter[]

@@ -202,7 +202,7 @@ namespace MiniSupermarket.GUI
             {
                 // Nếu đã chọn khách hàng
                 string input = cbChooseCustomer.Text.Trim();
-                string customerId = "";
+                string customerId = null;
                 Match match = Regex.Match(input, @"\[(C\d+)\]");
                 if (match.Success)
                 {
@@ -217,6 +217,10 @@ namespace MiniSupermarket.GUI
                             "Thông báo",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Information);
+
+                    // Cập nhật lại data grid view
+                    saleBus.updateBills();
+                    dgv_bill.DataSource = saleBus.getAllBills();
                     return;
                 }
                 else
