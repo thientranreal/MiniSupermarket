@@ -1,4 +1,4 @@
-﻿using MiniSupermarket.Controllers;
+﻿using MiniSupermarket.BUS;
 using MiniSupermarket.ImageAndFont;
 using System;
 using System.Collections.Generic;
@@ -11,12 +11,12 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MiniSupermarket.Views
+namespace MiniSupermarket.GUI
 {
     public partial class ProductTypeManage : Form
     {
         // khai bao controller
-        private ProductTypeController ptController = new ProductTypeController();
+        private ProductTypeBUS ptBus = new ProductTypeBUS();
         private string[] names;
         private string[] ids;
         AutoCompleteStringCollection allowedTypes = new AutoCompleteStringCollection();
@@ -70,7 +70,7 @@ namespace MiniSupermarket.Views
             if (id.Length != 0) // Nếu người dùng nhập mã loại
             {
                 // Nếu mã loại đã tồn tại trong hệ thống thì hiện lỗi
-                if (ptController.checkIdExist(id))
+                if (ptBus.checkIdExist(id))
                 {
                     MessageBox.Show(
                         "Mã loại đã tồn tại trong hệ thống",
@@ -93,7 +93,7 @@ namespace MiniSupermarket.Views
                 return;
             }
             // Nếu tên loại đã tồn tại trong hệ thống thì hiện lỗi
-            if (ptController.checkNameExist(name))
+            if (ptBus.checkNameExist(name))
             {
                 MessageBox.Show(
                     "Tên loại đã tồn tại trong hệ thống",
@@ -106,7 +106,7 @@ namespace MiniSupermarket.Views
             // Nếu mà mã loại rỗng thì sẽ tự tạo mã id
             if (id.Length == 0)
             {
-                if (ptController.addProductType(name))
+                if (ptBus.addProductType(name))
                 {
                     MessageBox.Show("Thêm thành công!",
                         "Thông báo",
@@ -125,7 +125,7 @@ namespace MiniSupermarket.Views
             }
             else // Nếu mà nhập đầy đủ thông tin thì thêm đầy đủ
             {
-                if (ptController.addProductType(name, id))
+                if (ptBus.addProductType(name, id))
                 {
                     MessageBox.Show("Thêm thành công!",
                         "Thông báo",
@@ -145,7 +145,7 @@ namespace MiniSupermarket.Views
             }
 
             // Tải lại danh sách
-            dgv_qllsp.DataSource = ptController.getAllProducts();
+            dgv_qllsp.DataSource = ptBus.getAllProducts();
         }
 
         public void LoadTheme()
@@ -179,7 +179,7 @@ namespace MiniSupermarket.Views
         private void ProductTypeManage_Load(object sender, EventArgs e)
         {
             // Tải dữ liệu lên data grid view
-            dgv_qllsp.DataSource = ptController.getAllProducts();
+            dgv_qllsp.DataSource = ptBus.getAllProducts();
             // Đổi tên cột
             dgv_qllsp.Columns["TypeID"].HeaderText = "Mã loại";
             dgv_qllsp.Columns["Name"].HeaderText = "Tên loại";
@@ -200,7 +200,7 @@ namespace MiniSupermarket.Views
             }
             // Lấy id của hàng đang chọn
             string id = dgv_qllsp.CurrentRow.Cells[0].Value.ToString();
-            if (ptController.deleteProductType(id))
+            if (ptBus.deleteProductType(id))
             {
                 MessageBox.Show("Xóa thành công!",
                         "Thông báo",
@@ -218,7 +218,7 @@ namespace MiniSupermarket.Views
             }
 
             // Tải lại danh sách
-            dgv_qllsp.DataSource = ptController.getAllProducts();
+            dgv_qllsp.DataSource = ptBus.getAllProducts();
         }
 
         private void btn_mod_Click(object sender, EventArgs e)
@@ -247,7 +247,7 @@ namespace MiniSupermarket.Views
                 return;
             }
             // Nếu tên đã tồn tại trong hệ thống
-            if (ptController.checkNameExist(name))
+            if (ptBus.checkNameExist(name))
             {
                 MessageBox.Show(
                     "Tên loại sản phẩm đã tồn tại",
@@ -257,7 +257,7 @@ namespace MiniSupermarket.Views
                 txt_nameType.Focus();
                 return;
             }
-            if (ptController.updateProductType(id, name))
+            if (ptBus.updateProductType(id, name))
             {
                 MessageBox.Show("Cập nhật thành công!",
                         "Thông báo",
@@ -276,7 +276,7 @@ namespace MiniSupermarket.Views
             }
 
             // Load lại danh sách
-            dgv_qllsp.DataSource = ptController.getAllProducts();
+            dgv_qllsp.DataSource = ptBus.getAllProducts();
         }
 
         // Clear các text box
@@ -300,20 +300,20 @@ namespace MiniSupermarket.Views
                 if (cb_search.Text == "Mã loại")
                 {
                     // Người dùng đã chọn một mục từ danh sách gợi ý
-                    dgv_qllsp.DataSource = ptController.getProductsById(txt_search.Text);
+                    dgv_qllsp.DataSource = ptBus.getProductsById(txt_search.Text);
                     return;
                 }
                 else if (cb_search.Text == "Tên loại")
                 {
                     // Người dùng đã chọn một mục từ danh sách gợi ý
-                    dgv_qllsp.DataSource = ptController.getProductsByName(txt_search.Text);
+                    dgv_qllsp.DataSource = ptBus.getProductsByName(txt_search.Text);
                     return;
                 }
             }
             // Hiển thị hết danh sách nếu text search rỗng
             if (txt_search.Text == "")
             {
-                dgv_qllsp.DataSource = ptController.getAllProducts();
+                dgv_qllsp.DataSource = ptBus.getAllProducts();
                 return;
             }
         }
@@ -335,13 +335,13 @@ namespace MiniSupermarket.Views
             if (cb_search.Text == "Mã loại")
             {
                 // Lấy tất cả các id cho loại sản phẩm và hiển thị suggestion box
-                ids = ptController.getIdForSuggestionBox();
+                ids = ptBus.getIdForSuggestionBox();
                 loadSuggestionBox(ids);
             }
             else if (cb_search.Text == "Tên loại")
             {
                 // Lấy tất cả các tên cho loại sản phẩm và hiển thị suggestion box
-                names = ptController.getNameForSuggestionBox();
+                names = ptBus.getNameForSuggestionBox();
                 loadSuggestionBox(names);
             }
         }
@@ -353,13 +353,13 @@ namespace MiniSupermarket.Views
                 if (cb_search.Text == "Mã loại")
                 {
                     // Người dùng đã chọn một mục từ danh sách gợi ý
-                    dgv_qllsp.DataSource = ptController.getProductsById(txt_search.Text);
+                    dgv_qllsp.DataSource = ptBus.getProductsById(txt_search.Text);
                     return;
                 }
                 else if (cb_search.Text == "Tên loại")
                 {
                     // Người dùng đã chọn một mục từ danh sách gợi ý
-                    dgv_qllsp.DataSource = ptController.getProductsByName(txt_search.Text);
+                    dgv_qllsp.DataSource = ptBus.getProductsByName(txt_search.Text);
                     return;
                 }
 

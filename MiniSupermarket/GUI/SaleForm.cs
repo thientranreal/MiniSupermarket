@@ -1,6 +1,5 @@
-﻿using MiniSupermarket.Controllers;
+﻿using MiniSupermarket.BUS;
 using MiniSupermarket.ImageAndFont;
-using MiniSupermarket.Models;
 using MiniSupermarket.RegularExpression;
 using System;
 using System.Collections.Generic;
@@ -12,11 +11,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MiniSupermarket.Views
+namespace MiniSupermarket.GUI
 {
     public partial class SaleForm : Form
     {
-        private SaleController saleController = new SaleController();
+        private SaleBUS saleBus = new SaleBUS();
         public SaleForm()
         {
             InitializeComponent();
@@ -35,7 +34,7 @@ namespace MiniSupermarket.Views
         {
             LoadTheme();
 
-            dgv_bill.DataSource = saleController.getAllBills();
+            dgv_bill.DataSource = saleBus.getAllBills();
             // Cho hiển thị hết chiều dài của bảng
             dgv_bill.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             // Đổi màu mặc định của data grid view
@@ -49,7 +48,6 @@ namespace MiniSupermarket.Views
             dgv_bill.Columns["EmployeeName"].HeaderText = "Tên NV";
             dgv_bill.Columns["CustomerID"].HeaderText = "Mã KH";
             dgv_bill.Columns["CustomerName"].HeaderText = "Tên KH";
-            dgv_bill.Columns["PromotionName"].HeaderText = "CTKM";
             dgv_bill.Columns["TotalPrice"].HeaderText = "Tổng tiền";
             dgv_bill.Columns["Status"].HeaderText = "Thanh toán";
         }

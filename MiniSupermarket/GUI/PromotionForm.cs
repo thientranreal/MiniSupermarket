@@ -10,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MiniSupermarket.Views
+namespace MiniSupermarket.GUI
 {
     public partial class PromotionForm : Form
     {

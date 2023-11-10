@@ -1,16 +1,16 @@
-﻿using MiniSupermarket.Models;
+﻿using MiniSupermarket.DAO;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MiniSupermarket.Controllers
+namespace MiniSupermarket.BUS
 {
-    internal class LoginController
+    internal class LoginBUS
     {
-        private LoginModel model = new LoginModel();
         private DataTable funcs;
         
 
@@ -21,7 +21,13 @@ namespace MiniSupermarket.Controllers
 
         public List<string> getFunctionFromAccount(string username, string password)
         {
-            funcs = model.getFunctionsFromAccount(username, password);
+            string storedProcedureName = "SelectFunctionNameFromAccount";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@userName", username),
+                new SqlParameter("@Password", password)
+            };
+            funcs = Connection.Execute(storedProcedureName, parameters);
             List<string> functions = new List<string>();
             foreach (DataRow row in funcs.Rows)
             {

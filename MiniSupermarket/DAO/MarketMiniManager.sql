@@ -82,11 +82,7 @@ create table Promotion(
 	StartDate datetime not null,
 	EndDate datetime not null,
 	Discount float(50) not null,
-<<<<<<< Updated upstream:MiniSupermarket/Models/MarketMiniManager.sql
 	[Status] nvarchar(50) not null,
-=======
-	[Status] tinyint not null default(0),
->>>>>>> Stashed changes:MiniSupermarket/DAO/MarketMiniManager.sql
 	isDeleted tinyint not null default(1),
 	primary key (PromotionID)
 )
@@ -413,9 +409,6 @@ add constraint fk_RoleFunction_Role foreign key (RoleID) references Role (RoleID
 GO
 alter table RoleFunction
 add constraint fk_RoleFunction_Functions foreign key (FunctionID) references Functions (FunctionID)
-<<<<<<< Updated upstream:MiniSupermarket/Models/MarketMiniManager.sql
-GO
-=======
 GO
 
 -- Tạo các procedures
@@ -523,6 +516,7 @@ BEGIN
 END;
 GO
 
+
 -- Lấy tất cả thông tin chương trình khuyến mãi
 CREATE PROC SelectAllPromotions
 AS
@@ -548,4 +542,4 @@ BEGIN
 END;
 GO
 
->>>>>>> Stashed changes:MiniSupermarket/DAO/MarketMiniManager.sql
+

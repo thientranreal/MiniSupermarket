@@ -1,4 +1,4 @@
-﻿using MiniSupermarket.Models;
+﻿using MiniSupermarket.DAO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -6,23 +6,29 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml.Linq;
 
-namespace MiniSupermarket.Controllers
+namespace MiniSupermarket.BUS
 {
-    internal class ProductTypeController
+    internal class ProductTypeBUS
     {
-        private ProductTypeModel model = new ProductTypeModel();
         // Chứa dữ liệu lấy lên từ database
         private DataTable productTypes;
-        public ProductTypeController()
+        public ProductTypeBUS()
         {
-            productTypes = model.getAllProducts();
+            productTypes = getAllProductTypes();
+        }
+
+        private DataTable getAllProductTypes()
+        {
+            string storedProcedureName = "SelectAllFromProductType";
+            return Connection.Execute(storedProcedureName, null);
         }
 
         public DataTable getAllProducts()
         {
-            return model.getAllProducts();
+            return getAllProductTypes();
         }
 
         // Nếu tồn tại trả về true, nếu không tồn tại trả về false
@@ -75,7 +81,16 @@ namespace MiniSupermarket.Controllers
             {
                 id = generateNewID();
             }
-            bool result = model.addProductType(name, id);
+
+            string storedProcedureName = "InsertIntoProductType";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@TypeID", id),
+                new SqlParameter("@Name", name)
+            };
+
+            bool result = Connection.ExecuteNonQuery(storedProcedureName, parameters);
+
             // Nếu thêm thành công thì sẽ cập nhật lại danh sách
             if (result)
             {
@@ -85,7 +100,12 @@ namespace MiniSupermarket.Controllers
         }
         public bool deleteProductType(string id)
         {
-            bool result = model.deleteProductType(id);
+            string storedProcedureName = "DeleteProductType";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@TypeID", id)
+            };
+            bool result = Connection.ExecuteNonQuery(storedProcedureName, parameters);
             // Nếu xóa thành công thì cập nhật lại danh sách
             if (result)
             {
@@ -96,7 +116,13 @@ namespace MiniSupermarket.Controllers
 
         public bool updateProductType(string id, string name)
         {
-            bool result = model.updateProductType(id, name);
+            string storedProcedureName = "UpdateProductType";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@TypeID", id),
+                new SqlParameter("@Name", name)
+            };
+            bool result = Connection.ExecuteNonQuery(storedProcedureName, parameters);
             // Nếu cập nhật thành công thì cập nhật lại danh sách
             if (result)
             {

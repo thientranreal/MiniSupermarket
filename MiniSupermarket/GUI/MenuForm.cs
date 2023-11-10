@@ -1,5 +1,4 @@
 ﻿using MiniSupermarket.ImageAndFont;
-using MiniSupermarket.Views;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,7 +10,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MiniSupermarket
+namespace MiniSupermarket.GUI
 {
     public partial class MenuForm : Form
     {
