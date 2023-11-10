@@ -82,7 +82,11 @@ create table Promotion(
 	StartDate datetime not null,
 	EndDate datetime not null,
 	Discount float(50) not null,
+<<<<<<< Updated upstream:MiniSupermarket/Models/MarketMiniManager.sql
 	[Status] nvarchar(50) not null,
+=======
+	[Status] tinyint not null default(0),
+>>>>>>> Stashed changes:MiniSupermarket/DAO/MarketMiniManager.sql
 	isDeleted tinyint not null default(1),
 	primary key (PromotionID)
 )
@@ -409,4 +413,139 @@ add constraint fk_RoleFunction_Role foreign key (RoleID) references Role (RoleID
 GO
 alter table RoleFunction
 add constraint fk_RoleFunction_Functions foreign key (FunctionID) references Functions (FunctionID)
+<<<<<<< Updated upstream:MiniSupermarket/Models/MarketMiniManager.sql
 GO
+=======
+GO
+
+-- Tạo các procedures
+-- Select * from ProductType
+CREATE PROCEDURE SelectAllFromProductType
+AS
+BEGIN
+    SELECT TypeID, [Name] FROM ProductType Where isDeleted = 1
+END;
+GO
+
+-- Insert Into ProductType
+CREATE PROCEDURE InsertIntoProductType
+    @TypeID varchar(10),
+	@Name nvarchar(50)
+AS
+BEGIN
+    INSERT INTO ProductType(TypeID, [Name])
+    VALUES (@TypeID, @Name)
+END;
+GO
+
+-- Delete ProductType
+CREATE PROCEDURE DeleteProductType
+    @TypeID varchar(10)
+AS
+BEGIN
+	UPDATE ProductType SET isDeleted = 0 WHERE TypeID = @TypeID
+END;
+GO
+
+-- Update ProductType
+CREATE PROCEDURE UpdateProductType
+    @TypeID varchar(10),
+	@Name nvarchar(50)
+AS
+BEGIN
+	UPDATE ProductType SET [Name] = @Name WHERE TypeID = @TypeID
+END;
+GO
+
+-- Lấy các chức năng từ account
+CREATE PROCEDURE SelectFunctionNameFromAccount
+    @userName varchar(50),
+	@Password varchar(50)
+AS
+BEGIN
+	SELECT Functions.[Name]
+	FROM Employee, EmployeeRole, [Role], RoleFunction, Functions
+    Where Employee.EmployeeID = EmployeeRole.EmployeeID 
+	AND EmployeeRole.RoleID = [Role].RoleID
+    AND [Role].RoleID = RoleFunction.RoleID
+    AND RoleFunction.FunctionID = Functions.FunctionID
+    AND UserName = @userName AND [Password] = @Password
+    AND Employee.IsDeleted = 1
+END;
+GO
+
+-- Lấy thông tin tài khoản từ username
+CREATE PROCEDURE SelectInfoFromAccount
+    @userName varchar(50)
+AS
+BEGIN
+	SELECT EmployeeID, [Name], [Address], PhoneNumber, Email
+    FROM Employee Where UserName = @userName
+    AND Employee.IsDeleted = 1
+END;
+GO
+
+-- Cập nhật thông tin tài khoản
+CREATE PROCEDURE UpdateAccountInfor
+    @EmployeeId varchar(10),
+	@address nvarchar(50),
+	@phone varchar(50),
+	@email varchar(50)
+AS
+BEGIN
+	UPDATE Employee SET [Address] = @address, PhoneNumber = @phone, Email = @email
+    WHERE EmployeeID = @EmployeeId
+END;
+GO
+
+-- Cập nhật mật khẩu tài khoản
+CREATE PROCEDURE UpdateAccountPassword
+    @EmployeeId varchar(10),
+	@Password varchar(50)
+AS
+BEGIN
+	UPDATE Employee SET Password = @Password
+    WHERE EmployeeID = @EmployeeId
+END;
+GO
+
+-- Lấy tất cả thông tin hóa đơn
+CREATE PROCEDURE SelectAllBills
+AS
+BEGIN
+	SELECT Bill.BillID, Bill.[Date], Bill.EmployeeID,
+    Employee.[Name] AS EmployeeName, Bill.CustomerID,
+    Customer.[Name] AS CustomerName, 
+    Bill.TotalPrice, Bill.[Status] FROM Bill INNER JOIN Employee
+	ON Bill.EmployeeID = Employee.EmployeeID INNER JOIN Customer
+	ON Bill.CustomerID = Customer.CustomerID
+    WHERE Bill.isDeleted = 1
+END;
+GO
+
+-- Lấy tất cả thông tin chương trình khuyến mãi
+CREATE PROC SelectAllPromotions
+AS
+BEGIN
+	SELECT Promotion.PromotionID AS ID, Promotion.Name, Promotion.StartDate,
+	Promotion.EndDate, Promotion.Discount, Promotion.[Status]
+	FROM Promotion
+	WHERE Promotion.isDeleted = 1
+END;
+GO
+
+-- Thêm chương trình khuyến mãi
+CREATE PROC InsertPromotion
+	@PromotionID nvarchar(10),
+	@Name nvarchar(50),
+	@StartDate datetime,
+	@EndDate datetime,
+	@Discount float(50)
+AS
+BEGIN
+	INSERT INTO Promotion(PromotionID,[Name],StartDate,EndDate,Discount)
+	VALUES (@PromotionID,@Name,@StartDate,@EndDate,@Discount)
+END;
+GO
+
+>>>>>>> Stashed changes:MiniSupermarket/DAO/MarketMiniManager.sql
