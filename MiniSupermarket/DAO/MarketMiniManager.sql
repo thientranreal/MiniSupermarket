@@ -82,18 +82,18 @@ create table Promotion(
 	StartDate datetime not null,
 	EndDate datetime not null,
 	Discount float(50) not null,
-	[Status] tinyint not null default(0),
+	[Status] nvarchar(50) not null,
 	isDeleted tinyint not null default(1),
 	primary key (PromotionID)
 )
 GO
 
 -- Rot du lieu vao bang khuyen mai
-INSERT INTO Promotion (PromotionID, [Name], StartDate, EndDate, Discount)
+INSERT INTO Promotion (PromotionID, [Name], StartDate, EndDate, Discount, [Status])
 VALUES
-    ('PM0001', N'Khuyến mãi giờ vàng', '2023-9-24', '2023-11-24', 10),
-    ('PM0002', N'Khuyến mãi lễ 2/9', '2023-08-30', '2023-09-03', 20),
-    ('PM0003', N'Khuyến mãi điểm tích luỹ', '2023-03-01', '2040-03-01', 10);
+    ('PM0001', N'Khuyến mãi giờ vàng', '2023-9-24', '2023-11-24', 10,N'Đang hoạt động'),
+    ('PM0002', N'Khuyến mãi lễ 2/9', '2023-08-30', '2023-09-03', 20, N'Ngưng hoạt động'),
+    ('PM0003', N'Khuyến mãi điểm tích luỹ', '2023-03-01', '2040-03-01', 10, N'Ngưng hoạt động');
 GO
 
 --Tao bang khach hang
@@ -515,4 +515,31 @@ BEGIN
     WHERE Bill.isDeleted = 1
 END;
 GO
+
+
+-- Lấy tất cả thông tin chương trình khuyến mãi
+CREATE PROC SelectAllPromotions
+AS
+BEGIN
+	SELECT Promotion.PromotionID AS ID, Promotion.Name, Promotion.StartDate,
+	Promotion.EndDate, Promotion.Discount, Promotion.[Status]
+	FROM Promotion
+	WHERE Promotion.isDeleted = 1
+END;
+GO
+
+-- Thêm chương trình khuyến mãi
+CREATE PROC InsertPromotion
+	@PromotionID nvarchar(10),
+	@Name nvarchar(50),
+	@StartDate datetime,
+	@EndDate datetime,
+	@Discount float(50)
+AS
+BEGIN
+	INSERT INTO Promotion(PromotionID,[Name],StartDate,EndDate,Discount)
+	VALUES (@PromotionID,@Name,@StartDate,@EndDate,@Discount)
+END;
+GO
+
 

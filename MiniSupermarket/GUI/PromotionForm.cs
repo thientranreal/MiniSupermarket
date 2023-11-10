@@ -1,4 +1,5 @@
-﻿using MiniSupermarket.ImageAndFont;
+﻿using MiniSupermarket.BUS;
+using MiniSupermarket.ImageAndFont;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ namespace MiniSupermarket.GUI
 {
     public partial class PromotionForm : Form
     {
+        PromotionBUS promotionBUS = new PromotionBUS();
         public PromotionForm()
         {
             InitializeComponent();
@@ -60,8 +62,8 @@ namespace MiniSupermarket.GUI
                     lb.ForeColor = ThemeColor.SecondaryColor;
                     lb.Font = ProjectFont.getNormalFont();
                 }
-
             }
+            lblTitle.Font = ProjectFont.getTitleFont();
         }
 
         private void groupBox3_Enter(object sender, EventArgs e)
@@ -80,7 +82,25 @@ namespace MiniSupermarket.GUI
 
         private void PromotionForm_Load(object sender, EventArgs e)
         {
+            dgvPromotions.DataSource = promotionBUS.getAllPromotions();
+            BindingPromotions();
             LoadTheme();
+        }
+
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+        }
+        public void BindingPromotions()
+        {
+            BindingSource binding = new BindingSource();
+            binding.DataSource = promotionBUS.getAllPromotions();
+            dgvPromotions.DataSource = binding;
+            txtPromotionID.DataBindings.Add("Text", binding, "ID");
+            txtPromotionName.DataBindings.Add("Text", binding, "Name");
+            dtpkStartDate.DataBindings.Add("Value", binding, "StartDate");
+            dtpkEndDate.DataBindings.Add("Value", binding, "EndDate");
+            txtDiscount.DataBindings.Add("Text", binding, "Discount");
         }
     }
 }
