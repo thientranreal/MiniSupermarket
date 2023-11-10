@@ -87,11 +87,10 @@ namespace MiniSupermarket.Views
             LoadTheme();
         }
 
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.cs
+
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-
-=======
+        }
         public void BindingPromotions()
         {
             BindingSource binding = new BindingSource();
@@ -102,7 +101,6 @@ namespace MiniSupermarket.Views
             dtpkStartDate.DataBindings.Add("Value", binding, "StartDate");
             dtpkEndDate.DataBindings.Add("Value", binding, "EndDate");
             txtDiscount.DataBindings.Add("Text", binding, "Discount");
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.cs
         }
     }
 }

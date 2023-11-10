@@ -31,11 +31,7 @@
             pnlInformation = new Panel();
             dtpkEndDate = new DateTimePicker();
             dtpkStartDate = new DateTimePicker();
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            btnExportExcel = new Button();
-=======
             btnStartWork = new Button();
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             btnUpdate = new Button();
             btnDelete = new Button();
             btnStopWork = new Button();
@@ -58,13 +54,8 @@
             dtpkSearchEndDate = new DateTimePicker();
             dtpkSearchStartDate = new DateTimePicker();
             grbPriceFilter = new GroupBox();
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            txtSearchEndDiscount = new TextBox();
-            txtSearchStartDiscount = new TextBox();
-=======
             txtEndDiscount = new TextBox();
             txtStartDiscount = new TextBox();
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             lblPriceTo = new Label();
             lblPriceFrom = new Label();
             panel4 = new Panel();
@@ -73,11 +64,7 @@
             groupBox1 = new GroupBox();
             cbxTypeOfSearch = new ComboBox();
             panel3 = new Panel();
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            dgvPromotion = new DataGridView();
-=======
             dgvPromotions = new DataGridView();
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             pnlInformation.SuspendLayout();
             panel2.SuspendLayout();
             panel5.SuspendLayout();
@@ -87,22 +74,14 @@
             groupBox2.SuspendLayout();
             groupBox1.SuspendLayout();
             panel3.SuspendLayout();
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            ((System.ComponentModel.ISupportInitialize)dgvPromotion).BeginInit();
-=======
             ((System.ComponentModel.ISupportInitialize)dgvPromotions).BeginInit();
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             SuspendLayout();
             // 
             // pnlInformation
             // 
             pnlInformation.Controls.Add(dtpkEndDate);
             pnlInformation.Controls.Add(dtpkStartDate);
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            pnlInformation.Controls.Add(btnExportExcel);
-=======
             pnlInformation.Controls.Add(btnStartWork);
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             pnlInformation.Controls.Add(btnUpdate);
             pnlInformation.Controls.Add(btnDelete);
             pnlInformation.Controls.Add(btnStopWork);
@@ -125,38 +104,18 @@
             // 
             // dtpkEndDate
             // 
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            dtpkEndDate.Location = new Point(216, 224);
-=======
             dtpkEndDate.Location = new Point(217, 234);
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             dtpkEndDate.Name = "dtpkEndDate";
             dtpkEndDate.Size = new Size(214, 27);
             dtpkEndDate.TabIndex = 31;
             // 
             // dtpkStartDate
             // 
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            dtpkStartDate.Location = new Point(216, 167);
-=======
             dtpkStartDate.Location = new Point(217, 178);
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             dtpkStartDate.Name = "dtpkStartDate";
             dtpkStartDate.Size = new Size(215, 27);
             dtpkStartDate.TabIndex = 30;
             // 
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            // btnExportExcel
-            // 
-            btnExportExcel.FlatAppearance.BorderSize = 0;
-            btnExportExcel.FlatStyle = FlatStyle.Flat;
-            btnExportExcel.Location = new Point(28, 409);
-            btnExportExcel.Name = "btnExportExcel";
-            btnExportExcel.Size = new Size(94, 31);
-            btnExportExcel.TabIndex = 24;
-            btnExportExcel.Text = "Lưu Excel";
-            btnExportExcel.UseVisualStyleBackColor = true;
-=======
             // btnStartWork
             // 
             btnStartWork.FlatAppearance.BorderSize = 0;
@@ -167,13 +126,12 @@
             btnStartWork.TabIndex = 24;
             btnStartWork.Text = "Hoạt động";
             btnStartWork.UseVisualStyleBackColor = true;
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             // 
             // btnUpdate
             // 
             btnUpdate.FlatAppearance.BorderSize = 0;
             btnUpdate.FlatStyle = FlatStyle.Flat;
-            btnUpdate.Location = new Point(168, 336);
+            btnUpdate.Location = new Point(157, 386);
             btnUpdate.Name = "btnUpdate";
             btnUpdate.Size = new Size(140, 31);
             btnUpdate.TabIndex = 23;
@@ -184,11 +142,7 @@
             // 
             btnDelete.FlatAppearance.BorderSize = 0;
             btnDelete.FlatStyle = FlatStyle.Flat;
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            btnDelete.Location = new Point(309, 336);
-=======
-            btnDelete.Location = new Point(322, 396);
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
+            btnDelete.Location = new Point(322, 386);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(94, 31);
             btnDelete.TabIndex = 22;
@@ -197,16 +151,6 @@
             // 
             // btnStopWork
             // 
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            btnImportExcel.FlatAppearance.BorderSize = 0;
-            btnImportExcel.FlatStyle = FlatStyle.Flat;
-            btnImportExcel.Location = new Point(168, 409);
-            btnImportExcel.Name = "btnImportExcel";
-            btnImportExcel.Size = new Size(94, 31);
-            btnImportExcel.TabIndex = 21;
-            btnImportExcel.Text = "Tải Excel";
-            btnImportExcel.UseVisualStyleBackColor = true;
-=======
             btnStopWork.FlatAppearance.BorderSize = 0;
             btnStopWork.FlatStyle = FlatStyle.Flat;
             btnStopWork.Location = new Point(157, 442);
@@ -215,17 +159,12 @@
             btnStopWork.TabIndex = 21;
             btnStopWork.Text = "Ngưng hoạt động";
             btnStopWork.UseVisualStyleBackColor = true;
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             // 
             // btnRefresh
             // 
             btnRefresh.FlatAppearance.BorderSize = 0;
             btnRefresh.FlatStyle = FlatStyle.Flat;
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            btnRefresh.Location = new Point(309, 409);
-=======
             btnRefresh.Location = new Point(322, 442);
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             btnRefresh.Name = "btnRefresh";
             btnRefresh.Size = new Size(94, 31);
             btnRefresh.TabIndex = 20;
@@ -236,7 +175,7 @@
             // 
             btnAdd.FlatAppearance.BorderSize = 0;
             btnAdd.FlatStyle = FlatStyle.Flat;
-            btnAdd.Location = new Point(28, 336);
+            btnAdd.Location = new Point(26, 386);
             btnAdd.Name = "btnAdd";
             btnAdd.Size = new Size(94, 31);
             btnAdd.TabIndex = 19;
@@ -246,11 +185,7 @@
             // lblDateStart
             // 
             lblDateStart.AutoSize = true;
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            lblDateStart.Location = new Point(29, 170);
-=======
             lblDateStart.Location = new Point(27, 181);
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             lblDateStart.Name = "lblDateStart";
             lblDateStart.Size = new Size(102, 20);
             lblDateStart.TabIndex = 16;
@@ -259,11 +194,7 @@
             // lblPromotionID
             // 
             lblPromotionID.AutoSize = true;
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            lblPromotionID.Location = new Point(28, 56);
-=======
             lblPromotionID.Location = new Point(27, 69);
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             lblPromotionID.Name = "lblPromotionID";
             lblPromotionID.Size = new Size(76, 20);
             lblPromotionID.TabIndex = 12;
@@ -271,25 +202,16 @@
             // 
             // txtPromotionID
             // 
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            txtPromotionID.Location = new Point(216, 53);
-            txtPromotionID.Name = "txtPromotionID";
-=======
             txtPromotionID.Location = new Point(218, 66);
             txtPromotionID.Name = "txtPromotionID";
             txtPromotionID.ReadOnly = true;
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             txtPromotionID.Size = new Size(214, 27);
             txtPromotionID.TabIndex = 11;
             // 
             // lblDateEnd
             // 
             lblDateEnd.AutoSize = true;
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            lblDateEnd.Location = new Point(29, 227);
-=======
             lblDateEnd.Location = new Point(27, 237);
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             lblDateEnd.Name = "lblDateEnd";
             lblDateEnd.Size = new Size(103, 20);
             lblDateEnd.TabIndex = 6;
@@ -298,11 +220,7 @@
             // lblDiscount
             // 
             lblDiscount.AutoSize = true;
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            lblDiscount.Location = new Point(29, 284);
-=======
             lblDiscount.Location = new Point(27, 293);
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             lblDiscount.Name = "lblDiscount";
             lblDiscount.Size = new Size(47, 20);
             lblDiscount.TabIndex = 4;
@@ -310,11 +228,7 @@
             // 
             // txtDiscount
             // 
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            txtDiscount.Location = new Point(216, 281);
-=======
             txtDiscount.Location = new Point(217, 290);
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             txtDiscount.Name = "txtDiscount";
             txtDiscount.Size = new Size(214, 27);
             txtDiscount.TabIndex = 3;
@@ -322,11 +236,7 @@
             // lblPromotionName
             // 
             lblPromotionName.AutoSize = true;
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            lblPromotionName.Location = new Point(29, 113);
-=======
             lblPromotionName.Location = new Point(27, 125);
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             lblPromotionName.Name = "lblPromotionName";
             lblPromotionName.Size = new Size(78, 20);
             lblPromotionName.TabIndex = 2;
@@ -334,11 +244,7 @@
             // 
             // txtPromotionName
             // 
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            txtPromotionName.Location = new Point(217, 110);
-=======
             txtPromotionName.Location = new Point(217, 122);
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             txtPromotionName.Name = "txtPromotionName";
             txtPromotionName.Size = new Size(214, 27);
             txtPromotionName.TabIndex = 1;
@@ -346,15 +252,10 @@
             // lblTitle
             // 
             lblTitle.AutoSize = true;
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            lblTitle.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-            lblTitle.Location = new Point(12, 9);
-=======
             lblTitle.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
             lblTitle.Location = new Point(26, 9);
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(397, 31);
+            lblTitle.Size = new Size(315, 25);
             lblTitle.TabIndex = 0;
             lblTitle.Text = "Thông tin chương trình khuyến mãi";
             // 
@@ -365,11 +266,7 @@
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(462, 0);
             panel2.Name = "panel2";
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            panel2.Size = new Size(690, 112);
-=======
             panel2.Size = new Size(832, 112);
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             panel2.TabIndex = 1;
             // 
             // panel5
@@ -377,13 +274,9 @@
             panel5.Controls.Add(grbDateFilter);
             panel5.Controls.Add(grbPriceFilter);
             panel5.Dock = DockStyle.Right;
-            panel5.Location = new Point(161, 0);
+            panel5.Location = new Point(157, 0);
             panel5.Name = "panel5";
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            panel5.Size = new Size(529, 112);
-=======
             panel5.Size = new Size(675, 112);
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             panel5.TabIndex = 1;
             // 
             // grbDateFilter
@@ -392,15 +285,6 @@
             grbDateFilter.Controls.Add(lblDateFrom);
             grbDateFilter.Controls.Add(dtpkSearchEndDate);
             grbDateFilter.Controls.Add(dtpkSearchStartDate);
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            grbDateFilter.Dock = DockStyle.Right;
-            grbDateFilter.Location = new Point(188, 0);
-            grbDateFilter.Name = "grbDateFilter";
-            grbDateFilter.Size = new Size(341, 112);
-            grbDateFilter.TabIndex = 0;
-            grbDateFilter.TabStop = false;
-            grbDateFilter.Text = "Tìm kiếm theo ngày";
-=======
             grbDateFilter.Dock = DockStyle.Fill;
             grbDateFilter.Location = new Point(186, 0);
             grbDateFilter.Name = "grbDateFilter";
@@ -408,7 +292,6 @@
             grbDateFilter.TabIndex = 0;
             grbDateFilter.TabStop = false;
             grbDateFilter.Text = "Lọc theo ngày";
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             // 
             // lblDateTo
             // 
@@ -430,35 +313,22 @@
             // 
             // dtpkSearchEndDate
             // 
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            dtpkSearchEndDate.Location = new Point(117, 71);
-=======
             dtpkSearchEndDate.Location = new Point(113, 69);
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             dtpkSearchEndDate.Name = "dtpkSearchEndDate";
             dtpkSearchEndDate.Size = new Size(214, 27);
             dtpkSearchEndDate.TabIndex = 1;
             // 
             // dtpkSearchStartDate
             // 
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            dtpkSearchStartDate.Location = new Point(117, 24);
-=======
             dtpkSearchStartDate.Location = new Point(113, 24);
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             dtpkSearchStartDate.Name = "dtpkSearchStartDate";
             dtpkSearchStartDate.Size = new Size(214, 27);
             dtpkSearchStartDate.TabIndex = 0;
             // 
             // grbPriceFilter
             // 
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            grbPriceFilter.Controls.Add(txtSearchEndDiscount);
-            grbPriceFilter.Controls.Add(txtSearchStartDiscount);
-=======
             grbPriceFilter.Controls.Add(txtEndDiscount);
             grbPriceFilter.Controls.Add(txtStartDiscount);
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             grbPriceFilter.Controls.Add(lblPriceTo);
             grbPriceFilter.Controls.Add(lblPriceFrom);
             grbPriceFilter.Dock = DockStyle.Left;
@@ -467,23 +337,6 @@
             grbPriceFilter.Size = new Size(186, 112);
             grbPriceFilter.TabIndex = 0;
             grbPriceFilter.TabStop = false;
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            grbPriceFilter.Text = "Tìm kiếm theo giá giảm";
-            // 
-            // txtSearchEndDiscount
-            // 
-            txtSearchEndDiscount.Location = new Point(70, 71);
-            txtSearchEndDiscount.Name = "txtSearchEndDiscount";
-            txtSearchEndDiscount.Size = new Size(110, 27);
-            txtSearchEndDiscount.TabIndex = 27;
-            // 
-            // txtSearchStartDiscount
-            // 
-            txtSearchStartDiscount.Location = new Point(70, 26);
-            txtSearchStartDiscount.Name = "txtSearchStartDiscount";
-            txtSearchStartDiscount.Size = new Size(110, 27);
-            txtSearchStartDiscount.TabIndex = 25;
-=======
             grbPriceFilter.Text = "Lọc theo giá";
             // 
             // txtEndDiscount
@@ -499,7 +352,6 @@
             txtStartDiscount.Name = "txtStartDiscount";
             txtStartDiscount.Size = new Size(110, 27);
             txtStartDiscount.TabIndex = 25;
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             // 
             // lblPriceTo
             // 
@@ -546,10 +398,6 @@
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(145, 27);
             txtSearch.TabIndex = 12;
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            txtSearch.TextChanged += txtSearch_TextChanged;
-=======
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             // 
             // groupBox1
             // 
@@ -572,25 +420,6 @@
             // 
             // panel3
             // 
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            panel3.Controls.Add(dgvPromotion);
-            panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(462, 112);
-            panel3.Name = "panel3";
-            panel3.Size = new Size(690, 373);
-            panel3.TabIndex = 2;
-            // 
-            // dgvPromotion
-            // 
-            dgvPromotion.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvPromotion.Dock = DockStyle.Fill;
-            dgvPromotion.Location = new Point(0, 0);
-            dgvPromotion.Name = "dgvPromotion";
-            dgvPromotion.RowHeadersWidth = 51;
-            dgvPromotion.RowTemplate.Height = 29;
-            dgvPromotion.Size = new Size(690, 373);
-            dgvPromotion.TabIndex = 0;
-=======
             panel3.Controls.Add(dgvPromotions);
             panel3.Dock = DockStyle.Fill;
             panel3.Location = new Point(462, 112);
@@ -608,17 +437,12 @@
             dgvPromotions.RowTemplate.Height = 29;
             dgvPromotions.Size = new Size(832, 373);
             dgvPromotions.TabIndex = 0;
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             // 
             // PromotionForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            ClientSize = new Size(1152, 485);
-=======
             ClientSize = new Size(1294, 485);
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(pnlInformation);
@@ -638,11 +462,7 @@
             groupBox2.PerformLayout();
             groupBox1.ResumeLayout(false);
             panel3.ResumeLayout(false);
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-            ((System.ComponentModel.ISupportInitialize)dgvPromotion).EndInit();
-=======
             ((System.ComponentModel.ISupportInitialize)dgvPromotions).EndInit();
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
             ResumeLayout(false);
         }
 
@@ -666,31 +486,21 @@
         private Label lblPromotionName;
         private TextBox txtPromotionName;
         private Label lblTitle;
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-        private Button btnExportExcel;
-=======
+
         private Button btnStartWork;
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
+
         private Button btnUpdate;
         private Button btnDelete;
         private Button btnStopWork;
         private Button btnRefresh;
         private Button btnAdd;
-<<<<<<< Updated upstream:MiniSupermarket/Views/PromotionForm.Designer.cs
-        private TextBox txtSearchEndDiscount;
-        private TextBox txtSearchStartDiscount;
-        private Label lblPriceTo;
-        private Label lblPriceFrom;
-        private TextBox txtSearch;
-        private DataGridView dgvPromotion;
-=======
+
         private TextBox txtEndDiscount;
         private TextBox txtStartDiscount;
         private Label lblPriceTo;
         private Label lblPriceFrom;
         private TextBox txtSearch;
         private DataGridView dgvPromotions;
->>>>>>> Stashed changes:MiniSupermarket/GUI/PromotionForm.Designer.cs
         private DateTimePicker dtpkSearchStartDate;
         private ComboBox cbxTypeOfSearch;
         private Label lblDateTo;
