@@ -437,6 +437,7 @@
             dgvPromotions.RowTemplate.Height = 29;
             dgvPromotions.Size = new Size(832, 373);
             dgvPromotions.TabIndex = 0;
+            dgvPromotions.CellDoubleClick += dgvPromotions_CellDoubleClick;
             // 
             // PromotionForm
             // 

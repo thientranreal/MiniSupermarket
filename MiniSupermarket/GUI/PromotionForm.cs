@@ -102,5 +102,14 @@ namespace MiniSupermarket.GUI
             dtpkEndDate.DataBindings.Add("Value", binding, "EndDate");
             txtDiscount.DataBindings.Add("Text", binding, "Discount");
         }
+
+        private void dgvPromotions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+            DataGridViewRow row = dgvPromotions.Rows[rowIndex];
+            string promotionID = row.Cells["ID"].Value.ToString();    
+            DetailPronmotionForm form = new DetailPronmotionForm(promotionID);
+            form.ShowDialog();
+        }
     }
 }

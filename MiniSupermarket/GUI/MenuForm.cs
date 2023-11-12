@@ -51,6 +51,8 @@ namespace MiniSupermarket.GUI
 
             forms.Add("Tài khoản", new UserAccount(username, password));
 
+            forms.Add("Quản lý nhập hàng", new PurchaseOderForm());
+
 
             // Ẩn nút chức năng
             foreach (var control in panelMenu.Controls)
@@ -250,6 +252,12 @@ namespace MiniSupermarket.GUI
             UserAccount temp = (UserAccount)forms["Tài khoản"];
             OpenChildForm(temp, sender, "Tài khoản");
             temp.LoadTheme();
+        }
+
+        private void btnImport_Click(object sender, EventArgs e)
+        {
+            PurchaseOderForm temp = (PurchaseOderForm)forms["Quản lý nhập hàng"];
+            OpenChildForm(temp, sender, "Quản lý nhập hàng");
         }
     }
 }
