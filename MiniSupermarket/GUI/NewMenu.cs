@@ -12,9 +12,16 @@ namespace MiniSupermarket.GUI
 {
     public partial class NewMenu : Form
     {
+        NCCForm formNCC;
         public NewMenu()
         {
             InitializeComponent();
+            mdiProp();
+        }
+        private void mdiProp()
+        {
+            this.SetBevel(false);
+            Controls.OfType<MdiClient>().FirstOrDefault().BackColor = Color.FromArgb(232, 234, 237);
         }
 
         private void menuPanel_Paint(object sender, PaintEventArgs e)
@@ -49,6 +56,18 @@ namespace MiniSupermarket.GUI
         private void btnMenu_Click(object sender, EventArgs e)
         {
             menuTimer.Start();
+            if (expandSanPham == true && expandMenu == true)
+            {
+                sanphamTimer.Start();
+            }
+            if (expandNCC == true && expandMenu == true)
+            {
+                nccTimer.Start();
+            }
+            if (expandNhanVien == true && expandMenu == true)
+            {
+                nhanvienTimer.Start();
+            }
         }
         bool expandMenu = true;
         private void menuTimer_Tick(object sender, EventArgs e)
@@ -56,7 +75,7 @@ namespace MiniSupermarket.GUI
             if (expandMenu)
             {
                 menuPanel.Width -= 10;
-                if (menuPanel.Width <= 40)
+                if (menuPanel.Width <= 60)
                 {
 
                     menuTimer.Stop();
@@ -68,7 +87,7 @@ namespace MiniSupermarket.GUI
             else
             {
                 menuPanel.Width += 10;
-                if (menuPanel.Width >= 200)
+                if (menuPanel.Width >= 300)
                 {
                     menuTimer.Stop();
                     expandMenu = true;
@@ -123,6 +142,53 @@ namespace MiniSupermarket.GUI
         private void button1_Click_1(object sender, EventArgs e)
         {
             nccTimer.Start();
+        }
+        bool expandNhanVien = false;
+        private void nhanvienTimer_Tick(object sender, EventArgs e)
+        {
+            if (expandNhanVien == false)
+            {
+                panelNhanVien.Height += 10;
+                if (panelNhanVien.Height >= 150)
+                {
+                    expandNhanVien = true;
+                    nhanvienTimer.Stop();
+                }
+            }
+            else
+            {
+                panelNhanVien.Height -= 10;
+                if (panelNhanVien.Height <= 50)
+                {
+                    expandNhanVien = false;
+                    nhanvienTimer.Stop();
+                }
+            }
+        }
+
+        private void btnNhanVien_Click(object sender, EventArgs e)
+        {
+            nhanvienTimer.Start();
+        }
+
+        private void btnThongTinNCC_Click(object sender, EventArgs e)
+        {
+            if(formNCC==null)
+            {
+                formNCC=new NCCForm();
+                formNCC.FormClosed += FormNCC_FormClosed;
+                formNCC.MdiParent = this;
+                formNCC.Dock = DockStyle.Fill;
+                formNCC.Show();
+            } else
+            {
+                formNCC.Activate();
+            }
+        }
+
+        private void FormNCC_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+            formNCC = null;
         }
     }
 }

@@ -251,5 +251,10 @@ namespace MiniSupermarket.GUI
             OpenChildForm(temp, sender, "Tài khoản");
             temp.LoadTheme();
         }
+
+        private void btnStatistic_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

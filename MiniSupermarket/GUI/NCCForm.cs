@@ -16,5 +16,15 @@ namespace MiniSupermarket.GUI
         {
             InitializeComponent();
         }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void NCCForm_Load(object sender, EventArgs e)
+        {
+            this.ControlBox = false;
+        }
     }
 }
