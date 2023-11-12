@@ -141,7 +141,7 @@ namespace MiniSupermarket.CustomControl
         }
         [Category("Custom Textbox")]
         public Color FocusBorderColor { get => focusBorderColor; set => focusBorderColor = value; }
-
+        [Category("Custom Textbox")]
         public int BorderRadius
         {
             get { return borderRadius; }
@@ -170,7 +170,7 @@ namespace MiniSupermarket.CustomControl
             }
             pathTxt.Dispose();
         }
-
+        [Category("Custom Textbox")]
         protected override void OnPaint(PaintEventArgs e)
         {
             base.OnPaint(e);
