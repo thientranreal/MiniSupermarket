@@ -173,14 +173,15 @@ namespace MiniSupermarket.GUI
 
         private void btnThongTinNCC_Click(object sender, EventArgs e)
         {
-            if(formNCC==null)
+            if (formNCC == null)
             {
-                formNCC=new NCCForm();
+                formNCC = new NCCForm();
                 formNCC.FormClosed += FormNCC_FormClosed;
                 formNCC.MdiParent = this;
                 formNCC.Dock = DockStyle.Fill;
                 formNCC.Show();
-            } else
+            }
+            else
             {
                 formNCC.Activate();
             }

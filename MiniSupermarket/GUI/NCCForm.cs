@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Drawing;
 
 namespace MiniSupermarket.GUI
 {
@@ -15,16 +16,19 @@ namespace MiniSupermarket.GUI
         public NCCForm()
         {
             InitializeComponent();
-        }
-
-        private void panel1_Paint(object sender, PaintEventArgs e)
-        {
 
         }
+
+
 
         private void NCCForm_Load(object sender, EventArgs e)
         {
             this.ControlBox = false;
+        }
+
+        private void label1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

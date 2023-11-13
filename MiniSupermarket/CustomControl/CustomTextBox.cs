@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace MiniSupermarket.CustomControl
 {
-    [DefaultEvent("_TextChange")]
+    [DefaultEvent("_TextChanged")]
     public partial class CustomTextBox : UserControl
     {
 
@@ -27,7 +27,7 @@ namespace MiniSupermarket.CustomControl
             InitializeComponent();
         }
 
-        public event EventHandler _TextChange;
+        public event EventHandler _TextChanged;
 
         [Category("Custom Textbox")]
         public Color BorderColor
@@ -289,9 +289,9 @@ namespace MiniSupermarket.CustomControl
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            if (_TextChange != null)
+            if (_TextChanged != null)
             {
-                _TextChange.Invoke(sender, e);
+                _TextChanged.Invoke(sender, e);
             }
         }
 
