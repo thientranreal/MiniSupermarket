@@ -21,5 +21,10 @@ namespace MiniSupermarket.GUI
         {
 
         }
+
+        private void dssp_DSSP_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+        }
     }
 }
