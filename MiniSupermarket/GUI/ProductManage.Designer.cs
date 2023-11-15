@@ -295,7 +295,7 @@
             this.panel2.Controls.Add(this.dssp_DSSP);
             this.panel2.Location = new System.Drawing.Point(2, 345);
             this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(952, 395);
+            this.panel2.Size = new System.Drawing.Size(952, 382);
             this.panel2.TabIndex = 2;
             // 
             // dssp_DSSP
@@ -305,7 +305,7 @@
             this.dssp_DSSP.Name = "dssp_DSSP";
             this.dssp_DSSP.RowHeadersWidth = 51;
             this.dssp_DSSP.RowTemplate.Height = 29;
-            this.dssp_DSSP.Size = new System.Drawing.Size(946, 389);
+            this.dssp_DSSP.Size = new System.Drawing.Size(946, 379);
             this.dssp_DSSP.TabIndex = 0;
             this.dssp_DSSP.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dssp_DSSP_CellContentClick);
             // 
@@ -313,7 +313,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(955, 739);
+            this.ClientSize = new System.Drawing.Size(955, 728);
             this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Name = "ProductManage";
