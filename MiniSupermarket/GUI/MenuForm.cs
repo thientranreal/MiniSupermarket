@@ -257,6 +257,7 @@ namespace MiniSupermarket.GUI
         {
             ProductManage temp = (ProductManage)forms["Quản lý sản phẩm"];
             OpenChildForm(temp, sender, "Quản lý sản phẩm");
+            temp.LoadTheme();
         }
     }
 }
