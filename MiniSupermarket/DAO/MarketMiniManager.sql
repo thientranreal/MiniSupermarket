@@ -60,19 +60,20 @@ create table Product(
 	[Description] nvarchar(100),
 	Unit nvarchar(20) not null,
 	[Image] varchar(50),
-	isDeleted tinyint not null default(1),
 	PromotionID varchar(10),
+	isDeleted tinyint not null default(1),
+	
 	primary key (ProductID)
 )
 GO
 
 -- Rot du lieu bang san pham	
-insert into Product(ProductID,[Name],TypeID,Quantity,CurrentPrice,[Description],Unit,[Image])
+insert into Product(ProductID,[Name],TypeID,Quantity,CurrentPrice,[Description],Unit,[Image],PromotionID)
 values
-	('P0001',N'Mì Kokomi','PT0001',100,2000,N'Mì Kokomi tôm chua cay 100g',N'Gói','.'),
-	('P0002',N'Sữa Milo','PT0002',100,4000,N'Sữa Milo vị ca cao lúa mạch 100ml',N'Hộp','.'),
-	('P0003',N'Bánh Slay','PT0003',100,9000,N'Bánh Slay khoai tây chiên vị tảo',N'Gói','.'),
-	('P0004',N'Mì Hảo hảo','PT0001',100,2500,N'Mì hảo hảo lẩu thái tôm',N'Gói','.')
+	('P0001',N'Mì Kokomi','PT0001',100,2000,N'Mì Kokomi tôm chua cay 100g',N'Gói','.','PM0001'),
+	('P0002',N'Sữa Milo','PT0002',100,4000,N'Sữa Milo vị ca cao lúa mạch 100ml',N'Hộp','.','PM0001'),
+	('P0003',N'Bánh Slay','PT0003',100,9000,N'Bánh Slay khoai tây chiên vị tảo',N'Gói','.','PM0002'),
+	('P0004',N'Mì Hảo hảo','PT0001',100,2500,N'Mì hảo hảo lẩu thái tôm',N'Gói','.','PM0003')
 GO
 
 --Tao bang khuyen mai
@@ -571,12 +572,13 @@ CREATE PROCEDURE InsertIntoProduct
     @CurrentPrice float(53),
     @Description nvarchar(100),
     @Unit nvarchar(20),
-    @Image varchar(50)
+    @Image varchar(50),
+	@PromotionID varchar(10)
     
 AS
 BEGIN
-    INSERT INTO Product (ProductID, [Name], TypeID, Quantity, CurrentPrice, [Description], Unit, [Image])
-    VALUES (@ProductID, @Name, @TypeID, @Quantity, @CurrentPrice, @Description, @Unit, @Image )
+    INSERT INTO Product (ProductID, [Name], TypeID, Quantity, CurrentPrice, [Description], Unit, [Image],PromotionID)
+    VALUES (@ProductID, @Name, @TypeID, @Quantity, @CurrentPrice, @Description, @Unit, @Image, @PromotionID )
 END;
 GO
 -- Cập nhật sản phẩm
@@ -588,7 +590,8 @@ CREATE PROCEDURE UpdateProduct
     @CurrentPrice float(53),
     @Description nvarchar(100),
     @Unit nvarchar(20),
-    @Image varchar(50)
+    @Image varchar(50),
+	@PromotionID varchar(10)
     
 AS
 BEGIN
@@ -600,7 +603,8 @@ BEGIN
         CurrentPrice = @CurrentPrice,
         [Description] = @Description,
         Unit = @Unit,
-        [Image] = @Image
+        [Image] = @Image,
+		PromotionID = @PromotionID
         
     WHERE ProductID = @ProductID
 END;

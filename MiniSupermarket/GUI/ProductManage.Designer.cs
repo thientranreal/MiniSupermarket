@@ -33,6 +33,9 @@
             this.txt_TimKiem = new System.Windows.Forms.TextBox();
             this.panel1 = new System.Windows.Forms.Panel();
             this.grb_TextField = new System.Windows.Forms.GroupBox();
+            this.cbx_MaLoai = new System.Windows.Forms.ComboBox();
+            this.lb_MaKM = new System.Windows.Forms.Label();
+            this.cbx_MaKM = new System.Windows.Forms.ComboBox();
             this.btn_NhapExcel = new System.Windows.Forms.Button();
             this.txt_MaSp = new System.Windows.Forms.TextBox();
             this.btn_XuatExcel = new System.Windows.Forms.Button();
@@ -53,7 +56,6 @@
             this.lb_HinhAnh = new System.Windows.Forms.Label();
             this.txt_SoLuong = new System.Windows.Forms.TextBox();
             this.txt_TenSp = new System.Windows.Forms.TextBox();
-            this.txt_MaLoaiSp = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.dssp_DSSP = new System.Windows.Forms.DataGridView();
             this.grb_TimKiem.SuspendLayout();
@@ -100,6 +102,9 @@
             // 
             // grb_TextField
             // 
+            this.grb_TextField.Controls.Add(this.cbx_MaLoai);
+            this.grb_TextField.Controls.Add(this.lb_MaKM);
+            this.grb_TextField.Controls.Add(this.cbx_MaKM);
             this.grb_TextField.Controls.Add(this.btn_NhapExcel);
             this.grb_TextField.Controls.Add(this.txt_MaSp);
             this.grb_TextField.Controls.Add(this.btn_XuatExcel);
@@ -120,7 +125,6 @@
             this.grb_TextField.Controls.Add(this.lb_HinhAnh);
             this.grb_TextField.Controls.Add(this.txt_SoLuong);
             this.grb_TextField.Controls.Add(this.txt_TenSp);
-            this.grb_TextField.Controls.Add(this.txt_MaLoaiSp);
             this.grb_TextField.Location = new System.Drawing.Point(3, 81);
             this.grb_TextField.Name = "grb_TextField";
             this.grb_TextField.Size = new System.Drawing.Size(946, 289);
@@ -128,9 +132,34 @@
             this.grb_TextField.TabStop = false;
             this.grb_TextField.Text = "Thông tin";
             // 
+            // cbx_MaLoai
+            // 
+            this.cbx_MaLoai.FormattingEnabled = true;
+            this.cbx_MaLoai.Location = new System.Drawing.Point(185, 86);
+            this.cbx_MaLoai.Name = "cbx_MaLoai";
+            this.cbx_MaLoai.Size = new System.Drawing.Size(172, 28);
+            this.cbx_MaLoai.TabIndex = 24;
+            // 
+            // lb_MaKM
+            // 
+            this.lb_MaKM.AutoSize = true;
+            this.lb_MaKM.Location = new System.Drawing.Point(31, 217);
+            this.lb_MaKM.Name = "lb_MaKM";
+            this.lb_MaKM.Size = new System.Drawing.Size(109, 20);
+            this.lb_MaKM.TabIndex = 23;
+            this.lb_MaKM.Text = "Mã khuyến mãi";
+            // 
+            // cbx_MaKM
+            // 
+            this.cbx_MaKM.FormattingEnabled = true;
+            this.cbx_MaKM.Location = new System.Drawing.Point(185, 214);
+            this.cbx_MaKM.Name = "cbx_MaKM";
+            this.cbx_MaKM.Size = new System.Drawing.Size(172, 28);
+            this.cbx_MaKM.TabIndex = 22;
+            // 
             // btn_NhapExcel
             // 
-            this.btn_NhapExcel.Location = new System.Drawing.Point(781, 229);
+            this.btn_NhapExcel.Location = new System.Drawing.Point(824, 229);
             this.btn_NhapExcel.Name = "btn_NhapExcel";
             this.btn_NhapExcel.Size = new System.Drawing.Size(94, 43);
             this.btn_NhapExcel.TabIndex = 21;
@@ -139,14 +168,14 @@
             // 
             // txt_MaSp
             // 
-            this.txt_MaSp.Location = new System.Drawing.Point(216, 48);
+            this.txt_MaSp.Location = new System.Drawing.Point(185, 44);
             this.txt_MaSp.Name = "txt_MaSp";
             this.txt_MaSp.Size = new System.Drawing.Size(172, 27);
             this.txt_MaSp.TabIndex = 9;
             // 
             // btn_XuatExcel
             // 
-            this.btn_XuatExcel.Location = new System.Drawing.Point(681, 229);
+            this.btn_XuatExcel.Location = new System.Drawing.Point(711, 229);
             this.btn_XuatExcel.Name = "btn_XuatExcel";
             this.btn_XuatExcel.Size = new System.Drawing.Size(94, 43);
             this.btn_XuatExcel.TabIndex = 20;
@@ -156,7 +185,7 @@
             // lb_MaSp
             // 
             this.lb_MaSp.AutoSize = true;
-            this.lb_MaSp.Location = new System.Drawing.Point(89, 51);
+            this.lb_MaSp.Location = new System.Drawing.Point(31, 47);
             this.lb_MaSp.Name = "lb_MaSp";
             this.lb_MaSp.Size = new System.Drawing.Size(98, 20);
             this.lb_MaSp.TabIndex = 1;
@@ -164,7 +193,7 @@
             // 
             // btn_Xoa
             // 
-            this.btn_Xoa.Location = new System.Drawing.Point(328, 229);
+            this.btn_Xoa.Location = new System.Drawing.Point(824, 152);
             this.btn_Xoa.Name = "btn_Xoa";
             this.btn_Xoa.Size = new System.Drawing.Size(94, 43);
             this.btn_Xoa.TabIndex = 19;
@@ -174,7 +203,7 @@
             // lb_TenSp
             // 
             this.lb_TenSp.AutoSize = true;
-            this.lb_TenSp.Location = new System.Drawing.Point(497, 51);
+            this.lb_TenSp.Location = new System.Drawing.Point(397, 50);
             this.lb_TenSp.Name = "lb_TenSp";
             this.lb_TenSp.Size = new System.Drawing.Size(100, 20);
             this.lb_TenSp.TabIndex = 2;
@@ -182,7 +211,7 @@
             // 
             // btn_Sua
             // 
-            this.btn_Sua.Location = new System.Drawing.Point(191, 229);
+            this.btn_Sua.Location = new System.Drawing.Point(824, 92);
             this.btn_Sua.Name = "btn_Sua";
             this.btn_Sua.Size = new System.Drawing.Size(94, 43);
             this.btn_Sua.TabIndex = 18;
@@ -192,7 +221,7 @@
             // lb_MaLoaiSp
             // 
             this.lb_MaLoaiSp.AutoSize = true;
-            this.lb_MaLoaiSp.Location = new System.Drawing.Point(89, 93);
+            this.lb_MaLoaiSp.Location = new System.Drawing.Point(31, 89);
             this.lb_MaLoaiSp.Name = "lb_MaLoaiSp";
             this.lb_MaLoaiSp.Size = new System.Drawing.Size(59, 20);
             this.lb_MaLoaiSp.TabIndex = 3;
@@ -201,17 +230,18 @@
             // 
             // btn_Them
             // 
-            this.btn_Them.Location = new System.Drawing.Point(54, 229);
+            this.btn_Them.Location = new System.Drawing.Point(824, 31);
             this.btn_Them.Name = "btn_Them";
             this.btn_Them.Size = new System.Drawing.Size(94, 43);
             this.btn_Them.TabIndex = 17;
             this.btn_Them.Text = "Thêm";
             this.btn_Them.UseVisualStyleBackColor = true;
+            this.btn_Them.Click += new System.EventHandler(this.btn_Them_Click);
             // 
             // lb_Soluong
             // 
             this.lb_Soluong.AutoSize = true;
-            this.lb_Soluong.Location = new System.Drawing.Point(497, 93);
+            this.lb_Soluong.Location = new System.Drawing.Point(397, 92);
             this.lb_Soluong.Name = "lb_Soluong";
             this.lb_Soluong.Size = new System.Drawing.Size(69, 20);
             this.lb_Soluong.TabIndex = 4;
@@ -219,7 +249,7 @@
             // 
             // txt_HinhAnh
             // 
-            this.txt_HinhAnh.Location = new System.Drawing.Point(635, 172);
+            this.txt_HinhAnh.Location = new System.Drawing.Point(535, 171);
             this.txt_HinhAnh.Name = "txt_HinhAnh";
             this.txt_HinhAnh.Size = new System.Drawing.Size(147, 27);
             this.txt_HinhAnh.TabIndex = 16;
@@ -227,7 +257,7 @@
             // lb_DonGia
             // 
             this.lb_DonGia.AutoSize = true;
-            this.lb_DonGia.Location = new System.Drawing.Point(89, 133);
+            this.lb_DonGia.Location = new System.Drawing.Point(31, 129);
             this.lb_DonGia.Name = "lb_DonGia";
             this.lb_DonGia.Size = new System.Drawing.Size(62, 20);
             this.lb_DonGia.TabIndex = 5;
@@ -235,7 +265,7 @@
             // 
             // txt_Kieu
             // 
-            this.txt_Kieu.Location = new System.Drawing.Point(216, 172);
+            this.txt_Kieu.Location = new System.Drawing.Point(185, 168);
             this.txt_Kieu.Name = "txt_Kieu";
             this.txt_Kieu.Size = new System.Drawing.Size(172, 27);
             this.txt_Kieu.TabIndex = 15;
@@ -243,7 +273,7 @@
             // lb_MoTa
             // 
             this.lb_MoTa.AutoSize = true;
-            this.lb_MoTa.Location = new System.Drawing.Point(497, 133);
+            this.lb_MoTa.Location = new System.Drawing.Point(397, 132);
             this.lb_MoTa.Name = "lb_MoTa";
             this.lb_MoTa.Size = new System.Drawing.Size(48, 20);
             this.lb_MoTa.TabIndex = 6;
@@ -251,7 +281,7 @@
             // 
             // txt_MoTa
             // 
-            this.txt_MoTa.Location = new System.Drawing.Point(635, 130);
+            this.txt_MoTa.Location = new System.Drawing.Point(535, 129);
             this.txt_MoTa.Name = "txt_MoTa";
             this.txt_MoTa.Size = new System.Drawing.Size(240, 27);
             this.txt_MoTa.TabIndex = 14;
@@ -259,7 +289,7 @@
             // lb_Kieu
             // 
             this.lb_Kieu.AutoSize = true;
-            this.lb_Kieu.Location = new System.Drawing.Point(89, 175);
+            this.lb_Kieu.Location = new System.Drawing.Point(31, 171);
             this.lb_Kieu.Name = "lb_Kieu";
             this.lb_Kieu.Size = new System.Drawing.Size(38, 20);
             this.lb_Kieu.TabIndex = 7;
@@ -267,7 +297,7 @@
             // 
             // txt_DonGia
             // 
-            this.txt_DonGia.Location = new System.Drawing.Point(216, 130);
+            this.txt_DonGia.Location = new System.Drawing.Point(185, 126);
             this.txt_DonGia.Name = "txt_DonGia";
             this.txt_DonGia.Size = new System.Drawing.Size(172, 27);
             this.txt_DonGia.TabIndex = 13;
@@ -275,7 +305,7 @@
             // lb_HinhAnh
             // 
             this.lb_HinhAnh.AutoSize = true;
-            this.lb_HinhAnh.Location = new System.Drawing.Point(497, 175);
+            this.lb_HinhAnh.Location = new System.Drawing.Point(397, 174);
             this.lb_HinhAnh.Name = "lb_HinhAnh";
             this.lb_HinhAnh.Size = new System.Drawing.Size(68, 20);
             this.lb_HinhAnh.TabIndex = 8;
@@ -283,24 +313,17 @@
             // 
             // txt_SoLuong
             // 
-            this.txt_SoLuong.Location = new System.Drawing.Point(635, 90);
+            this.txt_SoLuong.Location = new System.Drawing.Point(535, 89);
             this.txt_SoLuong.Name = "txt_SoLuong";
             this.txt_SoLuong.Size = new System.Drawing.Size(111, 27);
             this.txt_SoLuong.TabIndex = 12;
             // 
             // txt_TenSp
             // 
-            this.txt_TenSp.Location = new System.Drawing.Point(635, 48);
+            this.txt_TenSp.Location = new System.Drawing.Point(535, 47);
             this.txt_TenSp.Name = "txt_TenSp";
             this.txt_TenSp.Size = new System.Drawing.Size(161, 27);
             this.txt_TenSp.TabIndex = 10;
-            // 
-            // txt_MaLoaiSp
-            // 
-            this.txt_MaLoaiSp.Location = new System.Drawing.Point(216, 90);
-            this.txt_MaLoaiSp.Name = "txt_MaLoaiSp";
-            this.txt_MaLoaiSp.Size = new System.Drawing.Size(172, 27);
-            this.txt_MaLoaiSp.TabIndex = 11;
             // 
             // panel2
             // 
@@ -319,6 +342,7 @@
             this.dssp_DSSP.RowTemplate.Height = 29;
             this.dssp_DSSP.Size = new System.Drawing.Size(946, 379);
             this.dssp_DSSP.TabIndex = 0;
+            this.dssp_DSSP.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dssp_DSSP_CellClick);
             this.dssp_DSSP.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dssp_DSSP_CellContentClick);
             // 
             // ProductManage
@@ -366,11 +390,13 @@
         private TextBox txt_MoTa;
         private TextBox txt_DonGia;
         private TextBox txt_SoLuong;
-        private TextBox txt_MaLoaiSp;
         private TextBox txt_TenSp;
         private TextBox txt_MaSp;
         private Panel panel2;
         private DataGridView dssp_DSSP;
         private GroupBox grb_TextField;
+        private ComboBox cbx_MaLoai;
+        private Label lb_MaKM;
+        private ComboBox cbx_MaKM;
     }
 }
