@@ -10,6 +10,7 @@ namespace MiniSupermarket.DAO
 {
     internal static class Connection
     {
+
         private static string serverName = "MSI\\THIENTRAN";
         private static string databaseName = "MarketMiniManager";
 

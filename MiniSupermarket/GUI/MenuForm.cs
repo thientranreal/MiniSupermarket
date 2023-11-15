@@ -39,6 +39,7 @@ namespace MiniSupermarket.GUI
 
             // Khởi tạo giá trị cho dictionary
             forms = new Dictionary<string, Form>();
+            forms.Add("Quản lý sản phẩm", new ProductManage());
             forms.Add("Quản lý loại sản phẩm", new ProductTypeManage());
             forms.Add("Quản lý bán hàng", new SaleForm());
 
@@ -250,6 +251,11 @@ namespace MiniSupermarket.GUI
             temp.LoadTheme();
         }
 
+        private void btnProducts_Click_1(object sender, EventArgs e)
+        {
+            ProductManage temp = (ProductManage)forms["Quản lý sản phẩm"];
+            OpenChildForm(temp, sender, "Quản lý sản phẩm");
+            temp.LoadTheme();
         private void btnImport_Click(object sender, EventArgs e)
         {
             PurchaseOderForm temp = (PurchaseOderForm)forms["Quản lý nhập hàng"];
