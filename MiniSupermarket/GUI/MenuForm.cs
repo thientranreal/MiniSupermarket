@@ -35,6 +35,7 @@ namespace MiniSupermarket.GUI
             this.ControlBox = false;
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
             this.loginForm = loginForm;
+            this.WindowState = FormWindowState.Maximized;
 
             // Khởi tạo giá trị cho dictionary
             forms = new Dictionary<string, Form>();

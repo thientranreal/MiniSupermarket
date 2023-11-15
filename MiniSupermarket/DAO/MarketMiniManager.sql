@@ -521,7 +521,7 @@ BEGIN
 	SELECT Bill.BillID, Bill.[Date], Bill.EmployeeID,
     Employee.[Name] AS EmployeeName, Bill.CustomerID,
     Customer.[Name] AS CustomerName, 
-    Bill.TotalPrice, Bill.[Status] FROM Bill INNER JOIN Employee
+    Bill.EstimatedPrice, Bill.ReducePrice, Bill.TotalPrice, Bill.[Status] FROM Bill INNER JOIN Employee
 	ON Bill.EmployeeID = Employee.EmployeeID LEFT JOIN Customer
 	ON Bill.CustomerID = Customer.CustomerID
     WHERE Bill.isDeleted = 1
@@ -573,6 +573,19 @@ AS
 BEGIN
 	INSERT INTO Promotion(PromotionID,[Name],StartDate,EndDate,Discount)
 	VALUES (@PromotionID,@Name,@StartDate,@EndDate,@Discount)
+END;
+GO
+
+-- Thêm khách hàng cho hóa đơn
+CREATE PROC InsertCustomerSale
+	@CustomerID varchar(10),
+	@Name nvarchar(50),
+	@PhoneNumber varchar(50),
+	@Sex nvarchar(10)
+AS
+BEGIN
+	INSERT INTO Customer(CustomerID, [Name], PhoneNumber, Sex)
+	VALUES (@CustomerID, @Name, @PhoneNumber, @Sex)
 END;
 GO
 

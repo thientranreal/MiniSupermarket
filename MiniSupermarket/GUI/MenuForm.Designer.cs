@@ -423,6 +423,7 @@
             Controls.Add(panelTitleBar);
             Controls.Add(panelMenu);
             Name = "MenuForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "MenuForm";
             panelMenu.ResumeLayout(false);
             panelLogo.ResumeLayout(false);

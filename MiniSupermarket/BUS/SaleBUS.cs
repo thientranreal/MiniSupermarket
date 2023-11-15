@@ -12,9 +12,9 @@ namespace MiniSupermarket.BUS
     internal class SaleBUS
     {
         // Chứa dữ liệu lấy lên từ database
-        private DataTable bills;
+        private static DataTable bills;
         // Chứa mã khác hàng và tên KH
-        private List<string> customers = new List<string>();
+        private static List<string> customers = new List<string>();
 
         public SaleBUS()
         {
@@ -72,7 +72,7 @@ namespace MiniSupermarket.BUS
                 }
             }
 
-            this.customers = result;
+            SaleBUS.customers = result;
         }
          // Cập nhật tất cả dữ liệu cần thiết
         public void updateData()
@@ -119,6 +119,26 @@ namespace MiniSupermarket.BUS
                 new SqlParameter("@CustomerID", CustomerId),
             };
             return Connection.ExecuteNonQuery(storedProcudure, parameters);
+        }
+
+        // Thêm khách hàng mới vào csld
+        public bool InsertCustomerSale(string customerId, string name, string phone, string sex)
+        {
+            string procedure = "InsertCustomerSale";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@CustomerID", customerId),
+                new SqlParameter("@Name", name),
+                new SqlParameter("@PhoneNumber", phone),
+                new SqlParameter("@Sex", sex)
+            };
+            // Nếu thêm khách hàng thành công thì cập nhật danh sách khách hàng
+            if (Connection.ExecuteNonQuery(procedure, parameters))
+            {
+                updateCustomers();
+                return true;
+            }
+            return false;
         }
     }
 }

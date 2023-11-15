@@ -17,18 +17,11 @@ namespace MiniSupermarket.GUI
     public partial class SaleForm : Form
     {
         private SaleBUS saleBus = new SaleBUS();
+        private string sex;
         public SaleForm()
         {
             InitializeComponent();
             this.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
-
-            // Thêm lựa chọn combo box tìm kiếm
-            cbCustomer.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbCustomer.Items.Add("Mã KH");
-            cbCustomer.Items.Add("Tên KH");
-            cbEmployee.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbEmployee.Items.Add("Mã NV");
-            cbEmployee.Items.Add("Tên NV");
         }
 
         private void SaleForm_Load(object sender, EventArgs e)
@@ -40,6 +33,9 @@ namespace MiniSupermarket.GUI
             dgv_bill.BackgroundColor = Color.White;
             // Chỉ cho đọc data grid view
             dgv_bill.ReadOnly = true;
+
+            dgv_bill.DataSource = saleBus.getAllBills();
+
             // Sửa tên cột trong data grid view
             dgv_bill.Columns["BillID"].HeaderText = "Mã hóa đơn";
             dgv_bill.Columns["Date"].HeaderText = "Ngày lập";
@@ -47,6 +43,8 @@ namespace MiniSupermarket.GUI
             dgv_bill.Columns["EmployeeName"].HeaderText = "Tên NV";
             dgv_bill.Columns["CustomerID"].HeaderText = "Mã KH";
             dgv_bill.Columns["CustomerName"].HeaderText = "Tên KH";
+            dgv_bill.Columns["EstimatedPrice"].HeaderText = "Tạm tính";
+            dgv_bill.Columns["ReducePrice"].HeaderText = "Giá giảm";
             dgv_bill.Columns["TotalPrice"].HeaderText = "Tổng tiền";
             dgv_bill.Columns["Status"].HeaderText = "Thanh toán";
 
@@ -55,6 +53,10 @@ namespace MiniSupermarket.GUI
             txtPhone.Enabled = false;
             rdFemale.Enabled = false;
             rdMale.Enabled = false;
+
+            // Binding combo box chọn khách hàng với text box khách hàng
+            Binding binding = new Binding("Text", cbChooseCustomer, "Text");
+            txtSearchCustomer.DataBindings.Add(binding);
         }
 
         public void LoadTheme()
@@ -152,6 +154,7 @@ namespace MiniSupermarket.GUI
 
         private void btnAddBill_Click(object sender, EventArgs e)
         {
+            string currentDate = DateTime.Now.ToString("yyyy-MM-dd");
             // Nếu chọn khách hàng mới thì phải nhập đầy đủ thông tin khách hàng
             if (ckNewCustomer.Checked)
             {
@@ -197,18 +200,45 @@ namespace MiniSupermarket.GUI
                             MessageBoxIcon.Warning);
                     return;
                 }
+
+                // Tạo một mã khách hàng mới
+                string customerId = RandomString(5);
+                if (saleBus.InsertCustomerSale(customerId, txtCustomerName.Text, txtPhone.Text, sex))
+                {
+                    if (saleBus.InsertIntoBill(GlobalState.employeeId, customerId, currentDate))
+                    {
+                        // Hiện thông báo thành công
+                        MessageBox.Show("Tạo hóa đơn thành công",
+                                "Thông báo",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Information);
+
+                        // Cập nhật lại data grid view
+                        saleBus.updateBills();
+                        dgv_bill.DataSource = saleBus.getAllBills();
+                        return;
+                    }
+                    else
+                    {
+                        // Hiện thông báo thất bại
+                        MessageBox.Show("Tạo hóa đơn thất bại",
+                                "Thông báo",
+                                MessageBoxButtons.OK,
+                                MessageBoxIcon.Error);
+                        return;
+                    }
+                }
             }
             else
             {
                 // Nếu đã chọn khách hàng
-                string input = cbChooseCustomer.Text.Trim();
+                string input = txtSearchCustomer.Text.Trim();
                 string customerId = null;
                 Match match = Regex.Match(input, @"\[(C\d+)\]");
                 if (match.Success)
                 {
                     customerId = match.Groups[1].Value;
                 }
-                string currentDate = DateTime.Now.ToString("yyyy-MM-dd");
 
                 if (saleBus.InsertIntoBill(GlobalState.employeeId, customerId, currentDate))
                 {
@@ -235,6 +265,15 @@ namespace MiniSupermarket.GUI
             }
         }
 
+        // Tạo tạm mã khách hàng mới
+        private static Random random = new Random();
+        private static string RandomString(int length)
+        {
+            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+            return new string(Enumerable.Repeat(chars, length)
+              .Select(s => s[random.Next(s.Length)]).ToArray());
+        }
+
         private void txtPhone_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (char.IsWhiteSpace(e.KeyChar) || !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -246,7 +285,6 @@ namespace MiniSupermarket.GUI
         public void updateDateForSaleForm()
         {
             cbChooseCustomer.Items.Clear();
-            saleBus.updateData();
             // Thêm danh sách khách hàng cho combo box
             cbChooseCustomer.Items.AddRange(saleBus.getCustomers().ToArray());
             dgv_bill.DataSource = saleBus.getAllBills();
@@ -280,6 +318,23 @@ namespace MiniSupermarket.GUI
                 rdMale.Enabled = false;
 
             }
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            txtSearchCustomer.Clear();
+            txtCustomerName.Clear();
+            txtPhone.Clear();
+        }
+
+        private void rdMale_CheckedChanged(object sender, EventArgs e)
+        {
+            sex = "Nam";
+        }
+
+        private void rdFemale_CheckedChanged(object sender, EventArgs e)
+        {
+            sex = "Nữ";
         }
     }
 }
