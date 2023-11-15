@@ -541,5 +541,79 @@ BEGIN
 	VALUES (@PromotionID,@Name,@StartDate,@EndDate,@Discount)
 END;
 GO
+-- Công Anh 
+
+--Lấy danh sách sản phẩm 
+CREATE PROCEDURE SelectAllFromProduct
+AS
+BEGIN
+    SELECT
+        ProductID,
+        [Name],
+        TypeID,
+        Quantity,
+        CurrentPrice,
+        [Description],
+        Unit,
+        [Image],
+        isDeleted,
+        PromotionID
+    FROM Product
+    WHERE isDeleted = 1
+END;
+GO
+-- Thêm sản phẩm
+CREATE PROCEDURE InsertIntoProduct
+    @ProductID varchar(10),
+    @Name nvarchar(50),
+    @TypeID varchar(10),
+    @Quantity int,
+    @CurrentPrice float(53),
+    @Description nvarchar(100),
+    @Unit nvarchar(20),
+    @Image varchar(50)
+    
+AS
+BEGIN
+    INSERT INTO Product (ProductID, [Name], TypeID, Quantity, CurrentPrice, [Description], Unit, [Image])
+    VALUES (@ProductID, @Name, @TypeID, @Quantity, @CurrentPrice, @Description, @Unit, @Image )
+END;
+GO
+-- Cập nhật sản phẩm
+CREATE PROCEDURE UpdateProduct
+    @ProductID varchar(10),
+    @Name nvarchar(50),
+    @TypeID varchar(10),
+    @Quantity int,
+    @CurrentPrice float(53),
+    @Description nvarchar(100),
+    @Unit nvarchar(20),
+    @Image varchar(50)
+    
+AS
+BEGIN
+    UPDATE Product
+    SET
+        [Name] = @Name,
+        TypeID = @TypeID,
+        Quantity = @Quantity,
+        CurrentPrice = @CurrentPrice,
+        [Description] = @Description,
+        Unit = @Unit,
+        [Image] = @Image
+        
+    WHERE ProductID = @ProductID
+END;
+GO
+-- Xóa sản phẩm 
+CREATE PROCEDURE DeleteProduct
+    @ProductID varchar(10)
+AS
+BEGIN
+    UPDATE Product
+    SET isDeleted = 0
+    WHERE ProductID = @ProductID
+END;
+GO
 
 
