@@ -28,10 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
+            DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
+            DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
             customPanel1 = new CustomControl.CustomPanel();
             customPanel9 = new CustomControl.CustomPanel();
             label6 = new Label();
-            customDateTimePicker1 = new CustomControl.CustomDateTimePicker();
+            dateTimePickerNgayNhap = new CustomControl.CustomDateTimePicker();
             customPanel8 = new CustomControl.CustomPanel();
             label5 = new Label();
             customPanel7 = new CustomControl.CustomPanel();
@@ -42,21 +46,31 @@
             label2 = new Label();
             customPanel3 = new CustomControl.CustomPanel();
             label1 = new Label();
-            customTextBox5 = new CustomControl.CustomTextBox();
-            customTextBox4 = new CustomControl.CustomTextBox();
-            customTextBox3 = new CustomControl.CustomTextBox();
-            customTextBox2 = new CustomControl.CustomTextBox();
-            customTextBox1 = new CustomControl.CustomTextBox();
+            txtEmail = new CustomControl.CustomTextBox();
+            txtSDT = new CustomControl.CustomTextBox();
+            txtDiaChi = new CustomControl.CustomTextBox();
+            txtTen = new CustomControl.CustomTextBox();
+            txtID = new CustomControl.CustomTextBox();
             pnlTitleThongTin = new CustomControl.CustomPanel();
             lblTitleThongTinNCC = new Label();
             customPanel4 = new CustomControl.CustomPanel();
+            customPanel13 = new CustomControl.CustomPanel();
+            dataGridViewNCC = new DataGridView();
             customPanel2 = new CustomControl.CustomPanel();
             btnHuy = new CustomControl.CustomButton();
             btnXoa = new CustomControl.CustomButton();
             btnCapNhat = new CustomControl.CustomButton();
             btnThem = new CustomControl.CustomButton();
             txtTimKiem = new CustomControl.CustomTextBox();
-            customButton1 = new CustomControl.CustomButton();
+            btnTimKiem = new CustomControl.CustomButton();
+            customPanel10 = new CustomControl.CustomPanel();
+            dataGridViewLoaiSanPham = new DataGridView();
+            customPanel12 = new CustomControl.CustomPanel();
+            btnThemMoiLoai = new CustomControl.CustomButton();
+            customPanel11 = new CustomControl.CustomPanel();
+            label7 = new Label();
+            comboBox1 = new ComboBox();
+            btnLoad = new CustomControl.CustomButton();
             customPanel1.SuspendLayout();
             customPanel9.SuspendLayout();
             customPanel8.SuspendLayout();
@@ -65,12 +79,19 @@
             customPanel5.SuspendLayout();
             customPanel3.SuspendLayout();
             pnlTitleThongTin.SuspendLayout();
+            customPanel4.SuspendLayout();
+            customPanel13.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewNCC).BeginInit();
             customPanel2.SuspendLayout();
+            customPanel10.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewLoaiSanPham).BeginInit();
+            customPanel12.SuspendLayout();
+            customPanel11.SuspendLayout();
             SuspendLayout();
             // 
             // customPanel1
             // 
-            customPanel1.Anchor = AnchorStyles.Left | AnchorStyles.Right;
+            customPanel1.Anchor = AnchorStyles.Top;
             customPanel1.AutoSize = true;
             customPanel1.BackColor = Color.FromArgb(51, 124, 207);
             customPanel1.BackgroundColor = Color.FromArgb(51, 124, 207);
@@ -78,22 +99,22 @@
             customPanel1.BorderRadius = 20;
             customPanel1.BorderSize = 3;
             customPanel1.Controls.Add(customPanel9);
-            customPanel1.Controls.Add(customDateTimePicker1);
+            customPanel1.Controls.Add(dateTimePickerNgayNhap);
             customPanel1.Controls.Add(customPanel8);
             customPanel1.Controls.Add(customPanel7);
             customPanel1.Controls.Add(customPanel6);
             customPanel1.Controls.Add(customPanel5);
             customPanel1.Controls.Add(customPanel3);
-            customPanel1.Controls.Add(customTextBox5);
-            customPanel1.Controls.Add(customTextBox4);
-            customPanel1.Controls.Add(customTextBox3);
-            customPanel1.Controls.Add(customTextBox2);
-            customPanel1.Controls.Add(customTextBox1);
+            customPanel1.Controls.Add(txtEmail);
+            customPanel1.Controls.Add(txtSDT);
+            customPanel1.Controls.Add(txtDiaChi);
+            customPanel1.Controls.Add(txtTen);
+            customPanel1.Controls.Add(txtID);
             customPanel1.Controls.Add(pnlTitleThongTin);
             customPanel1.ForeColor = Color.White;
             customPanel1.Location = new Point(12, 12);
             customPanel1.Name = "customPanel1";
-            customPanel1.Size = new Size(400, 300);
+            customPanel1.Size = new Size(475, 300);
             customPanel1.TabIndex = 0;
             customPanel1.TextColor = Color.White;
             // 
@@ -124,20 +145,20 @@
             label6.Text = "Ngày nhập";
             label6.UseMnemonic = false;
             // 
-            // customDateTimePicker1
+            // dateTimePickerNgayNhap
             // 
-            customDateTimePicker1.BorderColor = Color.FromArgb(20, 80, 163);
-            customDateTimePicker1.BorderSize = 3;
-            customDateTimePicker1.CustomFormat = "dd/mm/yyyy";
-            customDateTimePicker1.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            customDateTimePicker1.Format = DateTimePickerFormat.Custom;
-            customDateTimePicker1.Location = new Point(132, 248);
-            customDateTimePicker1.MinimumSize = new Size(0, 35);
-            customDateTimePicker1.Name = "customDateTimePicker1";
-            customDateTimePicker1.Size = new Size(250, 35);
-            customDateTimePicker1.SkinColor = Color.FromArgb(125, 229, 237);
-            customDateTimePicker1.TabIndex = 9;
-            customDateTimePicker1.TextColor = Color.FromArgb(20, 80, 163);
+            dateTimePickerNgayNhap.BorderColor = Color.FromArgb(20, 80, 163);
+            dateTimePickerNgayNhap.BorderSize = 3;
+            dateTimePickerNgayNhap.CustomFormat = "dd/MM/yyyy";
+            dateTimePickerNgayNhap.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            dateTimePickerNgayNhap.Format = DateTimePickerFormat.Short;
+            dateTimePickerNgayNhap.Location = new Point(132, 248);
+            dateTimePickerNgayNhap.MinimumSize = new Size(0, 35);
+            dateTimePickerNgayNhap.Name = "dateTimePickerNgayNhap";
+            dateTimePickerNgayNhap.Size = new Size(136, 35);
+            dateTimePickerNgayNhap.SkinColor = Color.FromArgb(125, 229, 237);
+            dateTimePickerNgayNhap.TabIndex = 9;
+            dateTimePickerNgayNhap.TextColor = Color.FromArgb(20, 80, 163);
             // 
             // customPanel8
             // 
@@ -274,100 +295,100 @@
             label1.Text = "ID";
             label1.UseMnemonic = false;
             // 
-            // customTextBox5
+            // txtEmail
             // 
-            customTextBox5.BackColor = Color.FromArgb(51, 124, 207);
-            customTextBox5.BorderColor = Color.FromArgb(125, 229, 237);
-            customTextBox5.BorderRadius = 0;
-            customTextBox5.BorderSize = 3;
-            customTextBox5.FocusBorderColor = Color.HotPink;
-            customTextBox5.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-            customTextBox5.ForeColor = Color.DimGray;
-            customTextBox5.Location = new Point(132, 210);
-            customTextBox5.Multiline = false;
-            customTextBox5.Name = "customTextBox5";
-            customTextBox5.Padding = new Padding(7);
-            customTextBox5.PasswordChar = false;
-            customTextBox5.Size = new Size(250, 32);
-            customTextBox5.TabIndex = 5;
-            customTextBox5.Texts = "";
-            customTextBox5.UnderlineStyle = true;
+            txtEmail.BackColor = Color.FromArgb(51, 124, 207);
+            txtEmail.BorderColor = Color.FromArgb(125, 229, 237);
+            txtEmail.BorderRadius = 0;
+            txtEmail.BorderSize = 3;
+            txtEmail.FocusBorderColor = Color.HotPink;
+            txtEmail.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            txtEmail.ForeColor = Color.FromArgb(125, 229, 237);
+            txtEmail.Location = new Point(132, 210);
+            txtEmail.Multiline = false;
+            txtEmail.Name = "txtEmail";
+            txtEmail.Padding = new Padding(7);
+            txtEmail.PasswordChar = false;
+            txtEmail.Size = new Size(295, 34);
+            txtEmail.TabIndex = 5;
+            txtEmail.Texts = "";
+            txtEmail.UnderlineStyle = true;
             // 
-            // customTextBox4
+            // txtSDT
             // 
-            customTextBox4.BackColor = Color.FromArgb(51, 124, 207);
-            customTextBox4.BorderColor = Color.FromArgb(125, 229, 237);
-            customTextBox4.BorderRadius = 0;
-            customTextBox4.BorderSize = 3;
-            customTextBox4.FocusBorderColor = Color.HotPink;
-            customTextBox4.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-            customTextBox4.ForeColor = Color.DimGray;
-            customTextBox4.Location = new Point(132, 172);
-            customTextBox4.Multiline = false;
-            customTextBox4.Name = "customTextBox4";
-            customTextBox4.Padding = new Padding(7);
-            customTextBox4.PasswordChar = false;
-            customTextBox4.Size = new Size(250, 32);
-            customTextBox4.TabIndex = 4;
-            customTextBox4.Texts = "";
-            customTextBox4.UnderlineStyle = true;
+            txtSDT.BackColor = Color.FromArgb(51, 124, 207);
+            txtSDT.BorderColor = Color.FromArgb(125, 229, 237);
+            txtSDT.BorderRadius = 0;
+            txtSDT.BorderSize = 3;
+            txtSDT.FocusBorderColor = Color.HotPink;
+            txtSDT.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            txtSDT.ForeColor = Color.FromArgb(125, 229, 237);
+            txtSDT.Location = new Point(132, 172);
+            txtSDT.Multiline = false;
+            txtSDT.Name = "txtSDT";
+            txtSDT.Padding = new Padding(7);
+            txtSDT.PasswordChar = false;
+            txtSDT.Size = new Size(295, 34);
+            txtSDT.TabIndex = 4;
+            txtSDT.Texts = "";
+            txtSDT.UnderlineStyle = true;
             // 
-            // customTextBox3
+            // txtDiaChi
             // 
-            customTextBox3.BackColor = Color.FromArgb(51, 124, 207);
-            customTextBox3.BorderColor = Color.FromArgb(125, 229, 237);
-            customTextBox3.BorderRadius = 0;
-            customTextBox3.BorderSize = 3;
-            customTextBox3.FocusBorderColor = Color.HotPink;
-            customTextBox3.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-            customTextBox3.ForeColor = Color.DimGray;
-            customTextBox3.Location = new Point(132, 134);
-            customTextBox3.Multiline = false;
-            customTextBox3.Name = "customTextBox3";
-            customTextBox3.Padding = new Padding(7);
-            customTextBox3.PasswordChar = false;
-            customTextBox3.Size = new Size(250, 32);
-            customTextBox3.TabIndex = 3;
-            customTextBox3.Texts = "";
-            customTextBox3.UnderlineStyle = true;
+            txtDiaChi.BackColor = Color.FromArgb(51, 124, 207);
+            txtDiaChi.BorderColor = Color.FromArgb(125, 229, 237);
+            txtDiaChi.BorderRadius = 0;
+            txtDiaChi.BorderSize = 3;
+            txtDiaChi.FocusBorderColor = Color.HotPink;
+            txtDiaChi.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            txtDiaChi.ForeColor = Color.FromArgb(125, 229, 237);
+            txtDiaChi.Location = new Point(132, 134);
+            txtDiaChi.Multiline = false;
+            txtDiaChi.Name = "txtDiaChi";
+            txtDiaChi.Padding = new Padding(7);
+            txtDiaChi.PasswordChar = false;
+            txtDiaChi.Size = new Size(295, 34);
+            txtDiaChi.TabIndex = 3;
+            txtDiaChi.Texts = "";
+            txtDiaChi.UnderlineStyle = true;
             // 
-            // customTextBox2
+            // txtTen
             // 
-            customTextBox2.BackColor = Color.FromArgb(51, 124, 207);
-            customTextBox2.BorderColor = Color.FromArgb(125, 229, 237);
-            customTextBox2.BorderRadius = 0;
-            customTextBox2.BorderSize = 3;
-            customTextBox2.FocusBorderColor = Color.HotPink;
-            customTextBox2.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-            customTextBox2.ForeColor = Color.DimGray;
-            customTextBox2.Location = new Point(132, 96);
-            customTextBox2.Multiline = false;
-            customTextBox2.Name = "customTextBox2";
-            customTextBox2.Padding = new Padding(7);
-            customTextBox2.PasswordChar = false;
-            customTextBox2.Size = new Size(250, 32);
-            customTextBox2.TabIndex = 2;
-            customTextBox2.Texts = "";
-            customTextBox2.UnderlineStyle = true;
+            txtTen.BackColor = Color.FromArgb(51, 124, 207);
+            txtTen.BorderColor = Color.FromArgb(125, 229, 237);
+            txtTen.BorderRadius = 0;
+            txtTen.BorderSize = 3;
+            txtTen.FocusBorderColor = Color.HotPink;
+            txtTen.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            txtTen.ForeColor = Color.FromArgb(125, 229, 237);
+            txtTen.Location = new Point(132, 96);
+            txtTen.Multiline = false;
+            txtTen.Name = "txtTen";
+            txtTen.Padding = new Padding(7);
+            txtTen.PasswordChar = false;
+            txtTen.Size = new Size(295, 34);
+            txtTen.TabIndex = 2;
+            txtTen.Texts = "";
+            txtTen.UnderlineStyle = true;
             // 
-            // customTextBox1
+            // txtID
             // 
-            customTextBox1.BackColor = Color.FromArgb(51, 124, 207);
-            customTextBox1.BorderColor = Color.FromArgb(125, 229, 237);
-            customTextBox1.BorderRadius = 0;
-            customTextBox1.BorderSize = 3;
-            customTextBox1.FocusBorderColor = Color.HotPink;
-            customTextBox1.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
-            customTextBox1.ForeColor = Color.DimGray;
-            customTextBox1.Location = new Point(132, 58);
-            customTextBox1.Multiline = false;
-            customTextBox1.Name = "customTextBox1";
-            customTextBox1.Padding = new Padding(7);
-            customTextBox1.PasswordChar = false;
-            customTextBox1.Size = new Size(250, 32);
-            customTextBox1.TabIndex = 1;
-            customTextBox1.Texts = "";
-            customTextBox1.UnderlineStyle = true;
+            txtID.BackColor = Color.FromArgb(51, 124, 207);
+            txtID.BorderColor = Color.FromArgb(125, 229, 237);
+            txtID.BorderRadius = 0;
+            txtID.BorderSize = 3;
+            txtID.FocusBorderColor = Color.HotPink;
+            txtID.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            txtID.ForeColor = Color.FromArgb(125, 229, 237);
+            txtID.Location = new Point(132, 58);
+            txtID.Multiline = false;
+            txtID.Name = "txtID";
+            txtID.Padding = new Padding(7);
+            txtID.PasswordChar = false;
+            txtID.Size = new Size(295, 34);
+            txtID.TabIndex = 1;
+            txtID.Texts = "";
+            txtID.UnderlineStyle = true;
             // 
             // pnlTitleThongTin
             // 
@@ -381,36 +402,100 @@
             pnlTitleThongTin.ForeColor = Color.White;
             pnlTitleThongTin.Location = new Point(0, 0);
             pnlTitleThongTin.Name = "pnlTitleThongTin";
-            pnlTitleThongTin.Size = new Size(400, 40);
+            pnlTitleThongTin.Size = new Size(475, 40);
             pnlTitleThongTin.TabIndex = 0;
             pnlTitleThongTin.TextColor = Color.White;
             // 
             // lblTitleThongTinNCC
             // 
             lblTitleThongTinNCC.AutoSize = true;
-            lblTitleThongTinNCC.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            lblTitleThongTinNCC.Location = new Point(132, 8);
+            lblTitleThongTinNCC.Font = new Font("Arial", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblTitleThongTinNCC.Location = new Point(112, 8);
             lblTitleThongTinNCC.Name = "lblTitleThongTinNCC";
-            lblTitleThongTinNCC.Size = new Size(136, 25);
+            lblTitleThongTinNCC.Size = new Size(264, 22);
             lblTitleThongTinNCC.TabIndex = 0;
-            lblTitleThongTinNCC.Text = "INFORMATION";
+            lblTitleThongTinNCC.Text = "THÔNG TIN NHÀ CUNG CẤP";
+            lblTitleThongTinNCC.Click += lblTitleThongTinNCC_Click;
             // 
             // customPanel4
             // 
-            customPanel4.BackColor = Color.FromArgb(51, 124, 207);
-            customPanel4.BackgroundColor = Color.FromArgb(51, 124, 207);
+            customPanel4.Anchor = AnchorStyles.Top;
+            customPanel4.BackColor = Color.FromArgb(20, 80, 163);
+            customPanel4.BackgroundColor = Color.FromArgb(20, 80, 163);
             customPanel4.BorderColor = Color.FromArgb(20, 80, 163);
             customPanel4.BorderRadius = 20;
             customPanel4.BorderSize = 3;
+            customPanel4.Controls.Add(customPanel13);
             customPanel4.ForeColor = Color.White;
             customPanel4.Location = new Point(12, 469);
+            customPanel4.Margin = new Padding(0);
             customPanel4.Name = "customPanel4";
+            customPanel4.Padding = new Padding(10);
             customPanel4.Size = new Size(956, 195);
             customPanel4.TabIndex = 2;
             customPanel4.TextColor = Color.White;
             // 
+            // customPanel13
+            // 
+            customPanel13.BackColor = Color.FromArgb(51, 124, 207);
+            customPanel13.BackgroundColor = Color.FromArgb(51, 124, 207);
+            customPanel13.BorderColor = Color.PaleVioletRed;
+            customPanel13.BorderRadius = 20;
+            customPanel13.BorderSize = 0;
+            customPanel13.Controls.Add(dataGridViewNCC);
+            customPanel13.ForeColor = Color.White;
+            customPanel13.Location = new Point(10, 10);
+            customPanel13.Margin = new Padding(0);
+            customPanel13.Name = "customPanel13";
+            customPanel13.Size = new Size(936, 175);
+            customPanel13.TabIndex = 1;
+            customPanel13.TextColor = Color.White;
+            // 
+            // dataGridViewNCC
+            // 
+            dataGridViewNCC.AllowUserToAddRows = false;
+            dataGridViewNCC.AllowUserToDeleteRows = false;
+            dataGridViewNCC.AllowUserToResizeColumns = false;
+            dataGridViewNCC.AllowUserToResizeRows = false;
+            dataGridViewNCC.Anchor = AnchorStyles.Top;
+            dataGridViewNCC.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewNCC.BackgroundColor = Color.FromArgb(51, 124, 207);
+            dataGridViewNCC.BorderStyle = BorderStyle.None;
+            dataGridViewNCC.CellBorderStyle = DataGridViewCellBorderStyle.SingleHorizontal;
+            dataGridViewNCC.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleCenter;
+            dataGridViewCellStyle1.BackColor = Color.FromArgb(125, 229, 237);
+            dataGridViewCellStyle1.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle1.ForeColor = Color.FromArgb(20, 80, 163);
+            dataGridViewCellStyle1.SelectionBackColor = Color.FromArgb(125, 229, 237);
+            dataGridViewCellStyle1.SelectionForeColor = Color.FromArgb(20, 80, 163);
+            dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+            dataGridViewNCC.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewNCC.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle2.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle2.BackColor = Color.FromArgb(51, 124, 207);
+            dataGridViewCellStyle2.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle2.ForeColor = Color.White;
+            dataGridViewCellStyle2.SelectionBackColor = Color.FromArgb(125, 229, 237);
+            dataGridViewCellStyle2.SelectionForeColor = Color.FromArgb(20, 80, 163);
+            dataGridViewCellStyle2.WrapMode = DataGridViewTriState.False;
+            dataGridViewNCC.DefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewNCC.EnableHeadersVisualStyles = false;
+            dataGridViewNCC.GridColor = Color.FromArgb(20, 80, 163);
+            dataGridViewNCC.Location = new Point(0, 0);
+            dataGridViewNCC.Margin = new Padding(0);
+            dataGridViewNCC.Name = "dataGridViewNCC";
+            dataGridViewNCC.ReadOnly = true;
+            dataGridViewNCC.RowHeadersVisible = false;
+            dataGridViewNCC.RowTemplate.Height = 25;
+            dataGridViewNCC.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewNCC.Size = new Size(936, 175);
+            dataGridViewNCC.TabIndex = 0;
+            dataGridViewNCC.CellContentClick += dataGridView1_CellContentClick;
+            // 
             // customPanel2
             // 
+            customPanel2.Anchor = AnchorStyles.Top;
             customPanel2.BackColor = Color.FromArgb(125, 229, 237);
             customPanel2.BackgroundColor = Color.FromArgb(125, 229, 237);
             customPanel2.BorderColor = Color.FromArgb(20, 80, 163);
@@ -434,13 +519,14 @@
             btnHuy.BorderColor = Color.FromArgb(14, 41, 84);
             btnHuy.BorderRadius = 20;
             btnHuy.BorderSize = 3;
+            btnHuy.Enabled = false;
             btnHuy.FlatAppearance.BorderSize = 0;
             btnHuy.FlatStyle = FlatStyle.Flat;
             btnHuy.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnHuy.ForeColor = Color.White;
             btnHuy.Image = Properties.Resources.delete_document;
             btnHuy.ImageAlign = ContentAlignment.MiddleLeft;
-            btnHuy.Location = new Point(408, 17);
+            btnHuy.Location = new Point(611, 17);
             btnHuy.Margin = new Padding(0);
             btnHuy.Name = "btnHuy";
             btnHuy.Padding = new Padding(10, 0, 20, 0);
@@ -464,7 +550,7 @@
             btnXoa.ForeColor = Color.White;
             btnXoa.Image = Properties.Resources.delete;
             btnXoa.ImageAlign = ContentAlignment.MiddleLeft;
-            btnXoa.Location = new Point(283, 17);
+            btnXoa.Location = new Point(486, 17);
             btnXoa.Margin = new Padding(0);
             btnXoa.Name = "btnXoa";
             btnXoa.Padding = new Padding(10, 0, 20, 0);
@@ -488,7 +574,7 @@
             btnCapNhat.ForeColor = Color.White;
             btnCapNhat.Image = Properties.Resources.update;
             btnCapNhat.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCapNhat.Location = new Point(158, 17);
+            btnCapNhat.Location = new Point(361, 17);
             btnCapNhat.Margin = new Padding(0);
             btnCapNhat.Name = "btnCapNhat";
             btnCapNhat.Padding = new Padding(10, 0, 20, 0);
@@ -512,7 +598,7 @@
             btnThem.ForeColor = Color.White;
             btnThem.Image = Properties.Resources.add;
             btnThem.ImageAlign = ContentAlignment.MiddleLeft;
-            btnThem.Location = new Point(33, 17);
+            btnThem.Location = new Point(236, 17);
             btnThem.Margin = new Padding(0);
             btnThem.Name = "btnThem";
             btnThem.Padding = new Padding(10, 0, 10, 0);
@@ -525,6 +611,7 @@
             // 
             // txtTimKiem
             // 
+            txtTimKiem.Anchor = AnchorStyles.Top;
             txtTimKiem.BackColor = Color.FromArgb(125, 229, 237);
             txtTimKiem.BorderColor = Color.FromArgb(51, 124, 207);
             txtTimKiem.BorderRadius = 10;
@@ -532,7 +619,7 @@
             txtTimKiem.FocusBorderColor = Color.HotPink;
             txtTimKiem.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
             txtTimKiem.ForeColor = Color.DimGray;
-            txtTimKiem.Location = new Point(317, 428);
+            txtTimKiem.Location = new Point(336, 424);
             txtTimKiem.Multiline = false;
             txtTimKiem.Name = "txtTimKiem";
             txtTimKiem.Padding = new Padding(7);
@@ -542,39 +629,207 @@
             txtTimKiem.Texts = "";
             txtTimKiem.UnderlineStyle = false;
             // 
-            // customButton1
+            // btnTimKiem
             // 
-            customButton1.BackColor = Color.FromArgb(51, 124, 207);
-            customButton1.BackgroundColor = Color.FromArgb(51, 124, 207);
-            customButton1.BorderColor = Color.FromArgb(20, 80, 163);
-            customButton1.BorderRadius = 5;
-            customButton1.BorderSize = 2;
-            customButton1.FlatAppearance.BorderSize = 0;
-            customButton1.FlatStyle = FlatStyle.Flat;
-            customButton1.ForeColor = Color.White;
-            customButton1.Image = Properties.Resources.search;
-            customButton1.Location = new Point(573, 428);
-            customButton1.Name = "customButton1";
-            customButton1.Size = new Size(90, 32);
-            customButton1.TabIndex = 5;
-            customButton1.TextColor = Color.White;
-            customButton1.UseVisualStyleBackColor = false;
+            btnTimKiem.Anchor = AnchorStyles.Top;
+            btnTimKiem.BackColor = Color.FromArgb(51, 124, 207);
+            btnTimKiem.BackgroundColor = Color.FromArgb(51, 124, 207);
+            btnTimKiem.BorderColor = Color.FromArgb(20, 80, 163);
+            btnTimKiem.BorderRadius = 5;
+            btnTimKiem.BorderSize = 2;
+            btnTimKiem.FlatAppearance.BorderSize = 0;
+            btnTimKiem.FlatStyle = FlatStyle.Flat;
+            btnTimKiem.ForeColor = Color.White;
+            btnTimKiem.Image = Properties.Resources.search;
+            btnTimKiem.Location = new Point(242, 426);
+            btnTimKiem.Margin = new Padding(0);
+            btnTimKiem.Name = "btnTimKiem";
+            btnTimKiem.Size = new Size(90, 28);
+            btnTimKiem.TabIndex = 5;
+            btnTimKiem.TextColor = Color.White;
+            btnTimKiem.UseVisualStyleBackColor = false;
+            btnTimKiem.Click += btnTimKiem_Click;
+            // 
+            // customPanel10
+            // 
+            customPanel10.Anchor = AnchorStyles.Top;
+            customPanel10.BackColor = Color.FromArgb(46, 138, 153);
+            customPanel10.BackgroundColor = Color.FromArgb(46, 138, 153);
+            customPanel10.BorderColor = Color.FromArgb(14, 41, 84);
+            customPanel10.BorderRadius = 20;
+            customPanel10.BorderSize = 3;
+            customPanel10.Controls.Add(dataGridViewLoaiSanPham);
+            customPanel10.Controls.Add(customPanel12);
+            customPanel10.Controls.Add(customPanel11);
+            customPanel10.ForeColor = Color.White;
+            customPanel10.Location = new Point(493, 12);
+            customPanel10.Name = "customPanel10";
+            customPanel10.Size = new Size(475, 300);
+            customPanel10.TabIndex = 6;
+            customPanel10.TextColor = Color.White;
+            // 
+            // dataGridViewLoaiSanPham
+            // 
+            dataGridViewLoaiSanPham.AllowUserToAddRows = false;
+            dataGridViewLoaiSanPham.AllowUserToDeleteRows = false;
+            dataGridViewLoaiSanPham.AllowUserToResizeColumns = false;
+            dataGridViewLoaiSanPham.AllowUserToResizeRows = false;
+            dataGridViewLoaiSanPham.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridViewLoaiSanPham.BackgroundColor = Color.FromArgb(14, 41, 84);
+            dataGridViewLoaiSanPham.BorderStyle = BorderStyle.None;
+            dataGridViewLoaiSanPham.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dataGridViewCellStyle3.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle3.BackColor = Color.FromArgb(14, 41, 84);
+            dataGridViewCellStyle3.Font = new Font("Segoe UI", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            dataGridViewCellStyle3.ForeColor = Color.White;
+            dataGridViewCellStyle3.SelectionBackColor = Color.FromArgb(14, 41, 84);
+            dataGridViewCellStyle3.SelectionForeColor = Color.White;
+            dataGridViewCellStyle3.WrapMode = DataGridViewTriState.True;
+            dataGridViewLoaiSanPham.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewLoaiSanPham.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridViewCellStyle4.Alignment = DataGridViewContentAlignment.MiddleLeft;
+            dataGridViewCellStyle4.BackColor = Color.FromArgb(14, 41, 84);
+            dataGridViewCellStyle4.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            dataGridViewCellStyle4.ForeColor = Color.White;
+            dataGridViewCellStyle4.SelectionBackColor = Color.FromArgb(125, 229, 237);
+            dataGridViewCellStyle4.SelectionForeColor = Color.FromArgb(14, 41, 84);
+            dataGridViewCellStyle4.WrapMode = DataGridViewTriState.False;
+            dataGridViewLoaiSanPham.DefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewLoaiSanPham.EnableHeadersVisualStyles = false;
+            dataGridViewLoaiSanPham.GridColor = Color.FromArgb(46, 138, 153);
+            dataGridViewLoaiSanPham.Location = new Point(16, 46);
+            dataGridViewLoaiSanPham.Name = "dataGridViewLoaiSanPham";
+            dataGridViewLoaiSanPham.ReadOnly = true;
+            dataGridViewLoaiSanPham.RowHeadersVisible = false;
+            dataGridViewLoaiSanPham.RowTemplate.Height = 25;
+            dataGridViewLoaiSanPham.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dataGridViewLoaiSanPham.Size = new Size(444, 186);
+            dataGridViewLoaiSanPham.TabIndex = 2;
+            // 
+            // customPanel12
+            // 
+            customPanel12.BackColor = Color.FromArgb(46, 138, 153);
+            customPanel12.BackgroundColor = Color.FromArgb(46, 138, 153);
+            customPanel12.BorderColor = Color.FromArgb(14, 41, 84);
+            customPanel12.BorderRadius = 20;
+            customPanel12.BorderSize = 3;
+            customPanel12.Controls.Add(btnThemMoiLoai);
+            customPanel12.Dock = DockStyle.Bottom;
+            customPanel12.ForeColor = Color.White;
+            customPanel12.Location = new Point(0, 238);
+            customPanel12.Name = "customPanel12";
+            customPanel12.Size = new Size(475, 62);
+            customPanel12.TabIndex = 1;
+            customPanel12.TextColor = Color.White;
+            // 
+            // btnThemMoiLoai
+            // 
+            btnThemMoiLoai.BackColor = Color.FromArgb(55, 149, 189);
+            btnThemMoiLoai.BackgroundColor = Color.FromArgb(55, 149, 189);
+            btnThemMoiLoai.BorderColor = Color.FromArgb(14, 41, 84);
+            btnThemMoiLoai.BorderRadius = 20;
+            btnThemMoiLoai.BorderSize = 3;
+            btnThemMoiLoai.FlatAppearance.BorderSize = 0;
+            btnThemMoiLoai.FlatStyle = FlatStyle.Flat;
+            btnThemMoiLoai.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnThemMoiLoai.ForeColor = Color.White;
+            btnThemMoiLoai.Image = Properties.Resources.add;
+            btnThemMoiLoai.ImageAlign = ContentAlignment.MiddleLeft;
+            btnThemMoiLoai.Location = new Point(166, 10);
+            btnThemMoiLoai.Margin = new Padding(0);
+            btnThemMoiLoai.Name = "btnThemMoiLoai";
+            btnThemMoiLoai.Padding = new Padding(10, 0, 10, 0);
+            btnThemMoiLoai.Size = new Size(142, 40);
+            btnThemMoiLoai.TabIndex = 1;
+            btnThemMoiLoai.Text = "Thêm mới";
+            btnThemMoiLoai.TextAlign = ContentAlignment.MiddleRight;
+            btnThemMoiLoai.TextColor = Color.White;
+            btnThemMoiLoai.UseVisualStyleBackColor = false;
+            // 
+            // customPanel11
+            // 
+            customPanel11.BackColor = Color.FromArgb(14, 41, 84);
+            customPanel11.BackgroundColor = Color.FromArgb(14, 41, 84);
+            customPanel11.BorderColor = Color.PaleVioletRed;
+            customPanel11.BorderRadius = 20;
+            customPanel11.BorderSize = 0;
+            customPanel11.Controls.Add(label7);
+            customPanel11.Dock = DockStyle.Top;
+            customPanel11.ForeColor = Color.White;
+            customPanel11.Location = new Point(0, 0);
+            customPanel11.Name = "customPanel11";
+            customPanel11.Size = new Size(475, 40);
+            customPanel11.TabIndex = 0;
+            customPanel11.TextColor = Color.White;
+            // 
+            // label7
+            // 
+            label7.AutoSize = true;
+            label7.Font = new Font("Arial", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            label7.Location = new Point(133, 8);
+            label7.Name = "label7";
+            label7.Size = new Size(220, 22);
+            label7.TabIndex = 1;
+            label7.Text = "THÔNG TIN SẢN PHẨM";
+            // 
+            // comboBox1
+            // 
+            comboBox1.Anchor = AnchorStyles.Top;
+            comboBox1.AutoCompleteCustomSource.AddRange(new string[] { "ID", "Tên", "Địa chỉ", "SĐT", "Email" });
+            comboBox1.AutoCompleteMode = AutoCompleteMode.Suggest;
+            comboBox1.AutoCompleteSource = AutoCompleteSource.ListItems;
+            comboBox1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "ID", "Tên", "Địa chỉ", "SĐT", "Email" });
+            comboBox1.Location = new Point(590, 426);
+            comboBox1.Name = "comboBox1";
+            comboBox1.Size = new Size(101, 28);
+            comboBox1.TabIndex = 7;
+            // 
+            // btnLoad
+            // 
+            btnLoad.Anchor = AnchorStyles.Top;
+            btnLoad.BackColor = Color.FromArgb(55, 149, 189);
+            btnLoad.BackgroundColor = Color.FromArgb(55, 149, 189);
+            btnLoad.BorderColor = Color.FromArgb(14, 41, 84);
+            btnLoad.BorderRadius = 20;
+            btnLoad.BorderSize = 3;
+            btnLoad.FlatAppearance.BorderSize = 0;
+            btnLoad.FlatStyle = FlatStyle.Flat;
+            btnLoad.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnLoad.ForeColor = Color.White;
+            btnLoad.Image = Properties.Resources.reloading;
+            btnLoad.Location = new Point(694, 419);
+            btnLoad.Margin = new Padding(0);
+            btnLoad.Name = "btnLoad";
+            btnLoad.Size = new Size(40, 40);
+            btnLoad.TabIndex = 4;
+            btnLoad.TextAlign = ContentAlignment.MiddleRight;
+            btnLoad.TextColor = Color.White;
+            btnLoad.UseVisualStyleBackColor = false;
+            btnLoad.Click += btnLoad_Click;
             // 
             // NCCForm
             // 
+            AcceptButton = btnTimKiem;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(135, 196, 255);
             ClientSize = new Size(980, 676);
-            Controls.Add(customButton1);
+            Controls.Add(btnLoad);
+            Controls.Add(comboBox1);
+            Controls.Add(customPanel10);
+            Controls.Add(btnTimKiem);
             Controls.Add(txtTimKiem);
             Controls.Add(customPanel2);
             Controls.Add(customPanel4);
             Controls.Add(customPanel1);
             FormBorderStyle = FormBorderStyle.None;
+            KeyPreview = true;
             Name = "NCCForm";
             Text = "Form Nha cung cap";
             Load += NCCForm_Load;
+            KeyDown += NCCForm_KeyDown;
             customPanel1.ResumeLayout(false);
             customPanel9.ResumeLayout(false);
             customPanel9.PerformLayout();
@@ -590,7 +845,15 @@
             customPanel3.PerformLayout();
             pnlTitleThongTin.ResumeLayout(false);
             pnlTitleThongTin.PerformLayout();
+            customPanel4.ResumeLayout(false);
+            customPanel13.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridViewNCC).EndInit();
             customPanel2.ResumeLayout(false);
+            customPanel10.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridViewLoaiSanPham).EndInit();
+            customPanel12.ResumeLayout(false);
+            customPanel11.ResumeLayout(false);
+            customPanel11.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -602,20 +865,19 @@
         private Label lblTitleThongTinNCC;
         private CustomControl.CustomPanel customPanel4;
         private CustomControl.CustomPanel customPanel2;
-        private CustomControl.CustomButton btnThem;
         private CustomControl.CustomButton btnCapNhat;
         private CustomControl.CustomButton btnHuy;
         private CustomControl.CustomButton btnXoa;
         private CustomControl.CustomTextBox txtTimKiem;
-        private CustomControl.CustomButton customButton1;
-        private CustomControl.CustomTextBox customTextBox1;
-        private CustomControl.CustomTextBox customTextBox5;
-        private CustomControl.CustomTextBox customTextBox4;
-        private CustomControl.CustomTextBox customTextBox3;
-        private CustomControl.CustomTextBox customTextBox2;
+        private CustomControl.CustomButton btnTimKiem;
+        private CustomControl.CustomTextBox txtID;
+        private CustomControl.CustomTextBox txtEmail;
+        private CustomControl.CustomTextBox txtSDT;
+        private CustomControl.CustomTextBox txtDiaChi;
+        private CustomControl.CustomTextBox txtTen;
         private CustomControl.CustomPanel customPanel3;
         private Label label1;
-        private CustomControl.CustomDateTimePicker customDateTimePicker1;
+        private CustomControl.CustomDateTimePicker dateTimePickerNgayNhap;
         private CustomControl.CustomPanel customPanel8;
         private Label label5;
         private CustomControl.CustomPanel customPanel7;
@@ -626,5 +888,16 @@
         private Label label2;
         private CustomControl.CustomPanel customPanel9;
         private Label label6;
+        private CustomControl.CustomPanel customPanel10;
+        private CustomControl.CustomPanel customPanel11;
+        private Label label7;
+        private CustomControl.CustomButton btnThem;
+        private DataGridView dataGridViewLoaiSanPham;
+        private CustomControl.CustomPanel customPanel12;
+        private CustomControl.CustomButton btnThemMoiLoai;
+        private DataGridView dataGridViewNCC;
+        private CustomControl.CustomPanel customPanel13;
+        private ComboBox comboBox1;
+        private CustomControl.CustomButton btnLoad;
     }
 }

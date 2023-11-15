@@ -515,4 +515,51 @@ BEGIN
     WHERE Bill.isDeleted = 1
 END;
 GO
+--Lấy tất cả thông tin nhà cung cấp
+CREATE PROCEDURE SelectAllSupplier
+AS
+BEGIN
+	SELECT 
+	Supplier.SupplierID AS ID,
+	Supplier.[Name] AS TÊN ,
+	Supplier.[Address] [Địa chỉ],
+	Supplier.PhoneNumber AS [Số điện thoại],
+	Supplier.Email
+	FROM Supplier 
+	WHERE Supplier.isDeleted=1;
+END;
+GO
+--Lấy tất cả thông tin chi tiết nhà cung cấp
+CREATE PROCEDURE SelectAllSupplierDetail
+AS
+BEGIN
+	SELECT
+	SupplierProduct.ProductID AS ID,
+	SupplierProduct.SupplyStartDate AS [Ngày nhập],
+	Product.[Name],
+	Product.CurrentPrice
+
+	FROM 
+	(Supplier INNER JOIN SupplierProduct ON Supplier.SupplierID =SupplierProduct.SupplierID) INNER JOIN 
+	Product ON SupplierProduct.ProductID=Product.ProductID
+
+	WHERE Supplier.isDeleted=1 AND Product.isDeleted=1
+END;
+GO
+--Tìm thông tin theo ID nhà cung cấp
+Create PROCEDURE FindSupplierWithID
+	@ID varchar(10)
+AS
+BEGIN
+	SELECT
+	Supplier.SupplierID AS ID,
+	Supplier.[Name] AS TÊN ,
+	Supplier.[Address] [Địa chỉ],
+	Supplier.PhoneNumber AS [Số điện thoại],
+	Supplier.Email
+	FROM Supplier 
+	WHERE Supplier.SupplierID=@ID
+END;
+GO
+
 
