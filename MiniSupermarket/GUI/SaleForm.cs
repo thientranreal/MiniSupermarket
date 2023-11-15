@@ -53,10 +53,6 @@ namespace MiniSupermarket.GUI
             txtPhone.Enabled = false;
             rdFemale.Enabled = false;
             rdMale.Enabled = false;
-
-            // Binding combo box chọn khách hàng với text box khách hàng
-            Binding binding = new Binding("Text", cbChooseCustomer, "Text");
-            txtSearchCustomer.DataBindings.Add(binding);
         }
 
         public void LoadTheme()
@@ -232,7 +228,7 @@ namespace MiniSupermarket.GUI
             else
             {
                 // Nếu đã chọn khách hàng
-                string input = txtSearchCustomer.Text.Trim();
+                string input = cbChooseCustomer.Text.Trim();
                 string customerId = null;
                 Match match = Regex.Match(input, @"\[(C\d+)\]");
                 if (match.Success)
