@@ -170,6 +170,7 @@
             btnRefresh.TabIndex = 20;
             btnRefresh.Text = "Tải lại";
             btnRefresh.UseVisualStyleBackColor = true;
+            btnRefresh.Click += btnRefresh_Click;
             // 
             // btnAdd
             // 
@@ -181,6 +182,7 @@
             btnAdd.TabIndex = 19;
             btnAdd.Text = "Thêm";
             btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
             // 
             // lblDateStart
             // 
@@ -232,6 +234,7 @@
             txtDiscount.Name = "txtDiscount";
             txtDiscount.Size = new Size(214, 27);
             txtDiscount.TabIndex = 3;
+            txtDiscount.KeyPress += txtDiscount_KeyPress;
             // 
             // lblPromotionName
             // 

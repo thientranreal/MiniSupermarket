@@ -1,5 +1,6 @@
 ﻿using MiniSupermarket.BUS;
 using MiniSupermarket.ImageAndFont;
+using MiniSupermarket.RegularExpression;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -82,9 +83,24 @@ namespace MiniSupermarket.GUI
 
         private void PromotionForm_Load(object sender, EventArgs e)
         {
-            dgvPromotions.DataSource = promotionBUS.getAllPromotions();
+            ShowPromotion();
             BindingPromotions();
             LoadTheme();
+            SetNull();
+        }
+
+        public void ShowPromotion()
+        {
+            dgvPromotions.DataSource = promotionBUS.getAllPromotions();
+        }
+
+        void SetNull()
+        {
+            txtPromotionID.Text = null;
+            txtPromotionName.Text = null;
+            txtDiscount.Text = null;
+            dtpkStartDate.Value = DateTime.Now;
+            dtpkEndDate.Value = DateTime.Now;
         }
 
 
@@ -107,9 +123,78 @@ namespace MiniSupermarket.GUI
         {
             int rowIndex = e.RowIndex;
             DataGridViewRow row = dgvPromotions.Rows[rowIndex];
-            string promotionID = row.Cells["ID"].Value.ToString();    
+            string promotionID = row.Cells["ID"].Value.ToString();
             DetailPronmotionForm form = new DetailPronmotionForm(promotionID);
             form.ShowDialog();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            string Name = txtPromotionName.Text.Trim();
+            string StartDate = String.Format("{0:dd/MM/yyyy}", dtpkStartDate.Value);
+            string EndDate = String.Format("{0:dd/MM/yyyy}", dtpkEndDate.Value);
+            string Discount = txtDiscount.Text.Trim();
+            if (txtPromotionID.Text != "")
+            {
+                MessageBox.Show("Vui lòng để trống mã chương trình khuyến mãi! Chọn tải lại để xoá",
+                            "Thông báo",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                return;
+            }
+            if (Name.Length == 0)
+            {
+                MessageBox.Show("Vui lòng nhập tên chương trình khuyến mãi",
+                            "Thông báo",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                txtPromotionName.Focus();
+                return;
+            }
+            if (Discount.Length == 0)
+            {
+                MessageBox.Show("Vui lòng nhập phần trăm giảm của chương trình khuyến mãi",
+                            "Thông báo",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                txtDiscount.Focus();
+                return;
+            }
+            if (!ProjectRegex.checkDayAfterDay(StartDate, EndDate))
+            {
+                MessageBox.Show("Ngày kết thúc phải sau ngày bắt đầu",
+                            "Thông báo",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                return;
+            }
+            if (Convert.ToInt32(Discount) > 100 || Convert.ToInt32(Discount) < 1)
+            {
+                MessageBox.Show("Phần trăm giảm không hợp lệ! Hợp lệ trong khoảng 1 đến 100",
+                            "Thông báo",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                txtDiscount.Focus();
+                return;
+            }
+            if (promotionBUS.insertPromotion(Name,StartDate,EndDate,Discount)) {
+                MessageBox.Show("Thêm chương trình khuyến mãi thành công", "Thêm thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ShowPromotion();
+                SetNull();
+            }
+        }
+
+        private void txtDiscount_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsWhiteSpace(e.KeyChar) || !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+            SetNull();
         }
     }
 }
