@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace MiniSupermarket.BUS
 {
@@ -139,6 +140,17 @@ namespace MiniSupermarket.BUS
                 return true;
             }
             return false;
+        }
+
+        // Xóa hóa đơn chưa thanh toán
+        public bool DeleteBill(string billId)
+        {
+            string procedure = "DeleteBill";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@BillID", billId)
+            };
+            return Connection.ExecuteNonQuery(procedure, parameters);
         }
     }
 }

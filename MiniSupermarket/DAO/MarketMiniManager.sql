@@ -414,6 +414,9 @@ add constraint fk_RoleFunction_Functions foreign key (FunctionID) references Fun
 GO
 
 -- Tạo các procedures
+
+-- Thien ======================================================================================================
+
 -- Select * from ProductType
 CREATE PROCEDURE SelectAllFromProductType
 AS
@@ -552,6 +555,34 @@ BEGIN
 END;
 GO
 
+
+-- Thêm khách hàng cho hóa đơn
+CREATE PROC InsertCustomerSale
+	@CustomerID varchar(10),
+	@Name nvarchar(50),
+	@PhoneNumber varchar(50),
+	@Sex nvarchar(10)
+AS
+BEGIN
+	INSERT INTO Customer(CustomerID, [Name], PhoneNumber, Sex)
+	VALUES (@CustomerID, @Name, @PhoneNumber, @Sex)
+END;
+GO
+
+-- Xóa hóa đơn
+CREATE PROC DeleteBill
+	@BillID varchar(10)
+AS
+BEGIN
+	UPDATE Bill
+	SET Bill.isDeleted = 0
+	WHERE BillID = @BillID AND isDeleted = 1
+END;
+GO
+
+-- Thien ======================================================================================================
+
+
 -- Đại
 -- Lấy tất cả thông tin chương trình khuyến mãi
 CREATE PROC SelectAllPromotions
@@ -652,19 +683,6 @@ BEGIN
     UPDATE Product
     SET isDeleted = 0
     WHERE ProductID = @ProductID
-END;
-GO
-
--- Thêm khách hàng cho hóa đơn
-CREATE PROC InsertCustomerSale
-	@CustomerID varchar(10),
-	@Name nvarchar(50),
-	@PhoneNumber varchar(50),
-	@Sex nvarchar(10)
-AS
-BEGIN
-	INSERT INTO Customer(CustomerID, [Name], PhoneNumber, Sex)
-	VALUES (@CustomerID, @Name, @PhoneNumber, @Sex)
 END;
 GO
 

@@ -31,6 +31,7 @@
             pnl_top = new Panel();
             pnlAddBill = new Panel();
             pnlAddBtn = new Panel();
+            btnDelBill = new Button();
             btnAddBill = new Button();
             grbCustomerInfo = new GroupBox();
             btnReset = new Button();
@@ -49,7 +50,6 @@
             lbEmployee = new Label();
             lbCustomer = new Label();
             btnSearch = new Button();
-            cbNotPay = new CheckBox();
             cbPay = new CheckBox();
             txtEmployeeSearch = new TextBox();
             txtCustomerSearch = new TextBox();
@@ -90,6 +90,7 @@
             // 
             // pnlAddBtn
             // 
+            pnlAddBtn.Controls.Add(btnDelBill);
             pnlAddBtn.Controls.Add(btnAddBill);
             pnlAddBtn.Dock = DockStyle.Fill;
             pnlAddBtn.Location = new Point(0, 273);
@@ -97,14 +98,26 @@
             pnlAddBtn.Size = new Size(671, 79);
             pnlAddBtn.TabIndex = 2;
             // 
+            // btnDelBill
+            // 
+            btnDelBill.Dock = DockStyle.Fill;
+            btnDelBill.FlatStyle = FlatStyle.Flat;
+            btnDelBill.Location = new Point(351, 0);
+            btnDelBill.Name = "btnDelBill";
+            btnDelBill.Size = new Size(320, 79);
+            btnDelBill.TabIndex = 10;
+            btnDelBill.Text = "Xóa hóa đơn";
+            btnDelBill.UseVisualStyleBackColor = true;
+            btnDelBill.Click += btnDelBill_Click;
+            // 
             // btnAddBill
             // 
-            btnAddBill.Dock = DockStyle.Fill;
+            btnAddBill.Dock = DockStyle.Left;
             btnAddBill.FlatAppearance.BorderSize = 0;
             btnAddBill.FlatStyle = FlatStyle.Flat;
             btnAddBill.Location = new Point(0, 0);
             btnAddBill.Name = "btnAddBill";
-            btnAddBill.Size = new Size(671, 79);
+            btnAddBill.Size = new Size(351, 79);
             btnAddBill.TabIndex = 0;
             btnAddBill.Text = "Thêm hóa đơn";
             btnAddBill.UseVisualStyleBackColor = true;
@@ -237,6 +250,7 @@
             cbChooseCustomer.Name = "cbChooseCustomer";
             cbChooseCustomer.Size = new Size(240, 28);
             cbChooseCustomer.TabIndex = 1;
+            cbChooseCustomer.SelectedIndexChanged += cbChooseCustomer_SelectedIndexChanged;
             // 
             // lbChooseCustomer
             // 
@@ -252,7 +266,6 @@
             gbSearch.Controls.Add(lbEmployee);
             gbSearch.Controls.Add(lbCustomer);
             gbSearch.Controls.Add(btnSearch);
-            gbSearch.Controls.Add(cbNotPay);
             gbSearch.Controls.Add(cbPay);
             gbSearch.Controls.Add(txtEmployeeSearch);
             gbSearch.Controls.Add(txtCustomerSearch);
@@ -296,16 +309,7 @@
             btnSearch.TabIndex = 9;
             btnSearch.Text = "Tìm kiếm";
             btnSearch.UseVisualStyleBackColor = true;
-            // 
-            // cbNotPay
-            // 
-            cbNotPay.AutoSize = true;
-            cbNotPay.Location = new Point(162, 208);
-            cbNotPay.Name = "cbNotPay";
-            cbNotPay.Size = new Size(140, 24);
-            cbNotPay.TabIndex = 8;
-            cbNotPay.Text = "Chưa thanh toán";
-            cbNotPay.UseVisualStyleBackColor = true;
+            btnSearch.Click += btnSearch_Click;
             // 
             // cbPay
             // 
@@ -337,6 +341,7 @@
             dtpToDate.Name = "dtpToDate";
             dtpToDate.Size = new Size(250, 27);
             dtpToDate.TabIndex = 2;
+            dtpToDate.KeyDown += dtpToDate_KeyDown;
             // 
             // dtpFromDate
             // 
@@ -344,6 +349,7 @@
             dtpFromDate.Name = "dtpFromDate";
             dtpFromDate.Size = new Size(250, 27);
             dtpFromDate.TabIndex = 1;
+            dtpFromDate.KeyDown += dtpFromDate_KeyDown;
             // 
             // lbToDate
             // 
@@ -384,6 +390,7 @@
             dgv_bill.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgv_bill.Size = new Size(1190, 266);
             dgv_bill.TabIndex = 0;
+            dgv_bill.CellClick += dgv_bill_CellClick;
             // 
             // SaleForm
             // 
@@ -420,7 +427,6 @@
         private DateTimePicker dtpFromDate;
         private TextBox txtEmployeeSearch;
         private TextBox txtCustomerSearch;
-        private CheckBox cbNotPay;
         private CheckBox cbPay;
         private Panel pnlAddBill;
         private GroupBox grbCustomerInfo;
@@ -440,5 +446,6 @@
         private Button btnReset;
         private Label lbEmployee;
         private Label lbCustomer;
+        private Button btnDelBill;
     }
 }

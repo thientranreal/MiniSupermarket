@@ -26,6 +26,13 @@ namespace MiniSupermarket.GUI
 
         private void SaleForm_Load(object sender, EventArgs e)
         {
+            // chuyển định dạng cho date time picker
+            dtpFromDate.Format = DateTimePickerFormat.Custom;
+            dtpFromDate.CustomFormat = "yyyy-MM-dd";
+            dtpToDate.Format = DateTimePickerFormat.Custom;
+            dtpToDate.CustomFormat = "yyyy-MM-dd";
+
+
             LoadTheme();
             // Cho hiển thị hết chiều dài của bảng
             dgv_bill.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -53,10 +60,6 @@ namespace MiniSupermarket.GUI
             txtPhone.Enabled = false;
             rdFemale.Enabled = false;
             rdMale.Enabled = false;
-
-            // Binding combo box chọn khách hàng với text box khách hàng
-            Binding binding = new Binding("Text", cbChooseCustomer, "Text");
-            txtSearchCustomer.DataBindings.Add(binding);
         }
 
         public void LoadTheme()
@@ -68,10 +71,17 @@ namespace MiniSupermarket.GUI
             gbSearch.Font = ProjectFont.getTitleFont();
 
             // Thêm màu cho tất cả các nút thêm hóa đơn
-            btnAddBill.BackColor = ThemeColor.PrimaryColor;
-            btnAddBill.ForeColor = Color.White;
-            btnAddBill.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
-            btnAddBill.Font = ProjectFont.getNormalFont();
+            foreach (Control control in this.pnlAddBtn.Controls)
+            {
+                if (control.GetType() == typeof(Button))
+                {
+                    Button btn = (Button)control;
+                    btn.BackColor = ThemeColor.PrimaryColor;
+                    btn.ForeColor = Color.White;
+                    btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
+                    btn.Font = ProjectFont.getNormalFont();
+                }
+            }
 
             btnSearch.BackColor = ThemeColor.PrimaryColor;
             btnSearch.ForeColor = Color.White;
@@ -335,6 +345,109 @@ namespace MiniSupermarket.GUI
         private void rdFemale_CheckedChanged(object sender, EventArgs e)
         {
             sex = "Nữ";
+        }
+
+        // Sự kiện tìm kiếm hóa đơn
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            DateTime dateFrom = dtpFromDate.Value;
+            DateTime dateTo = dtpToDate.Value;
+
+            if (dateFrom > dateTo)
+            {
+                // Hiện thông báo cảnh báo từ ngày phải nhỏ hơn đến ngày
+                MessageBox.Show("Từ ngày phải nhỏ hơn đến ngày",
+                        "Thông báo",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning);
+                return;
+            }
+
+            string customer = txtCustomerSearch.Text.Trim();
+            string employee = txtEmployeeSearch.Text.Trim();
+            bool isCheckOut = cbPay.Checked ? true : false;
+
+            DataTable bills = saleBus.getAllBills();
+            DataTable resultSearch = bills.Clone();
+
+            // Lấy những hóa đơn từ ngày
+            foreach (DataRow dr in bills.Rows)
+            {
+                DateTime itemDate;
+                if (DateTime.TryParse(dr["Date"].ToString(), out itemDate) &&
+                    itemDate >= dateFrom && itemDate <= dateTo &&
+                    (dr["CustomerID"].ToString().Contains(customer) || dr["CustomerName"].ToString().Contains(customer) &&
+                    (dr["EmployeeID"].ToString().Contains(employee) || dr["EmployeeName"].ToString().Contains(employee))) &&
+                    dr["Status"].Equals(isCheckOut))
+                {
+                    resultSearch.ImportRow(dr);
+                }
+            }
+
+            dgv_bill.DataSource = resultSearch;
+        }
+
+        // Sự kiện chọn combo box
+        private void cbChooseCustomer_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            txtSearchCustomer.Text = cbChooseCustomer.Text;
+        }
+
+        private void dgv_bill_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            object status = dgv_bill.SelectedRows[0].Cells["Status"].Value;
+            if (status.ToString() == "")
+            {
+                btnDelBill.Enabled = false;
+                return;
+            }
+            bool isCheckOut = (bool)status;
+            // Nếu đã thanh toán hóa đơn thì disable nút xóa và ngược lại
+            if (isCheckOut)
+            {
+                btnDelBill.Enabled = false;
+            }
+            else
+            {
+                btnDelBill.Enabled = true;
+            }
+        }
+
+        private void btnDelBill_Click(object sender, EventArgs e)
+        {
+            string billId = dgv_bill.SelectedRows[0].Cells["BillID"].Value.ToString();
+            if (saleBus.DeleteBill(billId))
+            {
+                // Hiện thông báo thành công
+                MessageBox.Show("Xóa hóa đơn thành công",
+                        "Thông báo",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information);
+
+                // Cập nhật lại data grid view
+                saleBus.updateBills();
+                dgv_bill.DataSource = saleBus.getAllBills();
+                return;
+            }
+            else
+            {
+                // Hiện thông báo thất bại
+                MessageBox.Show("Xóa hóa đơn thất bại",
+                        "Thông báo",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error);
+                return;
+            }
+        }
+
+        private void dtpFromDate_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.SuppressKeyPress = true;
+        }
+
+        private void dtpToDate_KeyDown(object sender, KeyEventArgs e)
+        {
+            e.SuppressKeyPress = true;
         }
     }
 }
