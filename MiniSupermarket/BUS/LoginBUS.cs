@@ -20,7 +20,14 @@ namespace MiniSupermarket.BUS
                 new SqlParameter("@userName", username),
                 new SqlParameter("@Password", password)
             };
-            return int.Parse(Connection.Execute(storedProcedureName, parameters).Rows[0][0].ToString());
+            try
+            {
+                return int.Parse(Connection.Execute(storedProcedureName, parameters).Rows[0][0].ToString());
+            }
+            catch (Exception ex)
+            {
+                return -1;
+            }
         }
 
         public List<string> getFunctionFromAccount(string username, string password)
