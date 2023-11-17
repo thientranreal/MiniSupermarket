@@ -93,8 +93,8 @@ GO
 INSERT INTO Promotion (PromotionID, [Name], StartDate, EndDate, Discount, [Status])
 VALUES
     ('PM0001', N'Khuyến mãi giờ vàng', '2023-9-24', '2023-11-24', 10,N'Đang hoạt động'),
-    ('PM0002', N'Khuyến mãi lễ 2/9', '2023-08-30', '2023-09-03', 20, N'Ngưng hoạt động'),
-    ('PM0003', N'Khuyến mãi điểm tích luỹ', '2023-03-01', '2040-03-01', 10, N'Ngưng hoạt động');
+    ('PM0002', N'Khuyến mãi lễ 2/9', '2023-08-30', '2023-09-03', 20, N'Không hoạt động'),
+    ('PM0003', N'Khuyến mãi điểm tích luỹ', '2023-03-01', '2040-03-01', 10, N'Không hoạt động');
 GO
 
 --Tao bang khach hang
@@ -577,6 +577,51 @@ BEGIN
 	VALUES (@PromotionID,@Name,@StartDate,@EndDate,@Discount,N'Không hoạt động')
 END;
 GO
+
+-- Sửa thông tin chương trình khuyến mãi
+CREATE PROC UpdatePromotion
+	@PromotionID varchar(10),
+	@Name nvarchar(50),
+	@StartDate datetime,
+	@EndDate datetime,
+	@Discount float(50)
+AS
+BEGIN
+	UPDATE Promotion SET Name = @Name, StartDate = @StartDate, EndDate = @EndDate, Discount = @Discount
+	WHERE PromotionID = @PromotionID
+END;
+GO
+
+-- Xoá chương trình khuyến mãi
+CREATE PROC DeletePromotion
+	@PromotionID varchar(10)
+AS
+BEGIN
+	UPDATE Promotion SET isDeleted = '0'
+	WHERE PromotionID = @PromotionID
+END;
+GO
+
+-- Áp dụng chương trình khuyến mãi
+CREATE PROC StartWork
+	@PromotionID varchar(10)
+AS
+BEGIN
+	UPDATE Promotion SET [Status] = N'Đang hoạt động'
+	WHERE PromotionID = @PromotionID
+END;
+GO
+
+-- Ngưng áp dụng chương trình khuyến mãi
+CREATE PROC StopWork
+	@PromotionID varchar(10)
+AS
+BEGIN
+	UPDATE Promotion SET [Status] = N'Không hoạt động'
+	WHERE PromotionID = @PromotionID
+END;
+GO
+
 -- Công Anh 
 
 --Lấy danh sách sản phẩm 

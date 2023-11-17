@@ -20,7 +20,8 @@ namespace MiniSupermarket.BUS
         public DataTable getAllPromotions()
         {
             string storedProcedureName = "SelectAllPromotions";
-            return Connection.Execute(storedProcedureName, null);
+            promotions = Connection.Execute(storedProcedureName, null);
+            return promotions;
         }
 
         public Boolean checkExistedID(string id)
@@ -61,10 +62,56 @@ namespace MiniSupermarket.BUS
                 new SqlParameter("@PromotionID",newIDPromotion),
                 new SqlParameter("@Name",Name),
                 new SqlParameter("@StartDate",dateS),
-                new SqlParameter("EndDate",dateE),
+                new SqlParameter("@EndDate",dateE),
                 new SqlParameter("@Discount",discount)
             };
             return Connection.ExecuteNonQuery(storedProcedure, parameters); 
+        }
+
+        public Boolean updatePromotion(string ID, string Name, string dateStart, string dateEnd, string discount)
+        {
+            DateTime dateS, dateE;
+            DateTime.TryParse(dateStart, out dateS);
+            DateTime.TryParse(dateEnd, out dateE);
+            string storedProcedure = "UpdatePromotion";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@PromotionID",ID),
+                new SqlParameter("@Name",Name),
+                new SqlParameter("@StartDate",dateS),
+                new SqlParameter("@EndDate",dateE),
+                new SqlParameter("@Discount",discount)
+            };
+            return Connection.ExecuteNonQuery(storedProcedure, parameters);
+        }
+
+        public Boolean deletePromotion(string ID) {
+            string storedProcedure = "DeletePromotion";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@PromotionID",ID)
+            };
+            return Connection.ExecuteNonQuery(storedProcedure, parameters);
+        }
+
+        public Boolean startWorkPromotion(string ID)
+        {
+            string storedProcedure = "StartWork";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@PromotionID",ID)
+            };
+            return Connection.ExecuteNonQuery(storedProcedure, parameters);
+        }
+
+        public Boolean stopWorkPromotion(string ID)
+        {
+            string storedProcedure = "StopWork";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@PromotionID",ID)
+            };
+            return Connection.ExecuteNonQuery(storedProcedure, parameters);
         }
     }
 }
