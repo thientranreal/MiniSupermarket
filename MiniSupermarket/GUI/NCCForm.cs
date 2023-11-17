@@ -17,6 +17,7 @@ namespace MiniSupermarket.GUI
         private SupplierBUS supplierBUS = new SupplierBUS();
         DataTable dtSupplier = new DataTable();
         DataTable dtSupplierDetail = new DataTable();
+        
         public NCCForm()
         {
             InitializeComponent();
@@ -33,7 +34,9 @@ namespace MiniSupermarket.GUI
             dataGridViewNCC.DataSource = dtSupplier;
             dtSupplierDetail = supplierBUS.getAllFromSupplierDetail();
             dataGridViewLoaiSanPham.DataSource = dtSupplierDetail;
+            
         }
+        
 
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
@@ -81,6 +84,16 @@ namespace MiniSupermarket.GUI
             {
                 btnLoad.PerformClick();
             }
+        }
+
+        private void panelThongTinNhaCungCap_Resize(object sender, EventArgs e)
+        {
+
+        }
+
+        private void NCCForm_Resize(object sender, EventArgs e)
+        {
+            
         }
     }
 }

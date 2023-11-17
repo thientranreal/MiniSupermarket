@@ -32,7 +32,7 @@
             DataGridViewCellStyle dataGridViewCellStyle2 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle3 = new DataGridViewCellStyle();
             DataGridViewCellStyle dataGridViewCellStyle4 = new DataGridViewCellStyle();
-            customPanel1 = new CustomControl.CustomPanel();
+            panelThongTinNhaCungCap = new CustomControl.CustomPanel();
             customPanel9 = new CustomControl.CustomPanel();
             label6 = new Label();
             dateTimePickerNgayNhap = new CustomControl.CustomDateTimePicker();
@@ -71,7 +71,7 @@
             label7 = new Label();
             comboBox1 = new ComboBox();
             btnLoad = new CustomControl.CustomButton();
-            customPanel1.SuspendLayout();
+            panelThongTinNhaCungCap.SuspendLayout();
             customPanel9.SuspendLayout();
             customPanel8.SuspendLayout();
             customPanel7.SuspendLayout();
@@ -89,34 +89,35 @@
             customPanel11.SuspendLayout();
             SuspendLayout();
             // 
-            // customPanel1
+            // panelThongTinNhaCungCap
             // 
-            customPanel1.Anchor = AnchorStyles.Top;
-            customPanel1.AutoSize = true;
-            customPanel1.BackColor = Color.FromArgb(51, 124, 207);
-            customPanel1.BackgroundColor = Color.FromArgb(51, 124, 207);
-            customPanel1.BorderColor = Color.FromArgb(20, 80, 163);
-            customPanel1.BorderRadius = 20;
-            customPanel1.BorderSize = 3;
-            customPanel1.Controls.Add(customPanel9);
-            customPanel1.Controls.Add(dateTimePickerNgayNhap);
-            customPanel1.Controls.Add(customPanel8);
-            customPanel1.Controls.Add(customPanel7);
-            customPanel1.Controls.Add(customPanel6);
-            customPanel1.Controls.Add(customPanel5);
-            customPanel1.Controls.Add(customPanel3);
-            customPanel1.Controls.Add(txtEmail);
-            customPanel1.Controls.Add(txtSDT);
-            customPanel1.Controls.Add(txtDiaChi);
-            customPanel1.Controls.Add(txtTen);
-            customPanel1.Controls.Add(txtID);
-            customPanel1.Controls.Add(pnlTitleThongTin);
-            customPanel1.ForeColor = Color.White;
-            customPanel1.Location = new Point(12, 12);
-            customPanel1.Name = "customPanel1";
-            customPanel1.Size = new Size(475, 300);
-            customPanel1.TabIndex = 0;
-            customPanel1.TextColor = Color.White;
+            panelThongTinNhaCungCap.Anchor = AnchorStyles.Top;
+            panelThongTinNhaCungCap.AutoSize = true;
+            panelThongTinNhaCungCap.BackColor = Color.FromArgb(51, 124, 207);
+            panelThongTinNhaCungCap.BackgroundColor = Color.FromArgb(51, 124, 207);
+            panelThongTinNhaCungCap.BorderColor = Color.FromArgb(20, 80, 163);
+            panelThongTinNhaCungCap.BorderRadius = 20;
+            panelThongTinNhaCungCap.BorderSize = 3;
+            panelThongTinNhaCungCap.Controls.Add(customPanel9);
+            panelThongTinNhaCungCap.Controls.Add(dateTimePickerNgayNhap);
+            panelThongTinNhaCungCap.Controls.Add(customPanel8);
+            panelThongTinNhaCungCap.Controls.Add(customPanel7);
+            panelThongTinNhaCungCap.Controls.Add(customPanel6);
+            panelThongTinNhaCungCap.Controls.Add(customPanel5);
+            panelThongTinNhaCungCap.Controls.Add(customPanel3);
+            panelThongTinNhaCungCap.Controls.Add(txtEmail);
+            panelThongTinNhaCungCap.Controls.Add(txtSDT);
+            panelThongTinNhaCungCap.Controls.Add(txtDiaChi);
+            panelThongTinNhaCungCap.Controls.Add(txtTen);
+            panelThongTinNhaCungCap.Controls.Add(txtID);
+            panelThongTinNhaCungCap.Controls.Add(pnlTitleThongTin);
+            panelThongTinNhaCungCap.ForeColor = Color.White;
+            panelThongTinNhaCungCap.Location = new Point(12, 12);
+            panelThongTinNhaCungCap.Name = "panelThongTinNhaCungCap";
+            panelThongTinNhaCungCap.Size = new Size(475, 300);
+            panelThongTinNhaCungCap.TabIndex = 0;
+            panelThongTinNhaCungCap.TextColor = Color.White;
+            panelThongTinNhaCungCap.Resize += panelThongTinNhaCungCap_Resize;
             // 
             // customPanel9
             // 
@@ -823,14 +824,15 @@
             Controls.Add(txtTimKiem);
             Controls.Add(customPanel2);
             Controls.Add(customPanel4);
-            Controls.Add(customPanel1);
+            Controls.Add(panelThongTinNhaCungCap);
             FormBorderStyle = FormBorderStyle.None;
             KeyPreview = true;
             Name = "NCCForm";
             Text = "Form Nha cung cap";
             Load += NCCForm_Load;
             KeyDown += NCCForm_KeyDown;
-            customPanel1.ResumeLayout(false);
+            Resize += NCCForm_Resize;
+            panelThongTinNhaCungCap.ResumeLayout(false);
             customPanel9.ResumeLayout(false);
             customPanel9.PerformLayout();
             customPanel8.ResumeLayout(false);
@@ -860,7 +862,7 @@
 
         #endregion
 
-        private CustomControl.CustomPanel customPanel1;
+        private CustomControl.CustomPanel panelThongTinNhaCungCap;
         private CustomControl.CustomPanel pnlTitleThongTin;
         private Label lblTitleThongTinNCC;
         private CustomControl.CustomPanel customPanel4;

@@ -13,6 +13,7 @@ namespace MiniSupermarket.GUI
     public partial class NewMenu : Form
     {
         NCCForm formNCC;
+        ProductTypeManage formLoai;
         public NewMenu()
         {
             InitializeComponent();
@@ -75,11 +76,19 @@ namespace MiniSupermarket.GUI
             if (expandMenu)
             {
                 menuPanel.Width -= 10;
+
+
                 if (menuPanel.Width <= 60)
                 {
-
-                    menuTimer.Stop();
                     expandMenu = false;
+                    menuTimer.Stop();
+
+                    btnThongKe.Width = menuPanel.Width;
+                    panelSanPham.Width = menuPanel.Width;
+                    panelNhanVien.Width = menuPanel.Width;
+                    panelNCC.Width = menuPanel.Width;
+                    btnCTKM.Width = menuPanel.Width;
+                    btnBanHang.Width = menuPanel.Width;
                 }
 
 
@@ -89,8 +98,15 @@ namespace MiniSupermarket.GUI
                 menuPanel.Width += 10;
                 if (menuPanel.Width >= 300)
                 {
-                    menuTimer.Stop();
                     expandMenu = true;
+                    menuTimer.Stop();
+                    btnThongKe.Width = menuPanel.Width;
+                    panelSanPham.Width = menuPanel.Width;
+                    panelNhanVien.Width = menuPanel.Width;
+                    panelNCC.Width = menuPanel.Width;
+                    btnCTKM.Width = menuPanel.Width;
+                    btnBanHang.Width = menuPanel.Width;
+
                 }
             }
         }
@@ -190,6 +206,62 @@ namespace MiniSupermarket.GUI
         private void FormNCC_FormClosed(object? sender, FormClosedEventArgs e)
         {
             formNCC = null;
+        }
+        bool maximize = false;
+        private void pictureBox1_Click(object sender, EventArgs e)
+
+        {
+            if (maximize == false)
+            {
+                FormBorderStyle = FormBorderStyle.None;
+                WindowState = FormWindowState.Maximized;
+                btnResize.Image = MiniSupermarket.Properties.Resources.minimize;
+                maximize = true;
+            }
+            else
+            {
+                FormBorderStyle = FormBorderStyle.None;
+                WindowState = FormWindowState.Normal;
+                btnResize.Image = MiniSupermarket.Properties.Resources.maximize;
+                maximize = false;
+
+            }
+
+        }
+
+        private void btnDangXuat_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox2_Click(object sender, EventArgs e)
+        {
+            FormBorderStyle = FormBorderStyle.None;
+            WindowState = FormWindowState.Minimized;
+
+            maximize = false;
+        }
+
+        private void btnLoaiSanPham_Click(object sender, EventArgs e)
+        {
+            if (formLoai == null)
+            {
+                formLoai = new ProductTypeManage();
+                formLoai.FormClosed += FormLoai_FormClosed;
+                formLoai.MdiParent = this;
+                formLoai.Dock = DockStyle.Fill;
+                formLoai.LoadTheme();
+                formLoai.Show();
+            }
+            else
+            {
+                formLoai.Activate();
+            }
+        }
+
+        private void FormLoai_FormClosed(object? sender, FormClosedEventArgs e)
+        {
+            formLoai = null;
         }
     }
 }
