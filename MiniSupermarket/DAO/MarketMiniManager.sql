@@ -555,6 +555,7 @@ BEGIN
 END;
 GO
 
+
 -- Thêm khách hàng cho hóa đơn
 CREATE PROC InsertCustomerSale
 	@CustomerID varchar(10),
@@ -581,6 +582,8 @@ GO
 
 -- Thien ======================================================================================================
 
+
+-- Đại
 -- Lấy tất cả thông tin chương trình khuyến mãi
 CREATE PROC SelectAllPromotions
 AS
@@ -594,15 +597,15 @@ GO
 
 -- Thêm chương trình khuyến mãi
 CREATE PROC InsertPromotion
-	@PromotionID nvarchar(10),
+	@PromotionID varchar(10),
 	@Name nvarchar(50),
 	@StartDate datetime,
 	@EndDate datetime,
 	@Discount float(50)
 AS
 BEGIN
-	INSERT INTO Promotion(PromotionID,[Name],StartDate,EndDate,Discount)
-	VALUES (@PromotionID,@Name,@StartDate,@EndDate,@Discount)
+	INSERT INTO Promotion(PromotionID,[Name],StartDate,EndDate,Discount,[Status])
+	VALUES (@PromotionID,@Name,@StartDate,@EndDate,@Discount,N'Không hoạt động')
 END;
 GO
 -- Công Anh 
