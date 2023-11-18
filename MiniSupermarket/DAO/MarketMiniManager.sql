@@ -552,7 +552,8 @@ BEGIN
 END;
 GO
 
--- Đại
+--========= Đại ==========
+---------------------------------------------------Chương trình khuyến mãi và chi tiết chương trình khuyến mãi----------------------------------------------------
 -- Lấy tất cả thông tin chương trình khuyến mãi
 CREATE PROC SelectAllPromotions
 AS
@@ -622,6 +623,74 @@ BEGIN
 END;
 GO
 
+-- Tải danh sách sản phẩm cho chương trình khuyến mãi (danh sách chọn)
+CREATE PROC SelectProductToPromotion
+AS
+BEGIN
+	SELECT ProductID, [Name], TypeID, [Description]
+	FROM Product
+	WHERE PromotionID = '' and isDeleted = '1'
+END;
+GO
+
+-- Tải danh sách sản phẩm cho chương trình khuyến mãi (danh sách đã chọn)
+CREATE PROC SelectProductToPromotionApply
+	@PromotionID varchar(10)
+AS
+BEGIN
+	SELECT ProductID, [Name], TypeID, [Description]
+	FROM Product
+	WHERE PromotionID = @PromotionID and isDeleted = '1'
+END;
+GO
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------Phiếu nhập và chi tiết phiếu nhập----------------------------------------------------
+-- Lấy danh sách phiếu nhập
+CREATE PROC SelectAllPurchaseOrder
+AS
+BEGIN
+	SELECT OrderID, E.Name, S.Name, PO.importDate, PO.TotalPrice, PO.Status
+	FROM PurchaseOrder PO, Employee E, Supplier S
+	WHERE PO.EmployeeID = E.EmployeeID and PO.SupplierID = S.SupplierID and PO.isDeleted = '1'
+END;
+GO
+
+-- Tạo phiếu nhập
+CREATE PROC InsertPurchaseOrder
+	@OrderID varchar(10),
+	@EmployeeID varchar(10),
+	@SupplierID varchar(10),
+	@importDate datetime,
+	@TotalPrice float(50)
+AS
+BEGIN
+	INSERT INTO PurchaseOrder (OrderID,EmployeeID,SupplierID,importDate,TotalPrice)
+	VALUES (@OrderID,@EmployeeID, @SupplierID, @importDate, @TotalPrice)
+END;
+GO
+
+-- Sửa phiếu nhập
+CREATE PROC UpdatePurchaseOrder
+	@OrderID varchar(10),
+	@SupplierID varchar(10)
+AS
+BEGIN
+	UPDATE PurchaseOrder SET SupplierID = @SupplierID WHERE OrderID = @OrderID
+END;
+GO
+
+-- Xoá phiếu nhập
+CREATE PROC DeletePurchaseOrder
+	@OrderID varchar(10)
+AS
+BEGIN
+	UPDATE PurchaseOrder SET isDeleted = '0' WHERE OrderID = @OrderID
+END;
+GO
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Công Anh 
 
 --Lấy danh sách sản phẩm 

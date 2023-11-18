@@ -1,4 +1,5 @@
-﻿using MiniSupermarket.ImageAndFont;
+﻿using MiniSupermarket.BUS;
+using MiniSupermarket.ImageAndFont;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -13,6 +14,7 @@ namespace MiniSupermarket.GUI
 {
     public partial class DetailPronmotionForm : Form
     {
+        private DetailPromotionBUS bus = new DetailPromotionBUS();
         private string promotionID;
         public DetailPronmotionForm(string PromotionID)
         {
@@ -25,6 +27,13 @@ namespace MiniSupermarket.GUI
             lblTitlePromotion.Text = lblTitlePromotion.Text + " " + promotionID;
             lblTitlePromotion.Font = ProjectFont.getTitleFont();
             lblTitleProduct.Font = ProjectFont.getTitleFont();
+            ShowListProduct();
+        }
+
+        public void ShowListProduct()
+        {
+            dgvProductPromotions.DataSource = bus.getProductPromotions(promotionID);
+            dgvProducts.DataSource = bus.getProducts();
         }
     }
 }

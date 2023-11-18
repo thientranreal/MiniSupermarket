@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics.Contracts;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -14,7 +15,7 @@ namespace MiniSupermarket.GUI
 {
     public partial class PurchaseOderForm : Form
     {
-        private PurchaseOderBUS bus = new PurchaseOderBUS();
+        private PurchaseOrderBUS bus = new PurchaseOrderBUS();
         public PurchaseOderForm()
         {
             InitializeComponent();
@@ -44,12 +45,21 @@ namespace MiniSupermarket.GUI
         {
             LoadTheme();
             HienThiPhieuNhap();
+            ShowComboboxSupplier();
         }
 
         private void HienThiPhieuNhap()
         {
             dgvPurchaseOders.Rows.Clear();
-            dgvPurchaseOders.DataSource = bus.getAllPurchaseOder();
+            dgvPurchaseOders.DataSource = bus.getPurchaseOrders();
+        }
+
+        public void ShowComboboxSupplier()
+        {
+            DataTable dt = bus.getSuppliers();
+            cbxSupplier.DataSource = dt;
+            cbxSupplier.DisplayMember = "Name";
+            cbxSupplier.ValueMember = "SupplierID";
         }
 
         private void dgvPurchaseOders_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
