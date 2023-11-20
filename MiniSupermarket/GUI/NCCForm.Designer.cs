@@ -53,24 +53,23 @@
             txtID = new CustomControl.CustomTextBox();
             pnlTitleThongTin = new CustomControl.CustomPanel();
             lblTitleThongTinNCC = new Label();
-            customPanel4 = new CustomControl.CustomPanel();
-            customPanel13 = new CustomControl.CustomPanel();
-            dataGridViewNCC = new DataGridView();
             customPanel2 = new CustomControl.CustomPanel();
+            btnConfirm = new CustomControl.CustomButton();
             btnHuy = new CustomControl.CustomButton();
             btnXoa = new CustomControl.CustomButton();
             btnCapNhat = new CustomControl.CustomButton();
             btnThem = new CustomControl.CustomButton();
+            dataGridViewNCC = new DataGridView();
             txtTimKiem = new CustomControl.CustomTextBox();
             btnTimKiem = new CustomControl.CustomButton();
             customPanel10 = new CustomControl.CustomPanel();
             dataGridViewLoaiSanPham = new DataGridView();
-            customPanel12 = new CustomControl.CustomPanel();
-            btnThemMoiLoai = new CustomControl.CustomButton();
             customPanel11 = new CustomControl.CustomPanel();
             label7 = new Label();
             comboBox1 = new ComboBox();
             btnLoad = new CustomControl.CustomButton();
+            panelDataGridViewNCC = new CustomControl.CustomPanel();
+            customPanel1 = new CustomControl.CustomPanel();
             panelThongTinNhaCungCap.SuspendLayout();
             customPanel9.SuspendLayout();
             customPanel8.SuspendLayout();
@@ -79,14 +78,13 @@
             customPanel5.SuspendLayout();
             customPanel3.SuspendLayout();
             pnlTitleThongTin.SuspendLayout();
-            customPanel4.SuspendLayout();
-            customPanel13.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridViewNCC).BeginInit();
             customPanel2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dataGridViewNCC).BeginInit();
             customPanel10.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewLoaiSanPham).BeginInit();
-            customPanel12.SuspendLayout();
             customPanel11.SuspendLayout();
+            panelDataGridViewNCC.SuspendLayout();
+            customPanel1.SuspendLayout();
             SuspendLayout();
             // 
             // panelThongTinNhaCungCap
@@ -112,7 +110,7 @@
             panelThongTinNhaCungCap.Controls.Add(txtID);
             panelThongTinNhaCungCap.Controls.Add(pnlTitleThongTin);
             panelThongTinNhaCungCap.ForeColor = Color.White;
-            panelThongTinNhaCungCap.Location = new Point(12, 12);
+            panelThongTinNhaCungCap.Location = new Point(90, 12);
             panelThongTinNhaCungCap.Name = "panelThongTinNhaCungCap";
             panelThongTinNhaCungCap.Size = new Size(475, 300);
             panelThongTinNhaCungCap.TabIndex = 0;
@@ -152,7 +150,7 @@
             dateTimePickerNgayNhap.BorderSize = 3;
             dateTimePickerNgayNhap.CustomFormat = "dd/MM/yyyy";
             dateTimePickerNgayNhap.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            dateTimePickerNgayNhap.Format = DateTimePickerFormat.Short;
+            dateTimePickerNgayNhap.Format = DateTimePickerFormat.Custom;
             dateTimePickerNgayNhap.Location = new Point(132, 248);
             dateTimePickerNgayNhap.MinimumSize = new Size(0, 35);
             dateTimePickerNgayNhap.Name = "dateTimePickerNgayNhap";
@@ -310,9 +308,9 @@
             txtEmail.Name = "txtEmail";
             txtEmail.Padding = new Padding(7);
             txtEmail.PasswordChar = false;
+            txtEmail.ReadOnly1 = false;
             txtEmail.Size = new Size(295, 34);
             txtEmail.TabIndex = 5;
-            txtEmail.Texts = "";
             txtEmail.UnderlineStyle = true;
             // 
             // txtSDT
@@ -329,9 +327,9 @@
             txtSDT.Name = "txtSDT";
             txtSDT.Padding = new Padding(7);
             txtSDT.PasswordChar = false;
+            txtSDT.ReadOnly1 = false;
             txtSDT.Size = new Size(295, 34);
             txtSDT.TabIndex = 4;
-            txtSDT.Texts = "";
             txtSDT.UnderlineStyle = true;
             // 
             // txtDiaChi
@@ -348,9 +346,9 @@
             txtDiaChi.Name = "txtDiaChi";
             txtDiaChi.Padding = new Padding(7);
             txtDiaChi.PasswordChar = false;
+            txtDiaChi.ReadOnly1 = false;
             txtDiaChi.Size = new Size(295, 34);
             txtDiaChi.TabIndex = 3;
-            txtDiaChi.Texts = "";
             txtDiaChi.UnderlineStyle = true;
             // 
             // txtTen
@@ -367,9 +365,9 @@
             txtTen.Name = "txtTen";
             txtTen.Padding = new Padding(7);
             txtTen.PasswordChar = false;
+            txtTen.ReadOnly1 = false;
             txtTen.Size = new Size(295, 34);
             txtTen.TabIndex = 2;
-            txtTen.Texts = "";
             txtTen.UnderlineStyle = true;
             // 
             // txtID
@@ -386,10 +384,11 @@
             txtID.Name = "txtID";
             txtID.Padding = new Padding(7);
             txtID.PasswordChar = false;
+            txtID.ReadOnly1 = false;
             txtID.Size = new Size(295, 34);
             txtID.TabIndex = 1;
-            txtID.Texts = "";
             txtID.UnderlineStyle = true;
+            txtID.EnabledChanged += txtID_EnabledChanged;
             // 
             // pnlTitleThongTin
             // 
@@ -418,39 +417,152 @@
             lblTitleThongTinNCC.Text = "THÔNG TIN NHÀ CUNG CẤP";
             lblTitleThongTinNCC.Click += lblTitleThongTinNCC_Click;
             // 
-            // customPanel4
+            // customPanel2
             // 
-            customPanel4.Anchor = AnchorStyles.Top;
-            customPanel4.BackColor = Color.FromArgb(20, 80, 163);
-            customPanel4.BackgroundColor = Color.FromArgb(20, 80, 163);
-            customPanel4.BorderColor = Color.FromArgb(20, 80, 163);
-            customPanel4.BorderRadius = 20;
-            customPanel4.BorderSize = 3;
-            customPanel4.Controls.Add(customPanel13);
-            customPanel4.ForeColor = Color.White;
-            customPanel4.Location = new Point(12, 469);
-            customPanel4.Margin = new Padding(0);
-            customPanel4.Name = "customPanel4";
-            customPanel4.Padding = new Padding(10);
-            customPanel4.Size = new Size(956, 195);
-            customPanel4.TabIndex = 2;
-            customPanel4.TextColor = Color.White;
+            customPanel2.Anchor = AnchorStyles.Top;
+            customPanel2.BackColor = Color.FromArgb(125, 229, 237);
+            customPanel2.BackgroundColor = Color.FromArgb(125, 229, 237);
+            customPanel2.BorderColor = Color.FromArgb(20, 80, 163);
+            customPanel2.BorderRadius = 20;
+            customPanel2.BorderSize = 3;
+            customPanel2.Controls.Add(btnConfirm);
+            customPanel2.Controls.Add(btnHuy);
+            customPanel2.Controls.Add(btnXoa);
+            customPanel2.Controls.Add(btnCapNhat);
+            customPanel2.Controls.Add(btnThem);
+            customPanel2.ForeColor = Color.White;
+            customPanel2.Location = new Point(90, 334);
+            customPanel2.Name = "customPanel2";
+            customPanel2.Size = new Size(956, 75);
+            customPanel2.TabIndex = 3;
+            customPanel2.TextColor = Color.White;
             // 
-            // customPanel13
+            // btnConfirm
             // 
-            customPanel13.BackColor = Color.FromArgb(51, 124, 207);
-            customPanel13.BackgroundColor = Color.FromArgb(51, 124, 207);
-            customPanel13.BorderColor = Color.PaleVioletRed;
-            customPanel13.BorderRadius = 20;
-            customPanel13.BorderSize = 0;
-            customPanel13.Controls.Add(dataGridViewNCC);
-            customPanel13.ForeColor = Color.White;
-            customPanel13.Location = new Point(10, 10);
-            customPanel13.Margin = new Padding(0);
-            customPanel13.Name = "customPanel13";
-            customPanel13.Size = new Size(936, 175);
-            customPanel13.TabIndex = 1;
-            customPanel13.TextColor = Color.White;
+            btnConfirm.BackColor = Color.FromArgb(3, 201, 136);
+            btnConfirm.BackgroundColor = Color.FromArgb(3, 201, 136);
+            btnConfirm.BorderColor = Color.FromArgb(14, 41, 84);
+            btnConfirm.BorderRadius = 20;
+            btnConfirm.BorderSize = 3;
+            btnConfirm.Enabled = false;
+            btnConfirm.FlatAppearance.BorderSize = 0;
+            btnConfirm.FlatStyle = FlatStyle.Flat;
+            btnConfirm.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnConfirm.ForeColor = Color.White;
+            btnConfirm.Image = Properties.Resources.add;
+            btnConfirm.ImageAlign = ContentAlignment.MiddleLeft;
+            btnConfirm.Location = new Point(668, 17);
+            btnConfirm.Margin = new Padding(0);
+            btnConfirm.Name = "btnConfirm";
+            btnConfirm.Padding = new Padding(5, 0, 0, 0);
+            btnConfirm.Size = new Size(109, 40);
+            btnConfirm.TabIndex = 4;
+            btnConfirm.Text = "Confirm";
+            btnConfirm.TextAlign = ContentAlignment.MiddleRight;
+            btnConfirm.TextColor = Color.White;
+            btnConfirm.UseVisualStyleBackColor = false;
+            btnConfirm.Click += btnConfirm_Click;
+            // 
+            // btnHuy
+            // 
+            btnHuy.BackColor = Color.FromArgb(198, 61, 47);
+            btnHuy.BackgroundColor = Color.FromArgb(198, 61, 47);
+            btnHuy.BorderColor = Color.FromArgb(14, 41, 84);
+            btnHuy.BorderRadius = 20;
+            btnHuy.BorderSize = 3;
+            btnHuy.Enabled = false;
+            btnHuy.FlatAppearance.BorderSize = 0;
+            btnHuy.FlatStyle = FlatStyle.Flat;
+            btnHuy.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnHuy.ForeColor = Color.White;
+            btnHuy.Image = Properties.Resources.delete_document;
+            btnHuy.ImageAlign = ContentAlignment.MiddleLeft;
+            btnHuy.Location = new Point(546, 17);
+            btnHuy.Margin = new Padding(0);
+            btnHuy.Name = "btnHuy";
+            btnHuy.Padding = new Padding(10, 0, 5, 0);
+            btnHuy.Size = new Size(109, 40);
+            btnHuy.TabIndex = 3;
+            btnHuy.Text = "Cancel";
+            btnHuy.TextAlign = ContentAlignment.MiddleRight;
+            btnHuy.TextColor = Color.White;
+            btnHuy.UseVisualStyleBackColor = false;
+            btnHuy.Click += btnHuy_Click;
+            // 
+            // btnXoa
+            // 
+            btnXoa.BackColor = Color.FromArgb(55, 149, 189);
+            btnXoa.BackgroundColor = Color.FromArgb(55, 149, 189);
+            btnXoa.BorderColor = Color.FromArgb(14, 41, 84);
+            btnXoa.BorderRadius = 20;
+            btnXoa.BorderSize = 3;
+            btnXoa.FlatAppearance.BorderSize = 0;
+            btnXoa.FlatStyle = FlatStyle.Flat;
+            btnXoa.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnXoa.ForeColor = Color.White;
+            btnXoa.Image = Properties.Resources.delete;
+            btnXoa.ImageAlign = ContentAlignment.MiddleLeft;
+            btnXoa.Location = new Point(424, 17);
+            btnXoa.Margin = new Padding(0);
+            btnXoa.Name = "btnXoa";
+            btnXoa.Padding = new Padding(10, 0, 5, 0);
+            btnXoa.Size = new Size(109, 40);
+            btnXoa.TabIndex = 2;
+            btnXoa.Text = "Delete";
+            btnXoa.TextAlign = ContentAlignment.MiddleRight;
+            btnXoa.TextColor = Color.White;
+            btnXoa.UseVisualStyleBackColor = false;
+            btnXoa.Click += btnXoa_Click;
+            // 
+            // btnCapNhat
+            // 
+            btnCapNhat.BackColor = Color.FromArgb(55, 149, 189);
+            btnCapNhat.BackgroundColor = Color.FromArgb(55, 149, 189);
+            btnCapNhat.BorderColor = Color.FromArgb(14, 41, 84);
+            btnCapNhat.BorderRadius = 20;
+            btnCapNhat.BorderSize = 3;
+            btnCapNhat.FlatAppearance.BorderSize = 0;
+            btnCapNhat.FlatStyle = FlatStyle.Flat;
+            btnCapNhat.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnCapNhat.ForeColor = Color.White;
+            btnCapNhat.Image = Properties.Resources.update;
+            btnCapNhat.ImageAlign = ContentAlignment.MiddleLeft;
+            btnCapNhat.Location = new Point(302, 17);
+            btnCapNhat.Margin = new Padding(0);
+            btnCapNhat.Name = "btnCapNhat";
+            btnCapNhat.Padding = new Padding(5, 0, 5, 0);
+            btnCapNhat.Size = new Size(109, 40);
+            btnCapNhat.TabIndex = 1;
+            btnCapNhat.Text = "Update";
+            btnCapNhat.TextAlign = ContentAlignment.MiddleRight;
+            btnCapNhat.TextColor = Color.White;
+            btnCapNhat.UseVisualStyleBackColor = false;
+            btnCapNhat.Click += btnCapNhat_Click;
+            // 
+            // btnThem
+            // 
+            btnThem.BackColor = Color.FromArgb(55, 149, 189);
+            btnThem.BackgroundColor = Color.FromArgb(55, 149, 189);
+            btnThem.BorderColor = Color.FromArgb(14, 41, 84);
+            btnThem.BorderRadius = 20;
+            btnThem.BorderSize = 3;
+            btnThem.FlatAppearance.BorderSize = 0;
+            btnThem.FlatStyle = FlatStyle.Flat;
+            btnThem.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnThem.ForeColor = Color.White;
+            btnThem.Image = Properties.Resources.add;
+            btnThem.ImageAlign = ContentAlignment.MiddleLeft;
+            btnThem.Location = new Point(180, 17);
+            btnThem.Margin = new Padding(0);
+            btnThem.Name = "btnThem";
+            btnThem.Padding = new Padding(10, 0, 20, 0);
+            btnThem.Size = new Size(109, 40);
+            btnThem.TabIndex = 0;
+            btnThem.Text = "Add";
+            btnThem.TextAlign = ContentAlignment.MiddleRight;
+            btnThem.TextColor = Color.White;
+            btnThem.UseVisualStyleBackColor = false;
+            btnThem.Click += btnThem_Click;
             // 
             // dataGridViewNCC
             // 
@@ -458,7 +570,6 @@
             dataGridViewNCC.AllowUserToDeleteRows = false;
             dataGridViewNCC.AllowUserToResizeColumns = false;
             dataGridViewNCC.AllowUserToResizeRows = false;
-            dataGridViewNCC.Anchor = AnchorStyles.Top;
             dataGridViewNCC.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridViewNCC.BackgroundColor = Color.FromArgb(51, 124, 207);
             dataGridViewNCC.BorderStyle = BorderStyle.None;
@@ -490,125 +601,12 @@
             dataGridViewNCC.RowHeadersVisible = false;
             dataGridViewNCC.RowTemplate.Height = 25;
             dataGridViewNCC.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewNCC.Size = new Size(936, 175);
+            dataGridViewNCC.Size = new Size(1117, 175);
             dataGridViewNCC.TabIndex = 0;
+            dataGridViewNCC.TabStop = false;
+            dataGridViewNCC.CellClick += dataGridViewNCC_CellClick;
             dataGridViewNCC.CellContentClick += dataGridView1_CellContentClick;
-            // 
-            // customPanel2
-            // 
-            customPanel2.Anchor = AnchorStyles.Top;
-            customPanel2.BackColor = Color.FromArgb(125, 229, 237);
-            customPanel2.BackgroundColor = Color.FromArgb(125, 229, 237);
-            customPanel2.BorderColor = Color.FromArgb(20, 80, 163);
-            customPanel2.BorderRadius = 20;
-            customPanel2.BorderSize = 3;
-            customPanel2.Controls.Add(btnHuy);
-            customPanel2.Controls.Add(btnXoa);
-            customPanel2.Controls.Add(btnCapNhat);
-            customPanel2.Controls.Add(btnThem);
-            customPanel2.ForeColor = Color.White;
-            customPanel2.Location = new Point(12, 334);
-            customPanel2.Name = "customPanel2";
-            customPanel2.Size = new Size(956, 75);
-            customPanel2.TabIndex = 3;
-            customPanel2.TextColor = Color.White;
-            // 
-            // btnHuy
-            // 
-            btnHuy.BackColor = Color.FromArgb(55, 149, 189);
-            btnHuy.BackgroundColor = Color.FromArgb(55, 149, 189);
-            btnHuy.BorderColor = Color.FromArgb(14, 41, 84);
-            btnHuy.BorderRadius = 20;
-            btnHuy.BorderSize = 3;
-            btnHuy.Enabled = false;
-            btnHuy.FlatAppearance.BorderSize = 0;
-            btnHuy.FlatStyle = FlatStyle.Flat;
-            btnHuy.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnHuy.ForeColor = Color.White;
-            btnHuy.Image = Properties.Resources.delete_document;
-            btnHuy.ImageAlign = ContentAlignment.MiddleLeft;
-            btnHuy.Location = new Point(611, 17);
-            btnHuy.Margin = new Padding(0);
-            btnHuy.Name = "btnHuy";
-            btnHuy.Padding = new Padding(10, 0, 20, 0);
-            btnHuy.Size = new Size(109, 40);
-            btnHuy.TabIndex = 3;
-            btnHuy.Text = "Hủy";
-            btnHuy.TextAlign = ContentAlignment.MiddleRight;
-            btnHuy.TextColor = Color.White;
-            btnHuy.UseVisualStyleBackColor = false;
-            // 
-            // btnXoa
-            // 
-            btnXoa.BackColor = Color.FromArgb(55, 149, 189);
-            btnXoa.BackgroundColor = Color.FromArgb(55, 149, 189);
-            btnXoa.BorderColor = Color.FromArgb(14, 41, 84);
-            btnXoa.BorderRadius = 20;
-            btnXoa.BorderSize = 3;
-            btnXoa.FlatAppearance.BorderSize = 0;
-            btnXoa.FlatStyle = FlatStyle.Flat;
-            btnXoa.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btnXoa.ForeColor = Color.White;
-            btnXoa.Image = Properties.Resources.delete;
-            btnXoa.ImageAlign = ContentAlignment.MiddleLeft;
-            btnXoa.Location = new Point(486, 17);
-            btnXoa.Margin = new Padding(0);
-            btnXoa.Name = "btnXoa";
-            btnXoa.Padding = new Padding(10, 0, 20, 0);
-            btnXoa.Size = new Size(109, 40);
-            btnXoa.TabIndex = 2;
-            btnXoa.Text = "Xóa";
-            btnXoa.TextAlign = ContentAlignment.MiddleRight;
-            btnXoa.TextColor = Color.White;
-            btnXoa.UseVisualStyleBackColor = false;
-            // 
-            // btnCapNhat
-            // 
-            btnCapNhat.BackColor = Color.FromArgb(55, 149, 189);
-            btnCapNhat.BackgroundColor = Color.FromArgb(55, 149, 189);
-            btnCapNhat.BorderColor = Color.FromArgb(14, 41, 84);
-            btnCapNhat.BorderRadius = 20;
-            btnCapNhat.BorderSize = 3;
-            btnCapNhat.FlatAppearance.BorderSize = 0;
-            btnCapNhat.FlatStyle = FlatStyle.Flat;
-            btnCapNhat.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnCapNhat.ForeColor = Color.White;
-            btnCapNhat.Image = Properties.Resources.update;
-            btnCapNhat.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCapNhat.Location = new Point(361, 17);
-            btnCapNhat.Margin = new Padding(0);
-            btnCapNhat.Name = "btnCapNhat";
-            btnCapNhat.Padding = new Padding(10, 0, 20, 0);
-            btnCapNhat.Size = new Size(109, 40);
-            btnCapNhat.TabIndex = 1;
-            btnCapNhat.Text = "Sửa";
-            btnCapNhat.TextAlign = ContentAlignment.MiddleRight;
-            btnCapNhat.TextColor = Color.White;
-            btnCapNhat.UseVisualStyleBackColor = false;
-            // 
-            // btnThem
-            // 
-            btnThem.BackColor = Color.FromArgb(55, 149, 189);
-            btnThem.BackgroundColor = Color.FromArgb(55, 149, 189);
-            btnThem.BorderColor = Color.FromArgb(14, 41, 84);
-            btnThem.BorderRadius = 20;
-            btnThem.BorderSize = 3;
-            btnThem.FlatAppearance.BorderSize = 0;
-            btnThem.FlatStyle = FlatStyle.Flat;
-            btnThem.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            btnThem.ForeColor = Color.White;
-            btnThem.Image = Properties.Resources.add;
-            btnThem.ImageAlign = ContentAlignment.MiddleLeft;
-            btnThem.Location = new Point(236, 17);
-            btnThem.Margin = new Padding(0);
-            btnThem.Name = "btnThem";
-            btnThem.Padding = new Padding(10, 0, 10, 0);
-            btnThem.Size = new Size(109, 40);
-            btnThem.TabIndex = 0;
-            btnThem.Text = "Thêm";
-            btnThem.TextAlign = ContentAlignment.MiddleRight;
-            btnThem.TextColor = Color.White;
-            btnThem.UseVisualStyleBackColor = false;
+            dataGridViewNCC.DataBindingComplete += dataGridViewNCC_DataBindingComplete;
             // 
             // txtTimKiem
             // 
@@ -620,14 +618,14 @@
             txtTimKiem.FocusBorderColor = Color.HotPink;
             txtTimKiem.Font = new Font("Segoe UI", 9.5F, FontStyle.Regular, GraphicsUnit.Point);
             txtTimKiem.ForeColor = Color.DimGray;
-            txtTimKiem.Location = new Point(336, 424);
+            txtTimKiem.Location = new Point(414, 424);
             txtTimKiem.Multiline = false;
             txtTimKiem.Name = "txtTimKiem";
             txtTimKiem.Padding = new Padding(7);
             txtTimKiem.PasswordChar = false;
+            txtTimKiem.ReadOnly1 = false;
             txtTimKiem.Size = new Size(250, 32);
             txtTimKiem.TabIndex = 4;
-            txtTimKiem.Texts = "";
             txtTimKiem.UnderlineStyle = false;
             // 
             // btnTimKiem
@@ -642,7 +640,7 @@
             btnTimKiem.FlatStyle = FlatStyle.Flat;
             btnTimKiem.ForeColor = Color.White;
             btnTimKiem.Image = Properties.Resources.search;
-            btnTimKiem.Location = new Point(242, 426);
+            btnTimKiem.Location = new Point(320, 426);
             btnTimKiem.Margin = new Padding(0);
             btnTimKiem.Name = "btnTimKiem";
             btnTimKiem.Size = new Size(90, 28);
@@ -660,10 +658,9 @@
             customPanel10.BorderRadius = 20;
             customPanel10.BorderSize = 3;
             customPanel10.Controls.Add(dataGridViewLoaiSanPham);
-            customPanel10.Controls.Add(customPanel12);
             customPanel10.Controls.Add(customPanel11);
             customPanel10.ForeColor = Color.White;
-            customPanel10.Location = new Point(493, 12);
+            customPanel10.Location = new Point(571, 12);
             customPanel10.Name = "customPanel10";
             customPanel10.Size = new Size(475, 300);
             customPanel10.TabIndex = 6;
@@ -704,48 +701,10 @@
             dataGridViewLoaiSanPham.RowHeadersVisible = false;
             dataGridViewLoaiSanPham.RowTemplate.Height = 25;
             dataGridViewLoaiSanPham.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewLoaiSanPham.Size = new Size(444, 186);
+            dataGridViewLoaiSanPham.Size = new Size(444, 237);
             dataGridViewLoaiSanPham.TabIndex = 2;
-            // 
-            // customPanel12
-            // 
-            customPanel12.BackColor = Color.FromArgb(46, 138, 153);
-            customPanel12.BackgroundColor = Color.FromArgb(46, 138, 153);
-            customPanel12.BorderColor = Color.FromArgb(14, 41, 84);
-            customPanel12.BorderRadius = 20;
-            customPanel12.BorderSize = 3;
-            customPanel12.Controls.Add(btnThemMoiLoai);
-            customPanel12.Dock = DockStyle.Bottom;
-            customPanel12.ForeColor = Color.White;
-            customPanel12.Location = new Point(0, 238);
-            customPanel12.Name = "customPanel12";
-            customPanel12.Size = new Size(475, 62);
-            customPanel12.TabIndex = 1;
-            customPanel12.TextColor = Color.White;
-            // 
-            // btnThemMoiLoai
-            // 
-            btnThemMoiLoai.BackColor = Color.FromArgb(55, 149, 189);
-            btnThemMoiLoai.BackgroundColor = Color.FromArgb(55, 149, 189);
-            btnThemMoiLoai.BorderColor = Color.FromArgb(14, 41, 84);
-            btnThemMoiLoai.BorderRadius = 20;
-            btnThemMoiLoai.BorderSize = 3;
-            btnThemMoiLoai.FlatAppearance.BorderSize = 0;
-            btnThemMoiLoai.FlatStyle = FlatStyle.Flat;
-            btnThemMoiLoai.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnThemMoiLoai.ForeColor = Color.White;
-            btnThemMoiLoai.Image = Properties.Resources.add;
-            btnThemMoiLoai.ImageAlign = ContentAlignment.MiddleLeft;
-            btnThemMoiLoai.Location = new Point(166, 10);
-            btnThemMoiLoai.Margin = new Padding(0);
-            btnThemMoiLoai.Name = "btnThemMoiLoai";
-            btnThemMoiLoai.Padding = new Padding(10, 0, 10, 0);
-            btnThemMoiLoai.Size = new Size(142, 40);
-            btnThemMoiLoai.TabIndex = 1;
-            btnThemMoiLoai.Text = "Thêm mới";
-            btnThemMoiLoai.TextAlign = ContentAlignment.MiddleRight;
-            btnThemMoiLoai.TextColor = Color.White;
-            btnThemMoiLoai.UseVisualStyleBackColor = false;
+            dataGridViewLoaiSanPham.CellClick += dataGridViewLoaiSanPham_CellClick;
+            dataGridViewLoaiSanPham.DataBindingComplete += dataGridViewLoaiSanPham_DataBindingComplete;
             // 
             // customPanel11
             // 
@@ -782,7 +741,7 @@
             comboBox1.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "ID", "Tên", "Địa chỉ", "SĐT", "Email" });
-            comboBox1.Location = new Point(590, 426);
+            comboBox1.Location = new Point(668, 426);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(101, 28);
             comboBox1.TabIndex = 7;
@@ -800,7 +759,7 @@
             btnLoad.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnLoad.ForeColor = Color.White;
             btnLoad.Image = Properties.Resources.reloading;
-            btnLoad.Location = new Point(694, 419);
+            btnLoad.Location = new Point(772, 419);
             btnLoad.Margin = new Padding(0);
             btnLoad.Name = "btnLoad";
             btnLoad.Size = new Size(40, 40);
@@ -810,26 +769,61 @@
             btnLoad.UseVisualStyleBackColor = false;
             btnLoad.Click += btnLoad_Click;
             // 
+            // panelDataGridViewNCC
+            // 
+            panelDataGridViewNCC.Anchor = AnchorStyles.Top;
+            panelDataGridViewNCC.BackColor = Color.FromArgb(20, 80, 163);
+            panelDataGridViewNCC.BackgroundColor = Color.FromArgb(20, 80, 163);
+            panelDataGridViewNCC.BorderColor = Color.FromArgb(20, 80, 163);
+            panelDataGridViewNCC.BorderRadius = 20;
+            panelDataGridViewNCC.BorderSize = 3;
+            panelDataGridViewNCC.Controls.Add(customPanel1);
+            panelDataGridViewNCC.ForeColor = Color.White;
+            panelDataGridViewNCC.Location = new Point(0, 481);
+            panelDataGridViewNCC.Margin = new Padding(0);
+            panelDataGridViewNCC.Name = "panelDataGridViewNCC";
+            panelDataGridViewNCC.Padding = new Padding(10);
+            panelDataGridViewNCC.Size = new Size(1137, 195);
+            panelDataGridViewNCC.TabIndex = 2;
+            panelDataGridViewNCC.TextColor = Color.White;
+            // 
+            // customPanel1
+            // 
+            customPanel1.BackColor = Color.MediumSlateBlue;
+            customPanel1.BackgroundColor = Color.MediumSlateBlue;
+            customPanel1.BorderColor = Color.PaleVioletRed;
+            customPanel1.BorderRadius = 20;
+            customPanel1.BorderSize = 0;
+            customPanel1.Controls.Add(dataGridViewNCC);
+            customPanel1.Dock = DockStyle.Fill;
+            customPanel1.ForeColor = Color.White;
+            customPanel1.Location = new Point(10, 10);
+            customPanel1.Name = "customPanel1";
+            customPanel1.Size = new Size(1117, 175);
+            customPanel1.TabIndex = 0;
+            customPanel1.TextColor = Color.White;
+            // 
             // NCCForm
             // 
             AcceptButton = btnTimKiem;
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(135, 196, 255);
-            ClientSize = new Size(980, 676);
+            ClientSize = new Size(1137, 676);
             Controls.Add(btnLoad);
             Controls.Add(comboBox1);
             Controls.Add(customPanel10);
             Controls.Add(btnTimKiem);
             Controls.Add(txtTimKiem);
             Controls.Add(customPanel2);
-            Controls.Add(customPanel4);
+            Controls.Add(panelDataGridViewNCC);
             Controls.Add(panelThongTinNhaCungCap);
             FormBorderStyle = FormBorderStyle.None;
             KeyPreview = true;
             Name = "NCCForm";
             Text = "Form Nha cung cap";
             Load += NCCForm_Load;
+            SizeChanged += NCCForm_SizeChanged;
             KeyDown += NCCForm_KeyDown;
             Resize += NCCForm_Resize;
             panelThongTinNhaCungCap.ResumeLayout(false);
@@ -847,15 +841,14 @@
             customPanel3.PerformLayout();
             pnlTitleThongTin.ResumeLayout(false);
             pnlTitleThongTin.PerformLayout();
-            customPanel4.ResumeLayout(false);
-            customPanel13.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridViewNCC).EndInit();
             customPanel2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dataGridViewNCC).EndInit();
             customPanel10.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewLoaiSanPham).EndInit();
-            customPanel12.ResumeLayout(false);
             customPanel11.ResumeLayout(false);
             customPanel11.PerformLayout();
+            panelDataGridViewNCC.ResumeLayout(false);
+            customPanel1.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -865,7 +858,6 @@
         private CustomControl.CustomPanel panelThongTinNhaCungCap;
         private CustomControl.CustomPanel pnlTitleThongTin;
         private Label lblTitleThongTinNCC;
-        private CustomControl.CustomPanel customPanel4;
         private CustomControl.CustomPanel customPanel2;
         private CustomControl.CustomButton btnCapNhat;
         private CustomControl.CustomButton btnHuy;
@@ -895,11 +887,11 @@
         private Label label7;
         private CustomControl.CustomButton btnThem;
         private DataGridView dataGridViewLoaiSanPham;
-        private CustomControl.CustomPanel customPanel12;
-        private CustomControl.CustomButton btnThemMoiLoai;
-        private DataGridView dataGridViewNCC;
-        private CustomControl.CustomPanel customPanel13;
         private ComboBox comboBox1;
         private CustomControl.CustomButton btnLoad;
+        private CustomControl.CustomPanel panelDataGridViewNCC;
+        private DataGridView dataGridViewNCC;
+        private CustomControl.CustomPanel customPanel1;
+        private CustomControl.CustomButton btnConfirm;
     }
 }

@@ -529,8 +529,9 @@ BEGIN
 	WHERE Supplier.isDeleted=1;
 END;
 GO
---Lấy tất cả thông tin chi tiết nhà cung cấp
-CREATE PROCEDURE SelectAllSupplierDetail
+--Lấy thông tin chi tiết nhà cung cấp
+ALTER PROCEDURE SelectAllSupplierDetail
+	@ID varchar(10)
 AS
 BEGIN
 	SELECT
@@ -543,7 +544,7 @@ BEGIN
 	(Supplier INNER JOIN SupplierProduct ON Supplier.SupplierID =SupplierProduct.SupplierID) INNER JOIN 
 	Product ON SupplierProduct.ProductID=Product.ProductID
 
-	WHERE Supplier.isDeleted=1 AND Product.isDeleted=1
+	WHERE SupplierProduct.SupplierID=@ID
 END;
 GO
 --Tìm thông tin theo ID nhà cung cấp
@@ -561,5 +562,48 @@ BEGIN
 	WHERE Supplier.SupplierID=@ID
 END;
 GO
+--Thêm nhà cung cấp 
+CREATE PROCEDURE AddSupplier
+	@ID varchar(50),
+	@Name nvarchar(50),
+	@Address nvarchar(50),
+	@PhoneNumber varchar(50),
+	@Email varchar(50),
+	@ProductID varchar(10),
+	@Date datetime
 
+AS
+BEGIN
+	INSERT INTO Supplier(SupplierID,[Name],[Address],PhoneNumber,Email)
+	VALUES 
+		(@ID,@Name,@Address,@PhoneNumber,@Email)
+	INSERT INTO SupplierProduct(SupplierID,ProductID,SupplyStartDate)
+	VALUES
+		(@ID,@ProductID,@Date)
 
+END;
+GO
+--Xóa nhà cung cấp
+CREATE PROCEDURE DelSupplier
+	@ID varchar(10)
+AS
+BEGIN
+	DELETE FROM Supplier
+	WHERE SupplierID=@ID
+	DELETE FROM SupplierProduct
+	WHERE SupplierID=@ID
+END;
+GO
+--Lấy thông tin sản phẩm
+CREATE PROCEDURE AllProduct
+AS
+BEGIN
+	SELECT 
+	Product.ProductID AS ID,
+	Product.[Name] AS Tên,
+	Product.TypeID AS Loại,
+	Product.CurrentPrice AS Giá
+	FROM Product
+	WHERE Product.isDeleted=1;
+END;
+GO

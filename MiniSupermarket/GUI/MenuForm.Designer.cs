@@ -156,6 +156,7 @@
             btnSuppliers.TextAlign = ContentAlignment.MiddleLeft;
             btnSuppliers.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnSuppliers.UseVisualStyleBackColor = true;
+            btnSuppliers.Click += btnSuppliers_Click;
             // 
             // btnPromotions
             // 

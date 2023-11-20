@@ -22,6 +22,7 @@ namespace MiniSupermarket.CustomControl
         private bool isFocus = false;
         private int borderRadius = 0;
 
+
         public CustomTextBox()
         {
             InitializeComponent();
@@ -84,6 +85,8 @@ namespace MiniSupermarket.CustomControl
             get { return textBox1.Multiline; }
             set { textBox1.Multiline = value; }
         }
+
+
         [Category("Custom Textbox")]
         public override Color BackColor
         {
@@ -128,7 +131,7 @@ namespace MiniSupermarket.CustomControl
             }
         }
         [Category("Custom Textbox")]
-        public string Texts
+        public override string Text
         {
             get
             {
@@ -154,6 +157,9 @@ namespace MiniSupermarket.CustomControl
                 }
             }
         }
+
+        public bool ReadOnly1 { get => textBox1.ReadOnly; set => textBox1.ReadOnly = value; }
+
         [Category("Custom Textbox")]
         private void SetTextBoxRoundedRegion()
         {
@@ -305,6 +311,11 @@ namespace MiniSupermarket.CustomControl
         {
             isFocus = false;
             this.Invalidate();
+        }
+
+        private void textBox1_EnabledChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

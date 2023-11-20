@@ -215,6 +215,7 @@ namespace MiniSupermarket.GUI
             {
                 FormBorderStyle = FormBorderStyle.None;
                 WindowState = FormWindowState.Maximized;
+                
                 btnResize.Image = MiniSupermarket.Properties.Resources.minimize;
                 maximize = true;
             }
