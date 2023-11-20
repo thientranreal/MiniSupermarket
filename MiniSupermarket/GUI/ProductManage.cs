@@ -185,7 +185,7 @@ namespace MiniSupermarket.GUI
             // Nếu mà mã loại rỗng thì sẽ tự tạo mã id
             if (id.Length == 0)
             {
-                if (ptBus.addProduct(id,name,maloai,soluong,dongia,mota,kieu,hinhanh,makm))
+                if (ptBus.addProduct(name,maloai,soluong,dongia,mota,kieu,hinhanh,makm))
                 {
                     MessageBox.Show("Thêm thành công!",
                         "Thông báo",
@@ -204,7 +204,7 @@ namespace MiniSupermarket.GUI
             }
             else // Nếu mà nhập đầy đủ thông tin thì thêm đầy đủ
             {
-                if (ptBus.addProduct(id, name, maloai, soluong, dongia, mota, kieu, hinhanh, makm))
+                if (ptBus.addProduct(name, maloai, soluong, dongia, mota, kieu, hinhanh, makm,id))
                 {
                     MessageBox.Show("Thêm thành công!",
                         "Thông báo",
