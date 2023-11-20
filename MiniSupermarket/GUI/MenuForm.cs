@@ -221,7 +221,9 @@ namespace MiniSupermarket.GUI
 
         private void btnProducts_Click(object sender, EventArgs e)
         {
-            //OpenChildForm(forms["Quản lý loại sản phẩm"], sender, "Quản lý loại sản phẩm");
+            ProductManage temp = (ProductManage)forms["Quản lý sản phẩm"];
+            OpenChildForm(temp, sender, "Quản lý sản phẩm");
+            temp.LoadTheme();
         }
 
         private void btnSale_Click(object sender, EventArgs e)
