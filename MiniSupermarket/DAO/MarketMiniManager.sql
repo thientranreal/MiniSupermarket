@@ -134,11 +134,11 @@ GO
 
 
 -- Rot du lieu vao bang hoa don
-INSERT INTO Bill (BillID, [Date], EmployeeID, CustomerID, EstimatedPrice, ReducePrice, TotalPrice)
+INSERT INTO Bill (BillID, [Date], EmployeeID, CustomerID, EstimatedPrice, ReducePrice, TotalPrice, [Status])
 VALUES
-    ('B0001', '2023-09-23', 'E0001', 'C0001', 100.0, 0, 100.0),
-    ('B0002', '2023-09-23', 'E0002', 'C0002', 200.0, 0, 200.0),
-    ('B0003', '2023-09-23', 'E0003', 'C0003', 300.0, 0, 300.0);
+    ('B0001', '2023-09-23', 'E0001', 'C0001', 100.0, 0, 100.0, 0),
+    ('B0002', '2023-09-23', 'E0002', 'C0002', 200.0, 0, 200.0, 0),
+    ('B0003', '2023-09-23', 'E0003', 'C0003', 300.0, 0, 300.0, 1);
 GO
 
 --Tao bang nha cung cap
@@ -525,10 +525,10 @@ BEGIN
 	SELECT Bill.BillID, Bill.[Date], Bill.EmployeeID,
     Employee.[Name] AS EmployeeName, Bill.CustomerID,
     Customer.[Name] AS CustomerName, 
-    Bill.EstimatedPrice, Bill.ReducePrice, Bill.TotalPrice, Bill.[Status] FROM Bill INNER JOIN Employee
+    Bill.EstimatedPrice, Bill.ReducePrice, Bill.TotalPrice, Bill.[Status], Bill.isDeleted
+	FROM Bill INNER JOIN Employee
 	ON Bill.EmployeeID = Employee.EmployeeID LEFT JOIN Customer
 	ON Bill.CustomerID = Customer.CustomerID
-    WHERE Bill.isDeleted = 1
 END;
 GO
 
