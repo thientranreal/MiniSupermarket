@@ -44,14 +44,12 @@
             this.lb_MaLoaiSp = new System.Windows.Forms.Label();
             this.btn_Them = new System.Windows.Forms.Button();
             this.lb_Soluong = new System.Windows.Forms.Label();
-            this.txt_HinhAnh = new System.Windows.Forms.TextBox();
             this.lb_DonGia = new System.Windows.Forms.Label();
             this.txt_Kieu = new System.Windows.Forms.TextBox();
             this.lb_MoTa = new System.Windows.Forms.Label();
             this.txt_MoTa = new System.Windows.Forms.TextBox();
             this.lb_Kieu = new System.Windows.Forms.Label();
             this.txt_DonGia = new System.Windows.Forms.TextBox();
-            this.lb_HinhAnh = new System.Windows.Forms.Label();
             this.txt_SoLuong = new System.Windows.Forms.TextBox();
             this.txt_TenSp = new System.Windows.Forms.TextBox();
             this.panel2 = new System.Windows.Forms.Panel();
@@ -111,14 +109,12 @@
             this.grb_TextField.Controls.Add(this.lb_MaLoaiSp);
             this.grb_TextField.Controls.Add(this.btn_Them);
             this.grb_TextField.Controls.Add(this.lb_Soluong);
-            this.grb_TextField.Controls.Add(this.txt_HinhAnh);
             this.grb_TextField.Controls.Add(this.lb_DonGia);
             this.grb_TextField.Controls.Add(this.txt_Kieu);
             this.grb_TextField.Controls.Add(this.lb_MoTa);
             this.grb_TextField.Controls.Add(this.txt_MoTa);
             this.grb_TextField.Controls.Add(this.lb_Kieu);
             this.grb_TextField.Controls.Add(this.txt_DonGia);
-            this.grb_TextField.Controls.Add(this.lb_HinhAnh);
             this.grb_TextField.Controls.Add(this.txt_SoLuong);
             this.grb_TextField.Controls.Add(this.txt_TenSp);
             this.grb_TextField.Location = new System.Drawing.Point(3, 81);
@@ -226,13 +222,6 @@
             this.lb_Soluong.TabIndex = 4;
             this.lb_Soluong.Text = "Số lượng";
             // 
-            // txt_HinhAnh
-            // 
-            this.txt_HinhAnh.Location = new System.Drawing.Point(535, 171);
-            this.txt_HinhAnh.Name = "txt_HinhAnh";
-            this.txt_HinhAnh.Size = new System.Drawing.Size(147, 27);
-            this.txt_HinhAnh.TabIndex = 16;
-            // 
             // lb_DonGia
             // 
             this.lb_DonGia.AutoSize = true;
@@ -280,15 +269,6 @@
             this.txt_DonGia.Name = "txt_DonGia";
             this.txt_DonGia.Size = new System.Drawing.Size(172, 27);
             this.txt_DonGia.TabIndex = 13;
-            // 
-            // lb_HinhAnh
-            // 
-            this.lb_HinhAnh.AutoSize = true;
-            this.lb_HinhAnh.Location = new System.Drawing.Point(397, 174);
-            this.lb_HinhAnh.Name = "lb_HinhAnh";
-            this.lb_HinhAnh.Size = new System.Drawing.Size(68, 20);
-            this.lb_HinhAnh.TabIndex = 8;
-            this.lb_HinhAnh.Text = "Hình ảnh";
             // 
             // txt_SoLuong
             // 
@@ -354,7 +334,6 @@
         private Label lb_MaLoaiSp;
         private Label lb_TenSp;
         private Label lb_MaSp;
-        private Label lb_HinhAnh;
         private Label lb_Kieu;
         private Label lb_MoTa;
         private Label lb_DonGia;
@@ -364,7 +343,6 @@
         private Button btn_Xoa;
         private Button btn_Sua;
         private Button btn_Them;
-        private TextBox txt_HinhAnh;
         private TextBox txt_Kieu;
         private TextBox txt_MoTa;
         private TextBox txt_DonGia;

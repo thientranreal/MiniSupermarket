@@ -58,7 +58,7 @@ namespace MiniSupermarket.BUS
                 ++i;
             }
         }
-        public bool addProduct(string name, string typeid, string quantity, string price, string des, string unit, string img,string Promotionid, string id=null)
+        public bool addProduct(string name, string typeid, string quantity, string price, string des, string unit ,string Promotionid, string id=null)
         {
             // Nếu không nhập mã id thì sẽ tự tạo mã mới
             if (id == null)
@@ -76,7 +76,7 @@ namespace MiniSupermarket.BUS
                 new SqlParameter("@CurrentPrice", price),
                 new SqlParameter("@Description",des),
                 new SqlParameter("@Unit", unit),
-                new SqlParameter("@Image", img),
+            
                 new SqlParameter("@PromotionID", Promotionid)
             };
 
@@ -104,7 +104,7 @@ namespace MiniSupermarket.BUS
             }
             return result;
         }
-        public bool updateProduct(string name, string id, string typeid, string quantity, string price, string des, string unit, string img, string promotionid)
+        public bool updateProduct(string name, string id, string typeid, string quantity, string price, string des, string unit , string promotionid)
         {
             string storedProcedureName = "UpdateProduct";
             SqlParameter[] parameters = new SqlParameter[]
@@ -116,7 +116,7 @@ namespace MiniSupermarket.BUS
                 new SqlParameter("@CurrentPrice", price),
                 new SqlParameter("@Description",des),
                 new SqlParameter("@Unit", unit),
-                new SqlParameter("@Image", img),
+              
                 new SqlParameter("@PromotionID", promotionid)
             };
             bool result = Connection.ExecuteNonQuery(storedProcedureName, parameters);
