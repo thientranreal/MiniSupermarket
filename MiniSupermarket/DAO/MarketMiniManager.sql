@@ -584,14 +584,15 @@ BEGIN
 END;
 GO
 --Xóa nhà cung cấp
-CREATE PROCEDURE DelSupplier
+ALTER PROCEDURE DelSupplier
 	@ID varchar(10)
 AS
 BEGIN
-	DELETE FROM Supplier
-	WHERE SupplierID=@ID
 	DELETE FROM SupplierProduct
 	WHERE SupplierID=@ID
+	DELETE FROM Supplier
+	WHERE SupplierID=@ID
+	
 END;
 GO
 --Lấy thông tin sản phẩm
@@ -607,3 +608,9 @@ BEGIN
 	WHERE Product.isDeleted=1;
 END;
 GO
+
+
+DELETE FROM Supplier
+	WHERE SupplierID='S0006'
+	DELETE FROM SupplierProduct
+	WHERE SupplierID='S0007'
