@@ -206,18 +206,17 @@ create table DetailPurchaseOrder(
 	ProductID varchar(10) not null,
 	OrderID varchar(10) not null,
 	Quantity int not null,
-	Unit nvarchar(50) not null,
 	PurchasePrice float(50) not null,
 	primary key (ProductID,OrderID)
 )
 GO
 
 -- Rot du lieu vao bang chi tiet phieu nhap
-INSERT INTO DetailPurchaseOrder (ProductID, OrderID, Quantity, Unit, PurchasePrice)
+INSERT INTO DetailPurchaseOrder (ProductID, OrderID, Quantity, PurchasePrice)
 VALUES
-    ('P0001', 'PO0001', 100, N'Gói', 2000),
-    ('P0002', 'PO0002', 100, N'Hộp', 4000),
-    ('P0003', 'PO0003', 100, N'Gói', 9000);
+    ('P0001', 'PO0001', 100, 2000),
+    ('P0002', 'PO0002', 100, 4000),
+    ('P0003', 'PO0003', 100, 9000);
 GO
 
 --Tao bang san pham ma nha cung cap cung cap
@@ -584,7 +583,6 @@ GO
 
 --========= Đại ==========
 ---------------------------------------------------Chương trình khuyến mãi và chi tiết chương trình khuyến mãi----------------------------------------------------
-=======
 
 -- Đại
 -- Lấy tất cả thông tin chương trình khuyến mãi
@@ -757,17 +755,47 @@ GO
 
 --Tải danh sách các sản phẩm vào chi tiết phiếu nhập( Tất cả sản phẩm)
 CREATE PROC SelectProductsToPurchaseOrder
+	@OrderID varchar(10)
 AS
 BEGIN
-	SELECT ProductID, Name, Quantity, [Description]
-	FROM Product
-	WHERE isDeleted = '1'
+	SELECT DPO.ProductID, P.Name, DPO.Quantity, P.Unit
+	FROM Product P, DetailPurchaseOrder DPO
+	WHERE isDeleted = '1' and P.ProductID = DPO.ProductID and DPO.OrderID != @OrderID
 END;
 GO
 
--- Tải danh sách sản phẩm vào danh sách phiếu nhập( Sản phẩm chọn nhập)
+-- Tải danh sách các sản phẩm đang nhập và đã nhập vào chi tiết phiếu nhập
+CREATE PROC SelectProductsToDetailOrder
+	@OrderID varchar(10)
+AS
+BEGIN
+	SELECT P.ProductID, P.Name, DPO.Quantity, P.Unit, DPO.PurchasePrice
+	FROM DetailPurchaseOrder DPO, Product P
+	WHERE DPO.ProductID = P.ProductID and DPO.OrderID = @OrderID
+END;
+GO
 
+-- Thêm sản phẩm vào chi tiết phiếu nhập
+CREATE PROC AddProductToDetailOrder
+	@Order varchar(10),
+	@ProductID varchar(10),
+	@OrderPrice float(50),
+	@Quantity int
+AS
+BEGIN
+	INSERT INTO DetailPurchaseOrder (OrderID,ProductID,Quantity,PurchasePrice)
+	VALUES (@Order,@ProductID,@Quantity,@PurchasePrice)
+END;
+GO
 
+CREATE PROC AddProductToInventory
+	@Order varchar(10),
+	@ProductID varchar(10),
+	@CurrentQuantity int
+AS
+BEGIN
+	INSERT INTO Inventory (@)
+ 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Công Anh 
 

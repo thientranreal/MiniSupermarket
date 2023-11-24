@@ -35,6 +35,8 @@
             panel4 = new Panel();
             dgvProducts = new DataGridView();
             pnlInformation = new Panel();
+            btnReset = new Button();
+            btnAdd = new Button();
             nudQuantity = new NumericUpDown();
             txtOrderPrice = new TextBox();
             label4 = new Label();
@@ -73,6 +75,7 @@
             // 
             // dgvProductOrders
             // 
+            dgvProductOrders.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvProductOrders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvProductOrders.Dock = DockStyle.Bottom;
             dgvProductOrders.Location = new Point(0, 86);
@@ -129,6 +132,8 @@
             // 
             // pnlInformation
             // 
+            pnlInformation.Controls.Add(btnReset);
+            pnlInformation.Controls.Add(btnAdd);
             pnlInformation.Controls.Add(nudQuantity);
             pnlInformation.Controls.Add(txtOrderPrice);
             pnlInformation.Controls.Add(label4);
@@ -147,9 +152,33 @@
             pnlInformation.Size = new Size(575, 257);
             pnlInformation.TabIndex = 5;
             // 
+            // btnReset
+            // 
+            btnReset.FlatAppearance.BorderSize = 0;
+            btnReset.FlatStyle = FlatStyle.Flat;
+            btnReset.Location = new Point(297, 152);
+            btnReset.Name = "btnReset";
+            btnReset.Size = new Size(94, 31);
+            btnReset.TabIndex = 21;
+            btnReset.Text = "Tải lại";
+            btnReset.UseVisualStyleBackColor = true;
+            btnReset.Click += btnReset_Click;
+            // 
+            // btnAdd
+            // 
+            btnAdd.FlatAppearance.BorderSize = 0;
+            btnAdd.FlatStyle = FlatStyle.Flat;
+            btnAdd.Location = new Point(162, 152);
+            btnAdd.Name = "btnAdd";
+            btnAdd.Size = new Size(94, 31);
+            btnAdd.TabIndex = 20;
+            btnAdd.Text = "Thêm";
+            btnAdd.UseVisualStyleBackColor = true;
+            btnAdd.Click += btnAdd_Click;
+            // 
             // nudQuantity
             // 
-            nudQuantity.Location = new Point(449, 114);
+            nudQuantity.Location = new Point(449, 99);
             nudQuantity.Name = "nudQuantity";
             nudQuantity.Size = new Size(114, 27);
             nudQuantity.TabIndex = 13;
@@ -165,7 +194,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(334, 67);
+            label4.Location = new Point(343, 67);
             label4.Name = "label4";
             label4.Size = new Size(71, 20);
             label4.TabIndex = 11;
@@ -174,7 +203,7 @@
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(334, 117);
+            label3.Location = new Point(342, 102);
             label3.Name = "label3";
             label3.Size = new Size(72, 20);
             label3.TabIndex = 9;
@@ -182,7 +211,7 @@
             // 
             // txtProductName
             // 
-            txtProductName.Location = new Point(185, 112);
+            txtProductName.Location = new Point(185, 99);
             txtProductName.Margin = new Padding(3, 4, 3, 4);
             txtProductName.Name = "txtProductName";
             txtProductName.Size = new Size(114, 27);
@@ -191,7 +220,7 @@
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(14, 115);
+            label2.Location = new Point(23, 102);
             label2.Name = "label2";
             label2.Size = new Size(103, 20);
             label2.TabIndex = 7;
@@ -227,7 +256,7 @@
             // 
             groupBox1.Controls.Add(textBox1);
             groupBox1.Controls.Add(comboBox1);
-            groupBox1.Location = new Point(7, 169);
+            groupBox1.Location = new Point(6, 190);
             groupBox1.Margin = new Padding(3, 4, 3, 4);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(3, 4, 3, 4);
@@ -256,7 +285,7 @@
             // groupBox2
             // 
             groupBox2.Controls.Add(comboBox2);
-            groupBox2.Location = new Point(320, 172);
+            groupBox2.Location = new Point(311, 190);
             groupBox2.Margin = new Padding(3, 4, 3, 4);
             groupBox2.Name = "groupBox2";
             groupBox2.Padding = new Padding(3, 4, 3, 4);
@@ -283,7 +312,7 @@
             Controls.Add(panel1);
             Margin = new Padding(3, 4, 3, 4);
             Name = "DetailPurchaseOrderForm";
-            Text = "DetailPurchaseOrderForm";
+            Text = "Chi tiết phiếu nhập";
             Load += DetailPurchaseOrderForm_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -323,5 +352,7 @@
         private TextBox txtOrderPrice;
         private Label label4;
         private NumericUpDown nudQuantity;
+        private Button btnReset;
+        private Button btnAdd;
     }
 }
