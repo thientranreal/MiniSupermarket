@@ -10,8 +10,7 @@ namespace MiniSupermarket.DAO
 {
     internal static class Connection
     {
-
-        private static string serverName = "VCA\\SQLEXPRESS2012";
+        private static string serverName = "MSI\\THIENTRAN";
         private static string databaseName = "MarketMiniManager";
 
         private static string connectionString = $"Data Source={serverName};Initial Catalog={databaseName};Integrated Security=True";
@@ -138,6 +137,32 @@ namespace MiniSupermarket.DAO
                 connection.Close();
             }
             return flag;
+        }
+
+        public static object ExecuteScalar(string sql, params SqlParameter[] parameters)
+        {
+            object result = null;
+            try
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    if (parameters != null)
+                    {
+                        command.Parameters.AddRange(parameters);
+                    }
+                    result = command.ExecuteScalar();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return result;
         }
     }
 }
