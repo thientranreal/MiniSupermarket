@@ -363,6 +363,21 @@ namespace MiniSupermarket.GUI
             DateTime dateFrom = dtpFromDate.Value;
             DateTime dateTo = dtpToDate.Value;
 
+            // Giá trị mặc định cho tổng tiền
+            int giaTu;
+            int giaDen;
+            // Gán giá trị cho giá từ và giá đến
+            if (!int.TryParse(txtFromTotal.Text, out giaTu))
+            {
+                giaTu = 0; // Giá trị mặc định khi không parse được
+            }
+
+            if (!int.TryParse(txtToTotal.Text, out giaDen))
+            {
+                giaDen = int.MaxValue; // Giá trị mặc định khi không parse được
+            }
+
+
             if (dateFrom > dateTo)
             {
                 // Hiện thông báo cảnh báo từ ngày phải nhỏ hơn đến ngày
@@ -388,7 +403,9 @@ namespace MiniSupermarket.GUI
                     itemDate >= dateFrom && itemDate <= dateTo &&
                     (dr["CustomerID"].ToString().Contains(customer) || dr["CustomerName"].ToString().Contains(customer) &&
                     (dr["EmployeeID"].ToString().Contains(employee) || dr["EmployeeName"].ToString().Contains(employee))) &&
-                    dr["Status"].Equals(isCheckOut))
+                    dr["Status"].Equals(isCheckOut) &&
+                    (int.Parse(dr["TotalPrice"].ToString()) >= giaTu &&
+                    int.Parse(dr["TotalPrice"].ToString()) <= giaDen))
                 {
                     resultSearch.ImportRow(dr);
                 }
@@ -465,9 +482,16 @@ namespace MiniSupermarket.GUI
             dgv_bill.DataSource = saleBus.getAllBills();
         }
 
+        // Sự kiện tải lại cho tìm kiếm
         private void btnClearSearch_Click(object sender, EventArgs e)
         {
-
+            txtCustomerSearch.Clear();
+            txtEmployeeSearch.Clear();
+            txtToTotal.Text = "Giá đến";
+            txtToTotal.ForeColor = Color.Gray;
+            txtFromTotal.Text = "Giá từ";
+            txtFromTotal.ForeColor = Color.Gray;
+            resetBillGridView();
         }
 
         private void txtCustomerName_KeyPress(object sender, KeyPressEventArgs e)
