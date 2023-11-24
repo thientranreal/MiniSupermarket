@@ -168,7 +168,7 @@ namespace MiniSupermarket.GUI
             string mota = ProjectFont.upperFirstLetter(txt_MoTa.Text);
             string kieu = ProjectFont.upperFirstLetter(txt_Kieu.Text);
 
-            String makm = "null";
+          
             if (id.Length != 0) // Nếu người dùng nhập mã loại
             {
                 // Nếu mã loại đã tồn tại trong hệ thống thì hiện lỗi
@@ -186,7 +186,7 @@ namespace MiniSupermarket.GUI
             // Nếu mà mã loại rỗng thì sẽ tự tạo mã id
             if (id.Length == 0)
             {
-                if (ptBus.addProduct(name, maloai, soluong, dongia, mota, kieu, makm))
+                if (ptBus.addProduct(name, maloai, soluong, dongia, mota, kieu))
                 {
                     MessageBox.Show("Thêm thành công!",
                         "Thông báo",
@@ -205,7 +205,7 @@ namespace MiniSupermarket.GUI
             }
             else // Nếu mà nhập đầy đủ thông tin thì thêm đầy đủ
             {
-                if (ptBus.addProduct(name, maloai, soluong, dongia, mota, kieu, makm, id))
+                if (ptBus.addProduct(name, maloai, soluong, dongia, mota, kieu, id))
                 {
                     MessageBox.Show("Thêm thành công!",
                         "Thông báo",
