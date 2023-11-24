@@ -37,17 +37,18 @@ create table Employee(
 	Sex nvarchar(10) not null,
 	UserName varchar(50) not null,
 	[Password] varchar(50) not null,
+	BirthDate DATE,
 	isDeleted tinyint not null default(1),
 	primary key (EmployeeID)
 )
 GO
 
 -- Rot du lieu vao bang nhan vien
-insert into Employee(EmployeeID,Name,Address,PhoneNumber,Email,Sex,UserName,Password)
+insert into Employee(EmployeeID,Name,Password,Sex,BirthDate,PhoneNumber,Email,Address,UserName)
 values
-	('E0001',N'Nguyễn Văn A',N'123 An Dương Vương, Phường 3, Quận 2, TPHCM','0912312371','NguyenVanA@gmail.com',N'Nam','admin','1'),
-	('E0002',N'Nguyễn Văn B',N'456 Hoàng Hoa Thám, Phường 1, Quận Bình Tân, TPHCM','0914736281','NguyenVanB@gmail.com',N'Nữ','E0002','1'),
-	('E0003',N'Nguyễn Văn C',N'789 Nam Kỳ Khởi Nghĩa, Phường 9, Quận 8, TPHCM','0936271371','NguyenVanC@gmail.com',N'Nam','E0003','1')
+	('E0001',N'Nguyễn Văn A','1',N'Nam','2003-01-01','0912312371','NguyenVanA@gmail.com',N'123 An Dương Vương, Phường 3, Quận 2, TPHCM','admin'),
+	('E0002',N'Nguyễn Văn B','1',N'Nữ','2003-02-15','0914736281','NguyenVanB@gmail.com',N'456 Hoàng Hoa Thám, Phường 1, Quận Bình Tân, TPHCM','E0002'),
+	('E0003',N'Nguyễn Văn C','1',N'Nam','2003-08-30','0936271371','NguyenVanC@gmail.com',N'789 Nam Kỳ Khởi Nghĩa, Phường 9, Quận 8, TPHCM','E0003')
 GO
 
 --Tao bang san pham
@@ -59,7 +60,6 @@ create table Product(
 	CurrentPrice float(50) not null,
 	[Description] nvarchar(100),
 	Unit nvarchar(20) not null,
-	[Image] varchar(50),
 	PromotionID varchar(10),
 	isDeleted tinyint not null default(1),
 	
@@ -68,12 +68,12 @@ create table Product(
 GO
 
 -- Rot du lieu bang san pham	
-insert into Product(ProductID,[Name],TypeID,Quantity,CurrentPrice,[Description],Unit,[Image],PromotionID)
+insert into Product(ProductID,[Name],TypeID,Quantity,CurrentPrice,[Description],Unit,PromotionID)
 values
-	('P0001',N'Mì Kokomi','PT0001',100,2000,N'Mì Kokomi tôm chua cay 100g',N'Gói','.','PM0001'),
-	('P0002',N'Sữa Milo','PT0002',100,4000,N'Sữa Milo vị ca cao lúa mạch 100ml',N'Hộp','.','PM0001'),
-	('P0003',N'Bánh Slay','PT0003',100,9000,N'Bánh Slay khoai tây chiên vị tảo',N'Gói','.','PM0002'),
-	('P0004',N'Mì Hảo hảo','PT0001',100,2500,N'Mì hảo hảo lẩu thái tôm',N'Gói','.','PM0003')
+	('P0001',N'Mì Kokomi','PT0001',100,2000,N'Mì Kokomi tôm chua cay 100g',N'Gói','PM0001'),
+	('P0002',N'Sữa Milo','PT0002',100,4000,N'Sữa Milo vị ca cao lúa mạch 100ml',N'Hộp','PM0001'),
+	('P0003',N'Bánh Slay','PT0003',100,9000,N'Bánh Slay khoai tây chiên vị tảo',N'Gói','PM0002'),
+	('P0004',N'Mì Hảo hảo','PT0001',100,2500,N'Mì hảo hảo lẩu thái tôm',N'Gói','PM0003')
 GO
 
 --Tao bang khuyen mai
@@ -206,18 +206,17 @@ create table DetailPurchaseOrder(
 	ProductID varchar(10) not null,
 	OrderID varchar(10) not null,
 	Quantity int not null,
-	Unit nvarchar(50) not null,
 	PurchasePrice float(50) not null,
 	primary key (ProductID,OrderID)
 )
 GO
 
 -- Rot du lieu vao bang chi tiet phieu nhap
-INSERT INTO DetailPurchaseOrder (ProductID, OrderID, Quantity, Unit, PurchasePrice)
+INSERT INTO DetailPurchaseOrder (ProductID, OrderID, Quantity, PurchasePrice)
 VALUES
-    ('P0001', 'PO0001', 100, N'Gói', 2000),
-    ('P0002', 'PO0002', 100, N'Hộp', 4000),
-    ('P0003', 'PO0003', 100, N'Gói', 9000);
+    ('P0001', 'PO0001', 100, 2000),
+    ('P0002', 'PO0002', 100, 4000),
+    ('P0003', 'PO0003', 100, 9000);
 GO
 
 --Tao bang san pham ma nha cung cap cung cap
@@ -242,18 +241,17 @@ create table Inventory(
 	ProductID varchar(10) not null,
 	OrderID varchar(10) not null,
 	CurrentQuantity int not null,
-	ExpiredDate datetime not null,
 	isDisplayed tinyint not null default(1),
 	primary key (OrderID,ProductID)
 )
 GO
 
 --Rot du lieu vao bang hang ton kho
-INSERT INTO Inventory (ProductID, OrderID, CurrentQuantity, ExpiredDate)
+INSERT INTO Inventory (ProductID, OrderID, CurrentQuantity)
 VALUES
-    ('P0001', 'PO0001', 100, '2023-12-30'),
-    ('P0002', 'PO0002', 100, '2023-12-30'),
-    ('P0003', 'PO0003', 100, '2023-12-30');
+    ('P0001', 'PO0001', 100),
+    ('P0002', 'PO0002', 100),
+    ('P0003', 'PO0003', 100);
 GO
 
 --Tao bang quan ly quyen
@@ -458,13 +456,15 @@ GO
 -- Đếm số account
 CREATE PROCEDURE CountAccount
     @userName varchar(50),
-	@Password varchar(50)
+    @Password varchar(50)
 AS
 BEGIN
-	Select COUNT(*) from Employee
-	Where UserName = @userName and [Password] = @Password
+    SELECT COUNT(*) FROM Employee
+    WHERE UserName COLLATE SQL_Latin1_General_CP1_CS_AS = @userName 
+    AND [Password] = @Password
 END;
 GO
+
 
 -- Lấy các chức năng từ account
 CREATE PROCEDURE SelectFunctionNameFromAccount
@@ -529,6 +529,99 @@ BEGIN
 	FROM Bill INNER JOIN Employee
 	ON Bill.EmployeeID = Employee.EmployeeID LEFT JOIN Customer
 	ON Bill.CustomerID = Customer.CustomerID
+END;
+GO
+--Lấy tất cả thông tin nhà cung cấp
+CREATE PROCEDURE SelectAllSupplier
+AS
+BEGIN
+	SELECT 
+	Supplier.SupplierID AS ID,
+	Supplier.[Name] AS TÊN ,
+	Supplier.[Address] [Địa chỉ],
+	Supplier.PhoneNumber AS [Số điện thoại],
+	Supplier.Email
+	FROM Supplier 
+	WHERE Supplier.isDeleted=1;
+END;
+GO
+--Lấy thông tin chi tiết nhà cung cấp
+Create PROCEDURE SelectAllSupplierDetail
+	@ID varchar(10)
+AS
+BEGIN
+	SELECT
+	SupplierProduct.ProductID AS ID,
+	SupplierProduct.SupplyStartDate AS [Ngày nhập],
+	Product.[Name],
+	Product.CurrentPrice
+
+	FROM 
+	(Supplier INNER JOIN SupplierProduct ON Supplier.SupplierID =SupplierProduct.SupplierID) INNER JOIN 
+	Product ON SupplierProduct.ProductID=Product.ProductID
+
+	WHERE SupplierProduct.SupplierID=@ID
+END;
+GO
+--Tìm thông tin theo ID nhà cung cấp
+Create PROCEDURE FindSupplierWithID
+	@ID varchar(10)
+AS
+BEGIN
+	SELECT
+	Supplier.SupplierID AS ID,
+	Supplier.[Name] AS TÊN ,
+	Supplier.[Address] [Địa chỉ],
+	Supplier.PhoneNumber AS [Số điện thoại],
+	Supplier.Email
+	FROM Supplier 
+	WHERE Supplier.SupplierID=@ID
+END;
+GO
+--Thêm nhà cung cấp 
+CREATE PROCEDURE AddSupplier
+	@ID varchar(50),
+	@Name nvarchar(50),
+	@Address nvarchar(50),
+	@PhoneNumber varchar(50),
+	@Email varchar(50),
+	@ProductID varchar(10),
+	@Date datetime
+
+AS
+BEGIN
+	INSERT INTO Supplier(SupplierID,[Name],[Address],PhoneNumber,Email)
+	VALUES 
+		(@ID,@Name,@Address,@PhoneNumber,@Email)
+	INSERT INTO SupplierProduct(SupplierID,ProductID,SupplyStartDate)
+	VALUES
+		(@ID,@ProductID,@Date)
+
+END;
+GO
+--Xóa nhà cung cấp
+Create PROCEDURE DelSupplier
+	@ID varchar(10)
+AS
+BEGIN
+	DELETE FROM SupplierProduct
+	WHERE SupplierID=@ID
+	DELETE FROM Supplier
+	WHERE SupplierID=@ID
+	
+END;
+GO
+--Lấy thông tin sản phẩm
+CREATE PROCEDURE AllProduct
+AS
+BEGIN
+	SELECT 
+	Product.ProductID AS ID,
+	Product.[Name] AS Tên,
+	Product.TypeID AS Loại,
+	Product.CurrentPrice AS Giá
+	FROM Product
+	WHERE Product.isDeleted=1;
 END;
 GO
 
@@ -738,10 +831,9 @@ BEGIN
         CurrentPrice,
         [Description],
         Unit,
-        [Image],
         isDeleted,
-        PromotionID
-    FROM Product
+		 PromotionID
+      FROM Product
     WHERE isDeleted = 1
 END;
 GO
@@ -759,8 +851,8 @@ CREATE PROCEDURE InsertIntoProduct
     
 AS
 BEGIN
-    INSERT INTO Product (ProductID, [Name], TypeID, Quantity, CurrentPrice, [Description], Unit, [Image],PromotionID)
-    VALUES (@ProductID, @Name, @TypeID, @Quantity, @CurrentPrice, @Description, @Unit, @Image, @PromotionID )
+    INSERT INTO Product (ProductID, [Name], TypeID, Quantity, CurrentPrice, [Description], Unit, PromotionID)
+    VALUES (@ProductID, @Name, @TypeID, @Quantity, @CurrentPrice, @Description, @Unit, @PromotionID )
 END;
 GO
 -- Cập nhật sản phẩm
@@ -772,9 +864,7 @@ CREATE PROCEDURE UpdateProduct
     @CurrentPrice float(53),
     @Description nvarchar(100),
     @Unit nvarchar(20),
-    @Image varchar(50),
 	@PromotionID varchar(10)
-    
 AS
 BEGIN
     UPDATE Product
@@ -785,7 +875,6 @@ BEGIN
         CurrentPrice = @CurrentPrice,
         [Description] = @Description,
         Unit = @Unit,
-        [Image] = @Image,
 		PromotionID = @PromotionID
         
     WHERE ProductID = @ProductID
@@ -802,4 +891,132 @@ BEGIN
 END;
 GO
 
+-- =================================================Sang
+-- Lấy danh sách nhân viên
+CREATE PROCEDURE SelectAllFromEmployee
+AS
+BEGIN
+		SELECT Employee.EmployeeID, [Password], [Name], Sex, BirthDate, PhoneNumber, Email, [Address]
+		FROM Employee
+		WHERE isDeleted = 1;
 
+END;
+GO
+
+-- Thêm nhân viên
+CREATE PROCEDURE InsertIntoEmployee
+    @EmployeeID varchar(10),
+    @Name nvarchar(50),
+    @Address nvarchar(50),
+    @PhoneNumber varchar(50),
+    @Email varchar(50),
+    @Sex nvarchar(10),
+    @BirthDate date,
+    @Password varchar(50),
+    @UserName varchar(50)
+AS
+BEGIN
+        INSERT INTO Employee (EmployeeID, [Name], Address, PhoneNumber, Email, Sex, BirthDate, Password, UserName)
+        VALUES (@EmployeeID, @Name, @Address, @PhoneNumber, @Email, @Sex, @BirthDate, @Password, @UserName);
+END;
+GO
+
+
+-- Xóa nhân viên
+CREATE PROCEDURE EditEmployee
+    @EmployeeID varchar(10),
+	@Name nvarchar(50),
+	@Address nvarchar(50),
+	@PhoneNumber varchar(50),
+	@Email varchar(50),
+	@Sex nvarchar(10),
+	@BirthDate date,
+	@Password varchar(50),
+	@UserName varchar(50)
+AS
+BEGIN
+    UPDATE Employee
+    SET
+        [Name] = @Name,
+        Address = @Address,
+        PhoneNumber = @PhoneNumber,
+        Email = @Email,
+        Sex = @Sex,
+        BirthDate = @BirthDate,
+        Password = @Password,
+		UserName = @UserName
+        
+    WHERE EmployeeID = @EmployeeID
+END;
+GO
+-- ===================================================End Sang
+
+-- ========================================================Tiến
+CREATE PROCEDURE [dbo].[SelectAllCustomer]
+AS
+BEGIN
+    SELECT * FROM Customer;
+END;
+GO
+
+CREATE PROCEDURE [dbo].[InsertCustomer]
+    @CustomerID VARCHAR(10),
+    @Name NVARCHAR(MAX),
+    @PhoneNumber NVARCHAR(MAX),
+    @Sex NVARCHAR(10),
+    @Point INT = NULL,  -- Set a default value to allow NULL
+    @isDeleted BIT
+AS
+BEGIN
+    -- Your query to insert a new customer
+    INSERT INTO customer (CustomerID, Name, PhoneNumber, Sex, Point, isDeleted)
+    VALUES (@CustomerID, @Name, @PhoneNumber, @Sex, COALESCE(@Point, 0), @isDeleted);
+END;
+GO
+
+CREATE PROCEDURE [dbo].[UpdateCustomer]
+    @CustomerID VARCHAR(10),
+    @Name NVARCHAR(MAX),
+    @PhoneNumber NVARCHAR(MAX),
+    @Sex NVARCHAR(10),
+    @Point INT = NULL,  -- Set a default value to allow NULL
+    @isDeleted BIT
+AS
+BEGIN
+    -- Your query to update customer information by CustomerID
+    UPDATE customer
+    SET
+        Name = @Name,
+        PhoneNumber = @PhoneNumber,
+        Sex = @Sex,
+        Point = COALESCE(@Point, 0),
+        isDeleted = @isDeleted
+    WHERE
+        CustomerID = @CustomerID;
+END;
+GO
+
+CREATE PROCEDURE [dbo].[DeleteCustomer]
+    @CustomerID VARCHAR(10)
+AS
+BEGIN
+    -- Your query to delete a customer by CustomerID
+    DELETE FROM customer WHERE CustomerID = @CustomerID;
+END;
+GO
+
+
+CREATE PROCEDURE [dbo].[GetAllDetailBills]
+AS
+BEGIN
+    SELECT
+        [BillID],
+        [ProductID],
+        [OrderID],
+        [SalePrice],
+        [Quantity]
+    FROM
+        [DetailBill];
+END;
+GO
+-- =========================================================End Tiến

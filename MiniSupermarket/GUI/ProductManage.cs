@@ -26,25 +26,26 @@ namespace MiniSupermarket.GUI
             this.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
             // Đặt font cho các textbox và label
             txt_TimKiem.Font = ProjectFont.getNormalFont();
-            txt_MaSp.Font = ProjectFont.getNormalFont();    
-            cbx_MaLoai.Font = ProjectFont.getNormalFont();    
+            txt_MaSp.Font = ProjectFont.getNormalFont();
+            cbx_MaLoai.Font = ProjectFont.getNormalFont();
             txt_TenSp.Font = ProjectFont.getNormalFont();
             txt_SoLuong.Font = ProjectFont.getNormalFont();
             txt_DonGia.Font = ProjectFont.getNormalFont();
             txt_MoTa.Font = ProjectFont.getNormalFont();
             txt_Kieu.Font = ProjectFont.getNormalFont();
-            txt_HinhAnh.Font = ProjectFont.getNormalFont();
-            cbx_MaKM.Font = ProjectFont.getNormalFont();
-            cbx_TimKiem.Font=ProjectFont.getNormalFont();
-            lb_MaSp.Font=ProjectFont.getNormalFont();
+
+
+
+            cbx_TimKiem.Font = ProjectFont.getNormalFont();
+            lb_MaSp.Font = ProjectFont.getNormalFont();
             lb_MaLoaiSp.Font = ProjectFont.getNormalFont();
             lb_TenSp.Font = ProjectFont.getNormalFont();
             lb_Soluong.Font = ProjectFont.getNormalFont();
             lb_DonGia.Font = ProjectFont.getNormalFont();
             lb_MoTa.Font = ProjectFont.getNormalFont();
             lb_Kieu.Font = ProjectFont.getNormalFont();
-            lb_HinhAnh.Font = ProjectFont.getNormalFont();
-            lb_MaKM.Font = ProjectFont.getNormalFont();
+
+
 
             //
             cbx_TimKiem.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -85,22 +86,22 @@ namespace MiniSupermarket.GUI
             }
             // Thêm màu và chỉnh font cho các label
             lb_MaSp.Font = ProjectFont.getNormalFont();
-            lb_MaLoaiSp.Font = ProjectFont.getNormalFont(); 
+            lb_MaLoaiSp.Font = ProjectFont.getNormalFont();
             cbx_MaLoai.Font = ProjectFont.getNormalFont();
 
-            
+
 
             lb_DonGia.Font = ProjectFont.getNormalFont();
             lb_Kieu.Font = ProjectFont.getNormalFont();
             lb_MoTa.Font = ProjectFont.getNormalFont();
             lb_Soluong.Font = ProjectFont.getNormalFont();
-            lb_TenSp.Font = ProjectFont.getNormalFont();    
-            lb_HinhAnh.Font = ProjectFont.getNormalFont();
-            lb_MaKM.Font = ProjectFont.getNormalFont();
-           
-            
+            lb_TenSp.Font = ProjectFont.getNormalFont();
+
+
+
+
         }
-       
+
         private void label3_Click(object sender, EventArgs e)
         {
 
@@ -123,9 +124,9 @@ namespace MiniSupermarket.GUI
             dssp_DSSP.Columns["CurrentPrice"].HeaderText = "Đơn giá";
             dssp_DSSP.Columns["Description"].HeaderText = "Mô tả";
             dssp_DSSP.Columns["Unit"].HeaderText = "Kiểu";
-            dssp_DSSP.Columns["Image"].HeaderText = "Hình ảnh";
+
             dssp_DSSP.Columns["PromotionID"].HeaderText = "Mã khuyến mãi";
-           
+
 
             // Load danh sách loại sản phẩm vào ComboBox
             ProductTypeBUS typeBus = new ProductTypeBUS(); // Tạo đối tượng BUS cho loại sản phẩm
@@ -150,9 +151,9 @@ namespace MiniSupermarket.GUI
                 txt_DonGia.Text = row.Cells["CurrentPrice"].Value.ToString();
                 txt_MoTa.Text = row.Cells["Description"].Value.ToString();
                 txt_Kieu.Text = row.Cells["Unit"].Value.ToString();
-                txt_HinhAnh.Text = row.Cells["Image"].Value.ToString();
-                cbx_MaKM.Text = row.Cells["PromotionID"].Value.ToString();
-                
+
+
+
             }
         }
 
@@ -166,8 +167,8 @@ namespace MiniSupermarket.GUI
             string dongia = ProjectFont.upperFirstLetter(txt_DonGia.Text);
             string mota = ProjectFont.upperFirstLetter(txt_MoTa.Text);
             string kieu = ProjectFont.upperFirstLetter(txt_Kieu.Text);
-            string hinhanh = ProjectFont.upperFirstLetter(txt_HinhAnh.Text);
-            string makm = ProjectFont.upperFirstLetter(cbx_MaLoai.Text);
+
+            String makm = "null";
             if (id.Length != 0) // Nếu người dùng nhập mã loại
             {
                 // Nếu mã loại đã tồn tại trong hệ thống thì hiện lỗi
@@ -185,13 +186,13 @@ namespace MiniSupermarket.GUI
             // Nếu mà mã loại rỗng thì sẽ tự tạo mã id
             if (id.Length == 0)
             {
-                if (ptBus.addProduct(name,maloai,soluong,dongia,mota,kieu,hinhanh,makm))
+                if (ptBus.addProduct(name, maloai, soluong, dongia, mota, kieu, makm))
                 {
                     MessageBox.Show("Thêm thành công!",
                         "Thông báo",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information); // Thêm thành công
-                    
+
                 }
                 else
                 {
@@ -204,13 +205,13 @@ namespace MiniSupermarket.GUI
             }
             else // Nếu mà nhập đầy đủ thông tin thì thêm đầy đủ
             {
-                if (ptBus.addProduct(name, maloai, soluong, dongia, mota, kieu, hinhanh, makm,id))
+                if (ptBus.addProduct(name, maloai, soluong, dongia, mota, kieu, makm, id))
                 {
                     MessageBox.Show("Thêm thành công!",
                         "Thông báo",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information); // Thêm thành công
-                 
+
                 }
                 else
                 {
@@ -221,6 +222,24 @@ namespace MiniSupermarket.GUI
                     txt_MaSp.Focus();
                     return;
                 }
+            }
+        }
+
+        private void txt_SoLuong_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Chỉ cho phép nhập các ký tự số và ký tự điều khiển (như Backspace)
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;  // Chặn ký tự không mong muốn
+            }
+        }
+
+        private void txt_DonGia_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Chỉ cho phép nhập các ký tự số và ký tự điều khiển (như Backspace)
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;  // Chặn ký tự không mong muốn
             }
         }
     }
