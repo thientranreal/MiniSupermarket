@@ -60,7 +60,7 @@ create table Product(
 	[Description] nvarchar(100),
 	Unit nvarchar(20) not null,
 	[Image] varchar(50),
-
+	PromotionID varchar(10),
 	isDeleted tinyint not null default(1),
 	
 	primary key (ProductID)
@@ -342,6 +342,9 @@ GO
 alter table Product
 add constraint fk_Product_ProductType foreign key (TypeID) references ProductType (TypeID)
 GO
+alter table Product
+add constraint fk_Product_Promotion foreign key (PromotionID) references Promotion (PromotionID)
+GO
 
 --Bang Bill
 alter table Bill
@@ -581,7 +584,7 @@ GO
 
 --========= Đại ==========
 ---------------------------------------------------Chương trình khuyến mãi và chi tiết chương trình khuyến mãi----------------------------------------------------
-=======
+
 
 -- Đại
 -- Lấy tất cả thông tin chương trình khuyến mãi
@@ -736,7 +739,8 @@ BEGIN
         [Description],
         Unit,
         [Image],
-        isDeleted
+        isDeleted,
+		 PromotionID
       FROM Product
     WHERE isDeleted = 1
 END;
@@ -750,12 +754,13 @@ CREATE PROCEDURE InsertIntoProduct
     @CurrentPrice float(53),
     @Description nvarchar(100),
     @Unit nvarchar(20),
-    @Image varchar(50)
+    @Image varchar(50),
+	@PromotionID varchar(10)
     
 AS
 BEGIN
-    INSERT INTO Product (ProductID, [Name], TypeID, Quantity, CurrentPrice, [Description], Unit, [Image])
-    VALUES (@ProductID, @Name, @TypeID, @Quantity, @CurrentPrice, @Description, @Unit, @Image )
+    INSERT INTO Product (ProductID, [Name], TypeID, Quantity, CurrentPrice, [Description], Unit, [Image],PromotionID)
+    VALUES (@ProductID, @Name, @TypeID, @Quantity, @CurrentPrice, @Description, @Unit, @Image,@PromotionID )
 END;
 GO
 -- Cập nhật sản phẩm
@@ -767,8 +772,8 @@ CREATE PROCEDURE UpdateProduct
     @CurrentPrice float(53),
     @Description nvarchar(100),
     @Unit nvarchar(20),
-    @Image varchar(50)
-    
+    @Image varchar(50),
+    @PromotionID varchar(10)
 AS
 BEGIN
     UPDATE Product
@@ -779,8 +784,8 @@ BEGIN
         CurrentPrice = @CurrentPrice,
         [Description] = @Description,
         Unit = @Unit,
-        [Image] = @Image
-		
+        [Image] = @Image,
+		PromotionID = @PromotionID
         
     WHERE ProductID = @ProductID
 END;
