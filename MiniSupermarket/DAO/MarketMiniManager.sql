@@ -60,19 +60,20 @@ create table Product(
 	[Description] nvarchar(100),
 	Unit nvarchar(20) not null,
 	[Image] varchar(50),
-	isDeleted tinyint not null default(1),
 	PromotionID varchar(10),
+	isDeleted tinyint not null default(1),
+	
 	primary key (ProductID)
 )
 GO
 
 -- Rot du lieu bang san pham	
-insert into Product(ProductID,[Name],TypeID,Quantity,CurrentPrice,[Description],Unit,[Image])
+insert into Product(ProductID,[Name],TypeID,Quantity,CurrentPrice,[Description],Unit,[Image],PromotionID)
 values
-	('P0001',N'Mì Kokomi','PT0001',100,2000,N'Mì Kokomi tôm chua cay 100g',N'Gói','.'),
-	('P0002',N'Sữa Milo','PT0002',100,4000,N'Sữa Milo vị ca cao lúa mạch 100ml',N'Hộp','.'),
-	('P0003',N'Bánh Slay','PT0003',100,9000,N'Bánh Slay khoai tây chiên vị tảo',N'Gói','.'),
-	('P0004',N'Mì Hảo hảo','PT0001',100,2500,N'Mì hảo hảo lẩu thái tôm',N'Gói','.')
+	('P0001',N'Mì Kokomi','PT0001',100,2000,N'Mì Kokomi tôm chua cay 100g',N'Gói','.','PM0001'),
+	('P0002',N'Sữa Milo','PT0002',100,4000,N'Sữa Milo vị ca cao lúa mạch 100ml',N'Hộp','.','PM0001'),
+	('P0003',N'Bánh Slay','PT0003',100,9000,N'Bánh Slay khoai tây chiên vị tảo',N'Gói','.','PM0002'),
+	('P0004',N'Mì Hảo hảo','PT0001',100,2500,N'Mì hảo hảo lẩu thái tôm',N'Gói','.','PM0003')
 GO
 
 --Tao bang khuyen mai
@@ -82,18 +83,18 @@ create table Promotion(
 	StartDate datetime not null,
 	EndDate datetime not null,
 	Discount float(50) not null,
-	[Status] tinyint not null default(0),
+	[Status] nvarchar(50) not null,
 	isDeleted tinyint not null default(1),
 	primary key (PromotionID)
 )
 GO
 
 -- Rot du lieu vao bang khuyen mai
-INSERT INTO Promotion (PromotionID, [Name], StartDate, EndDate, Discount)
+INSERT INTO Promotion (PromotionID, [Name], StartDate, EndDate, Discount, [Status])
 VALUES
-    ('PM0001', N'Khuyến mãi giờ vàng', '2023-9-24', '2023-11-24', 10),
-    ('PM0002', N'Khuyến mãi lễ 2/9', '2023-08-30', '2023-09-03', 20),
-    ('PM0003', N'Khuyến mãi điểm tích luỹ', '2023-03-01', '2040-03-01', 10);
+    ('PM0001', N'Khuyến mãi giờ vàng', '2023-9-24', '2023-11-24', 10,N'Đang hoạt động'),
+    ('PM0002', N'Khuyến mãi lễ 2/9', '2023-08-30', '2023-09-03', 20, N'Không hoạt động'),
+    ('PM0003', N'Khuyến mãi điểm tích luỹ', '2023-03-01', '2040-03-01', 10, N'Không hoạt động');
 GO
 
 --Tao bang khach hang
@@ -121,22 +122,23 @@ create table Bill(
 	BillID varchar(10) not null,
 	[Date] datetime not null,
 	EmployeeID varchar(10) not null,
-	CustomerID varchar(10) not null,
-	EstimatedPrice float(50) not null,
-	ReducePrice float(50) not null,
-	TotalPrice float(50) not null,
+	CustomerID varchar(10),
+	EstimatedPrice float(50) not null default(0),
+	ReducePrice float(50) not null default(0),
+	TotalPrice float(50) not null default(0),
 	[Status] tinyint not null default(0),
 	isDeleted tinyint not null default(1),
 	primary key(BillID)
 )
 GO
 
+
 -- Rot du lieu vao bang hoa don
-INSERT INTO Bill (BillID, [Date], EmployeeID, CustomerID, EstimatedPrice, ReducePrice, TotalPrice)
+INSERT INTO Bill (BillID, [Date], EmployeeID, CustomerID, EstimatedPrice, ReducePrice, TotalPrice, [Status])
 VALUES
-    ('B0001', '2023-09-23', 'E0001', 'C0001', 100.0, 0, 100.0),
-    ('B0002', '2023-09-23', 'E0002', 'C0002', 200.0, 0, 200.0),
-    ('B0003', '2023-09-23', 'E0003', 'C0003', 300.0, 0, 300.0);
+    ('B0001', '2023-09-23', 'E0001', 'C0001', 100.0, 0, 100.0, 0),
+    ('B0002', '2023-09-23', 'E0002', 'C0002', 200.0, 0, 200.0, 0),
+    ('B0003', '2023-09-23', 'E0003', 'C0003', 300.0, 0, 300.0, 1);
 GO
 
 --Tao bang nha cung cap
@@ -412,6 +414,9 @@ add constraint fk_RoleFunction_Functions foreign key (FunctionID) references Fun
 GO
 
 -- Tạo các procedures
+
+-- Thien ======================================================================================================
+
 -- Select * from ProductType
 CREATE PROCEDURE SelectAllFromProductType
 AS
@@ -447,6 +452,17 @@ CREATE PROCEDURE UpdateProductType
 AS
 BEGIN
 	UPDATE ProductType SET [Name] = @Name WHERE TypeID = @TypeID
+END;
+GO
+
+-- Đếm số account
+CREATE PROCEDURE CountAccount
+    @userName varchar(50),
+	@Password varchar(50)
+AS
+BEGIN
+	Select COUNT(*) from Employee
+	Where UserName = @userName and [Password] = @Password
 END;
 GO
 
@@ -509,10 +525,10 @@ BEGIN
 	SELECT Bill.BillID, Bill.[Date], Bill.EmployeeID,
     Employee.[Name] AS EmployeeName, Bill.CustomerID,
     Customer.[Name] AS CustomerName, 
-    Bill.TotalPrice, Bill.[Status] FROM Bill INNER JOIN Employee
-	ON Bill.EmployeeID = Employee.EmployeeID INNER JOIN Customer
+    Bill.EstimatedPrice, Bill.ReducePrice, Bill.TotalPrice, Bill.[Status], Bill.isDeleted
+	FROM Bill INNER JOIN Employee
+	ON Bill.EmployeeID = Employee.EmployeeID LEFT JOIN Customer
 	ON Bill.CustomerID = Customer.CustomerID
-    WHERE Bill.isDeleted = 1
 END;
 GO
 --Lấy tất cả thông tin nhà cung cấp
@@ -609,8 +625,272 @@ BEGIN
 END;
 GO
 
+-- Lấy mã KH và tên KH
+CREATE PROCEDURE SelectCustomerIdAndName
+AS
+BEGIN
+	SELECT CustomerID, [Name]
+	FROM Customer
+    WHERE isDeleted = 1
+END;
+GO
 
-DELETE FROM Supplier
-	WHERE SupplierID='S0006'
-	DELETE FROM SupplierProduct
-	WHERE SupplierID='S0007'
+-- Thêm một bill mới
+CREATE PROCEDURE InsertIntoBill
+	@BillID varchar(10),
+	@Date datetime,
+	@EmployeeID varchar(10),
+	@CustomerID varchar(10) = NULL
+AS
+BEGIN
+	INSERT INTO Bill(BillID, [Date], EmployeeID, CustomerID)
+	VALUES (@BillID, @Date, @EmployeeID, @CustomerID)
+END;
+GO
+
+-- Thêm khách hàng cho hóa đơn
+CREATE PROC InsertCustomerSale
+	@CustomerID varchar(10),
+	@Name nvarchar(50),
+	@PhoneNumber varchar(50),
+	@Sex nvarchar(10)
+AS
+BEGIN
+	INSERT INTO Customer(CustomerID, [Name], PhoneNumber, Sex)
+	VALUES (@CustomerID, @Name, @PhoneNumber, @Sex)
+END;
+GO
+
+-- Xóa hóa đơn
+CREATE PROC DeleteBill
+	@BillID varchar(10)
+AS
+BEGIN
+	UPDATE Bill
+	SET Bill.isDeleted = 0
+	WHERE BillID = @BillID AND isDeleted = 1
+END;
+GO
+
+-- Thien ======================================================================================================
+
+
+--========= Đại ==========
+---------------------------------------------------Chương trình khuyến mãi và chi tiết chương trình khuyến mãi----------------------------------------------------
+
+
+-- Đại
+-- Lấy tất cả thông tin chương trình khuyến mãi
+CREATE PROC SelectAllPromotions
+AS
+BEGIN
+	SELECT Promotion.PromotionID AS ID, Promotion.Name, Promotion.StartDate,
+	Promotion.EndDate, Promotion.Discount, Promotion.[Status]
+	FROM Promotion
+	WHERE Promotion.isDeleted = 1
+END;
+GO
+
+-- Thêm chương trình khuyến mãi
+CREATE PROC InsertPromotion
+	@PromotionID varchar(10),
+	@Name nvarchar(50),
+	@StartDate datetime,
+	@EndDate datetime,
+	@Discount float(50)
+AS
+BEGIN
+	INSERT INTO Promotion(PromotionID,[Name],StartDate,EndDate,Discount,[Status])
+	VALUES (@PromotionID,@Name,@StartDate,@EndDate,@Discount,N'Không hoạt động')
+END;
+GO
+
+-- Sửa thông tin chương trình khuyến mãi
+CREATE PROC UpdatePromotion
+	@PromotionID varchar(10),
+	@Name nvarchar(50),
+	@StartDate datetime,
+	@EndDate datetime,
+	@Discount float(50)
+AS
+BEGIN
+	UPDATE Promotion SET Name = @Name, StartDate = @StartDate, EndDate = @EndDate, Discount = @Discount
+	WHERE PromotionID = @PromotionID
+END;
+GO
+
+-- Xoá chương trình khuyến mãi
+CREATE PROC DeletePromotion
+	@PromotionID varchar(10)
+AS
+BEGIN
+	UPDATE Promotion SET isDeleted = '0'
+	WHERE PromotionID = @PromotionID
+END;
+GO
+
+-- Áp dụng chương trình khuyến mãi
+CREATE PROC StartWork
+	@PromotionID varchar(10)
+AS
+BEGIN
+	UPDATE Promotion SET [Status] = N'Đang hoạt động'
+	WHERE PromotionID = @PromotionID
+END;
+GO
+
+-- Ngưng áp dụng chương trình khuyến mãi
+CREATE PROC StopWork
+	@PromotionID varchar(10)
+AS
+BEGIN
+	UPDATE Promotion SET [Status] = N'Không hoạt động'
+	WHERE PromotionID = @PromotionID
+END;
+GO
+
+-- Tải danh sách sản phẩm cho chương trình khuyến mãi (danh sách chọn)
+CREATE PROC SelectProductToPromotion
+AS
+BEGIN
+	SELECT ProductID, [Name], TypeID, [Description]
+	FROM Product
+	WHERE PromotionID = '' and isDeleted = '1'
+END;
+GO
+
+-- Tải danh sách sản phẩm cho chương trình khuyến mãi (danh sách đã chọn)
+CREATE PROC SelectProductToPromotionApply
+	@PromotionID varchar(10)
+AS
+BEGIN
+	SELECT ProductID, [Name], TypeID, [Description]
+	FROM Product
+	WHERE PromotionID = @PromotionID and isDeleted = '1'
+END;
+GO
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------Phiếu nhập và chi tiết phiếu nhập----------------------------------------------------
+-- Lấy danh sách phiếu nhập
+CREATE PROC SelectAllPurchaseOrder
+AS
+BEGIN
+	SELECT OrderID, E.Name, S.Name, PO.importDate, PO.TotalPrice, PO.Status
+	FROM PurchaseOrder PO, Employee E, Supplier S
+	WHERE PO.EmployeeID = E.EmployeeID and PO.SupplierID = S.SupplierID and PO.isDeleted = '1'
+END;
+GO
+
+-- Tạo phiếu nhập
+CREATE PROC InsertPurchaseOrder
+	@OrderID varchar(10),
+	@EmployeeID varchar(10),
+	@SupplierID varchar(10),
+	@importDate datetime,
+	@TotalPrice float(50)
+AS
+BEGIN
+	INSERT INTO PurchaseOrder (OrderID,EmployeeID,SupplierID,importDate,TotalPrice)
+	VALUES (@OrderID,@EmployeeID, @SupplierID, @importDate, @TotalPrice)
+END;
+GO
+
+-- Sửa phiếu nhập
+CREATE PROC UpdatePurchaseOrder
+	@OrderID varchar(10),
+	@SupplierID varchar(10)
+AS
+BEGIN
+	UPDATE PurchaseOrder SET SupplierID = @SupplierID WHERE OrderID = @OrderID
+END;
+GO
+
+-- Xoá phiếu nhập
+CREATE PROC DeletePurchaseOrder
+	@OrderID varchar(10)
+AS
+BEGIN
+	UPDATE PurchaseOrder SET isDeleted = '0' WHERE OrderID = @OrderID
+END;
+GO
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+-- Công Anh 
+
+--Lấy danh sách sản phẩm 
+CREATE PROCEDURE SelectAllFromProduct
+AS
+BEGIN
+    SELECT
+        ProductID,
+        [Name],
+        TypeID,
+        Quantity,
+        CurrentPrice,
+        [Description],
+        Unit,
+        [Image],
+        isDeleted,
+        PromotionID
+    FROM Product
+    WHERE isDeleted = 1
+END;
+GO
+-- Thêm sản phẩm
+CREATE PROCEDURE InsertIntoProduct
+    @ProductID varchar(10),
+    @Name nvarchar(50),
+    @TypeID varchar(10),
+    @Quantity int,
+    @CurrentPrice float(53),
+    @Description nvarchar(100),
+    @Unit nvarchar(20),
+    @Image varchar(50),
+	@PromotionID varchar(10)
+    
+AS
+BEGIN
+    INSERT INTO Product (ProductID, [Name], TypeID, Quantity, CurrentPrice, [Description], Unit, [Image],PromotionID)
+    VALUES (@ProductID, @Name, @TypeID, @Quantity, @CurrentPrice, @Description, @Unit, @Image, @PromotionID )
+END;
+GO
+-- Cập nhật sản phẩm
+CREATE PROCEDURE UpdateProduct
+    @ProductID varchar(10),
+    @Name nvarchar(50),
+    @TypeID varchar(10),
+    @Quantity int,
+    @CurrentPrice float(53),
+    @Description nvarchar(100),
+    @Unit nvarchar(20),
+    @Image varchar(50),
+	@PromotionID varchar(10)
+    
+AS
+BEGIN
+    UPDATE Product
+    SET
+        [Name] = @Name,
+        TypeID = @TypeID,
+        Quantity = @Quantity,
+        CurrentPrice = @CurrentPrice,
+        [Description] = @Description,
+        Unit = @Unit,
+        [Image] = @Image,
+		PromotionID = @PromotionID
+        
+    WHERE ProductID = @ProductID
+END;
+GO
+-- Xóa sản phẩm 
+CREATE PROCEDURE DeleteProduct
+    @ProductID varchar(10)
+AS
+BEGIN
+    UPDATE Product
+    SET isDeleted = 0
+    WHERE ProductID = @ProductID
+END;
+GO

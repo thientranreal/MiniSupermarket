@@ -17,9 +17,6 @@ namespace MiniSupermarket.GUI
 {
     public partial class UserAccount : Form
     {
-        private string userName;
-        private string password;
-        private string EmployeeID;
         private string EmployeeName;
         private string EmployeeAddress;
         private string EmployeeEmail;
@@ -28,11 +25,9 @@ namespace MiniSupermarket.GUI
         private Timer timerPassword = new Timer();
 
         private UserAccountBUS userAccountBus = new UserAccountBUS();
-        public UserAccount(string userName, string password)
+        public UserAccount()
         {
             InitializeComponent();
-            this.userName = userName;
-            this.password = password;
             this.txtOldPass.PasswordChar = '*';
             this.txtNewPass.PasswordChar = '*';
             this.txtConfirmPass.PasswordChar = '*';
@@ -55,6 +50,27 @@ namespace MiniSupermarket.GUI
 
             // Đặt khoảng thời gian cho Timer (ví dụ: 300ms)
             timerPassword.Interval = 300;
+
+            // Tải thông tin nhân viên
+            DataTable employInfor = userAccountBus.getInforFromAccount(GlobalState.username);
+            // Kiểm tra xem thông tin nhân viên lấy được không
+            if (employInfor != null)
+            {
+                DataRow row = employInfor.Rows[0];
+                // Set những trường để theo dõi trạng thái
+                GlobalState.employeeId = row["EmployeeID"].ToString();
+                EmployeeName = row["Name"].ToString();
+                EmployeeAddress = row["Address"].ToString();
+                EmployeePhone = row["PhoneNumber"].ToString();
+                EmployeeEmail = row["Email"].ToString();
+
+                // Hiển thị thông tin lên text box
+                txtEmID.Text = GlobalState.employeeId;
+                txtEmName.Text = EmployeeName;
+                txtAddress.Text = EmployeeAddress;
+                txtPhone.Text = EmployeePhone;
+                txtEmail.Text = EmployeeEmail;
+            }
         }
 
         // Hàm tải màu cho label và nút
@@ -110,22 +126,6 @@ namespace MiniSupermarket.GUI
         private void UserAccount_Load(object sender, EventArgs e)
         {
             LoadTheme();
-            // Tải thông tin nhân viên
-            DataTable employInfor = userAccountBus.getInforFromAccount(userName);
-            DataRow row = employInfor.Rows[0];
-            // Set những trường để theo dõi trạng thái
-            EmployeeID = row["EmployeeID"].ToString();
-            EmployeeName = row["Name"].ToString();
-            EmployeeAddress = row["Address"].ToString();
-            EmployeePhone = row["PhoneNumber"].ToString();
-            EmployeeEmail = row["Email"].ToString();
-
-            // Hiển thị thông tin lên text box
-            txtEmID.Text = EmployeeID;
-            txtEmName.Text = EmployeeName;
-            txtAddress.Text = EmployeeAddress;
-            txtPhone.Text = EmployeePhone;
-            txtEmail.Text = EmployeeEmail;
 
             // Thêm sự kiện cho các text box thông tin tài khoản
             foreach (Control control in this.pnlLeft.Controls)
@@ -207,8 +207,8 @@ namespace MiniSupermarket.GUI
 
             // Nếu nhập đúng mật khẩu cũ và mật khẩu mới khác với mật khẩu cũ
             // nhập lại mật khẩu đúng thì sẽ cho cập nhật mật khẩu
-            if (txtOldPass.Text.Equals(password) &&
-                !txtNewPass.Text.Equals(password) &&
+            if (txtOldPass.Text.Equals(GlobalState.password) &&
+                !txtNewPass.Text.Equals(GlobalState.password) &&
                 txtConfirmPass.Text.Equals(txtNewPass.Text))
             {
                 this.btnChangePass.Enabled = true;
@@ -303,9 +303,9 @@ namespace MiniSupermarket.GUI
         private void btnChangePass_Click(object sender, EventArgs e)
         {
             // update lại giá trị password
-            if (userAccountBus.updateAccountPassword(EmployeeID, txtNewPass.Text))
+            if (userAccountBus.updateAccountPassword(GlobalState.employeeId, txtNewPass.Text))
             {
-                this.password = txtNewPass.Text;
+                GlobalState.password = txtNewPass.Text;
                 // Hiện thông báo
                 MessageBox.Show("Cập nhật mật khẩu thành công",
                         "Thông báo",
