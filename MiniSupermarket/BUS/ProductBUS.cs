@@ -58,7 +58,7 @@ namespace MiniSupermarket.BUS
                 ++i;
             }
         }
-        public bool addProduct(string id, string name, string typeid, string quantity, string price, string des, string unit, string img,string Promotionid)
+        public bool addProduct(string name, string typeid, string quantity, string price, string des, string unit, string img,string Promotionid, string id=null)
         {
             // Nếu không nhập mã id thì sẽ tự tạo mã mới
             if (id == null)

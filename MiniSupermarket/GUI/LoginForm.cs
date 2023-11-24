@@ -69,6 +69,13 @@ namespace MiniSupermarket.GUI
                         MessageBoxIcon.Warning); // Tài khoản không có trong hệ thống
                     txtUsername.Select();
                     break;
+                case -1:
+                    MessageBox.Show("Lỗi hệ thống",
+                        "Thông báo",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error); // Lỗi hệ thống
+                    txtUsername.Select();
+                    break;
                 default:
                     // Lưu các chức năng của user này vào biến toàn cục
                     GlobalState.funcs = loginBus.getFunctionFromAccount(username, password);
