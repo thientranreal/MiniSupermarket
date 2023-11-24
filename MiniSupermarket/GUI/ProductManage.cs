@@ -131,7 +131,7 @@ namespace MiniSupermarket.GUI
 
             // Load danh sách loại sản phẩm vào ComboBox
             ProductTypeBUS typeBus = new ProductTypeBUS(); // Tạo đối tượng BUS cho loại sản phẩm
-            string[] danhSachLoaiSPNames = typeBus.getIdForSuggestionBox(); // Lấy danh sách tên loại sản phẩm
+            string[] danhSachLoaiSPNames = typeBus.getProductTypesWithIdAndName(); // Lấy danh sách tên loại sản phẩm
             foreach (var loaiSP in danhSachLoaiSPNames)
             {
                 
@@ -146,6 +146,18 @@ namespace MiniSupermarket.GUI
             if (e.RowIndex >= 0) // make sure user select at least 1 row 
             {
                 DataGridViewRow row = dssp_DSSP.Rows[e.RowIndex];
+                // Lấy TypeID và name từ DataGridView
+                string typeID = row.Cells["TypeID"].Value.ToString();
+                ProductTypeBUS typeBus = new ProductTypeBUS();
+
+                // Gọi phương thức trong ProductTypeBUS để lấy TypeName từ TypeID
+                string typeName = typeBus.GetNameFromId(typeID); // Hàm này sẽ trả về name dựa trên TypeID
+
+                // Hiển thị TypeID và name trong ComboBox
+                string displayText = $"[{typeID}] {typeName}";
+                cbx_MaLoai.Text = displayText;
+
+
                 txt_MaSp.Text = row.Cells["ProductID"].Value.ToString();
                 txt_TenSp.Text = row.Cells["Name"].Value.ToString();
                 cbx_MaLoai.Text = row.Cells["TypeID"].Value.ToString();

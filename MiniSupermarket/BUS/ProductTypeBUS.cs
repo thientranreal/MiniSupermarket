@@ -200,5 +200,36 @@ namespace MiniSupermarket.BUS
 
             return result;
         }
+
+        //=====================Công Anh thêm======================= 
+
+        public string[] getProductTypesWithIdAndName()
+        {
+            List<(string Id, string Name)> types = new List<(string Id, string Name)>();
+
+            foreach (DataRow row in productTypes.Rows)
+            {
+                string typeId = row["TypeID"].ToString();
+                string name = row["Name"].ToString();
+                types.Add((typeId, name));
+            }
+
+            return types.Select(t => $"[{t.Id}] {t.Name}").ToArray();
+        }
+        public string GetNameFromId(string id)
+        {
+            foreach (DataRow row in productTypes.Rows)
+            {
+                // Nếu TypeID khớp với ID cần tìm, trả về Name tương ứng
+                if (row["TypeID"].ToString().Equals(id, StringComparison.OrdinalIgnoreCase))
+                {
+                    return row["Name"].ToString();
+                }
+            }
+
+            // Trường hợp không tìm thấy
+            return "Không tìm thấy"; // hoặc có thể trả về một giá trị mặc định khác
+        }
+
     }
 }
