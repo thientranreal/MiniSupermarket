@@ -829,8 +829,8 @@ BEGIN
         [Description],
         Unit,
         isDeleted,
-        PromotionID
-    FROM Product
+		 PromotionID
+      FROM Product
     WHERE isDeleted = 1
 END;
 GO
@@ -862,7 +862,6 @@ CREATE PROCEDURE UpdateProduct
     @Description nvarchar(100),
     @Unit nvarchar(20),
 	@PromotionID varchar(10)
-    
 AS
 BEGIN
     UPDATE Product
