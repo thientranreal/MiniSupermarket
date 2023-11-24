@@ -30,18 +30,19 @@
         {
             panel1 = new Panel();
             groupBox4 = new GroupBox();
-            dateTimePicker1 = new DateTimePicker();
+            dtpkFilterDate = new DateTimePicker();
             groupBox3 = new GroupBox();
-            textBox2 = new TextBox();
-            comboBox2 = new ComboBox();
-            btnPay = new Button();
-            grbxDeletePurchaseOder = new GroupBox();
-            textBox1 = new TextBox();
-            btnDeletePurchaseOder = new Button();
-            lblPurchaseOderID = new Label();
+            txtSearch = new TextBox();
+            cbxTypeSearch = new ComboBox();
             grbxAddPurchaseOder = new GroupBox();
+            btnReset = new Button();
+            btnPrintOrder = new Button();
+            btnUpdate = new Button();
+            btnDeletePurchaseOder = new Button();
             btnAddPurchaseOder = new Button();
-            comboBox1 = new ComboBox();
+            txtOrderID = new TextBox();
+            cbxSupplier = new ComboBox();
+            lblPurchaseOderID = new Label();
             lblSupplier = new Label();
             label2 = new Label();
             lblTitle = new Label();
@@ -50,7 +51,6 @@
             panel1.SuspendLayout();
             groupBox4.SuspendLayout();
             groupBox3.SuspendLayout();
-            grbxDeletePurchaseOder.SuspendLayout();
             grbxAddPurchaseOder.SuspendLayout();
             panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvPurchaseOders).BeginInit();
@@ -60,181 +60,183 @@
             // 
             panel1.Controls.Add(groupBox4);
             panel1.Controls.Add(groupBox3);
-            panel1.Controls.Add(btnPay);
-            panel1.Controls.Add(grbxDeletePurchaseOder);
             panel1.Controls.Add(grbxAddPurchaseOder);
             panel1.Controls.Add(label2);
             panel1.Controls.Add(lblTitle);
             panel1.Dock = DockStyle.Top;
             panel1.Location = new Point(0, 0);
-            panel1.Margin = new Padding(3, 2, 3, 2);
             panel1.Name = "panel1";
-            panel1.Size = new Size(905, 166);
+            panel1.Size = new Size(1034, 221);
             panel1.TabIndex = 0;
             // 
             // groupBox4
             // 
-            groupBox4.Controls.Add(dateTimePicker1);
-            groupBox4.Location = new Point(600, 100);
-            groupBox4.Margin = new Padding(3, 2, 3, 2);
+            groupBox4.Controls.Add(dtpkFilterDate);
+            groupBox4.Location = new Point(686, 133);
             groupBox4.Name = "groupBox4";
-            groupBox4.Padding = new Padding(3, 2, 3, 2);
-            groupBox4.Size = new Size(302, 56);
+            groupBox4.Size = new Size(345, 75);
             groupBox4.TabIndex = 6;
             groupBox4.TabStop = false;
             groupBox4.Text = "Tìm kiếm theo ngày";
             // 
-            // dateTimePicker1
+            // dtpkFilterDate
             // 
-            dateTimePicker1.Location = new Point(34, 20);
-            dateTimePicker1.Margin = new Padding(3, 2, 3, 2);
-            dateTimePicker1.Name = "dateTimePicker1";
-            dateTimePicker1.Size = new Size(219, 23);
-            dateTimePicker1.TabIndex = 0;
+            dtpkFilterDate.Location = new Point(39, 27);
+            dtpkFilterDate.Name = "dtpkFilterDate";
+            dtpkFilterDate.Size = new Size(250, 27);
+            dtpkFilterDate.TabIndex = 0;
             // 
             // groupBox3
             // 
-            groupBox3.Controls.Add(textBox2);
-            groupBox3.Controls.Add(comboBox2);
-            groupBox3.Location = new Point(600, 40);
-            groupBox3.Margin = new Padding(3, 2, 3, 2);
+            groupBox3.Controls.Add(txtSearch);
+            groupBox3.Controls.Add(cbxTypeSearch);
+            groupBox3.Location = new Point(686, 53);
             groupBox3.Name = "groupBox3";
-            groupBox3.Padding = new Padding(3, 2, 3, 2);
-            groupBox3.Size = new Size(302, 55);
+            groupBox3.Size = new Size(345, 73);
             groupBox3.TabIndex = 5;
             groupBox3.TabStop = false;
             groupBox3.Text = "Tìm kiếm theo";
             // 
-            // textBox2
+            // txtSearch
             // 
-            textBox2.Location = new Point(138, 20);
-            textBox2.Margin = new Padding(3, 2, 3, 2);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(148, 23);
-            textBox2.TabIndex = 1;
+            txtSearch.Location = new Point(158, 27);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(169, 27);
+            txtSearch.TabIndex = 1;
             // 
-            // comboBox2
+            // cbxTypeSearch
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(5, 20);
-            comboBox2.Margin = new Padding(3, 2, 3, 2);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(108, 23);
-            comboBox2.TabIndex = 0;
+            cbxTypeSearch.FormattingEnabled = true;
+            cbxTypeSearch.Items.AddRange(new object[] { "Mã phiếu", "Nhà cung cấp" });
+            cbxTypeSearch.Location = new Point(6, 27);
+            cbxTypeSearch.Name = "cbxTypeSearch";
+            cbxTypeSearch.Size = new Size(123, 28);
+            cbxTypeSearch.TabIndex = 0;
             // 
-            // btnPay
+            // grbxAddPurchaseOder
             // 
-            btnPay.FlatAppearance.BorderSize = 0;
-            btnPay.FlatStyle = FlatStyle.Flat;
-            btnPay.Location = new Point(403, 130);
-            btnPay.Margin = new Padding(3, 2, 3, 2);
-            btnPay.Name = "btnPay";
-            btnPay.Size = new Size(82, 26);
-            btnPay.TabIndex = 4;
-            btnPay.Text = "Thanh toán";
-            btnPay.UseVisualStyleBackColor = true;
+            grbxAddPurchaseOder.Controls.Add(btnReset);
+            grbxAddPurchaseOder.Controls.Add(btnPrintOrder);
+            grbxAddPurchaseOder.Controls.Add(btnUpdate);
+            grbxAddPurchaseOder.Controls.Add(btnDeletePurchaseOder);
+            grbxAddPurchaseOder.Controls.Add(btnAddPurchaseOder);
+            grbxAddPurchaseOder.Controls.Add(txtOrderID);
+            grbxAddPurchaseOder.Controls.Add(cbxSupplier);
+            grbxAddPurchaseOder.Controls.Add(lblPurchaseOderID);
+            grbxAddPurchaseOder.Controls.Add(lblSupplier);
+            grbxAddPurchaseOder.Location = new Point(21, 53);
+            grbxAddPurchaseOder.Name = "grbxAddPurchaseOder";
+            grbxAddPurchaseOder.Size = new Size(614, 139);
+            grbxAddPurchaseOder.TabIndex = 2;
+            grbxAddPurchaseOder.TabStop = false;
+            grbxAddPurchaseOder.Text = "Thêm phiếu nhập";
             // 
-            // grbxDeletePurchaseOder
+            // btnReset
             // 
-            grbxDeletePurchaseOder.Controls.Add(textBox1);
-            grbxDeletePurchaseOder.Controls.Add(btnDeletePurchaseOder);
-            grbxDeletePurchaseOder.Controls.Add(lblPurchaseOderID);
-            grbxDeletePurchaseOder.Location = new Point(312, 40);
-            grbxDeletePurchaseOder.Margin = new Padding(3, 2, 3, 2);
-            grbxDeletePurchaseOder.Name = "grbxDeletePurchaseOder";
-            grbxDeletePurchaseOder.Padding = new Padding(3, 2, 3, 2);
-            grbxDeletePurchaseOder.Size = new Size(267, 86);
-            grbxDeletePurchaseOder.TabIndex = 3;
-            grbxDeletePurchaseOder.TabStop = false;
-            grbxDeletePurchaseOder.Text = "Xoá phiếu nhập";
+            btnReset.FlatAppearance.BorderSize = 0;
+            btnReset.FlatStyle = FlatStyle.Flat;
+            btnReset.Location = new Point(360, 95);
+            btnReset.Name = "btnReset";
+            btnReset.Size = new Size(94, 29);
+            btnReset.TabIndex = 6;
+            btnReset.Text = "Tải lại";
+            btnReset.UseVisualStyleBackColor = true;
             // 
-            // textBox1
+            // btnPrintOrder
             // 
-            textBox1.Location = new Point(144, 26);
-            textBox1.Margin = new Padding(3, 2, 3, 2);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(110, 23);
-            textBox1.TabIndex = 3;
+            btnPrintOrder.FlatAppearance.BorderSize = 0;
+            btnPrintOrder.FlatStyle = FlatStyle.Flat;
+            btnPrintOrder.Location = new Point(478, 95);
+            btnPrintOrder.Name = "btnPrintOrder";
+            btnPrintOrder.Size = new Size(127, 29);
+            btnPrintOrder.TabIndex = 5;
+            btnPrintOrder.Text = "In phiếu nhập";
+            btnPrintOrder.UseVisualStyleBackColor = true;
+            // 
+            // btnUpdate
+            // 
+            btnUpdate.FlatAppearance.BorderSize = 0;
+            btnUpdate.FlatStyle = FlatStyle.Flat;
+            btnUpdate.Location = new Point(124, 95);
+            btnUpdate.Name = "btnUpdate";
+            btnUpdate.Size = new Size(94, 29);
+            btnUpdate.TabIndex = 4;
+            btnUpdate.Text = "Sửa";
+            btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // btnDeletePurchaseOder
             // 
             btnDeletePurchaseOder.FlatAppearance.BorderSize = 0;
             btnDeletePurchaseOder.FlatStyle = FlatStyle.Flat;
-            btnDeletePurchaseOder.Location = new Point(91, 51);
-            btnDeletePurchaseOder.Margin = new Padding(3, 2, 3, 2);
+            btnDeletePurchaseOder.Location = new Point(242, 95);
             btnDeletePurchaseOder.Name = "btnDeletePurchaseOder";
-            btnDeletePurchaseOder.Size = new Size(82, 22);
+            btnDeletePurchaseOder.Size = new Size(94, 29);
             btnDeletePurchaseOder.TabIndex = 2;
             btnDeletePurchaseOder.Text = "Xoá";
             btnDeletePurchaseOder.UseVisualStyleBackColor = true;
-            // 
-            // lblPurchaseOderID
-            // 
-            lblPurchaseOderID.AutoSize = true;
-            lblPurchaseOderID.Location = new Point(14, 28);
-            lblPurchaseOderID.Name = "lblPurchaseOderID";
-            lblPurchaseOderID.Size = new Size(87, 15);
-            lblPurchaseOderID.TabIndex = 0;
-            lblPurchaseOderID.Text = "Mã phiếu nhập";
-            // 
-            // grbxAddPurchaseOder
-            // 
-            grbxAddPurchaseOder.Controls.Add(btnAddPurchaseOder);
-            grbxAddPurchaseOder.Controls.Add(comboBox1);
-            grbxAddPurchaseOder.Controls.Add(lblSupplier);
-            grbxAddPurchaseOder.Location = new Point(18, 40);
-            grbxAddPurchaseOder.Margin = new Padding(3, 2, 3, 2);
-            grbxAddPurchaseOder.Name = "grbxAddPurchaseOder";
-            grbxAddPurchaseOder.Padding = new Padding(3, 2, 3, 2);
-            grbxAddPurchaseOder.Size = new Size(267, 104);
-            grbxAddPurchaseOder.TabIndex = 2;
-            grbxAddPurchaseOder.TabStop = false;
-            grbxAddPurchaseOder.Text = "Thêm phiếu nhập";
+            btnDeletePurchaseOder.Click += btnDeletePurchaseOder_Click;
             // 
             // btnAddPurchaseOder
             // 
             btnAddPurchaseOder.FlatAppearance.BorderSize = 0;
             btnAddPurchaseOder.FlatStyle = FlatStyle.Flat;
-            btnAddPurchaseOder.Location = new Point(88, 71);
-            btnAddPurchaseOder.Margin = new Padding(3, 2, 3, 2);
+            btnAddPurchaseOder.Location = new Point(6, 95);
             btnAddPurchaseOder.Name = "btnAddPurchaseOder";
-            btnAddPurchaseOder.Size = new Size(82, 22);
+            btnAddPurchaseOder.Size = new Size(94, 29);
             btnAddPurchaseOder.TabIndex = 2;
             btnAddPurchaseOder.Text = "Thêm";
             btnAddPurchaseOder.UseVisualStyleBackColor = true;
+            btnAddPurchaseOder.Click += btnAddPurchaseOder_Click;
             // 
-            // comboBox1
+            // txtOrderID
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(130, 35);
-            comboBox1.Margin = new Padding(3, 2, 3, 2);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(133, 23);
-            comboBox1.TabIndex = 1;
+            txtOrderID.Location = new Point(156, 27);
+            txtOrderID.Name = "txtOrderID";
+            txtOrderID.Size = new Size(125, 27);
+            txtOrderID.TabIndex = 3;
+            // 
+            // cbxSupplier
+            // 
+            cbxSupplier.FormattingEnabled = true;
+            cbxSupplier.Location = new Point(457, 27);
+            cbxSupplier.Name = "cbxSupplier";
+            cbxSupplier.Size = new Size(151, 28);
+            cbxSupplier.TabIndex = 1;
+            // 
+            // lblPurchaseOderID
+            // 
+            lblPurchaseOderID.AutoSize = true;
+            lblPurchaseOderID.Enabled = false;
+            lblPurchaseOderID.Location = new Point(6, 30);
+            lblPurchaseOderID.Name = "lblPurchaseOderID";
+            lblPurchaseOderID.Size = new Size(111, 20);
+            lblPurchaseOderID.TabIndex = 0;
+            lblPurchaseOderID.Text = "Mã phiếu nhập:";
             // 
             // lblSupplier
             // 
             lblSupplier.AutoSize = true;
-            lblSupplier.Location = new Point(15, 40);
+            lblSupplier.Location = new Point(310, 30);
             lblSupplier.Name = "lblSupplier";
-            lblSupplier.Size = new Size(81, 15);
+            lblSupplier.Size = new Size(103, 20);
             lblSupplier.TabIndex = 0;
-            lblSupplier.Text = "Nhà cung cáp";
+            lblSupplier.Text = "Nhà cung cấp:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(106, 40);
+            label2.Location = new Point(121, 53);
             label2.Name = "label2";
-            label2.Size = new Size(0, 15);
+            label2.Size = new Size(0, 20);
             label2.TabIndex = 1;
             // 
             // lblTitle
             // 
             lblTitle.AutoSize = true;
-            lblTitle.Location = new Point(364, 7);
+            lblTitle.Location = new Point(416, 9);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(128, 15);
+            lblTitle.Size = new Size(158, 20);
             lblTitle.TabIndex = 0;
             lblTitle.Text = "QUẢN LÝ PHIẾU NHẬP";
             // 
@@ -242,10 +244,9 @@
             // 
             panel2.Controls.Add(dgvPurchaseOders);
             panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(0, 166);
-            panel2.Margin = new Padding(3, 2, 3, 2);
+            panel2.Location = new Point(0, 221);
             panel2.Name = "panel2";
-            panel2.Size = new Size(905, 212);
+            panel2.Size = new Size(1034, 283);
             panel2.TabIndex = 1;
             // 
             // dgvPurchaseOders
@@ -253,22 +254,20 @@
             dgvPurchaseOders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvPurchaseOders.Dock = DockStyle.Fill;
             dgvPurchaseOders.Location = new Point(0, 0);
-            dgvPurchaseOders.Margin = new Padding(3, 2, 3, 2);
             dgvPurchaseOders.Name = "dgvPurchaseOders";
             dgvPurchaseOders.RowHeadersWidth = 51;
             dgvPurchaseOders.RowTemplate.Height = 29;
-            dgvPurchaseOders.Size = new Size(905, 212);
+            dgvPurchaseOders.Size = new Size(1034, 283);
             dgvPurchaseOders.TabIndex = 0;
             dgvPurchaseOders.CellDoubleClick += dgvPurchaseOders_CellDoubleClick;
             // 
             // PurchaseOderForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(905, 378);
+            ClientSize = new Size(1034, 504);
             Controls.Add(panel2);
             Controls.Add(panel1);
-            Margin = new Padding(3, 2, 3, 2);
             Name = "PurchaseOderForm";
             Text = "PurchaseOderForm";
             Load += PurchaseOderForm_Load;
@@ -277,8 +276,6 @@
             groupBox4.ResumeLayout(false);
             groupBox3.ResumeLayout(false);
             groupBox3.PerformLayout();
-            grbxDeletePurchaseOder.ResumeLayout(false);
-            grbxDeletePurchaseOder.PerformLayout();
             grbxAddPurchaseOder.ResumeLayout(false);
             grbxAddPurchaseOder.PerformLayout();
             panel2.ResumeLayout(false);
@@ -293,19 +290,20 @@
         private Panel panel2;
         private DataGridView dgvPurchaseOders;
         private GroupBox groupBox3;
-        private Button btnPay;
-        private GroupBox grbxDeletePurchaseOder;
-        private TextBox textBox1;
+        private TextBox txtOrderID;
         private Button btnDeletePurchaseOder;
         private Label lblPurchaseOderID;
         private GroupBox grbxAddPurchaseOder;
         private Button btnAddPurchaseOder;
-        private ComboBox comboBox1;
+        private ComboBox cbxSupplier;
         private Label lblSupplier;
         private Label label2;
         private GroupBox groupBox4;
-        private TextBox textBox2;
-        private ComboBox comboBox2;
-        private DateTimePicker dateTimePicker1;
+        private TextBox txtSearch;
+        private ComboBox cbxTypeSearch;
+        private DateTimePicker dtpkFilterDate;
+        private Button btnPrintOrder;
+        private Button btnUpdate;
+        private Button btnReset;
     }
 }

@@ -93,8 +93,8 @@ GO
 INSERT INTO Promotion (PromotionID, [Name], StartDate, EndDate, Discount, [Status])
 VALUES
     ('PM0001', N'Khuyến mãi giờ vàng', '2023-9-24', '2023-11-24', 10,N'Đang hoạt động'),
-    ('PM0002', N'Khuyến mãi lễ 2/9', '2023-08-30', '2023-09-03', 20, N'Ngưng hoạt động'),
-    ('PM0003', N'Khuyến mãi điểm tích luỹ', '2023-03-01', '2040-03-01', 10, N'Ngưng hoạt động');
+    ('PM0002', N'Khuyến mãi lễ 2/9', '2023-08-30', '2023-09-03', 20, N'Không hoạt động'),
+    ('PM0003', N'Khuyến mãi điểm tích luỹ', '2023-03-01', '2040-03-01', 10, N'Không hoạt động');
 GO
 
 --Tao bang khach hang
@@ -555,7 +555,6 @@ BEGIN
 END;
 GO
 
-
 -- Thêm khách hàng cho hóa đơn
 CREATE PROC InsertCustomerSale
 	@CustomerID varchar(10),
@@ -583,6 +582,10 @@ GO
 -- Thien ======================================================================================================
 
 
+--========= Đại ==========
+---------------------------------------------------Chương trình khuyến mãi và chi tiết chương trình khuyến mãi----------------------------------------------------
+=======
+
 -- Đại
 -- Lấy tất cả thông tin chương trình khuyến mãi
 CREATE PROC SelectAllPromotions
@@ -608,6 +611,119 @@ BEGIN
 	VALUES (@PromotionID,@Name,@StartDate,@EndDate,@Discount,N'Không hoạt động')
 END;
 GO
+
+-- Sửa thông tin chương trình khuyến mãi
+CREATE PROC UpdatePromotion
+	@PromotionID varchar(10),
+	@Name nvarchar(50),
+	@StartDate datetime,
+	@EndDate datetime,
+	@Discount float(50)
+AS
+BEGIN
+	UPDATE Promotion SET Name = @Name, StartDate = @StartDate, EndDate = @EndDate, Discount = @Discount
+	WHERE PromotionID = @PromotionID
+END;
+GO
+
+-- Xoá chương trình khuyến mãi
+CREATE PROC DeletePromotion
+	@PromotionID varchar(10)
+AS
+BEGIN
+	UPDATE Promotion SET isDeleted = '0'
+	WHERE PromotionID = @PromotionID
+END;
+GO
+
+-- Áp dụng chương trình khuyến mãi
+CREATE PROC StartWork
+	@PromotionID varchar(10)
+AS
+BEGIN
+	UPDATE Promotion SET [Status] = N'Đang hoạt động'
+	WHERE PromotionID = @PromotionID
+END;
+GO
+
+-- Ngưng áp dụng chương trình khuyến mãi
+CREATE PROC StopWork
+	@PromotionID varchar(10)
+AS
+BEGIN
+	UPDATE Promotion SET [Status] = N'Không hoạt động'
+	WHERE PromotionID = @PromotionID
+END;
+GO
+
+-- Tải danh sách sản phẩm cho chương trình khuyến mãi (danh sách chọn)
+CREATE PROC SelectProductToPromotion
+AS
+BEGIN
+	SELECT ProductID, [Name], TypeID, [Description]
+	FROM Product
+	WHERE PromotionID = '' and isDeleted = '1'
+END;
+GO
+
+-- Tải danh sách sản phẩm cho chương trình khuyến mãi (danh sách đã chọn)
+CREATE PROC SelectProductToPromotionApply
+	@PromotionID varchar(10)
+AS
+BEGIN
+	SELECT ProductID, [Name], TypeID, [Description]
+	FROM Product
+	WHERE PromotionID = @PromotionID and isDeleted = '1'
+END;
+GO
+----------------------------------------------------------------------------------------------------------------------------------------------------------
+---------------------------------------------------Phiếu nhập và chi tiết phiếu nhập----------------------------------------------------
+-- Lấy danh sách phiếu nhập
+CREATE PROC SelectAllPurchaseOrder
+AS
+BEGIN
+	SELECT OrderID, E.Name, S.Name, PO.importDate, PO.TotalPrice, PO.Status
+	FROM PurchaseOrder PO, Employee E, Supplier S
+	WHERE PO.EmployeeID = E.EmployeeID and PO.SupplierID = S.SupplierID and PO.isDeleted = '1'
+END;
+GO
+
+-- Tạo phiếu nhập
+CREATE PROC InsertPurchaseOrder
+	@OrderID varchar(10),
+	@EmployeeID varchar(10),
+	@SupplierID varchar(10),
+	@importDate datetime,
+	@TotalPrice float(50)
+AS
+BEGIN
+	INSERT INTO PurchaseOrder (OrderID,EmployeeID,SupplierID,importDate,TotalPrice)
+	VALUES (@OrderID,@EmployeeID, @SupplierID, @importDate, @TotalPrice)
+END;
+GO
+
+-- Sửa phiếu nhập
+CREATE PROC UpdatePurchaseOrder
+	@OrderID varchar(10),
+	@SupplierID varchar(10)
+AS
+BEGIN
+	UPDATE PurchaseOrder SET SupplierID = @SupplierID WHERE OrderID = @OrderID
+END;
+GO
+
+-- Xoá phiếu nhập
+CREATE PROC DeletePurchaseOrder
+	@OrderID varchar(10)
+AS
+BEGIN
+	UPDATE PurchaseOrder SET isDeleted = '0' WHERE OrderID = @OrderID
+END;
+GO
+
+
+
+----------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Công Anh 
 
 --Lấy danh sách sản phẩm 
