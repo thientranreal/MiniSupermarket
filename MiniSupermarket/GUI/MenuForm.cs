@@ -262,6 +262,7 @@ namespace MiniSupermarket.GUI
         {
             NCCForm temp = (NCCForm)forms["Quản lý nhà cung cấp"];
             OpenChildForm(temp, sender, "Quản lý nhà cung cấp");
+        }
         private void btnProducts_Click_1(object sender, EventArgs e)
         {
             ProductManage temp = (ProductManage)forms["Quản lý sản phẩm"];
