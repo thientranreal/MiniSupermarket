@@ -65,7 +65,7 @@ namespace MiniSupermarket.BUS
             {
                 id = generateNewID();
             }
-
+            
             string storedProcedureName = "InsertIntoProduct";
             SqlParameter[] parameters = new SqlParameter[]
             {
@@ -107,6 +107,7 @@ namespace MiniSupermarket.BUS
         public bool updateProduct(string name, string id, string typeid, string quantity, string price, string des, string unit)
         {
             string storedProcedureName = "UpdateProduct";
+            
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@ProductID", id),

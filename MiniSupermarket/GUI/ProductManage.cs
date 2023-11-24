@@ -33,6 +33,7 @@ namespace MiniSupermarket.GUI
             txt_DonGia.Font = ProjectFont.getNormalFont();
             txt_MoTa.Font = ProjectFont.getNormalFont();
             txt_Kieu.Font = ProjectFont.getNormalFont();
+            txt_SoLuong.ReadOnly = true;
 
 
 
@@ -133,9 +134,10 @@ namespace MiniSupermarket.GUI
             string[] danhSachLoaiSPNames = typeBus.getIdForSuggestionBox(); // Lấy danh sách tên loại sản phẩm
             foreach (var loaiSP in danhSachLoaiSPNames)
             {
+                
                 cbx_MaLoai.Items.Add(loaiSP); // Thêm từng loại sản phẩm vào ComboBox
             }
-
+            cbx_MaLoai.DropDownStyle = ComboBoxStyle.DropDownList;
             LoadTheme();
         }
 
@@ -163,7 +165,7 @@ namespace MiniSupermarket.GUI
             string id = txt_MaSp.Text.Trim().ToUpper();
             string name = ProjectFont.upperFirstLetter(txt_TenSp.Text);
             string maloai = ProjectFont.upperFirstLetter(cbx_MaLoai.Text);
-            string soluong = ProjectFont.upperFirstLetter(txt_SoLuong.Text);
+            string soluong = "0";
             string dongia = ProjectFont.upperFirstLetter(txt_DonGia.Text);
             string mota = ProjectFont.upperFirstLetter(txt_MoTa.Text);
             string kieu = ProjectFont.upperFirstLetter(txt_Kieu.Text);
@@ -223,6 +225,7 @@ namespace MiniSupermarket.GUI
                     return;
                 }
             }
+            dssp_DSSP.DataSource = ptBus.getAllProducts();
         }
 
         private void txt_SoLuong_KeyPress(object sender, KeyPressEventArgs e)

@@ -843,7 +843,6 @@ CREATE PROCEDURE InsertIntoProduct
     @CurrentPrice float(53),
     @Description nvarchar(100),
     @Unit nvarchar(20),
-    @Image varchar(50),
 	@PromotionID varchar(10)
     
 AS
@@ -883,7 +882,7 @@ CREATE PROCEDURE DeleteProduct
 AS
 BEGIN
     UPDATE Product
-    SET isDeleted = 0
+    SET isDeleted = '0'
     WHERE ProductID = @ProductID
 END;
 GO
