@@ -32,6 +32,10 @@ namespace MiniSupermarket.GUI
             dtpToDate.Format = DateTimePickerFormat.Custom;
             dtpToDate.CustomFormat = "yyyy-MM-dd";
 
+            txtToTotal.Text = "Giá đến";
+            txtToTotal.ForeColor = Color.Gray;
+            txtFromTotal.Text = "Giá từ";
+            txtFromTotal.ForeColor = Color.Gray;
 
             LoadTheme();
             // Cho hiển thị hết chiều dài của bảng
@@ -83,11 +87,6 @@ namespace MiniSupermarket.GUI
                 }
             }
 
-            btnSearch.BackColor = ThemeColor.PrimaryColor;
-            btnSearch.ForeColor = Color.White;
-            btnSearch.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
-            btnSearch.Font = ProjectFont.getNormalFont();
-
             btnReset.BackColor = ThemeColor.PrimaryColor;
             btnReset.ForeColor = Color.White;
             btnReset.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
@@ -119,6 +118,15 @@ namespace MiniSupermarket.GUI
                 {
                     CheckBox chk = (CheckBox)control;
                     chk.Font = ProjectFont.getNormalFont();
+                }
+                // Nếu control là button thì chỉnh font
+                else if (control.GetType() == typeof(Button))
+                {
+                    Button btn = (Button)control;
+                    btn.BackColor = ThemeColor.PrimaryColor;
+                    btn.ForeColor = Color.White;
+                    btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
+                    btn.Font = ProjectFont.getNormalFont();
                 }
             }
 
@@ -213,8 +221,12 @@ namespace MiniSupermarket.GUI
 
                 // Tạo một mã khách hàng mới
                 string customerId = RandomString(5);
-                if (saleBus.InsertCustomerSale(customerId, txtCustomerName.Text, txtPhone.Text, sex))
+                string customerName = txtCustomerName.Text.Trim();
+                if (saleBus.InsertCustomerSale(customerId, customerName, txtPhone.Text, sex))
                 {
+                    // Thêm khách hàng mới tạo vào combo box chọn khách hàng
+                    cbChooseCustomer.Items.Add($"[{customerId}] {customerName}");
+
                     if (saleBus.InsertIntoBill(GlobalState.employeeId, customerId, currentDate))
                     {
                         // Hiện thông báo thành công
@@ -224,8 +236,7 @@ namespace MiniSupermarket.GUI
                                 MessageBoxIcon.Information);
 
                         // Cập nhật lại data grid view
-                        saleBus.updateBills();
-                        dgv_bill.DataSource = saleBus.getAllBills();
+                        resetBillGridView();
                         return;
                     }
                     else
@@ -244,7 +255,7 @@ namespace MiniSupermarket.GUI
                 // Nếu đã chọn khách hàng
                 string input = txtSearchCustomer.Text.Trim();
                 string customerId = null;
-                Match match = Regex.Match(input, @"\[(C\d+)\]");
+                Match match = Regex.Match(input, @"\[(.*?)\]");
                 if (match.Success)
                 {
                     customerId = match.Groups[1].Value;
@@ -259,8 +270,7 @@ namespace MiniSupermarket.GUI
                             MessageBoxIcon.Information);
 
                     // Cập nhật lại data grid view
-                    saleBus.updateBills();
-                    dgv_bill.DataSource = saleBus.getAllBills();
+                    resetBillGridView();
                     return;
                 }
                 else
@@ -292,7 +302,7 @@ namespace MiniSupermarket.GUI
             }
         }
 
-        public void updateDateForSaleForm()
+        public void updateDataForSaleForm()
         {
             cbChooseCustomer.Items.Clear();
             // Thêm danh sách khách hàng cho combo box
@@ -423,10 +433,8 @@ namespace MiniSupermarket.GUI
                         "Thông báo",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information);
+                resetBillGridView();
 
-                // Cập nhật lại data grid view
-                saleBus.updateBills();
-                dgv_bill.DataSource = saleBus.getAllBills();
                 return;
             }
             else
@@ -448,6 +456,81 @@ namespace MiniSupermarket.GUI
         private void dtpToDate_KeyDown(object sender, KeyEventArgs e)
         {
             e.SuppressKeyPress = true;
+        }
+
+        public void resetBillGridView()
+        {
+            // Cập nhật lại data grid view
+            saleBus.updateBills();
+            dgv_bill.DataSource = saleBus.getAllBills();
+        }
+
+        private void btnClearSearch_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtCustomerName_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Chỉ cho phép nhập các ký tự chữ cái và ký tự điều khiển (như Backspace)
+            if (!char.IsWhiteSpace(e.KeyChar) && !char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;  // Chặn ký tự không mong muốn
+            }
+        }
+
+        private void txtFromTotal_Leave(object sender, EventArgs e)
+        {
+            if (txtFromTotal.Text == "")
+            {
+                txtFromTotal.Text = "Giá từ";
+                txtFromTotal.ForeColor = Color.Gray;
+            }
+        }
+
+        private void txtFromTotal_Enter(object sender, EventArgs e)
+        {
+            if (txtFromTotal.Text == "Giá từ")
+            {
+                txtFromTotal.Text = "";
+                txtFromTotal.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtToTotal_Leave(object sender, EventArgs e)
+        {
+            if (txtToTotal.Text == "")
+            {
+                txtToTotal.Text = "Giá đến";
+                txtToTotal.ForeColor = Color.Gray;
+            }
+        }
+
+        private void txtToTotal_Enter(object sender, EventArgs e)
+        {
+            if (txtToTotal.Text == "Giá đến")
+            {
+                txtToTotal.Text = "";
+                txtToTotal.ForeColor = Color.Black;
+            }
+        }
+
+        private void txtFromTotal_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Chỉ cho phép nhập các ký tự số và ký tự điều khiển (như Backspace)
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;  // Chặn ký tự không mong muốn
+            }
+        }
+
+        private void txtToTotal_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            // Chỉ cho phép nhập các ký tự số và ký tự điều khiển (như Backspace)
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true;  // Chặn ký tự không mong muốn
+            }
         }
     }
 }

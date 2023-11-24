@@ -47,6 +47,10 @@
             cbChooseCustomer = new ComboBox();
             lbChooseCustomer = new Label();
             gbSearch = new GroupBox();
+            txtToTotal = new TextBox();
+            txtFromTotal = new TextBox();
+            lbTotal = new Label();
+            btnClearSearch = new Button();
             lbEmployee = new Label();
             lbCustomer = new Label();
             btnSearch = new Button();
@@ -214,6 +218,7 @@
             txtCustomerName.Name = "txtCustomerName";
             txtCustomerName.Size = new Size(240, 27);
             txtCustomerName.TabIndex = 5;
+            txtCustomerName.KeyPress += txtCustomerName_KeyPress;
             // 
             // lbSex
             // 
@@ -263,6 +268,10 @@
             // 
             // gbSearch
             // 
+            gbSearch.Controls.Add(txtToTotal);
+            gbSearch.Controls.Add(txtFromTotal);
+            gbSearch.Controls.Add(lbTotal);
+            gbSearch.Controls.Add(btnClearSearch);
             gbSearch.Controls.Add(lbEmployee);
             gbSearch.Controls.Add(lbCustomer);
             gbSearch.Controls.Add(btnSearch);
@@ -281,10 +290,51 @@
             gbSearch.TabStop = false;
             gbSearch.Text = "Tìm kiếm";
             // 
+            // txtToTotal
+            // 
+            txtToTotal.Location = new Point(306, 208);
+            txtToTotal.Name = "txtToTotal";
+            txtToTotal.Size = new Size(106, 27);
+            txtToTotal.TabIndex = 14;
+            txtToTotal.Enter += txtToTotal_Enter;
+            txtToTotal.KeyPress += txtToTotal_KeyPress;
+            txtToTotal.Leave += txtToTotal_Leave;
+            // 
+            // txtFromTotal
+            // 
+            txtFromTotal.Location = new Point(162, 208);
+            txtFromTotal.Name = "txtFromTotal";
+            txtFromTotal.Size = new Size(106, 27);
+            txtFromTotal.TabIndex = 14;
+            txtFromTotal.Enter += txtFromTotal_Enter;
+            txtFromTotal.KeyPress += txtFromTotal_KeyPress;
+            txtFromTotal.Leave += txtFromTotal_Leave;
+            // 
+            // lbTotal
+            // 
+            lbTotal.AutoSize = true;
+            lbTotal.Location = new Point(6, 211);
+            lbTotal.Name = "lbTotal";
+            lbTotal.Size = new Size(72, 20);
+            lbTotal.TabIndex = 13;
+            lbTotal.Text = "Tổng tiền";
+            // 
+            // btnClearSearch
+            // 
+            btnClearSearch.FlatAppearance.BorderSize = 0;
+            btnClearSearch.FlatStyle = FlatStyle.Flat;
+            btnClearSearch.Location = new Point(296, 285);
+            btnClearSearch.Name = "btnClearSearch";
+            btnClearSearch.Size = new Size(116, 54);
+            btnClearSearch.TabIndex = 12;
+            btnClearSearch.Text = "Tải lại";
+            btnClearSearch.UseVisualStyleBackColor = true;
+            btnClearSearch.Click += btnClearSearch_Click;
+            // 
             // lbEmployee
             // 
             lbEmployee.AutoSize = true;
-            lbEmployee.Location = new Point(6, 166);
+            lbEmployee.Location = new Point(6, 167);
             lbEmployee.Name = "lbEmployee";
             lbEmployee.Size = new Size(75, 20);
             lbEmployee.TabIndex = 11;
@@ -293,7 +343,7 @@
             // lbCustomer
             // 
             lbCustomer.AutoSize = true;
-            lbCustomer.Location = new Point(6, 119);
+            lbCustomer.Location = new Point(6, 123);
             lbCustomer.Name = "lbCustomer";
             lbCustomer.Size = new Size(86, 20);
             lbCustomer.TabIndex = 10;
@@ -303,7 +353,7 @@
             // 
             btnSearch.FlatAppearance.BorderSize = 0;
             btnSearch.FlatStyle = FlatStyle.Flat;
-            btnSearch.Location = new Point(296, 250);
+            btnSearch.Location = new Point(162, 285);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(116, 54);
             btnSearch.TabIndex = 9;
@@ -314,7 +364,7 @@
             // cbPay
             // 
             cbPay.AutoSize = true;
-            cbPay.Location = new Point(6, 208);
+            cbPay.Location = new Point(6, 259);
             cbPay.Name = "cbPay";
             cbPay.Size = new Size(125, 24);
             cbPay.TabIndex = 7;
@@ -323,21 +373,21 @@
             // 
             // txtEmployeeSearch
             // 
-            txtEmployeeSearch.Location = new Point(162, 163);
+            txtEmployeeSearch.Location = new Point(162, 164);
             txtEmployeeSearch.Name = "txtEmployeeSearch";
             txtEmployeeSearch.Size = new Size(250, 27);
             txtEmployeeSearch.TabIndex = 6;
             // 
             // txtCustomerSearch
             // 
-            txtCustomerSearch.Location = new Point(162, 116);
+            txtCustomerSearch.Location = new Point(162, 120);
             txtCustomerSearch.Name = "txtCustomerSearch";
             txtCustomerSearch.Size = new Size(250, 27);
             txtCustomerSearch.TabIndex = 5;
             // 
             // dtpToDate
             // 
-            dtpToDate.Location = new Point(162, 75);
+            dtpToDate.Location = new Point(162, 76);
             dtpToDate.Name = "dtpToDate";
             dtpToDate.Size = new Size(250, 27);
             dtpToDate.TabIndex = 2;
@@ -354,7 +404,7 @@
             // lbToDate
             // 
             lbToDate.AutoSize = true;
-            lbToDate.Location = new Point(6, 78);
+            lbToDate.Location = new Point(6, 79);
             lbToDate.Name = "lbToDate";
             lbToDate.Size = new Size(72, 20);
             lbToDate.TabIndex = 0;
@@ -447,5 +497,9 @@
         private Label lbEmployee;
         private Label lbCustomer;
         private Button btnDelBill;
+        private Button btnClearSearch;
+        private Label lbTotal;
+        private TextBox txtToTotal;
+        private TextBox txtFromTotal;
     }
 }
