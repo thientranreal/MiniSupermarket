@@ -242,5 +242,31 @@ namespace MiniSupermarket.GUI
                 e.Handled = true;  // Chặn ký tự không mong muốn
             }
         }
+
+        private void btn_Xoa_Click(object sender, EventArgs e)
+        {
+            
+            // Lấy id của hàng đang chọn
+            string id = dssp_DSSP.CurrentRow.Cells[0].Value.ToString();
+            if (ptBus.deleteProduct(id))
+            {
+                MessageBox.Show("Xóa thành công!",
+                        "Thông báo",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information); // Xóa thành công
+          
+            }
+            else
+            {
+                MessageBox.Show("Xóa thất bại!",
+                        "Thông báo",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error); // Xóa thất bại
+                return;
+            }
+
+            // Tải lại danh sách
+            dssp_DSSP.DataSource = ptBus.getAllProducts();
+        }
     }
 }
