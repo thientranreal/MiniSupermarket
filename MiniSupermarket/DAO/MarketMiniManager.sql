@@ -456,13 +456,15 @@ GO
 -- Đếm số account
 CREATE PROCEDURE CountAccount
     @userName varchar(50),
-	@Password varchar(50)
+    @Password varchar(50)
 AS
 BEGIN
-	Select COUNT(*) from Employee
-	Where UserName = @userName and [Password] = @Password
+    SELECT COUNT(*) FROM Employee
+    WHERE UserName COLLATE SQL_Latin1_General_CP1_CS_AS = @userName 
+    AND [Password] = @Password
 END;
 GO
+
 
 -- Lấy các chức năng từ account
 CREATE PROCEDURE SelectFunctionNameFromAccount
