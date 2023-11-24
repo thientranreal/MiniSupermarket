@@ -29,27 +29,27 @@
         private void InitializeComponent()
         {
             panel1 = new Panel();
-            dataGridView1 = new DataGridView();
+            dgvProductPromotions = new DataGridView();
             lblTitlePromotion = new Label();
             panel2 = new Panel();
-            dataGridView2 = new DataGridView();
+            dgvProducts = new DataGridView();
             groupBox2 = new GroupBox();
-            comboBox2 = new ComboBox();
+            cbxTypeProduct = new ComboBox();
             groupBox1 = new GroupBox();
-            textBox1 = new TextBox();
-            comboBox1 = new ComboBox();
+            txtSearch = new TextBox();
+            cbxTypeSearch = new ComboBox();
             lblTitleProduct = new Label();
             panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvProductPromotions).BeginInit();
             panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvProducts).BeginInit();
             groupBox2.SuspendLayout();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
             // panel1
             // 
-            panel1.Controls.Add(dataGridView1);
+            panel1.Controls.Add(dgvProductPromotions);
             panel1.Controls.Add(lblTitlePromotion);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
@@ -57,16 +57,16 @@
             panel1.Size = new Size(692, 533);
             panel1.TabIndex = 0;
             // 
-            // dataGridView1
+            // dgvProductPromotions
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Dock = DockStyle.Bottom;
-            dataGridView1.Location = new Point(0, 86);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowHeadersWidth = 51;
-            dataGridView1.RowTemplate.Height = 29;
-            dataGridView1.Size = new Size(692, 447);
-            dataGridView1.TabIndex = 1;
+            dgvProductPromotions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvProductPromotions.Dock = DockStyle.Bottom;
+            dgvProductPromotions.Location = new Point(0, 86);
+            dgvProductPromotions.Name = "dgvProductPromotions";
+            dgvProductPromotions.RowHeadersWidth = 51;
+            dgvProductPromotions.RowTemplate.Height = 29;
+            dgvProductPromotions.Size = new Size(692, 447);
+            dgvProductPromotions.TabIndex = 1;
             // 
             // lblTitlePromotion
             // 
@@ -79,7 +79,7 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(dataGridView2);
+            panel2.Controls.Add(dgvProducts);
             panel2.Controls.Add(groupBox2);
             panel2.Controls.Add(groupBox1);
             panel2.Controls.Add(lblTitleProduct);
@@ -89,20 +89,20 @@
             panel2.Size = new Size(576, 533);
             panel2.TabIndex = 1;
             // 
-            // dataGridView2
+            // dgvProducts
             // 
-            dataGridView2.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView2.Dock = DockStyle.Bottom;
-            dataGridView2.Location = new Point(0, 163);
-            dataGridView2.Name = "dataGridView2";
-            dataGridView2.RowHeadersWidth = 51;
-            dataGridView2.RowTemplate.Height = 29;
-            dataGridView2.Size = new Size(576, 370);
-            dataGridView2.TabIndex = 3;
+            dgvProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvProducts.Dock = DockStyle.Bottom;
+            dgvProducts.Location = new Point(0, 163);
+            dgvProducts.Name = "dgvProducts";
+            dgvProducts.RowHeadersWidth = 51;
+            dgvProducts.RowTemplate.Height = 29;
+            dgvProducts.Size = new Size(576, 370);
+            dgvProducts.TabIndex = 3;
             // 
             // groupBox2
             // 
-            groupBox2.Controls.Add(comboBox2);
+            groupBox2.Controls.Add(cbxTypeProduct);
             groupBox2.Location = new Point(347, 60);
             groupBox2.Name = "groupBox2";
             groupBox2.Size = new Size(155, 71);
@@ -110,18 +110,18 @@
             groupBox2.TabStop = false;
             groupBox2.Text = "Lọc theo loại sản phẩm";
             // 
-            // comboBox2
+            // cbxTypeProduct
             // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(7, 26);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(139, 28);
-            comboBox2.TabIndex = 1;
+            cbxTypeProduct.FormattingEnabled = true;
+            cbxTypeProduct.Location = new Point(7, 26);
+            cbxTypeProduct.Name = "cbxTypeProduct";
+            cbxTypeProduct.Size = new Size(139, 28);
+            cbxTypeProduct.TabIndex = 1;
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(textBox1);
-            groupBox1.Controls.Add(comboBox1);
+            groupBox1.Controls.Add(txtSearch);
+            groupBox1.Controls.Add(cbxTypeSearch);
             groupBox1.Location = new Point(3, 60);
             groupBox1.Name = "groupBox1";
             groupBox1.Size = new Size(338, 71);
@@ -129,20 +129,20 @@
             groupBox1.TabStop = false;
             groupBox1.Text = "Tìm kiếm theo";
             // 
-            // textBox1
+            // txtSearch
             // 
-            textBox1.Location = new Point(193, 26);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(125, 27);
-            textBox1.TabIndex = 1;
+            txtSearch.Location = new Point(193, 26);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(125, 27);
+            txtSearch.TabIndex = 1;
             // 
-            // comboBox1
+            // cbxTypeSearch
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(20, 26);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(151, 28);
-            comboBox1.TabIndex = 0;
+            cbxTypeSearch.FormattingEnabled = true;
+            cbxTypeSearch.Location = new Point(20, 26);
+            cbxTypeSearch.Name = "cbxTypeSearch";
+            cbxTypeSearch.Size = new Size(151, 28);
+            cbxTypeSearch.TabIndex = 0;
             // 
             // lblTitleProduct
             // 
@@ -165,10 +165,10 @@
             Load += DetailPronmotionForm_Load;
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvProductPromotions).EndInit();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView2).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvProducts).EndInit();
             groupBox2.ResumeLayout(false);
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
@@ -179,14 +179,14 @@
 
         private Panel panel1;
         private Panel panel2;
-        private DataGridView dataGridView1;
+        private DataGridView dgvProductPromotions;
         private Label lblTitlePromotion;
-        private DataGridView dataGridView2;
+        private DataGridView dgvProducts;
         private GroupBox groupBox2;
-        private ComboBox comboBox2;
+        private ComboBox cbxTypeProduct;
         private GroupBox groupBox1;
-        private TextBox textBox1;
-        private ComboBox comboBox1;
+        private TextBox txtSearch;
+        private ComboBox cbxTypeSearch;
         private Label lblTitleProduct;
     }
 }

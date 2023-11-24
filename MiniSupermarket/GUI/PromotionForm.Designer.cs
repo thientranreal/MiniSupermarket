@@ -126,6 +126,7 @@
             btnStartWork.TabIndex = 24;
             btnStartWork.Text = "Hoạt động";
             btnStartWork.UseVisualStyleBackColor = true;
+            btnStartWork.Click += btnStartWork_Click;
             // 
             // btnUpdate
             // 
@@ -137,6 +138,7 @@
             btnUpdate.TabIndex = 23;
             btnUpdate.Text = "Sửa";
             btnUpdate.UseVisualStyleBackColor = true;
+            btnUpdate.Click += btnUpdate_Click;
             // 
             // btnDelete
             // 
@@ -148,6 +150,7 @@
             btnDelete.TabIndex = 22;
             btnDelete.Text = "Xoá";
             btnDelete.UseVisualStyleBackColor = true;
+            btnDelete.Click += btnDelete_Click;
             // 
             // btnStopWork
             // 
@@ -159,6 +162,7 @@
             btnStopWork.TabIndex = 21;
             btnStopWork.Text = "Ngưng hoạt động";
             btnStopWork.UseVisualStyleBackColor = true;
+            btnStopWork.Click += btnStopWork_Click;
             // 
             // btnRefresh
             // 
