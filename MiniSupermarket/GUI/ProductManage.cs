@@ -34,7 +34,7 @@ namespace MiniSupermarket.GUI
             txt_MoTa.Font = ProjectFont.getNormalFont();
             txt_Kieu.Font = ProjectFont.getNormalFont();
             txt_HinhAnh.Font = ProjectFont.getNormalFont();
-            cbx_MaKM.Font = ProjectFont.getNormalFont();
+          
             cbx_TimKiem.Font=ProjectFont.getNormalFont();
             lb_MaSp.Font=ProjectFont.getNormalFont();
             lb_MaLoaiSp.Font = ProjectFont.getNormalFont();
@@ -44,7 +44,7 @@ namespace MiniSupermarket.GUI
             lb_MoTa.Font = ProjectFont.getNormalFont();
             lb_Kieu.Font = ProjectFont.getNormalFont();
             lb_HinhAnh.Font = ProjectFont.getNormalFont();
-            lb_MaKM.Font = ProjectFont.getNormalFont();
+           
 
             //
             cbx_TimKiem.DropDownStyle = ComboBoxStyle.DropDownList;
@@ -96,7 +96,7 @@ namespace MiniSupermarket.GUI
             lb_Soluong.Font = ProjectFont.getNormalFont();
             lb_TenSp.Font = ProjectFont.getNormalFont();    
             lb_HinhAnh.Font = ProjectFont.getNormalFont();
-            lb_MaKM.Font = ProjectFont.getNormalFont();
+          
            
             
         }
@@ -151,7 +151,7 @@ namespace MiniSupermarket.GUI
                 txt_MoTa.Text = row.Cells["Description"].Value.ToString();
                 txt_Kieu.Text = row.Cells["Unit"].Value.ToString();
                 txt_HinhAnh.Text = row.Cells["Image"].Value.ToString();
-                cbx_MaKM.Text = row.Cells["PromotionID"].Value.ToString();
+                
                 
             }
         }
@@ -167,7 +167,7 @@ namespace MiniSupermarket.GUI
             string mota = ProjectFont.upperFirstLetter(txt_MoTa.Text);
             string kieu = ProjectFont.upperFirstLetter(txt_Kieu.Text);
             string hinhanh = ProjectFont.upperFirstLetter(txt_HinhAnh.Text);
-            string makm = ProjectFont.upperFirstLetter(cbx_MaLoai.Text);
+            String makm = "null";
             if (id.Length != 0) // Nếu người dùng nhập mã loại
             {
                 // Nếu mã loại đã tồn tại trong hệ thống thì hiện lỗi

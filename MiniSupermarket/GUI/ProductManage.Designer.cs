@@ -34,8 +34,6 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.grb_TextField = new System.Windows.Forms.GroupBox();
             this.cbx_MaLoai = new System.Windows.Forms.ComboBox();
-            this.lb_MaKM = new System.Windows.Forms.Label();
-            this.cbx_MaKM = new System.Windows.Forms.ComboBox();
             this.btn_NhapExcel = new System.Windows.Forms.Button();
             this.txt_MaSp = new System.Windows.Forms.TextBox();
             this.btn_XuatExcel = new System.Windows.Forms.Button();
@@ -103,8 +101,6 @@
             // grb_TextField
             // 
             this.grb_TextField.Controls.Add(this.cbx_MaLoai);
-            this.grb_TextField.Controls.Add(this.lb_MaKM);
-            this.grb_TextField.Controls.Add(this.cbx_MaKM);
             this.grb_TextField.Controls.Add(this.btn_NhapExcel);
             this.grb_TextField.Controls.Add(this.txt_MaSp);
             this.grb_TextField.Controls.Add(this.btn_XuatExcel);
@@ -139,23 +135,6 @@
             this.cbx_MaLoai.Name = "cbx_MaLoai";
             this.cbx_MaLoai.Size = new System.Drawing.Size(172, 28);
             this.cbx_MaLoai.TabIndex = 24;
-            // 
-            // lb_MaKM
-            // 
-            this.lb_MaKM.AutoSize = true;
-            this.lb_MaKM.Location = new System.Drawing.Point(31, 217);
-            this.lb_MaKM.Name = "lb_MaKM";
-            this.lb_MaKM.Size = new System.Drawing.Size(109, 20);
-            this.lb_MaKM.TabIndex = 23;
-            this.lb_MaKM.Text = "Mã khuyến mãi";
-            // 
-            // cbx_MaKM
-            // 
-            this.cbx_MaKM.FormattingEnabled = true;
-            this.cbx_MaKM.Location = new System.Drawing.Point(185, 214);
-            this.cbx_MaKM.Name = "cbx_MaKM";
-            this.cbx_MaKM.Size = new System.Drawing.Size(172, 28);
-            this.cbx_MaKM.TabIndex = 22;
             // 
             // btn_NhapExcel
             // 
@@ -396,7 +375,5 @@
         private DataGridView dssp_DSSP;
         private GroupBox grb_TextField;
         private ComboBox cbx_MaLoai;
-        private Label lb_MaKM;
-        private ComboBox cbx_MaKM;
     }
 }
