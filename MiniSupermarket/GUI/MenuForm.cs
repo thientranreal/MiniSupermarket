@@ -50,6 +50,7 @@ namespace MiniSupermarket.GUI
 
             forms.Add("Quản lý nhập hàng", new PurchaseOderForm());
             forms.Add("Quản lý nhân viên", new EmployeeForm());
+            forms.Add("Quản lý khách hàng", new CustomerForm());
 
 
             // Ẩn nút chức năng
@@ -281,6 +282,13 @@ namespace MiniSupermarket.GUI
         {
             EmployeeForm temp = (EmployeeForm)forms["Quản lý nhân viên"];
             OpenChildForm(temp, sender, "Quản lý nhân viên");
+            temp.LoadTheme();
+        }
+
+        private void btnCustomers_Click(object sender, EventArgs e)
+        {
+            CustomerForm temp = (CustomerForm)forms["Quản lý khách hàng"];
+            OpenChildForm(temp, sender, "Quản lý khách hàng");
             temp.LoadTheme();
         }
     }

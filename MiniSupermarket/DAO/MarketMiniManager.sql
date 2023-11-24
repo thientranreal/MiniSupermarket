@@ -948,3 +948,73 @@ BEGIN
 END;
 GO
 -- ===================================================End Sang
+
+-- ========================================================Tiến
+CREATE PROCEDURE [dbo].[SelectAllCustomer]
+AS
+BEGIN
+    SELECT * FROM Customer;
+END;
+GO
+
+CREATE PROCEDURE [dbo].[InsertCustomer]
+    @CustomerID VARCHAR(10),
+    @Name NVARCHAR(MAX),
+    @PhoneNumber NVARCHAR(MAX),
+    @Sex NVARCHAR(10),
+    @Point INT = NULL,  -- Set a default value to allow NULL
+    @isDeleted BIT
+AS
+BEGIN
+    -- Your query to insert a new customer
+    INSERT INTO customer (CustomerID, Name, PhoneNumber, Sex, Point, isDeleted)
+    VALUES (@CustomerID, @Name, @PhoneNumber, @Sex, COALESCE(@Point, 0), @isDeleted);
+END;
+GO
+
+CREATE PROCEDURE [dbo].[UpdateCustomer]
+    @CustomerID VARCHAR(10),
+    @Name NVARCHAR(MAX),
+    @PhoneNumber NVARCHAR(MAX),
+    @Sex NVARCHAR(10),
+    @Point INT = NULL,  -- Set a default value to allow NULL
+    @isDeleted BIT
+AS
+BEGIN
+    -- Your query to update customer information by CustomerID
+    UPDATE customer
+    SET
+        Name = @Name,
+        PhoneNumber = @PhoneNumber,
+        Sex = @Sex,
+        Point = COALESCE(@Point, 0),
+        isDeleted = @isDeleted
+    WHERE
+        CustomerID = @CustomerID;
+END;
+GO
+
+CREATE PROCEDURE [dbo].[DeleteCustomer]
+    @CustomerID VARCHAR(10)
+AS
+BEGIN
+    -- Your query to delete a customer by CustomerID
+    DELETE FROM customer WHERE CustomerID = @CustomerID;
+END;
+GO
+
+
+CREATE PROCEDURE [dbo].[GetAllDetailBills]
+AS
+BEGIN
+    SELECT
+        [BillID],
+        [ProductID],
+        [OrderID],
+        [SalePrice],
+        [Quantity]
+    FROM
+        [DetailBill];
+END;
+GO
+-- =========================================================End Tiến
