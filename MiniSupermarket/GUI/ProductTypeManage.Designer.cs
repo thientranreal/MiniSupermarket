@@ -55,8 +55,9 @@
             pnl_left.Controls.Add(grb_search);
             pnl_left.Dock = DockStyle.Left;
             pnl_left.Location = new Point(0, 0);
+            pnl_left.Margin = new Padding(3, 2, 3, 2);
             pnl_left.Name = "pnl_left";
-            pnl_left.Size = new Size(417, 538);
+            pnl_left.Size = new Size(365, 404);
             pnl_left.TabIndex = 1;
             // 
             // grb_textField
@@ -69,9 +70,11 @@
             grb_textField.Controls.Add(lb_typeName);
             grb_textField.Controls.Add(lb_idType);
             grb_textField.Dock = DockStyle.Fill;
-            grb_textField.Location = new Point(0, 125);
+            grb_textField.Location = new Point(0, 94);
+            grb_textField.Margin = new Padding(3, 2, 3, 2);
             grb_textField.Name = "grb_textField";
-            grb_textField.Size = new Size(417, 413);
+            grb_textField.Padding = new Padding(3, 2, 3, 2);
+            grb_textField.Size = new Size(365, 310);
             grb_textField.TabIndex = 1;
             grb_textField.TabStop = false;
             grb_textField.Text = "Thông tin";
@@ -80,9 +83,10 @@
             // 
             btn_mod.FlatAppearance.BorderSize = 0;
             btn_mod.FlatStyle = FlatStyle.Flat;
-            btn_mod.Location = new Point(304, 153);
+            btn_mod.Location = new Point(266, 115);
+            btn_mod.Margin = new Padding(3, 2, 3, 2);
             btn_mod.Name = "btn_mod";
-            btn_mod.Size = new Size(106, 49);
+            btn_mod.Size = new Size(93, 37);
             btn_mod.TabIndex = 2;
             btn_mod.Text = "Sửa";
             btn_mod.UseVisualStyleBackColor = true;
@@ -92,9 +96,10 @@
             // 
             btn_del.FlatAppearance.BorderSize = 0;
             btn_del.FlatStyle = FlatStyle.Flat;
-            btn_del.Location = new Point(158, 153);
+            btn_del.Location = new Point(138, 115);
+            btn_del.Margin = new Padding(3, 2, 3, 2);
             btn_del.Name = "btn_del";
-            btn_del.Size = new Size(106, 49);
+            btn_del.Size = new Size(93, 37);
             btn_del.TabIndex = 2;
             btn_del.Text = "Xóa";
             btn_del.UseVisualStyleBackColor = true;
@@ -104,9 +109,10 @@
             // 
             btn_add.FlatAppearance.BorderSize = 0;
             btn_add.FlatStyle = FlatStyle.Flat;
-            btn_add.Location = new Point(12, 153);
+            btn_add.Location = new Point(10, 115);
+            btn_add.Margin = new Padding(3, 2, 3, 2);
             btn_add.Name = "btn_add";
-            btn_add.Size = new Size(106, 49);
+            btn_add.Size = new Size(93, 37);
             btn_add.TabIndex = 2;
             btn_add.Text = "Thêm";
             btn_add.UseVisualStyleBackColor = true;
@@ -114,33 +120,35 @@
             // 
             // txt_nameType
             // 
-            txt_nameType.Location = new Point(127, 95);
+            txt_nameType.Location = new Point(111, 71);
+            txt_nameType.Margin = new Padding(3, 2, 3, 2);
             txt_nameType.Name = "txt_nameType";
-            txt_nameType.Size = new Size(284, 27);
+            txt_nameType.Size = new Size(249, 23);
             txt_nameType.TabIndex = 1;
             // 
             // txt_idType
             // 
-            txt_idType.Location = new Point(127, 40);
+            txt_idType.Location = new Point(111, 30);
+            txt_idType.Margin = new Padding(3, 2, 3, 2);
             txt_idType.Name = "txt_idType";
-            txt_idType.Size = new Size(284, 27);
+            txt_idType.Size = new Size(249, 23);
             txt_idType.TabIndex = 1;
             // 
             // lb_typeName
             // 
             lb_typeName.AutoSize = true;
-            lb_typeName.Location = new Point(12, 102);
+            lb_typeName.Location = new Point(10, 76);
             lb_typeName.Name = "lb_typeName";
-            lb_typeName.Size = new Size(61, 20);
+            lb_typeName.Size = new Size(47, 15);
             lb_typeName.TabIndex = 0;
             lb_typeName.Text = "Tên loại";
             // 
             // lb_idType
             // 
             lb_idType.AutoSize = true;
-            lb_idType.Location = new Point(12, 47);
+            lb_idType.Location = new Point(10, 35);
             lb_idType.Name = "lb_idType";
-            lb_idType.Size = new Size(59, 20);
+            lb_idType.Size = new Size(46, 15);
             lb_idType.TabIndex = 0;
             lb_idType.Text = "Mã loại";
             // 
@@ -150,17 +158,20 @@
             grb_search.Controls.Add(cb_search);
             grb_search.Dock = DockStyle.Top;
             grb_search.Location = new Point(0, 0);
+            grb_search.Margin = new Padding(3, 2, 3, 2);
             grb_search.Name = "grb_search";
-            grb_search.Size = new Size(417, 125);
+            grb_search.Padding = new Padding(3, 2, 3, 2);
+            grb_search.Size = new Size(365, 94);
             grb_search.TabIndex = 0;
             grb_search.TabStop = false;
             grb_search.Text = "Tìm kiếm theo";
             // 
             // txt_search
             // 
-            txt_search.Location = new Point(169, 55);
+            txt_search.Location = new Point(148, 41);
+            txt_search.Margin = new Padding(3, 2, 3, 2);
             txt_search.Name = "txt_search";
-            txt_search.Size = new Size(242, 27);
+            txt_search.Size = new Size(212, 23);
             txt_search.TabIndex = 1;
             txt_search.TextChanged += txt_search_TextChanged;
             txt_search.KeyDown += txt_search_KeyDown;
@@ -168,9 +179,10 @@
             // cb_search
             // 
             cb_search.FormattingEnabled = true;
-            cb_search.Location = new Point(12, 55);
+            cb_search.Location = new Point(10, 41);
+            cb_search.Margin = new Padding(3, 2, 3, 2);
             cb_search.Name = "cb_search";
-            cb_search.Size = new Size(151, 28);
+            cb_search.Size = new Size(133, 23);
             cb_search.TabIndex = 0;
             cb_search.SelectedIndexChanged += cb_search_SelectedIndexChanged;
             // 
@@ -178,9 +190,10 @@
             // 
             pnl_right.Controls.Add(dgv_qllsp);
             pnl_right.Dock = DockStyle.Fill;
-            pnl_right.Location = new Point(417, 0);
+            pnl_right.Location = new Point(365, 0);
+            pnl_right.Margin = new Padding(3, 2, 3, 2);
             pnl_right.Name = "pnl_right";
-            pnl_right.Size = new Size(617, 538);
+            pnl_right.Size = new Size(540, 404);
             pnl_right.TabIndex = 2;
             // 
             // dgv_qllsp
@@ -188,22 +201,24 @@
             dgv_qllsp.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgv_qllsp.Dock = DockStyle.Fill;
             dgv_qllsp.Location = new Point(0, 0);
+            dgv_qllsp.Margin = new Padding(3, 2, 3, 2);
             dgv_qllsp.MultiSelect = false;
             dgv_qllsp.Name = "dgv_qllsp";
             dgv_qllsp.RowHeadersWidth = 51;
             dgv_qllsp.RowTemplate.Height = 29;
             dgv_qllsp.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv_qllsp.Size = new Size(617, 538);
+            dgv_qllsp.Size = new Size(540, 404);
             dgv_qllsp.TabIndex = 0;
             dgv_qllsp.CellClick += dgv_qllsp_CellClick;
             // 
             // ProductTypeManage
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1034, 538);
+            ClientSize = new Size(905, 404);
             Controls.Add(pnl_right);
             Controls.Add(pnl_left);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "ProductTypeManage";
             Text = "ProductTypeManage";
             Load += ProductTypeManage_Load;

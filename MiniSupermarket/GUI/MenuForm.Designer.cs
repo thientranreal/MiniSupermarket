@@ -73,6 +73,7 @@
             panelMenu.Controls.Add(panelLogo);
             panelMenu.Dock = DockStyle.Left;
             panelMenu.Location = new Point(0, 0);
+            panelMenu.Margin = new Padding(3, 2, 3, 2);
             panelMenu.Name = "panelMenu";
             panelMenu.Size = new Size(219, 853);
             panelMenu.TabIndex = 0;
@@ -85,7 +86,8 @@
             btnLogout.ForeColor = Color.Gainsboro;
             btnLogout.Image = Properties.Resources.iconProduct;
             btnLogout.ImageAlign = ContentAlignment.MiddleLeft;
-            btnLogout.Location = new Point(0, 740);
+            btnLogout.Location = new Point(0, 555);
+            btnLogout.Margin = new Padding(3, 2, 3, 2);
             btnLogout.Name = "btnLogout";
             btnLogout.Padding = new Padding(11, 0, 0, 0);
             btnLogout.Size = new Size(219, 60);
@@ -104,7 +106,8 @@
             btnAccount.ForeColor = Color.Gainsboro;
             btnAccount.Image = Properties.Resources.iconProduct;
             btnAccount.ImageAlign = ContentAlignment.MiddleLeft;
-            btnAccount.Location = new Point(0, 680);
+            btnAccount.Location = new Point(0, 510);
+            btnAccount.Margin = new Padding(3, 2, 3, 2);
             btnAccount.Name = "btnAccount";
             btnAccount.Padding = new Padding(11, 0, 0, 0);
             btnAccount.Size = new Size(219, 60);
@@ -123,7 +126,8 @@
             btnStatistic.ForeColor = Color.Gainsboro;
             btnStatistic.Image = Properties.Resources.iconProduct;
             btnStatistic.ImageAlign = ContentAlignment.MiddleLeft;
-            btnStatistic.Location = new Point(0, 620);
+            btnStatistic.Location = new Point(0, 465);
+            btnStatistic.Margin = new Padding(3, 2, 3, 2);
             btnStatistic.Name = "btnStatistic";
             btnStatistic.Padding = new Padding(11, 0, 0, 0);
             btnStatistic.Size = new Size(219, 60);
@@ -132,6 +136,7 @@
             btnStatistic.TextAlign = ContentAlignment.MiddleLeft;
             btnStatistic.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnStatistic.UseVisualStyleBackColor = true;
+            btnStatistic.Click += btnStatistic_Click;
             // 
             // btnSuppliers
             // 
@@ -141,15 +146,18 @@
             btnSuppliers.ForeColor = Color.Gainsboro;
             btnSuppliers.Image = Properties.Resources.iconProduct;
             btnSuppliers.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSuppliers.Location = new Point(0, 560);
+            btnSuppliers.Location = new Point(0, 420);
+            btnSuppliers.Margin = new Padding(3, 2, 3, 2);
             btnSuppliers.Name = "btnSuppliers";
             btnSuppliers.Padding = new Padding(11, 0, 0, 0);
             btnSuppliers.Size = new Size(219, 60);
+
             btnSuppliers.TabIndex = 9;
             btnSuppliers.Text = "Nhà cung cấp";
             btnSuppliers.TextAlign = ContentAlignment.MiddleLeft;
             btnSuppliers.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnSuppliers.UseVisualStyleBackColor = true;
+            btnSuppliers.Click += btnSuppliers_Click;
             // 
             // btnPromotions
             // 
@@ -159,7 +167,8 @@
             btnPromotions.ForeColor = Color.Gainsboro;
             btnPromotions.Image = Properties.Resources.iconProduct;
             btnPromotions.ImageAlign = ContentAlignment.MiddleLeft;
-            btnPromotions.Location = new Point(0, 500);
+            btnPromotions.Location = new Point(0, 375);
+            btnPromotions.Margin = new Padding(3, 2, 3, 2);
             btnPromotions.Name = "btnPromotions";
             btnPromotions.Padding = new Padding(11, 0, 0, 0);
             btnPromotions.Size = new Size(219, 60);
@@ -178,7 +187,8 @@
             btnRoles.ForeColor = Color.Gainsboro;
             btnRoles.Image = Properties.Resources.iconProduct;
             btnRoles.ImageAlign = ContentAlignment.MiddleLeft;
-            btnRoles.Location = new Point(0, 440);
+            btnRoles.Location = new Point(0, 330);
+            btnRoles.Margin = new Padding(3, 2, 3, 2);
             btnRoles.Name = "btnRoles";
             btnRoles.Padding = new Padding(11, 0, 0, 0);
             btnRoles.Size = new Size(219, 60);
@@ -196,7 +206,8 @@
             btnEmployees.ForeColor = Color.Gainsboro;
             btnEmployees.Image = Properties.Resources.iconProduct;
             btnEmployees.ImageAlign = ContentAlignment.MiddleLeft;
-            btnEmployees.Location = new Point(0, 380);
+            btnEmployees.Location = new Point(0, 285);
+            btnEmployees.Margin = new Padding(3, 2, 3, 2);
             btnEmployees.Name = "btnEmployees";
             btnEmployees.Padding = new Padding(11, 0, 0, 0);
             btnEmployees.Size = new Size(219, 60);
@@ -214,7 +225,8 @@
             btnImport.ForeColor = Color.Gainsboro;
             btnImport.Image = Properties.Resources.iconProduct;
             btnImport.ImageAlign = ContentAlignment.MiddleLeft;
-            btnImport.Location = new Point(0, 320);
+            btnImport.Location = new Point(0, 240);
+            btnImport.Margin = new Padding(3, 2, 3, 2);
             btnImport.Name = "btnImport";
             btnImport.Padding = new Padding(11, 0, 0, 0);
             btnImport.Size = new Size(219, 60);
@@ -233,7 +245,8 @@
             btnSale.ForeColor = Color.Gainsboro;
             btnSale.Image = Properties.Resources.iconProduct;
             btnSale.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSale.Location = new Point(0, 260);
+            btnSale.Location = new Point(0, 195);
+            btnSale.Margin = new Padding(3, 2, 3, 2);
             btnSale.Name = "btnSale";
             btnSale.Padding = new Padding(11, 0, 0, 0);
             btnSale.Size = new Size(219, 60);
@@ -252,7 +265,8 @@
             btnCustomers.ForeColor = Color.Gainsboro;
             btnCustomers.Image = Properties.Resources.iconProduct;
             btnCustomers.ImageAlign = ContentAlignment.MiddleLeft;
-            btnCustomers.Location = new Point(0, 200);
+            btnCustomers.Location = new Point(0, 150);
+            btnCustomers.Margin = new Padding(3, 2, 3, 2);
             btnCustomers.Name = "btnCustomers";
             btnCustomers.Padding = new Padding(11, 0, 0, 0);
             btnCustomers.Size = new Size(219, 60);
@@ -270,7 +284,8 @@
             btnProducts.ForeColor = Color.Gainsboro;
             btnProducts.Image = Properties.Resources.iconProduct;
             btnProducts.ImageAlign = ContentAlignment.MiddleLeft;
-            btnProducts.Location = new Point(0, 140);
+            btnProducts.Location = new Point(0, 105);
+            btnProducts.Margin = new Padding(3, 2, 3, 2);
             btnProducts.Name = "btnProducts";
             btnProducts.Padding = new Padding(11, 0, 0, 0);
             btnProducts.Size = new Size(219, 60);
@@ -289,7 +304,8 @@
             btnProductType.ForeColor = Color.Gainsboro;
             btnProductType.Image = Properties.Resources.iconProduct;
             btnProductType.ImageAlign = ContentAlignment.MiddleLeft;
-            btnProductType.Location = new Point(0, 80);
+            btnProductType.Location = new Point(0, 60);
+            btnProductType.Margin = new Padding(3, 2, 3, 2);
             btnProductType.Name = "btnProductType";
             btnProductType.Padding = new Padding(11, 0, 0, 0);
             btnProductType.Size = new Size(219, 60);
@@ -306,8 +322,10 @@
             panelLogo.Controls.Add(label1);
             panelLogo.Dock = DockStyle.Top;
             panelLogo.Location = new Point(0, 0);
+            panelLogo.Margin = new Padding(3, 2, 3, 2);
             panelLogo.Name = "panelLogo";
             panelLogo.Size = new Size(219, 80);
+
             panelLogo.TabIndex = 0;
             // 
             // label1
@@ -317,7 +335,7 @@
             label1.ForeColor = Color.LightGray;
             label1.Location = new Point(70, 29);
             label1.Name = "label1";
-            label1.Size = new Size(67, 25);
+            label1.Size = new Size(52, 20);
             label1.TabIndex = 0;
             label1.Text = "TITLE";
             // 
@@ -389,8 +407,9 @@
             btnCloseChildForm.ForeColor = SystemColors.ActiveCaption;
             btnCloseChildForm.Image = Properties.Resources.iconX;
             btnCloseChildForm.Location = new Point(0, 0);
+            btnCloseChildForm.Margin = new Padding(3, 2, 3, 2);
             btnCloseChildForm.Name = "btnCloseChildForm";
-            btnCloseChildForm.Size = new Size(94, 80);
+            btnCloseChildForm.Size = new Size(82, 60);
             btnCloseChildForm.TabIndex = 1;
             btnCloseChildForm.UseVisualStyleBackColor = true;
             btnCloseChildForm.Click += btnCloseChildForm_Click;
@@ -403,7 +422,7 @@
             lblTitle.ForeColor = Color.White;
             lblTitle.Location = new Point(571, 9);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(98, 32);
+            lblTitle.Size = new Size(78, 26);
             lblTitle.TabIndex = 0;
             lblTitle.Text = "HOME";
             // 
@@ -417,12 +436,13 @@
             // 
             // MenuForm
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1582, 853);
             Controls.Add(panelDesktopPane);
             Controls.Add(panelTitleBar);
             Controls.Add(panelMenu);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "MenuForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "MenuForm";
