@@ -40,6 +40,7 @@ namespace MiniSupermarket.GUI
             forms = new Dictionary<string, Form>();
             forms.Add("Quản lý sản phẩm", new ProductManage());
             forms.Add("Quản lý loại sản phẩm", new ProductTypeManage());
+            forms.Add("Quản lý nhà cung cấp",new NCCForm());
             forms.Add("Quản lý bán hàng", new SaleForm());
 
             forms.Add("Quản lý chương trình khuyến mãi", new PromotionForm());
@@ -252,6 +253,15 @@ namespace MiniSupermarket.GUI
             temp.LoadTheme();
         }
 
+        private void btnStatistic_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void btnSuppliers_Click(object sender, EventArgs e)
+        {
+            NCCForm temp = (NCCForm)forms["Quản lý nhà cung cấp"];
+            OpenChildForm(temp, sender, "Quản lý nhà cung cấp");
         private void btnProducts_Click_1(object sender, EventArgs e)
         {
             ProductManage temp = (ProductManage)forms["Quản lý sản phẩm"];

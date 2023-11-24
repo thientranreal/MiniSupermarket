@@ -531,6 +531,99 @@ BEGIN
 	ON Bill.CustomerID = Customer.CustomerID
 END;
 GO
+--Lấy tất cả thông tin nhà cung cấp
+CREATE PROCEDURE SelectAllSupplier
+AS
+BEGIN
+	SELECT 
+	Supplier.SupplierID AS ID,
+	Supplier.[Name] AS TÊN ,
+	Supplier.[Address] [Địa chỉ],
+	Supplier.PhoneNumber AS [Số điện thoại],
+	Supplier.Email
+	FROM Supplier 
+	WHERE Supplier.isDeleted=1;
+END;
+GO
+--Lấy thông tin chi tiết nhà cung cấp
+ALTER PROCEDURE SelectAllSupplierDetail
+	@ID varchar(10)
+AS
+BEGIN
+	SELECT
+	SupplierProduct.ProductID AS ID,
+	SupplierProduct.SupplyStartDate AS [Ngày nhập],
+	Product.[Name],
+	Product.CurrentPrice
+
+	FROM 
+	(Supplier INNER JOIN SupplierProduct ON Supplier.SupplierID =SupplierProduct.SupplierID) INNER JOIN 
+	Product ON SupplierProduct.ProductID=Product.ProductID
+
+	WHERE SupplierProduct.SupplierID=@ID
+END;
+GO
+--Tìm thông tin theo ID nhà cung cấp
+Create PROCEDURE FindSupplierWithID
+	@ID varchar(10)
+AS
+BEGIN
+	SELECT
+	Supplier.SupplierID AS ID,
+	Supplier.[Name] AS TÊN ,
+	Supplier.[Address] [Địa chỉ],
+	Supplier.PhoneNumber AS [Số điện thoại],
+	Supplier.Email
+	FROM Supplier 
+	WHERE Supplier.SupplierID=@ID
+END;
+GO
+--Thêm nhà cung cấp 
+CREATE PROCEDURE AddSupplier
+	@ID varchar(50),
+	@Name nvarchar(50),
+	@Address nvarchar(50),
+	@PhoneNumber varchar(50),
+	@Email varchar(50),
+	@ProductID varchar(10),
+	@Date datetime
+
+AS
+BEGIN
+	INSERT INTO Supplier(SupplierID,[Name],[Address],PhoneNumber,Email)
+	VALUES 
+		(@ID,@Name,@Address,@PhoneNumber,@Email)
+	INSERT INTO SupplierProduct(SupplierID,ProductID,SupplyStartDate)
+	VALUES
+		(@ID,@ProductID,@Date)
+
+END;
+GO
+--Xóa nhà cung cấp
+ALTER PROCEDURE DelSupplier
+	@ID varchar(10)
+AS
+BEGIN
+	DELETE FROM SupplierProduct
+	WHERE SupplierID=@ID
+	DELETE FROM Supplier
+	WHERE SupplierID=@ID
+	
+END;
+GO
+--Lấy thông tin sản phẩm
+CREATE PROCEDURE AllProduct
+AS
+BEGIN
+	SELECT 
+	Product.ProductID AS ID,
+	Product.[Name] AS Tên,
+	Product.TypeID AS Loại,
+	Product.CurrentPrice AS Giá
+	FROM Product
+	WHERE Product.isDeleted=1;
+END;
+GO
 
 -- Lấy mã KH và tên KH
 CREATE PROCEDURE SelectCustomerIdAndName
@@ -801,5 +894,3 @@ BEGIN
     WHERE ProductID = @ProductID
 END;
 GO
-
-
