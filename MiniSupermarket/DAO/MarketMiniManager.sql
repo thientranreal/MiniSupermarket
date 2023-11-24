@@ -37,17 +37,18 @@ create table Employee(
 	Sex nvarchar(10) not null,
 	UserName varchar(50) not null,
 	[Password] varchar(50) not null,
+	BirthDate DATE,
 	isDeleted tinyint not null default(1),
 	primary key (EmployeeID)
 )
 GO
 
 -- Rot du lieu vao bang nhan vien
-insert into Employee(EmployeeID,Name,Address,PhoneNumber,Email,Sex,UserName,Password)
+insert into Employee(EmployeeID,Name,Password,Sex,BirthDate,PhoneNumber,Email,Address,UserName)
 values
-	('E0001',N'Nguyễn Văn A',N'123 An Dương Vương, Phường 3, Quận 2, TPHCM','0912312371','NguyenVanA@gmail.com',N'Nam','admin','1'),
-	('E0002',N'Nguyễn Văn B',N'456 Hoàng Hoa Thám, Phường 1, Quận Bình Tân, TPHCM','0914736281','NguyenVanB@gmail.com',N'Nữ','E0002','1'),
-	('E0003',N'Nguyễn Văn C',N'789 Nam Kỳ Khởi Nghĩa, Phường 9, Quận 8, TPHCM','0936271371','NguyenVanC@gmail.com',N'Nam','E0003','1')
+	('E0001',N'Nguyễn Văn A','1',N'Nam','2003-01-01','0912312371','NguyenVanA@gmail.com',N'123 An Dương Vương, Phường 3, Quận 2, TPHCM','admin'),
+	('E0002',N'Nguyễn Văn B','1',N'Nữ','2003-02-15','0914736281','NguyenVanB@gmail.com',N'456 Hoàng Hoa Thám, Phường 1, Quận Bình Tân, TPHCM','E0002'),
+	('E0003',N'Nguyễn Văn C','1',N'Nam','2003-08-30','0936271371','NguyenVanC@gmail.com',N'789 Nam Kỳ Khởi Nghĩa, Phường 9, Quận 8, TPHCM','E0003')
 GO
 
 --Tao bang san pham
@@ -887,3 +888,63 @@ BEGIN
     WHERE ProductID = @ProductID
 END;
 GO
+
+-- =================================================Sang
+-- Lấy danh sách nhân viên
+CREATE PROCEDURE SelectAllFromEmployee
+AS
+BEGIN
+		SELECT Employee.EmployeeID, [Password], [Name], Sex, BirthDate, PhoneNumber, Email, [Address]
+		FROM Employee
+		WHERE isDeleted = 1;
+
+END;
+GO
+
+-- Thêm nhân viên
+CREATE PROCEDURE InsertIntoEmployee
+    @EmployeeID varchar(10),
+    @Name nvarchar(50),
+    @Address nvarchar(50),
+    @PhoneNumber varchar(50),
+    @Email varchar(50),
+    @Sex nvarchar(10),
+    @BirthDate date,
+    @Password varchar(50),
+    @UserName varchar(50)
+AS
+BEGIN
+        INSERT INTO Employee (EmployeeID, [Name], Address, PhoneNumber, Email, Sex, BirthDate, Password, UserName)
+        VALUES (@EmployeeID, @Name, @Address, @PhoneNumber, @Email, @Sex, @BirthDate, @Password, @UserName);
+END;
+GO
+
+
+-- Xóa nhân viên
+CREATE PROCEDURE EditEmployee
+    @EmployeeID varchar(10),
+	@Name nvarchar(50),
+	@Address nvarchar(50),
+	@PhoneNumber varchar(50),
+	@Email varchar(50),
+	@Sex nvarchar(10),
+	@BirthDate date,
+	@Password varchar(50),
+	@UserName varchar(50)
+AS
+BEGIN
+    UPDATE Employee
+    SET
+        [Name] = @Name,
+        Address = @Address,
+        PhoneNumber = @PhoneNumber,
+        Email = @Email,
+        Sex = @Sex,
+        BirthDate = @BirthDate,
+        Password = @Password,
+		UserName = @UserName
+        
+    WHERE EmployeeID = @EmployeeID
+END;
+GO
+-- ===================================================End Sang

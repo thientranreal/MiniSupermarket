@@ -1,4 +1,5 @@
-﻿using MiniSupermarket.ImageAndFont;
+﻿using MiniSupermarket.BUS;
+using MiniSupermarket.ImageAndFont;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,7 +41,7 @@ namespace MiniSupermarket.GUI
             forms = new Dictionary<string, Form>();
             forms.Add("Quản lý sản phẩm", new ProductManage());
             forms.Add("Quản lý loại sản phẩm", new ProductTypeManage());
-            forms.Add("Quản lý nhà cung cấp",new NCCForm());
+            forms.Add("Quản lý nhà cung cấp", new NCCForm());
             forms.Add("Quản lý bán hàng", new SaleForm());
 
             forms.Add("Quản lý chương trình khuyến mãi", new PromotionForm());
@@ -48,6 +49,7 @@ namespace MiniSupermarket.GUI
             forms.Add("Tài khoản", new UserAccount());
 
             forms.Add("Quản lý nhập hàng", new PurchaseOderForm());
+            forms.Add("Quản lý nhân viên", new EmployeeForm());
 
 
             // Ẩn nút chức năng
@@ -255,7 +257,7 @@ namespace MiniSupermarket.GUI
 
         private void btnStatistic_Click(object sender, EventArgs e)
         {
-            
+
         }
 
         private void btnSuppliers_Click(object sender, EventArgs e)
@@ -273,6 +275,13 @@ namespace MiniSupermarket.GUI
         {
             PurchaseOderForm temp = (PurchaseOderForm)forms["Quản lý nhập hàng"];
             OpenChildForm(temp, sender, "Quản lý nhập hàng");
+        }
+
+        private void btnEmployees_Click(object sender, EventArgs e)
+        {
+            EmployeeForm temp = (EmployeeForm)forms["Quản lý nhân viên"];
+            OpenChildForm(temp, sender, "Quản lý nhân viên");
+            temp.LoadTheme();
         }
     }
 }
