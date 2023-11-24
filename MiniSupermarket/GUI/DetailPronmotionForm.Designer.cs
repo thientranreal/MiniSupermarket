@@ -67,6 +67,7 @@
             dgvProductPromotions.RowTemplate.Height = 29;
             dgvProductPromotions.Size = new Size(692, 447);
             dgvProductPromotions.TabIndex = 1;
+            dgvProductPromotions.CellMouseDoubleClick += dgvProductPromotions_CellMouseDoubleClick;
             // 
             // lblTitlePromotion
             // 
@@ -99,13 +100,14 @@
             dgvProducts.RowTemplate.Height = 29;
             dgvProducts.Size = new Size(576, 370);
             dgvProducts.TabIndex = 3;
+            dgvProducts.CellMouseDoubleClick += dgvProducts_CellMouseDoubleClick;
             // 
             // groupBox2
             // 
             groupBox2.Controls.Add(cbxTypeProduct);
-            groupBox2.Location = new Point(347, 60);
+            groupBox2.Location = new Point(377, 60);
             groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(155, 71);
+            groupBox2.Size = new Size(187, 71);
             groupBox2.TabIndex = 2;
             groupBox2.TabStop = false;
             groupBox2.Text = "Lọc theo loại sản phẩm";
@@ -115,7 +117,7 @@
             cbxTypeProduct.FormattingEnabled = true;
             cbxTypeProduct.Location = new Point(7, 26);
             cbxTypeProduct.Name = "cbxTypeProduct";
-            cbxTypeProduct.Size = new Size(139, 28);
+            cbxTypeProduct.Size = new Size(174, 28);
             cbxTypeProduct.TabIndex = 1;
             // 
             // groupBox1
@@ -124,7 +126,7 @@
             groupBox1.Controls.Add(cbxTypeSearch);
             groupBox1.Location = new Point(3, 60);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(338, 71);
+            groupBox1.Size = new Size(368, 71);
             groupBox1.TabIndex = 1;
             groupBox1.TabStop = false;
             groupBox1.Text = "Tìm kiếm theo";
@@ -133,7 +135,7 @@
             // 
             txtSearch.Location = new Point(193, 26);
             txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(125, 27);
+            txtSearch.Size = new Size(169, 27);
             txtSearch.TabIndex = 1;
             // 
             // cbxTypeSearch

@@ -625,11 +625,12 @@ GO
 
 -- Tải danh sách sản phẩm cho chương trình khuyến mãi (danh sách chọn)
 CREATE PROC SelectProductToPromotion
+	@PromotionID varchar(10)
 AS
 BEGIN
-	SELECT ProductID, [Name], TypeID, [Description]
+	SELECT ProductID, [Name], TypeID, PromotionID, [Description]
 	FROM Product
-	WHERE PromotionID = '' and isDeleted = '1'
+	WHERE (PromotionID != @PromotionID and isDeleted = '1') or PromotionID is null
 END;
 GO
 
@@ -643,6 +644,39 @@ BEGIN
 	WHERE PromotionID = @PromotionID and isDeleted = '1'
 END;
 GO
+
+-- Xoá sản phẩm khuyến mãi khỏi danh sách chi tiết khuyến mãi
+CREATE PROC DeleteProductFromPromotionProduct
+	@ProductID varchar(10)
+AS
+BEGIN
+	UPDATE Product SET PromotionID = null
+	WHERE ProductID = @ProductID
+END;
+GO
+
+-- Thêm sản phẩm vào danh sách chi tiết khuyến mãi
+CREATE PROC AddProductToPromotionProduct
+	@ProductID varchar(10),
+	@PromotionID varchar(10)
+AS
+BEGIN
+	UPDATE Product SET PromotionID = @PromotionID
+	WHERE ProductID = @ProductID
+END;
+GO
+
+-- Lấy mã chương trình khuyến mãi trong danh sách
+CREATE PROC GetPromotionIDFromProductID
+	@ProductID varchar(10)
+AS
+BEGIN
+	SELECT PromotionID
+	FROM Product
+	WHERE ProductID = @ProductID
+END;
+GO
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 ---------------------------------------------------Phiếu nhập và chi tiết phiếu nhập----------------------------------------------------
 -- Lấy danh sách phiếu nhập
@@ -688,6 +722,17 @@ BEGIN
 END;
 GO
 
+--Tải danh sách các sản phẩm vào chi tiết phiếu nhập( Tất cả sản phẩm)
+CREATE PROC SelectProductsToPurchaseOrder
+AS
+BEGIN
+	SELECT ProductID, Name, Quantity, [Description]
+	FROM Product
+	WHERE isDeleted = '1'
+END;
+GO
+
+-- Tải danh sách sản phẩm vào danh sách phiếu nhập( Sản phẩm chọn nhập)
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
