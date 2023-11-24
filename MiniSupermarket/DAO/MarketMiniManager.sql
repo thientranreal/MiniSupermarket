@@ -59,7 +59,6 @@ create table Product(
 	CurrentPrice float(50) not null,
 	[Description] nvarchar(100),
 	Unit nvarchar(20) not null,
-	[Image] varchar(50),
 	PromotionID varchar(10),
 	isDeleted tinyint not null default(1),
 	
@@ -68,12 +67,12 @@ create table Product(
 GO
 
 -- Rot du lieu bang san pham	
-insert into Product(ProductID,[Name],TypeID,Quantity,CurrentPrice,[Description],Unit,[Image],PromotionID)
+insert into Product(ProductID,[Name],TypeID,Quantity,CurrentPrice,[Description],Unit,PromotionID)
 values
-	('P0001',N'Mì Kokomi','PT0001',100,2000,N'Mì Kokomi tôm chua cay 100g',N'Gói','.','PM0001'),
-	('P0002',N'Sữa Milo','PT0002',100,4000,N'Sữa Milo vị ca cao lúa mạch 100ml',N'Hộp','.','PM0001'),
-	('P0003',N'Bánh Slay','PT0003',100,9000,N'Bánh Slay khoai tây chiên vị tảo',N'Gói','.','PM0002'),
-	('P0004',N'Mì Hảo hảo','PT0001',100,2500,N'Mì hảo hảo lẩu thái tôm',N'Gói','.','PM0003')
+	('P0001',N'Mì Kokomi','PT0001',100,2000,N'Mì Kokomi tôm chua cay 100g',N'Gói','PM0001'),
+	('P0002',N'Sữa Milo','PT0002',100,4000,N'Sữa Milo vị ca cao lúa mạch 100ml',N'Hộp','PM0001'),
+	('P0003',N'Bánh Slay','PT0003',100,9000,N'Bánh Slay khoai tây chiên vị tảo',N'Gói','PM0002'),
+	('P0004',N'Mì Hảo hảo','PT0001',100,2500,N'Mì hảo hảo lẩu thái tôm',N'Gói','PM0003')
 GO
 
 --Tao bang khuyen mai
@@ -206,18 +205,17 @@ create table DetailPurchaseOrder(
 	ProductID varchar(10) not null,
 	OrderID varchar(10) not null,
 	Quantity int not null,
-	Unit nvarchar(50) not null,
 	PurchasePrice float(50) not null,
 	primary key (ProductID,OrderID)
 )
 GO
 
 -- Rot du lieu vao bang chi tiet phieu nhap
-INSERT INTO DetailPurchaseOrder (ProductID, OrderID, Quantity, Unit, PurchasePrice)
+INSERT INTO DetailPurchaseOrder (ProductID, OrderID, Quantity, PurchasePrice)
 VALUES
-    ('P0001', 'PO0001', 100, N'Gói', 2000),
-    ('P0002', 'PO0002', 100, N'Hộp', 4000),
-    ('P0003', 'PO0003', 100, N'Gói', 9000);
+    ('P0001', 'PO0001', 100, 2000),
+    ('P0002', 'PO0002', 100, 4000),
+    ('P0003', 'PO0003', 100, 9000);
 GO
 
 --Tao bang san pham ma nha cung cap cung cap
@@ -242,18 +240,17 @@ create table Inventory(
 	ProductID varchar(10) not null,
 	OrderID varchar(10) not null,
 	CurrentQuantity int not null,
-	ExpiredDate datetime not null,
 	isDisplayed tinyint not null default(1),
 	primary key (OrderID,ProductID)
 )
 GO
 
 --Rot du lieu vao bang hang ton kho
-INSERT INTO Inventory (ProductID, OrderID, CurrentQuantity, ExpiredDate)
+INSERT INTO Inventory (ProductID, OrderID, CurrentQuantity)
 VALUES
-    ('P0001', 'PO0001', 100, '2023-12-30'),
-    ('P0002', 'PO0002', 100, '2023-12-30'),
-    ('P0003', 'PO0003', 100, '2023-12-30');
+    ('P0001', 'PO0001', 100),
+    ('P0002', 'PO0002', 100),
+    ('P0003', 'PO0003', 100);
 GO
 
 --Tao bang quan ly quyen
@@ -546,7 +543,7 @@ BEGIN
 END;
 GO
 --Lấy thông tin chi tiết nhà cung cấp
-ALTER PROCEDURE SelectAllSupplierDetail
+Create PROCEDURE SelectAllSupplierDetail
 	@ID varchar(10)
 AS
 BEGIN
@@ -600,7 +597,7 @@ BEGIN
 END;
 GO
 --Xóa nhà cung cấp
-ALTER PROCEDURE DelSupplier
+Create PROCEDURE DelSupplier
 	@ID varchar(10)
 AS
 BEGIN
@@ -831,7 +828,6 @@ BEGIN
         CurrentPrice,
         [Description],
         Unit,
-        [Image],
         isDeleted,
         PromotionID
     FROM Product
@@ -852,8 +848,8 @@ CREATE PROCEDURE InsertIntoProduct
     
 AS
 BEGIN
-    INSERT INTO Product (ProductID, [Name], TypeID, Quantity, CurrentPrice, [Description], Unit, [Image],PromotionID)
-    VALUES (@ProductID, @Name, @TypeID, @Quantity, @CurrentPrice, @Description, @Unit, @Image, @PromotionID )
+    INSERT INTO Product (ProductID, [Name], TypeID, Quantity, CurrentPrice, [Description], Unit, PromotionID)
+    VALUES (@ProductID, @Name, @TypeID, @Quantity, @CurrentPrice, @Description, @Unit, @PromotionID )
 END;
 GO
 -- Cập nhật sản phẩm
@@ -865,7 +861,6 @@ CREATE PROCEDURE UpdateProduct
     @CurrentPrice float(53),
     @Description nvarchar(100),
     @Unit nvarchar(20),
-    @Image varchar(50),
 	@PromotionID varchar(10)
     
 AS
@@ -878,7 +873,6 @@ BEGIN
         CurrentPrice = @CurrentPrice,
         [Description] = @Description,
         Unit = @Unit,
-        [Image] = @Image,
 		PromotionID = @PromotionID
         
     WHERE ProductID = @ProductID
