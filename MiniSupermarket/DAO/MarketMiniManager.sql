@@ -134,11 +134,11 @@ GO
 
 
 -- Rot du lieu vao bang hoa don
-INSERT INTO Bill (BillID, [Date], EmployeeID, CustomerID, EstimatedPrice, ReducePrice, TotalPrice)
+INSERT INTO Bill (BillID, [Date], EmployeeID, CustomerID, EstimatedPrice, ReducePrice, TotalPrice, [Status])
 VALUES
-    ('B0001', '2023-09-23', 'E0001', 'C0001', 100.0, 0, 100.0),
-    ('B0002', '2023-09-23', 'E0002', 'C0002', 200.0, 0, 200.0),
-    ('B0003', '2023-09-23', 'E0003', 'C0003', 300.0, 0, 300.0);
+    ('B0001', '2023-09-23', 'E0001', 'C0001', 100.0, 0, 100.0, 0),
+    ('B0002', '2023-09-23', 'E0002', 'C0002', 200.0, 0, 200.0, 0),
+    ('B0003', '2023-09-23', 'E0003', 'C0003', 300.0, 0, 300.0, 1);
 GO
 
 --Tao bang nha cung cap
@@ -414,6 +414,9 @@ add constraint fk_RoleFunction_Functions foreign key (FunctionID) references Fun
 GO
 
 -- Tạo các procedures
+
+-- Thien ======================================================================================================
+
 -- Select * from ProductType
 CREATE PROCEDURE SelectAllFromProductType
 AS
@@ -522,10 +525,10 @@ BEGIN
 	SELECT Bill.BillID, Bill.[Date], Bill.EmployeeID,
     Employee.[Name] AS EmployeeName, Bill.CustomerID,
     Customer.[Name] AS CustomerName, 
-    Bill.EstimatedPrice, Bill.ReducePrice, Bill.TotalPrice, Bill.[Status] FROM Bill INNER JOIN Employee
+    Bill.EstimatedPrice, Bill.ReducePrice, Bill.TotalPrice, Bill.[Status], Bill.isDeleted
+	FROM Bill INNER JOIN Employee
 	ON Bill.EmployeeID = Employee.EmployeeID LEFT JOIN Customer
 	ON Bill.CustomerID = Customer.CustomerID
-    WHERE Bill.isDeleted = 1
 END;
 GO
 
@@ -552,8 +555,38 @@ BEGIN
 END;
 GO
 
+-- Thêm khách hàng cho hóa đơn
+CREATE PROC InsertCustomerSale
+	@CustomerID varchar(10),
+	@Name nvarchar(50),
+	@PhoneNumber varchar(50),
+	@Sex nvarchar(10)
+AS
+BEGIN
+	INSERT INTO Customer(CustomerID, [Name], PhoneNumber, Sex)
+	VALUES (@CustomerID, @Name, @PhoneNumber, @Sex)
+END;
+GO
+
+-- Xóa hóa đơn
+CREATE PROC DeleteBill
+	@BillID varchar(10)
+AS
+BEGIN
+	UPDATE Bill
+	SET Bill.isDeleted = 0
+	WHERE BillID = @BillID AND isDeleted = 1
+END;
+GO
+
+-- Thien ======================================================================================================
+
+
 --========= Đại ==========
 ---------------------------------------------------Chương trình khuyến mãi và chi tiết chương trình khuyến mãi----------------------------------------------------
+=======
+
+-- Đại
 -- Lấy tất cả thông tin chương trình khuyến mãi
 CREATE PROC SelectAllPromotions
 AS
@@ -766,19 +799,6 @@ BEGIN
     UPDATE Product
     SET isDeleted = 0
     WHERE ProductID = @ProductID
-END;
-GO
-
--- Thêm khách hàng cho hóa đơn
-CREATE PROC InsertCustomerSale
-	@CustomerID varchar(10),
-	@Name nvarchar(50),
-	@PhoneNumber varchar(50),
-	@Sex nvarchar(10)
-AS
-BEGIN
-	INSERT INTO Customer(CustomerID, [Name], PhoneNumber, Sex)
-	VALUES (@CustomerID, @Name, @PhoneNumber, @Sex)
 END;
 GO
 

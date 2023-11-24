@@ -6,6 +6,7 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace MiniSupermarket.BUS
 {
@@ -23,7 +24,16 @@ namespace MiniSupermarket.BUS
 
         public DataTable getAllBills()
         {
-            return bills;
+            // Lấy những bill chưa xóa
+            DataRow[] selectedRows = bills.Select("isDeleted = 1");
+            DataTable newTable = selectedRows.CopyToDataTable();
+
+            if (newTable.Columns.Contains("isDeleted"))
+            {
+                newTable.Columns.Remove("isDeleted");
+            }
+
+            return newTable;
         }
 
         public List<string> getCustomers()
@@ -33,6 +43,7 @@ namespace MiniSupermarket.BUS
         // Cập nhật danh sách bill
         public void updateBills()
         {
+            // Lấy hết tất cả bill kể cả những bill đã xóa
             string procedureName = "SelectAllBills";
 
             bills = Connection.Execute(procedureName, null);
@@ -135,10 +146,21 @@ namespace MiniSupermarket.BUS
             // Nếu thêm khách hàng thành công thì cập nhật danh sách khách hàng
             if (Connection.ExecuteNonQuery(procedure, parameters))
             {
-                updateCustomers();
+                customers.Add($"[{customerId}] {name}");
                 return true;
             }
             return false;
+        }
+
+        // Xóa hóa đơn chưa thanh toán
+        public bool DeleteBill(string billId)
+        {
+            string procedure = "DeleteBill";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@BillID", billId)
+            };
+            return Connection.ExecuteNonQuery(procedure, parameters);
         }
     }
 }
