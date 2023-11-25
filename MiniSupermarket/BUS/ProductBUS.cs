@@ -142,6 +142,7 @@ namespace MiniSupermarket.BUS
             result.Columns.Add("CurrentPrice", typeof(string));
             result.Columns.Add("Description", typeof(string));
             result.Columns.Add("Unit", typeof(string));
+            result.Columns.Add("PromotionID", typeof(string));
 
             foreach (DataRow row in product.Rows)
             {
@@ -157,6 +158,7 @@ namespace MiniSupermarket.BUS
                     rowTemp["CurrentPrice"] = row["CurrentPrice"].ToString();
                     rowTemp["Description"] = row["Description"].ToString();
                     rowTemp["Unit"] = row["Unit"].ToString();
+                    rowTemp["PromotionID"] = row["PromotionID"].ToString();
                     result.Rows.Add(rowTemp);
                 }
             }
@@ -177,6 +179,7 @@ namespace MiniSupermarket.BUS
             result.Columns.Add("CurrentPrice", typeof(string));
             result.Columns.Add("Description", typeof(string));
             result.Columns.Add("Unit", typeof(string));
+            result.Columns.Add("PromotionID", typeof(string));
 
             foreach (DataRow row in product.Rows)
             {
@@ -192,7 +195,7 @@ namespace MiniSupermarket.BUS
                     rowTemp["CurrentPrice"] = row["CurrentPrice"].ToString();
                     rowTemp["Description"] = row["Description"].ToString();
                     rowTemp["Unit"] = row["Unit"].ToString();
-                    
+                    rowTemp["PromotionID"] = row["PromotionID"].ToString();
                     result.Rows.Add(rowTemp);
                 }
             }
@@ -212,6 +215,7 @@ namespace MiniSupermarket.BUS
             result.Columns.Add("CurrentPrice", typeof(string));
             result.Columns.Add("Description", typeof(string));
             result.Columns.Add("Unit", typeof(string));
+            result.Columns.Add("PromotionID", typeof(string));
 
             foreach (DataRow row in product.Rows)
             {
@@ -227,6 +231,7 @@ namespace MiniSupermarket.BUS
                     rowTemp["CurrentPrice"] = row["CurrentPrice"].ToString();
                     rowTemp["Description"] = row["Description"].ToString();
                     rowTemp["Unit"] = row["Unit"].ToString();
+                    rowTemp["PromotionID"] = row["PromotionID"].ToString();
                     result.Rows.Add(rowTemp);
                 }
             }

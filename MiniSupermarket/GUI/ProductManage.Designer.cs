@@ -87,6 +87,7 @@
             txt_TimKiem.Size = new Size(324, 27);
             txt_TimKiem.TabIndex = 0;
             txt_TimKiem.TextChanged+=txt_TimKiem_TextChanged;
+            txt_TimKiem.KeyDown += txt_TimKiem_KeyDown;
             // 
             // panel1
             // 

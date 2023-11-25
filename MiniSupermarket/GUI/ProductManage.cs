@@ -401,7 +401,32 @@ namespace MiniSupermarket.GUI
         }
         private void txt_TimKiem_TextChanged(object sender, EventArgs e)
         {
-            if (txt_TimKiem.AutoCompleteCustomSource.Contains(txt_TimKiem.Text))
+            string searchText = txt_TimKiem.Text.Trim();
+
+            if (string.IsNullOrWhiteSpace(searchText))
+            {
+                // Hiển thị toàn bộ danh sách nếu text search rỗng
+                dssp_DSSP.DataSource = ptBus.getAllProducts();
+            }
+            else
+            {
+                if (cbx_TimKiem.Text == "Mã sản phẩm")
+                {
+                    dssp_DSSP.DataSource = ptBus.getProductByID(searchText);
+                }
+                else if (cbx_TimKiem.Text == "Tên sản phẩm")
+                {
+                    dssp_DSSP.DataSource = ptBus.getProductsByProductName(searchText);
+                }
+                else if (cbx_TimKiem.Text == "Mã loại sản phẩm")
+                {
+                    dssp_DSSP.DataSource = ptBus.getProductsByTypeID(searchText);
+                }
+            }
+        }
+        private void txt_TimKiem_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
             {
                 if (cbx_TimKiem.Text == "Mã sản phẩm")
                 {
@@ -421,12 +446,7 @@ namespace MiniSupermarket.GUI
                     dssp_DSSP.DataSource = ptBus.getProductsByTypeID(txt_TimKiem.Text);
                     return;
                 }
-            }
-            // Hiển thị hết danh sách nếu text search rỗng
-            if (txt_TimKiem.Text == "")
-            {
-                dssp_DSSP.DataSource = ptBus.getAllProducts();
-                return;
+
             }
         }
     }
