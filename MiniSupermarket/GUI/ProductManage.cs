@@ -173,19 +173,40 @@ namespace MiniSupermarket.GUI
 
         private void btn_Them_Click(object sender, EventArgs e)
         {
+            // Kiểm tra các trường không được nhập và hiển thị thông báo lỗi
+            if (string.IsNullOrWhiteSpace(txt_TenSp.Text) || string.IsNullOrWhiteSpace(cbx_MaLoai.Text) || string.IsNullOrWhiteSpace(txt_DonGia.Text) || string.IsNullOrWhiteSpace(txt_MoTa.Text) || string.IsNullOrWhiteSpace(txt_Kieu.Text))
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin!",
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning); // Thông báo lỗi khi không nhập đủ thông tin
+                return;
+            }
             // Viết hoa id và chữ cái đầu 
             string id = txt_MaSp.Text.Trim().ToUpper();
             string name = ProjectFont.upperFirstLetter(txt_TenSp.Text);
-            string maloai = ProjectFont.upperFirstLetter(cbx_MaLoai.Text);
+            // Lấy chỉ ID từ chuỗi có dạng "[id]name" trong ComboBox cbx_MaLoai
+            string selectedValue = cbx_MaLoai.Text;
+
+            // Tìm vị trí của ký tự '[' và ']'
+            int indexOfOpenBracket = selectedValue.IndexOf('[');
+            int indexOfCloseBracket = selectedValue.IndexOf(']');
+
+           
+            string maloai = selectedValue.Substring(indexOfOpenBracket + 1, indexOfCloseBracket - indexOfOpenBracket - 1).Trim();
+
+
             string soluong = "0";
             string dongia = ProjectFont.upperFirstLetter(txt_DonGia.Text);
             string mota = ProjectFont.upperFirstLetter(txt_MoTa.Text);
             string kieu = ProjectFont.upperFirstLetter(txt_Kieu.Text);
 
-          
-            if (id.Length != 0) // Nếu người dùng nhập mã loại
+
+            
+
+            if (id.Length != 0) // Nếu người dùng nhập mã sản phẩm
             {
-                // Nếu mã loại đã tồn tại trong hệ thống thì hiện lỗi
+                // Nếu mã sản phẩm đã tồn tại trong hệ thống thì hiện lỗi
                 if (ptBus.checkIdExist(id))
                 {
                     MessageBox.Show(
@@ -197,7 +218,7 @@ namespace MiniSupermarket.GUI
                     return;
                 }
             }
-            // Nếu mà mã loại rỗng thì sẽ tự tạo mã id
+            // Nếu mà mã sản phẩm rỗng thì sẽ tự tạo mã id
             if (id.Length == 0)
             {
                 if (ptBus.addProduct(name, maloai, soluong, dongia, mota, kieu))
@@ -225,7 +246,14 @@ namespace MiniSupermarket.GUI
                         "Thông báo",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information); // Thêm thành công
-
+                  
+                    // Xóa nội dung của các ô nhập liệu sau khi thêm thành công
+                    txt_MaSp.Clear();
+                    txt_TenSp.Clear();
+                    cbx_MaLoai.SelectedIndex = -1; // Đặt lại ComboBox để không có mục nào được chọn
+                    txt_DonGia.Clear();
+                    txt_MoTa.Clear();
+                    txt_Kieu.Clear();
                 }
                 else
                 {
@@ -260,7 +288,16 @@ namespace MiniSupermarket.GUI
 
         private void btn_Xoa_Click(object sender, EventArgs e)
         {
-            
+            if (dssp_DSSP.SelectedCells.Count == 0)
+
+            {
+                MessageBox.Show(
+                        "Vui lòng chọn sản phẩm cần xóa",
+                        "Warning",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning); // cho cảnh báo
+                return;
+            }
             // Lấy id của hàng đang chọn
             string id = dssp_DSSP.CurrentRow.Cells[0].Value.ToString();
             if (ptBus.deleteProduct(id))
@@ -269,7 +306,14 @@ namespace MiniSupermarket.GUI
                         "Thông báo",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information); // Xóa thành công
-          
+
+                // Xóa nội dung của các ô nhập liệu sau khi thêm thành công
+                txt_MaSp.Clear();
+                txt_TenSp.Clear();
+                cbx_MaLoai.SelectedIndex = -1; // Đặt lại ComboBox để không có mục nào được chọn
+                txt_DonGia.Clear();
+                txt_MoTa.Clear();
+                txt_Kieu.Clear();
             }
             else
             {
@@ -282,6 +326,108 @@ namespace MiniSupermarket.GUI
 
             // Tải lại danh sách
             dssp_DSSP.DataSource = ptBus.getAllProducts();
+        }
+
+        
+        private void btn_Sua_Click(object sender, EventArgs e)
+        {
+
+            if (dssp_DSSP.SelectedCells.Count == 0)
+
+            {
+                MessageBox.Show(
+                        "Vui lòng chọn sản phẩm cần cập nhật",
+                        "Warning",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Warning); // cho cảnh báo
+                return;
+            }
+
+            // Kiểm tra các trường không được nhập và hiển thị thông báo lỗi
+            if (string.IsNullOrWhiteSpace(txt_TenSp.Text) || string.IsNullOrWhiteSpace(cbx_MaLoai.Text) || string.IsNullOrWhiteSpace(txt_DonGia.Text) || string.IsNullOrWhiteSpace(txt_MoTa.Text) || string.IsNullOrWhiteSpace(txt_Kieu.Text))
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin!",
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning); // Thông báo lỗi khi không nhập đủ thông tin
+                return;
+            }
+
+            // Viết hoa id và chữ cái đầu 
+            string id = txt_MaSp.Text.Trim().ToUpper();
+            string name = ProjectFont.upperFirstLetter(txt_TenSp.Text);
+            // Lấy chỉ ID từ chuỗi có dạng "[id]name" trong ComboBox cbx_MaLoai
+            string selectedValue = cbx_MaLoai.Text;
+
+            // Tìm vị trí của ký tự '[' và ']'
+            int indexOfOpenBracket = selectedValue.IndexOf('[');
+            int indexOfCloseBracket = selectedValue.IndexOf(']');
+
+
+            string maloai = selectedValue.Substring(indexOfOpenBracket + 1, indexOfCloseBracket - indexOfOpenBracket - 1).Trim();
+
+
+            string soluong = ProjectFont.upperFirstLetter(txt_SoLuong.Text);
+            string dongia = ProjectFont.upperFirstLetter(txt_DonGia.Text);
+            string mota = ProjectFont.upperFirstLetter(txt_MoTa.Text);
+            string kieu = ProjectFont.upperFirstLetter(txt_Kieu.Text);
+
+            if (ptBus.updateProduct(name, id, maloai, soluong, dongia, mota, kieu))
+            {
+                MessageBox.Show("Cập nhật thành công!",
+                        "Thông báo",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information); // Cập nhật thành công
+              // Xóa nội dung của các ô nhập liệu sau khi cập nhật thành công
+                txt_MaSp.Clear();
+                txt_TenSp.Clear();
+                cbx_MaLoai.SelectedIndex = -1; // Đặt lại ComboBox để không có mục nào được chọn
+                txt_DonGia.Clear();
+                txt_MoTa.Clear();
+                txt_Kieu.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Cập nhật thất bại!",
+                        "Thông báo",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error); // Cập nhật thất bại
+               
+                return;
+            }
+            // Load lại danh sách
+            dssp_DSSP.DataSource = ptBus.getAllProducts();
+
+        }
+        private void txt_TimKiem_TextChanged(object sender, EventArgs e)
+        {
+            if (txt_TimKiem.AutoCompleteCustomSource.Contains(txt_TimKiem.Text))
+            {
+                if (cbx_TimKiem.Text == "Mã sản phẩm")
+                {
+                    // Người dùng đã chọn một mục từ danh sách gợi ý
+                    dssp_DSSP.DataSource = ptBus.getProductByID(txt_TimKiem.Text);
+                    return;
+                }
+                else if (cbx_TimKiem.Text == "Tên sản phẩm")
+                {
+                    // Người dùng đã chọn một mục từ danh sách gợi ý
+                    dssp_DSSP.DataSource = ptBus.getProductsByProductName(txt_TimKiem.Text);
+                    return;
+                }
+                else if (cbx_TimKiem.Text == "Mã loại sản phẩm")
+                {
+                    // Người dùng đã chọn một mục từ danh sách gợi ý
+                    dssp_DSSP.DataSource = ptBus.getProductsByTypeID(txt_TimKiem.Text);
+                    return;
+                }
+            }
+            // Hiển thị hết danh sách nếu text search rỗng
+            if (txt_TimKiem.Text == "")
+            {
+                dssp_DSSP.DataSource = ptBus.getAllProducts();
+                return;
+            }
         }
     }
 }

@@ -86,6 +86,7 @@
             txt_TimKiem.Name = "txt_TimKiem";
             txt_TimKiem.Size = new Size(324, 27);
             txt_TimKiem.TabIndex = 0;
+            txt_TimKiem.TextChanged+=txt_TimKiem_TextChanged;
             // 
             // panel1
             // 
@@ -193,6 +194,7 @@
             btn_Sua.TabIndex = 18;
             btn_Sua.Text = "Sửa";
             btn_Sua.UseVisualStyleBackColor = true;
+            btn_Sua.Click += btn_Sua_Click;
             // 
             // lb_MaLoaiSp
             // 

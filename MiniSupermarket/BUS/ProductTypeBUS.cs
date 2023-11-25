@@ -203,6 +203,7 @@ namespace MiniSupermarket.BUS
 
         //=====================Công Anh thêm======================= 
 
+        //Lấy ra id và tên loại sản phẩm theo dạng: [id]name
         public string[] getProductTypesWithIdAndName()
         {
             List<(string Id, string Name)> types = new List<(string Id, string Name)>();
@@ -216,6 +217,8 @@ namespace MiniSupermarket.BUS
 
             return types.Select(t => $"[{t.Id}] {t.Name}").ToArray();
         }
+
+        //lấy ra tên từ mã loại sản phẩm
         public string GetNameFromId(string id)
         {
             foreach (DataRow row in productTypes.Rows)

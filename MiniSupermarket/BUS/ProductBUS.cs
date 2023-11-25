@@ -128,5 +128,111 @@ namespace MiniSupermarket.BUS
             }
             return result;
         }
+
+        //Lấy sản phẩm từ mã sản phẩm
+        public DataTable getProductByID(string id)
+        {
+            DataTable result = new DataTable();
+            DataRow rowTemp;
+            // Thêm tên cột
+            result.Columns.Add("ProductID", typeof(string));
+            result.Columns.Add("Name", typeof(string));
+            result.Columns.Add("TypeID", typeof(string));
+            result.Columns.Add("Quantity", typeof(string));
+            result.Columns.Add("CurrentPrice", typeof(string));
+            result.Columns.Add("Description", typeof(string));
+            result.Columns.Add("Unit", typeof(string));
+
+            foreach (DataRow row in product.Rows)
+            {
+                // Nếu dòng đó chứa ID như ID cần tìm thì thêm dòng đó vào result
+                if (row["ProductID"].ToString() == id)
+                {
+                    // Thêm dữ liệu
+                    rowTemp = result.NewRow();
+                    rowTemp["ProductID"] = row["ProductID"].ToString();
+                    rowTemp["Name"] = row["Name"].ToString();
+                    rowTemp["TypeID"] = row["TypeID"].ToString();
+                    rowTemp["Quantity"] = row["Quantity"].ToString();
+                    rowTemp["CurrentPrice"] = row["CurrentPrice"].ToString();
+                    rowTemp["Description"] = row["Description"].ToString();
+                    rowTemp["Unit"] = row["Unit"].ToString();
+                    result.Rows.Add(rowTemp);
+                }
+            }
+
+            return result;
+        }
+
+        //Lấy sản phẩm từ ten sản phẩm
+        public DataTable getProductsByProductName(string name)
+        {
+            DataTable result = new DataTable();
+            DataRow rowTemp;
+            // Thêm tên cột
+            result.Columns.Add("ProductID", typeof(string));
+            result.Columns.Add("Name", typeof(string));
+            result.Columns.Add("TypeID", typeof(string));
+            result.Columns.Add("Quantity", typeof(string));
+            result.Columns.Add("CurrentPrice", typeof(string));
+            result.Columns.Add("Description", typeof(string));
+            result.Columns.Add("Unit", typeof(string));
+
+            foreach (DataRow row in product.Rows)
+            {
+                // Nếu dòng đó chứa name như name cần tìm thì thêm dòng đó vào result
+                if (row["Name"].ToString().ToLower().Contains(name.ToLower()))
+                {
+                    // Thêm dữ liệu
+                    rowTemp = result.NewRow();
+                    rowTemp["ProductID"] = row["ProductID"].ToString();
+                    rowTemp["Name"] = row["Name"].ToString();
+                    rowTemp["TypeID"] = row["TypeID"].ToString();
+                    rowTemp["Quantity"] = row["Quantity"].ToString();
+                    rowTemp["CurrentPrice"] = row["CurrentPrice"].ToString();
+                    rowTemp["Description"] = row["Description"].ToString();
+                    rowTemp["Unit"] = row["Unit"].ToString();
+                    
+                    result.Rows.Add(rowTemp);
+                }
+            }
+
+            return result;
+        }
+        //Lấy sản phẩm từ mã loại sản phẩm
+        public DataTable getProductsByTypeID(string typeId)
+        {
+            DataTable result = new DataTable();
+            DataRow rowTemp;
+            // Thêm tên cột
+            result.Columns.Add("ProductID", typeof(string));
+            result.Columns.Add("Name", typeof(string));
+            result.Columns.Add("TypeID", typeof(string));
+            result.Columns.Add("Quantity", typeof(string));
+            result.Columns.Add("CurrentPrice", typeof(string));
+            result.Columns.Add("Description", typeof(string));
+            result.Columns.Add("Unit", typeof(string));
+
+            foreach (DataRow row in product.Rows)
+            {
+                // Nếu dòng đó chứa TypeID như TypeID cần tìm thì thêm dòng đó vào result
+                if (row["TypeID"].ToString() == typeId)
+                {
+                    // Thêm dữ liệu
+                    rowTemp = result.NewRow();
+                    rowTemp["ProductID"] = row["ProductID"].ToString();
+                    rowTemp["Name"] = row["Name"].ToString();
+                    rowTemp["TypeID"] = row["TypeID"].ToString();
+                    rowTemp["Quantity"] = row["Quantity"].ToString();
+                    rowTemp["CurrentPrice"] = row["CurrentPrice"].ToString();
+                    rowTemp["Description"] = row["Description"].ToString();
+                    rowTemp["Unit"] = row["Unit"].ToString();
+                    result.Rows.Add(rowTemp);
+                }
+            }
+
+            return result;
+        }
+
     }
 }
