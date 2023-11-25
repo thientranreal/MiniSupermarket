@@ -50,7 +50,7 @@ namespace MiniSupermarket.GUI {
             binding.DataSource = filteredCustomers;
             dgvCustomer.DataSource = binding;
 
-            //dgvCustomer.Columns["IsDeleted"].Visible = false;
+            dgvCustomer.Columns["IsDeleted"].Visible = false;
 
             // Đổi tên các cột
             dgvCustomer.Columns["CustomerID"].HeaderText = "ID Khách Hàng";
