@@ -225,6 +225,9 @@ namespace MiniSupermarket.GUI
             ProductManage temp = (ProductManage)forms["Quản lý sản phẩm"];
             OpenChildForm(temp, sender, "Quản lý sản phẩm");
             temp.LoadTheme();
+            // Gọi lại phương thức Combobox của ProductManage để cập nhật ComboBox
+            ProductManage productManageForm = (ProductManage)forms["Quản lý sản phẩm"];
+            productManageForm.Combobox();
         }
 
         private void btnSale_Click(object sender, EventArgs e)
@@ -265,9 +268,11 @@ namespace MiniSupermarket.GUI
         }
         private void btnProducts_Click_1(object sender, EventArgs e)
         {
+
             ProductManage temp = (ProductManage)forms["Quản lý sản phẩm"];
             OpenChildForm(temp, sender, "Quản lý sản phẩm");
             temp.LoadTheme();
+            
         }
         private void btnImport_Click(object sender, EventArgs e)
         {

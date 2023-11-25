@@ -15,6 +15,10 @@ namespace MiniSupermarket.GUI
 
     public partial class ProductManage : Form
     {
+        private string[] names;
+        private string[] ids;
+        private string[] typeids;
+       
         // khai bao controller
         private ProductBUS ptBus = new ProductBUS();
         AutoCompleteStringCollection allowedTypes = new AutoCompleteStringCollection();
@@ -112,7 +116,7 @@ namespace MiniSupermarket.GUI
         {
 
         }
-
+       
         private void ProductManage_Load(object sender, EventArgs e)
         {
             // Tải dữ liệu lên data grid view
@@ -125,22 +129,25 @@ namespace MiniSupermarket.GUI
             dssp_DSSP.Columns["CurrentPrice"].HeaderText = "Đơn giá";
             dssp_DSSP.Columns["Description"].HeaderText = "Mô tả";
             dssp_DSSP.Columns["Unit"].HeaderText = "Kiểu";
-
             dssp_DSSP.Columns["PromotionID"].HeaderText = "Mã khuyến mãi";
-
-
+            cbx_MaLoai.DropDownStyle = ComboBoxStyle.DropDownList;
+            
+           
+            LoadTheme();
+        }
+        public void Combobox()
+        {
+            // Xóa hết dữ liệu cũ trong ComboBox
+            cbx_MaLoai.Items.Clear();
             // Load danh sách loại sản phẩm vào ComboBox
             ProductTypeBUS typeBus = new ProductTypeBUS(); // Tạo đối tượng BUS cho loại sản phẩm
             string[] danhSachLoaiSPNames = typeBus.getProductTypesWithIdAndName(); // Lấy danh sách tên loại sản phẩm
             foreach (var loaiSP in danhSachLoaiSPNames)
             {
-                
+
                 cbx_MaLoai.Items.Add(loaiSP); // Thêm từng loại sản phẩm vào ComboBox
             }
-            cbx_MaLoai.DropDownStyle = ComboBoxStyle.DropDownList;
-            LoadTheme();
         }
-
         private void dssp_DSSP_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             if (e.RowIndex >= 0) // make sure user select at least 1 row 
@@ -449,5 +456,6 @@ namespace MiniSupermarket.GUI
 
             }
         }
+        
     }
 }

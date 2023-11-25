@@ -58,6 +58,39 @@ namespace MiniSupermarket.BUS
                 ++i;
             }
         }
+        // Lấy tất cả các tên  sp bỏ vào hộp gợi ý
+        public string[] getNameForSuggestionBox()
+        {
+            List<string> names = new List<string>();
+
+            foreach (DataRow row in product.Rows)
+            {
+                names.Add(row["Name"].ToString());
+            }
+            return names.ToArray();
+        }
+        // Lấy tất cả các mã loại sp bỏ vào hộp gợi ý
+        public string[] getTypeIdForSuggestionBox()
+        {
+            List<string> names = new List<string>();
+
+            foreach (DataRow row in product.Rows)
+            {
+                names.Add(row["TypeID"].ToString());
+            }
+            return names.ToArray();
+        }
+        // Lấy tất cả các mã sp bỏ vào hộp gợi ý
+        public string[] getIdForSuggestionBox()
+        {
+            List<string> names = new List<string>();
+
+            foreach (DataRow row in product.Rows)
+            {
+                names.Add(row["ProductID"].ToString());
+            }
+            return names.ToArray();
+        }
         public bool addProduct(string name, string typeid, string quantity, string price, string des, string unit , string id=null)
         {
             // Nếu không nhập mã id thì sẽ tự tạo mã mới
@@ -147,7 +180,7 @@ namespace MiniSupermarket.BUS
             foreach (DataRow row in product.Rows)
             {
                 // Nếu dòng đó chứa ID như ID cần tìm thì thêm dòng đó vào result
-                if (row["ProductID"].ToString() == id)
+                if (row["ProductID"].ToString().ToLower().Contains(id.ToLower()))
                 {
                     // Thêm dữ liệu
                     rowTemp = result.NewRow();
@@ -220,7 +253,7 @@ namespace MiniSupermarket.BUS
             foreach (DataRow row in product.Rows)
             {
                 // Nếu dòng đó chứa TypeID như TypeID cần tìm thì thêm dòng đó vào result
-                if (row["TypeID"].ToString() == typeId)
+                if (row["TypeID"].ToString().ToLower().Contains(typeId.ToLower()))
                 {
                     // Thêm dữ liệu
                     rowTemp = result.NewRow();

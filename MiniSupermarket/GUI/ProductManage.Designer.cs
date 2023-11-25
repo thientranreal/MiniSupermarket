@@ -79,6 +79,7 @@
             cbx_TimKiem.Name = "cbx_TimKiem";
             cbx_TimKiem.Size = new Size(202, 28);
             cbx_TimKiem.TabIndex = 1;
+            
             // 
             // txt_TimKiem
             // 
