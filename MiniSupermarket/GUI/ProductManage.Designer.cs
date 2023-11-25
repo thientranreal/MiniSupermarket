@@ -174,6 +174,7 @@
             btn_Xoa.TabIndex = 19;
             btn_Xoa.Text = "Xóa";
             btn_Xoa.UseVisualStyleBackColor = true;
+            btn_Xoa.Click += btn_Xoa_Click;
             // 
             // lb_TenSp
             // 
