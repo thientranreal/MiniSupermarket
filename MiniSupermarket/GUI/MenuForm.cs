@@ -50,7 +50,8 @@ namespace MiniSupermarket.GUI
 
             forms.Add("Quản lý nhập hàng", new PurchaseOderForm());
             forms.Add("Quản lý nhân viên", new EmployeeForm());
-
+            forms.Add("Quản lý khách hàng", new CustomerForm());
+            forms.Add("Thống kê", new Statistics());
 
             // Ẩn nút chức năng
             foreach (var control in panelMenu.Controls)
@@ -227,6 +228,9 @@ namespace MiniSupermarket.GUI
             ProductManage temp = (ProductManage)forms["Quản lý sản phẩm"];
             OpenChildForm(temp, sender, "Quản lý sản phẩm");
             temp.LoadTheme();
+            // Gọi lại phương thức Combobox của ProductManage để cập nhật ComboBox
+            ProductManage productManageForm = (ProductManage)forms["Quản lý sản phẩm"];
+            productManageForm.Combobox();
         }
 
         private void btnSale_Click(object sender, EventArgs e)
@@ -257,7 +261,9 @@ namespace MiniSupermarket.GUI
 
         private void btnStatistic_Click(object sender, EventArgs e)
         {
-
+            Statistics temp = (Statistics)forms["Thống kê"];
+            OpenChildForm(temp, sender, "Thống kê");
+            temp.LoadTheme();
         }
 
         private void btnSuppliers_Click(object sender, EventArgs e)
@@ -267,9 +273,11 @@ namespace MiniSupermarket.GUI
         }
         private void btnProducts_Click_1(object sender, EventArgs e)
         {
+
             ProductManage temp = (ProductManage)forms["Quản lý sản phẩm"];
             OpenChildForm(temp, sender, "Quản lý sản phẩm");
             temp.LoadTheme();
+            
         }
         private void btnImport_Click(object sender, EventArgs e)
         {
@@ -281,6 +289,13 @@ namespace MiniSupermarket.GUI
         {
             EmployeeForm temp = (EmployeeForm)forms["Quản lý nhân viên"];
             OpenChildForm(temp, sender, "Quản lý nhân viên");
+            temp.LoadTheme();
+        }
+
+        private void btnCustomers_Click(object sender, EventArgs e)
+        {
+            CustomerForm temp = (CustomerForm)forms["Quản lý khách hàng"];
+            OpenChildForm(temp, sender, "Quản lý khách hàng");
             temp.LoadTheme();
         }
     }

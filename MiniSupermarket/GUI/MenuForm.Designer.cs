@@ -264,6 +264,7 @@
             btnCustomers.TextAlign = ContentAlignment.MiddleLeft;
             btnCustomers.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnCustomers.UseVisualStyleBackColor = true;
+            btnCustomers.Click += btnCustomers_Click;
             // 
             // btnProducts
             // 
