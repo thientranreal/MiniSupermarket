@@ -81,6 +81,15 @@ namespace MiniSupermarket.BUS
                 };
                 Connection.ExecuteNonQuery(storedProcedureInventory, prm);
             }
+            string storedTotalPrice = "SetTotalPriceOrder";
+            SqlParameter[] parameterTotalPrice = new SqlParameter[]
+            {
+                new SqlParameter("@OrderID",OrderID)
+            };
+            Connection.ExecuteNonQuery(storedTotalPrice,parameterTotalPrice);
+
+            string storedTotalQuantity = "SetQuantityProduct";
+            Connection.ExecuteNonQuery(storedTotalQuantity, null);
 
             return Connection.ExecuteNonQuery(storedProcedure, parameterOrders);
         }
