@@ -11,6 +11,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace MiniSupermarket.GUI
 {
@@ -220,10 +221,11 @@ namespace MiniSupermarket.GUI
                 }
 
                 // Tạo một mã khách hàng mới
-                string customerId = RandomString(5);
+                string customerId = new CustomerBus().generateNewID();
                 string customerName = txtCustomerName.Text.Trim();
                 if (saleBus.InsertCustomerSale(customerId, customerName, txtPhone.Text, sex))
                 {
+                    CustomerBus.customerList.Add(new Customer(customerId, customerName, txtPhone.Text, sex, "0", "1"));
                     // Thêm khách hàng mới tạo vào combo box chọn khách hàng
                     cbChooseCustomer.Items.Add($"[{customerId}] {customerName}");
 
@@ -285,15 +287,6 @@ namespace MiniSupermarket.GUI
             }
         }
 
-        // Tạo tạm mã khách hàng mới
-        private static Random random = new Random();
-        private static string RandomString(int length)
-        {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            return new string(Enumerable.Repeat(chars, length)
-              .Select(s => s[random.Next(s.Length)]).ToArray());
-        }
-
         private void txtPhone_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (char.IsWhiteSpace(e.KeyChar) || !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
@@ -306,8 +299,8 @@ namespace MiniSupermarket.GUI
         {
             cbChooseCustomer.Items.Clear();
             // Thêm danh sách khách hàng cho combo box
+            saleBus.updateCustomers();
             cbChooseCustomer.Items.AddRange(saleBus.getCustomers().ToArray());
-            dgv_bill.DataSource = saleBus.getAllBills();
         }
 
         // Khi text change của combo box thì lựa chọn sẽ hiển thị tương ứng
@@ -363,6 +356,21 @@ namespace MiniSupermarket.GUI
             DateTime dateFrom = dtpFromDate.Value;
             DateTime dateTo = dtpToDate.Value;
 
+            // Giá trị mặc định cho tổng tiền
+            int giaTu;
+            int giaDen;
+            // Gán giá trị cho giá từ và giá đến
+            if (!int.TryParse(txtFromTotal.Text, out giaTu))
+            {
+                giaTu = 0; // Giá trị mặc định khi không parse được
+            }
+
+            if (!int.TryParse(txtToTotal.Text, out giaDen))
+            {
+                giaDen = int.MaxValue; // Giá trị mặc định khi không parse được
+            }
+
+
             if (dateFrom > dateTo)
             {
                 // Hiện thông báo cảnh báo từ ngày phải nhỏ hơn đến ngày
@@ -388,7 +396,9 @@ namespace MiniSupermarket.GUI
                     itemDate >= dateFrom && itemDate <= dateTo &&
                     (dr["CustomerID"].ToString().Contains(customer) || dr["CustomerName"].ToString().Contains(customer) &&
                     (dr["EmployeeID"].ToString().Contains(employee) || dr["EmployeeName"].ToString().Contains(employee))) &&
-                    dr["Status"].Equals(isCheckOut))
+                    dr["Status"].Equals(isCheckOut) &&
+                    (int.Parse(dr["TotalPrice"].ToString()) >= giaTu &&
+                    int.Parse(dr["TotalPrice"].ToString()) <= giaDen))
                 {
                     resultSearch.ImportRow(dr);
                 }
@@ -465,9 +475,16 @@ namespace MiniSupermarket.GUI
             dgv_bill.DataSource = saleBus.getAllBills();
         }
 
+        // Sự kiện tải lại cho tìm kiếm
         private void btnClearSearch_Click(object sender, EventArgs e)
         {
-
+            txtCustomerSearch.Clear();
+            txtEmployeeSearch.Clear();
+            txtToTotal.Text = "Giá đến";
+            txtToTotal.ForeColor = Color.Gray;
+            txtFromTotal.Text = "Giá từ";
+            txtFromTotal.ForeColor = Color.Gray;
+            resetBillGridView();
         }
 
         private void txtCustomerName_KeyPress(object sender, KeyPressEventArgs e)

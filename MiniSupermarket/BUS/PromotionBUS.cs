@@ -24,6 +24,28 @@ namespace MiniSupermarket.BUS
             return promotions;
         }
 
+        public DataTable SearchPromotionsByID(string searchID)
+        {
+            string storedProcedureName = "SearchPromotionByID";
+            SqlParameter[] sp = new SqlParameter[]
+            {
+                new SqlParameter("@PromotionID",searchID)
+            };
+            promotions = Connection.Execute(storedProcedureName, sp);
+            return promotions;
+        }
+
+        public DataTable SearchPromotionsByName(string searchName)
+        {
+            string storedProcedureName = "SearchPromotionByName";
+            SqlParameter[] sp = new SqlParameter[]
+            {
+                new SqlParameter("@PromotionName",searchName)
+            };
+            promotions = Connection.Execute(storedProcedureName, sp);
+            return promotions;
+        }
+
         public Boolean checkExistedID(string id)
         {
             foreach(DataRow row in promotions.Rows)
@@ -107,6 +129,16 @@ namespace MiniSupermarket.BUS
         public Boolean stopWorkPromotion(string ID)
         {
             string storedProcedure = "StopWork";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@PromotionID",ID)
+            };
+            return Connection.ExecuteNonQuery(storedProcedure, parameters);
+        }
+
+        public Boolean clearAllProductsFromPromotion(string ID)
+        {
+            string storedProcedure = "ClearAllProductsFromPromotion";
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@PromotionID",ID)

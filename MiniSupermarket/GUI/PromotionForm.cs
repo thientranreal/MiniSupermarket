@@ -85,29 +85,30 @@ namespace MiniSupermarket.GUI
         {
             dgvPromotions.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvPromotions.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            ShowPromotion();
             dgvPromotions.ReadOnly = true;
-            //dgvPromotions.Columns["PromotionID"].HeaderText = "Mã CTKM";
-            //dgvPromotions.Columns["Name"].HeaderText = "Tên CTKM";
-            //dgvPromotions.Columns["StartDate"].HeaderText = "Ngày bắt đầu";
-            //dgvPromotions.Columns["EndDate"].HeaderText = "Ngày kết thúc";
-            //dgvPromotions.Columns["Giảm"].HeaderText = "Giảm (%)";
-            //dgvPromotions.Columns["Status"].HeaderText = "Trạng thái";
-            BindingPromotions();
-            LoadTheme();
             SetNull();
+            dgvPromotions.Columns[0].HeaderText = "Mã CTKM";
+            dgvPromotions.Columns[1].HeaderText = "Tên CTKM";
+            dgvPromotions.Columns[2].HeaderText = "Ngày bắt đầu";
+            dgvPromotions.Columns[3].HeaderText = "Ngày kết thúc";
+            dgvPromotions.Columns[4].HeaderText = "Giảm (%)";
+            dgvPromotions.Columns[5].HeaderText = "Trạng thái";
+            LoadTheme();
+            cbxTypeOfSearch.Text = "Mã CTKM";
         }
 
         public void ShowPromotion()
         {
+            dgvPromotions.DataSource = null;
             dgvPromotions.DataSource = promotionBUS.getAllPromotions();
         }
 
         void SetNull()
         {
-            txtPromotionID.Text = null;
-            txtPromotionName.Text = null;
-            txtDiscount.Text = null;
+            ShowPromotion();
+            txtPromotionID.Clear();
+            txtPromotionName.Clear();
+            txtDiscount.Clear();
             dtpkStartDate.Value = DateTime.Now;
             dtpkEndDate.Value = DateTime.Now;
         }
@@ -116,23 +117,12 @@ namespace MiniSupermarket.GUI
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
         }
-        public void BindingPromotions()
-        {
-            BindingSource binding = new BindingSource();
-            binding.DataSource = promotionBUS.getAllPromotions();
-            dgvPromotions.DataSource = binding;
-            txtPromotionID.DataBindings.Add("Text", binding, "ID");
-            txtPromotionName.DataBindings.Add("Text", binding, "Name");
-            dtpkStartDate.DataBindings.Add("Value", binding, "StartDate");
-            dtpkEndDate.DataBindings.Add("Value", binding, "EndDate");
-            txtDiscount.DataBindings.Add("Text", binding, "Discount");
-        }
 
         private void dgvPromotions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int rowIndex = e.RowIndex;
             DataGridViewRow row = dgvPromotions.Rows[rowIndex];
-            string promotionID = row.Cells["ID"].Value.ToString();
+            string promotionID = row.Cells[0].Value.ToString();
             DetailPronmotionForm form = new DetailPronmotionForm(promotionID);
             form.ShowDialog();
         }
@@ -189,7 +179,6 @@ namespace MiniSupermarket.GUI
             if (promotionBUS.insertPromotion(Name, StartDate, EndDate, Discount))
             {
                 MessageBox.Show("Thêm chương trình khuyến mãi thành công", "Thêm thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ShowPromotion();
                 SetNull();
                 return;
             }
@@ -206,7 +195,6 @@ namespace MiniSupermarket.GUI
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             SetNull();
-            ShowPromotion();
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -262,7 +250,6 @@ namespace MiniSupermarket.GUI
             if (promotionBUS.updatePromotion(ID, Name, StartDate, EndDate, Discount))
             {
                 MessageBox.Show("Sửa thông tin chương trình khuyến mãi thành công", "Xoá thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ShowPromotion();
                 SetNull();
                 return;
             }
@@ -285,7 +272,7 @@ namespace MiniSupermarket.GUI
                 if (promotionBUS.deletePromotion(ID))
                 {
                     MessageBox.Show("Xoá chương trình khuyến mãi thành công", "Xoá thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ShowPromotion();
+                    promotionBUS.clearAllProductsFromPromotion(ID);
                     SetNull();
                     return;
                 }
@@ -354,7 +341,7 @@ namespace MiniSupermarket.GUI
                             MessageBoxIcon.Warning);
                 return;
             }
-            DialogResult choice = MessageBox.Show($"Bạn có chắc muốn ngưng áp dụng chương trình khuyến mãi {ID} không","Ngưng hoạt động chương trình khuyến mãi",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            DialogResult choice = MessageBox.Show($"Bạn có chắc muốn ngưng áp dụng chương trình khuyến mãi {ID} không", "Ngưng hoạt động chương trình khuyến mãi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (choice == DialogResult.Yes)
             {
                 if (promotionBUS.stopWorkPromotion(ID))
@@ -365,6 +352,39 @@ namespace MiniSupermarket.GUI
                     return;
                 }
             }
+        }
+
+
+        private void txtSearch_TextChanged_1(object sender, EventArgs e)
+        {
+            string search = txtSearch.Text;
+            if (search.Length == 0)
+            {
+                dgvPromotions.DataSource = promotionBUS.getAllPromotions();
+            }
+            else
+            {
+                if (cbxTypeOfSearch.SelectedIndex == 0)
+                {
+                    dgvPromotions.DataSource = promotionBUS.SearchPromotionsByID(search);
+                }
+                if (cbxTypeOfSearch.SelectedIndex == 1)
+                {
+                    dgvPromotions.DataSource = promotionBUS.SearchPromotionsByName(search);
+                }
+            }
+        }
+
+        private void dgvPromotions_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewRow row = dgvPromotions.SelectedRows[0];
+            txtPromotionID.Text = row.Cells[0].Value.ToString();
+            txtPromotionName.Text = row.Cells[1].Value.ToString();
+            DateTime startDate = DateTime.Parse(row.Cells[2].Value.ToString());
+            DateTime endDate = DateTime.Parse(row.Cells[3].Value.ToString());
+            dtpkStartDate.Value = startDate;
+            dtpkEndDate.Value = endDate;
+            txtDiscount.Text = row.Cells[4].Value.ToString();
         }
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace MiniSupermarket.BUS {
     internal class CustomerBus {
         private DataTable customers;
-        static List<Customer> customerList = new List<Customer>();
+        public static List<Customer> customerList = new List<Customer>();
 
         public CustomerBus() {
             customers = getAllCustomer();
@@ -40,7 +40,7 @@ namespace MiniSupermarket.BUS {
         }
 
         // Hàm tự tạo mã mới
-        private string generateNewID() {
+        public string generateNewID() {
             int i = 1;
             string id;
 
