@@ -70,15 +70,14 @@ namespace MiniSupermarket.BUS
         public void updateCustomers()
         {
             string id, name;
-            string storedProcedure = "SelectCustomerIdAndName";
             List<string> result = new List<string>();
-            DataTable customers = Connection.Execute(storedProcedure, null);
+            List<Customer> customers = CustomerBus.customerList;
             if (customers != null)
             {
-                foreach (DataRow row in customers.Rows)
+                foreach (Customer cus in customers)
                 {
-                    id = row["CustomerID"].ToString();
-                    name = row["Name"].ToString();
+                    id = cus.CustomerID;
+                    name = cus.Name;
                     result.Add($"[{id}] {name}");
                 }
             }

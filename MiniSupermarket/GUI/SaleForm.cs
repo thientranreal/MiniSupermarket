@@ -11,6 +11,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Xml.Linq;
 
 namespace MiniSupermarket.GUI
 {
@@ -220,10 +221,11 @@ namespace MiniSupermarket.GUI
                 }
 
                 // Tạo một mã khách hàng mới
-                string customerId = RandomString(5);
+                string customerId = new CustomerBus().generateNewID();
                 string customerName = txtCustomerName.Text.Trim();
                 if (saleBus.InsertCustomerSale(customerId, customerName, txtPhone.Text, sex))
                 {
+                    CustomerBus.customerList.Add(new Customer(customerId, customerName, txtPhone.Text, sex, "0", "1"));
                     // Thêm khách hàng mới tạo vào combo box chọn khách hàng
                     cbChooseCustomer.Items.Add($"[{customerId}] {customerName}");
 
@@ -283,15 +285,6 @@ namespace MiniSupermarket.GUI
                     return;
                 }
             }
-        }
-
-        // Tạo tạm mã khách hàng mới
-        private static Random random = new Random();
-        private static string RandomString(int length)
-        {
-            const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-            return new string(Enumerable.Repeat(chars, length)
-              .Select(s => s[random.Next(s.Length)]).ToArray());
         }
 
         private void txtPhone_KeyPress(object sender, KeyPressEventArgs e)
