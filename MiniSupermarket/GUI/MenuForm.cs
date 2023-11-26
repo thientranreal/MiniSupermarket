@@ -233,6 +233,7 @@ namespace MiniSupermarket.GUI
         private void btnSale_Click(object sender, EventArgs e)
         {
             SaleForm temp = (SaleForm)forms["Quản lý bán hàng"];
+            // Cập nhật danh sách khách hàng nếu khách hàng được tạo mới ở form khác
             temp.updateDataForSaleForm();
             OpenChildForm(temp, sender, "Quản lý bán hàng");
             temp.LoadTheme();

@@ -306,8 +306,8 @@ namespace MiniSupermarket.GUI
         {
             cbChooseCustomer.Items.Clear();
             // Thêm danh sách khách hàng cho combo box
+            saleBus.updateCustomers();
             cbChooseCustomer.Items.AddRange(saleBus.getCustomers().ToArray());
-            dgv_bill.DataSource = saleBus.getAllBills();
         }
 
         // Khi text change của combo box thì lựa chọn sẽ hiển thị tương ứng
