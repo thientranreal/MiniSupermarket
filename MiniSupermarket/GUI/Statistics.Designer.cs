@@ -31,6 +31,10 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.grb_ThongTin = new System.Windows.Forms.GroupBox();
             this.grb_ChiTiet = new System.Windows.Forms.GroupBox();
+            this.lb_DTHDThapNhat = new System.Windows.Forms.Label();
+            this.lb_HoaDonThapNhat = new System.Windows.Forms.Label();
+            this.lb_DTHDCaoNhat = new System.Windows.Forms.Label();
+            this.lb_HoaDonCaoNhat = new System.Windows.Forms.Label();
             this.lb_TongDoanhThu = new System.Windows.Forms.Label();
             this.lb_DoanhThu = new System.Windows.Forms.Label();
             this.lb_ThongKeTheo = new System.Windows.Forms.Label();
@@ -77,6 +81,10 @@
             // 
             // grb_ChiTiet
             // 
+            this.grb_ChiTiet.Controls.Add(this.lb_DTHDThapNhat);
+            this.grb_ChiTiet.Controls.Add(this.lb_HoaDonThapNhat);
+            this.grb_ChiTiet.Controls.Add(this.lb_DTHDCaoNhat);
+            this.grb_ChiTiet.Controls.Add(this.lb_HoaDonCaoNhat);
             this.grb_ChiTiet.Controls.Add(this.lb_TongDoanhThu);
             this.grb_ChiTiet.Controls.Add(this.lb_DoanhThu);
             this.grb_ChiTiet.Location = new System.Drawing.Point(527, 20);
@@ -86,19 +94,56 @@
             this.grb_ChiTiet.TabStop = false;
             this.grb_ChiTiet.Text = "Chi tiết";
             // 
+            // lb_DTHDThapNhat
+            // 
+            this.lb_DTHDThapNhat.AutoSize = true;
+            this.lb_DTHDThapNhat.Location = new System.Drawing.Point(387, 82);
+            this.lb_DTHDThapNhat.Name = "lb_DTHDThapNhat";
+            this.lb_DTHDThapNhat.Size = new System.Drawing.Size(17, 20);
+            this.lb_DTHDThapNhat.TabIndex = 11;
+            this.lb_DTHDThapNhat.Text = "0";
+            // 
+            // lb_HoaDonThapNhat
+            // 
+            this.lb_HoaDonThapNhat.AutoSize = true;
+            this.lb_HoaDonThapNhat.Location = new System.Drawing.Point(62, 82);
+            this.lb_HoaDonThapNhat.Name = "lb_HoaDonThapNhat";
+            this.lb_HoaDonThapNhat.Size = new System.Drawing.Size(134, 20);
+            this.lb_HoaDonThapNhat.TabIndex = 10;
+            this.lb_HoaDonThapNhat.Text = "Hóa đơn thấp nhất";
+            // 
+            // lb_DTHDCaoNhat
+            // 
+            this.lb_DTHDCaoNhat.AutoSize = true;
+            this.lb_DTHDCaoNhat.Location = new System.Drawing.Point(387, 37);
+            this.lb_DTHDCaoNhat.Name = "lb_DTHDCaoNhat";
+            this.lb_DTHDCaoNhat.Size = new System.Drawing.Size(17, 20);
+            this.lb_DTHDCaoNhat.TabIndex = 9;
+            this.lb_DTHDCaoNhat.Text = "0";
+            // 
+            // lb_HoaDonCaoNhat
+            // 
+            this.lb_HoaDonCaoNhat.AutoSize = true;
+            this.lb_HoaDonCaoNhat.Location = new System.Drawing.Point(62, 37);
+            this.lb_HoaDonCaoNhat.Name = "lb_HoaDonCaoNhat";
+            this.lb_HoaDonCaoNhat.Size = new System.Drawing.Size(128, 20);
+            this.lb_HoaDonCaoNhat.TabIndex = 8;
+            this.lb_HoaDonCaoNhat.Text = "Hóa đơn cao nhất";
+            // 
             // lb_TongDoanhThu
             // 
             this.lb_TongDoanhThu.AutoSize = true;
-            this.lb_TongDoanhThu.Location = new System.Drawing.Point(153, 142);
+            this.lb_TongDoanhThu.Location = new System.Drawing.Point(157, 142);
             this.lb_TongDoanhThu.Name = "lb_TongDoanhThu";
             this.lb_TongDoanhThu.Size = new System.Drawing.Size(117, 20);
             this.lb_TongDoanhThu.TabIndex = 6;
             this.lb_TongDoanhThu.Text = "Tổng doanh thu:";
+            this.lb_TongDoanhThu.Click += new System.EventHandler(this.lb_TongDoanhThu_Click);
             // 
             // lb_DoanhThu
             // 
             this.lb_DoanhThu.AutoSize = true;
-            this.lb_DoanhThu.Location = new System.Drawing.Point(333, 142);
+            this.lb_DoanhThu.Location = new System.Drawing.Point(387, 142);
             this.lb_DoanhThu.Name = "lb_DoanhThu";
             this.lb_DoanhThu.Size = new System.Drawing.Size(17, 20);
             this.lb_DoanhThu.TabIndex = 7;
@@ -138,6 +183,8 @@
             this.cbx_TimKiem.Name = "cbx_TimKiem";
             this.cbx_TimKiem.Size = new System.Drawing.Size(311, 28);
             this.cbx_TimKiem.TabIndex = 4;
+            this.cbx_TimKiem.SelectedIndexChanged += new System.EventHandler(this.cbx_TimKiem_SelectedIndexChanged);
+            this.cbx_TimKiem.TextChanged += new System.EventHandler(this.cbx_TimKiem_TextChanged);
             // 
             // dtp_TuNgay
             // 
@@ -221,5 +268,9 @@
         private DataGridView dshd_sp;
         private GroupBox grb_ChiTiet;
         private Label lb_ThongKeTheo;
+        private Label lb_DTHDThapNhat;
+        private Label lb_HoaDonThapNhat;
+        private Label lb_DTHDCaoNhat;
+        private Label lb_HoaDonCaoNhat;
     }
 }

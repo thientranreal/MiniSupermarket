@@ -817,7 +817,58 @@ GO
 
 
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
--- Công Anh 
+
+--Công Anh--
+
+-- Tạo stored procedure để lấy hóa đơn trong khoảng thời gian
+CREATE PROCEDURE GetBillsByDateRange
+    @FromDate DATETIME,
+    @ToDate DATETIME
+AS
+BEGIN
+    SELECT BillID, [Date], EmployeeID, CustomerID, EstimatedPrice, ReducePrice, TotalPrice, [Status]
+    FROM Bill
+    WHERE [Date] BETWEEN @FromDate AND @ToDate
+      AND isDeleted = 1; -- Chỉ lấy những hóa đơn chưa bị xóa
+END;
+GO
+
+-- Tạo stored procedure để lấy một số thông tin nhân viên của hóa đơn trong khoảng thời gian
+CREATE PROCEDURE GetEmployeesByDateRange
+    @FromDate DATETIME,
+    @ToDate DATETIME
+AS
+BEGIN
+    SELECT 
+        Bill.EmployeeID AS 'EmployeeID',
+        Employee.[Name] AS 'EmployeeName',
+        Bill.BillID AS 'BillID',
+        Bill.[Date] AS 'Date',  
+        Bill.TotalPrice AS 'TotalPrice'
+    FROM 
+        Bill 
+    INNER JOIN 
+        Employee ON Bill.EmployeeID = Employee.EmployeeID 
+    WHERE 
+        Bill.[Date] BETWEEN @FromDate AND @ToDate
+        AND Bill.isDeleted = 1; -- Chỉ lấy những hóa đơn chưa bị xóa
+END;
+GO
+
+
+--Lấy một thông tin nhân viên của hóa đơn
+CREATE PROCEDURE SelectBillInformation
+AS
+BEGIN
+    SELECT Bill.EmployeeID,
+    Employee.[Name] AS EmployeeName,
+	Bill.BillID, 
+	Bill.[Date],  
+    Bill.TotalPrice
+	FROM Bill INNER JOIN Employee
+	ON Bill.EmployeeID = Employee.EmployeeID 
+END;
+GO
 
 --Lấy danh sách sản phẩm 
 CREATE PROCEDURE SelectAllFromProduct

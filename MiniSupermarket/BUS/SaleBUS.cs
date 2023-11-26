@@ -162,5 +162,147 @@ namespace MiniSupermarket.BUS
             };
             return Connection.ExecuteNonQuery(procedure, parameters);
         }
+
+
+
+        //=============================Công Anh thêm====================================
+        // Lấy các hóa đơn trong khoảng thời gian từ fromDate đến toDate
+        public DataTable GetBillsByDateRange(DateTime fromDate, DateTime toDate)
+        {
+            string procedureName = "GetBillsByDateRange";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+            new SqlParameter("@FromDate", fromDate),
+            new SqlParameter("@ToDate", toDate)
+            };
+
+            DataTable billsByDateRange = Connection.Execute(procedureName, parameters);
+            return billsByDateRange;
+        }
+        //Tính tổng hóa đơn theo khoảng thời gian
+        public decimal CalculateTotalRevenue(DataTable dataTable)
+        {
+            decimal totalRevenue = 0;
+
+            if (dataTable != null && dataTable.Rows.Count > 0)
+            {
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    decimal totalPrice = Convert.ToDecimal(row["TotalPrice"]);
+                    totalRevenue += totalPrice;
+                }
+            }
+
+            return totalRevenue;
+        }
+        //Tính hóa đơn cao nhất theo khoảng thời gian
+
+        public decimal GetMaxTotalPrice(DataTable dataTable)
+        {
+            if (dataTable != null && dataTable.Rows.Count > 0)
+            {
+                decimal maxTotalPrice = Convert.ToDecimal(dataTable.Rows[0]["TotalPrice"]);
+
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    decimal totalPrice = Convert.ToDecimal(row["TotalPrice"]);
+                    if (totalPrice > maxTotalPrice)
+                    {
+                        maxTotalPrice = totalPrice;
+                    }
+                }
+
+                return maxTotalPrice;
+            }
+            return 0;
+        }
+        //Tính hóa đơn thấp nhất theo khoảng thời gian
+        public decimal GetMinTotalPrice(DataTable dataTable)
+        {
+            if (dataTable != null && dataTable.Rows.Count > 0)
+            {
+                decimal minTotalPrice = Convert.ToDecimal(dataTable.Rows[0]["TotalPrice"]);
+
+                foreach (DataRow row in dataTable.Rows)
+                {
+                    decimal totalPrice = Convert.ToDecimal(row["TotalPrice"]);
+                    if (totalPrice < minTotalPrice)
+                    {
+                        minTotalPrice = totalPrice;
+                    }
+                }
+
+                return minTotalPrice;
+            }
+            return 0;
+        }
+        //Tính tổng doanh thu hóa đơn
+        public decimal CalculateTotalRevenueForAllBills()
+        {
+            decimal totalRevenue = 0;
+
+            DataTable allBills = getAllBills();
+
+            if (allBills != null && allBills.Rows.Count > 0)
+            {
+                foreach (DataRow row in allBills.Rows)
+                {
+                    decimal totalPrice = Convert.ToDecimal(row["TotalPrice"]);
+                    totalRevenue += totalPrice;
+                }
+            }
+
+            return totalRevenue;
+        }
+        //Tính hóa đơn cao nhất
+        public decimal GetMaxTotalPriceForAllBills()
+        {
+            decimal maxTotalPrice = 0;
+
+            DataTable allBills = getAllBills();
+
+            if (allBills != null && allBills.Rows.Count > 0)
+            {
+                maxTotalPrice = Convert.ToDecimal(allBills.Rows[0]["TotalPrice"]);
+
+                foreach (DataRow row in allBills.Rows)
+                {
+                    decimal totalPrice = Convert.ToDecimal(row["TotalPrice"]);
+                    if (totalPrice > maxTotalPrice)
+                    {
+                        maxTotalPrice = totalPrice;
+                    }
+                }
+            }
+
+            return maxTotalPrice;
+        }
+        //Tính hóa đơn thấp nhất
+        public decimal GetMinTotalPriceForAllBills()
+        {
+            decimal minTotalPrice = 0;
+
+            DataTable allBills = getAllBills();
+
+            if (allBills != null && allBills.Rows.Count > 0)
+            {
+                minTotalPrice = Convert.ToDecimal(allBills.Rows[0]["TotalPrice"]);
+
+                foreach (DataRow row in allBills.Rows)
+                {
+                    decimal totalPrice = Convert.ToDecimal(row["TotalPrice"]);
+                    if (totalPrice < minTotalPrice)
+                    {
+                        minTotalPrice = totalPrice;
+                    }
+                }
+            }
+
+            return minTotalPrice;
+        }
+        
+        
+
+
     }
 }
