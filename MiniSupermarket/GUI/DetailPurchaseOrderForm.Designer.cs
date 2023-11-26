@@ -28,11 +28,14 @@
         /// </summary>
         private void InitializeComponent()
         {
-            panel1 = new Panel();
+            pnlDetailOrders = new Panel();
+            btnPay = new Button();
             dgvProductOrders = new DataGridView();
             lblProductOrder = new Label();
             panel2 = new Panel();
             panel4 = new Panel();
+            panel3 = new Panel();
+            panel5 = new Panel();
             dgvProducts = new DataGridView();
             pnlInformation = new Panel();
             btnReset = new Button();
@@ -51,10 +54,12 @@
             comboBox1 = new ComboBox();
             groupBox2 = new GroupBox();
             comboBox2 = new ComboBox();
-            panel1.SuspendLayout();
+            pnlDetailOrders.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProductOrders).BeginInit();
             panel2.SuspendLayout();
             panel4.SuspendLayout();
+            panel3.SuspendLayout();
+            panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProducts).BeginInit();
             pnlInformation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudQuantity).BeginInit();
@@ -62,29 +67,43 @@
             groupBox2.SuspendLayout();
             SuspendLayout();
             // 
-            // panel1
+            // pnlDetailOrders
             // 
-            panel1.Controls.Add(dgvProductOrders);
-            panel1.Controls.Add(lblProductOrder);
-            panel1.Dock = DockStyle.Left;
-            panel1.Location = new Point(0, 0);
-            panel1.Margin = new Padding(3, 4, 3, 4);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(557, 595);
-            panel1.TabIndex = 0;
+            pnlDetailOrders.Controls.Add(btnPay);
+            pnlDetailOrders.Controls.Add(dgvProductOrders);
+            pnlDetailOrders.Controls.Add(lblProductOrder);
+            pnlDetailOrders.Dock = DockStyle.Left;
+            pnlDetailOrders.Location = new Point(0, 0);
+            pnlDetailOrders.Margin = new Padding(3, 4, 3, 4);
+            pnlDetailOrders.Name = "pnlDetailOrders";
+            pnlDetailOrders.Size = new Size(557, 596);
+            pnlDetailOrders.TabIndex = 0;
+            // 
+            // btnPay
+            // 
+            btnPay.FlatAppearance.BorderSize = 0;
+            btnPay.FlatStyle = FlatStyle.Flat;
+            btnPay.Location = new Point(207, 547);
+            btnPay.Name = "btnPay";
+            btnPay.Size = new Size(119, 37);
+            btnPay.TabIndex = 22;
+            btnPay.Text = "Thanh Toán";
+            btnPay.UseVisualStyleBackColor = true;
+            btnPay.Click += btnPay_Click;
             // 
             // dgvProductOrders
             // 
+            dgvProductOrders.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dgvProductOrders.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvProductOrders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvProductOrders.Dock = DockStyle.Bottom;
             dgvProductOrders.Location = new Point(0, 86);
             dgvProductOrders.Margin = new Padding(3, 4, 3, 4);
             dgvProductOrders.Name = "dgvProductOrders";
             dgvProductOrders.RowHeadersWidth = 51;
             dgvProductOrders.RowTemplate.Height = 25;
-            dgvProductOrders.Size = new Size(557, 509);
+            dgvProductOrders.Size = new Size(557, 454);
             dgvProductOrders.TabIndex = 1;
+            dgvProductOrders.CellDoubleClick += dgvProductOrders_CellDoubleClick;
             // 
             // lblProductOrder
             // 
@@ -98,23 +117,42 @@
             // panel2
             // 
             panel2.Controls.Add(panel4);
-            panel2.Controls.Add(pnlInformation);
-            panel2.Dock = DockStyle.Fill;
-            panel2.Location = new Point(557, 0);
+            panel2.Dock = DockStyle.Bottom;
+            panel2.Location = new Point(0, -1);
             panel2.Margin = new Padding(3, 4, 3, 4);
             panel2.Name = "panel2";
-            panel2.Size = new Size(575, 595);
+            panel2.Size = new Size(1132, 596);
             panel2.TabIndex = 1;
             // 
             // panel4
             // 
-            panel4.Controls.Add(dgvProducts);
+            panel4.Controls.Add(panel3);
+            panel4.Controls.Add(pnlDetailOrders);
             panel4.Dock = DockStyle.Fill;
-            panel4.Location = new Point(0, 257);
+            panel4.Location = new Point(0, 0);
             panel4.Margin = new Padding(3, 4, 3, 4);
             panel4.Name = "panel4";
-            panel4.Size = new Size(575, 338);
+            panel4.Size = new Size(1132, 596);
             panel4.TabIndex = 6;
+            // 
+            // panel3
+            // 
+            panel3.Controls.Add(panel5);
+            panel3.Controls.Add(pnlInformation);
+            panel3.Dock = DockStyle.Fill;
+            panel3.Location = new Point(557, 0);
+            panel3.Name = "panel3";
+            panel3.Size = new Size(575, 596);
+            panel3.TabIndex = 6;
+            // 
+            // panel5
+            // 
+            panel5.Controls.Add(dgvProducts);
+            panel5.Dock = DockStyle.Fill;
+            panel5.Location = new Point(0, 256);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(575, 340);
+            panel5.TabIndex = 6;
             // 
             // dgvProducts
             // 
@@ -126,7 +164,7 @@
             dgvProducts.Name = "dgvProducts";
             dgvProducts.RowHeadersWidth = 51;
             dgvProducts.RowTemplate.Height = 25;
-            dgvProducts.Size = new Size(575, 338);
+            dgvProducts.Size = new Size(575, 340);
             dgvProducts.TabIndex = 2;
             dgvProducts.CellMouseClick += dgvProducts_CellMouseClick;
             // 
@@ -149,7 +187,7 @@
             pnlInformation.Location = new Point(0, 0);
             pnlInformation.Margin = new Padding(3, 4, 3, 4);
             pnlInformation.Name = "pnlInformation";
-            pnlInformation.Size = new Size(575, 257);
+            pnlInformation.Size = new Size(575, 256);
             pnlInformation.TabIndex = 5;
             // 
             // btnReset
@@ -309,16 +347,17 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1132, 595);
             Controls.Add(panel2);
-            Controls.Add(panel1);
             Margin = new Padding(3, 4, 3, 4);
             Name = "DetailPurchaseOrderForm";
             Text = "Chi tiết phiếu nhập";
             Load += DetailPurchaseOrderForm_Load;
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            pnlDetailOrders.ResumeLayout(false);
+            pnlDetailOrders.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProductOrders).EndInit();
             panel2.ResumeLayout(false);
             panel4.ResumeLayout(false);
+            panel3.ResumeLayout(false);
+            panel5.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvProducts).EndInit();
             pnlInformation.ResumeLayout(false);
             pnlInformation.PerformLayout();
@@ -331,7 +370,7 @@
 
         #endregion
 
-        private Panel panel1;
+        private Panel pnlDetailOrders;
         private Label lblProductOrder;
         private Panel panel2;
         private Label lblProduct;
@@ -354,5 +393,8 @@
         private NumericUpDown nudQuantity;
         private Button btnReset;
         private Button btnAdd;
+        private Panel panel3;
+        private Panel panel5;
+        private Button btnPay;
     }
 }

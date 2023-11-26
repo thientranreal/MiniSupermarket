@@ -38,15 +38,51 @@ namespace MiniSupermarket.BUS
 
         public Boolean AddProductToDetailOrder(string OrderID, string ProductID, string OrderPrice, string Quantity)
         {
-            string storedProcedure = "AddProductToDetailOrder";
-            SqlParameter[] parameters = new SqlParameter[]
+            string storedProcedureOrder = "AddProductToDetailOrder";
+            SqlParameter[] parameterOrders = new SqlParameter[]
             {
                 new SqlParameter("@Order",OrderID),
                 new SqlParameter("@ProductID",ProductID),
                 new SqlParameter("@OrderPrice",OrderPrice),
                 new SqlParameter("@Quantity",Quantity)
             };
-            return Connection.ExecuteNonQuery(storedProcedure,parameters);
+            return Connection.ExecuteNonQuery(storedProcedureOrder, parameterOrders);
+        }
+
+        public Boolean DeleteProductFromDetailOrder(string OrderID, string ProductID)
+        {
+            string storedProcedure = "DeleteProductFromDetailOrder";
+            SqlParameter[] parameterOrders = new SqlParameter[]
+            {
+                new SqlParameter("@OrderID",OrderID),
+                new SqlParameter("@ProductID",ProductID)
+            };
+            return Connection.ExecuteNonQuery(storedProcedure, parameterOrders);
+        }
+
+        public Boolean PayPurchaseOrder(string OrderID)
+        {
+            string storedProcedure = "PayOrder";
+            SqlParameter[] parameterOrders = new SqlParameter[]
+            {
+                new SqlParameter("@OrderID",OrderID)
+            };
+            DataTable Inventory = getProductOrders(OrderID);
+            foreach (DataRow row in Inventory.Rows)
+            {
+                string storedProcedureInventory = "AddProductsToInventory";
+                string ProductID = row.ItemArray[0].ToString();
+                string CurrentQuantity = row.ItemArray[2].ToString();
+                SqlParameter[] prm = new SqlParameter[]
+                {
+                    new SqlParameter("@Order",OrderID),
+                    new SqlParameter("@ProductID",ProductID),
+                    new SqlParameter("@CurrentQuantity",CurrentQuantity)
+                };
+                Connection.ExecuteNonQuery(storedProcedureInventory, prm);
+            }
+
+            return Connection.ExecuteNonQuery(storedProcedure, parameterOrders);
         }
     }
 }

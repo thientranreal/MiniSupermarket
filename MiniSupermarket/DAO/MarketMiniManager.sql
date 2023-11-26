@@ -247,12 +247,12 @@ create table Inventory(
 GO
 
 --Rot du lieu vao bang hang ton kho
-INSERT INTO Inventory (ProductID, OrderID, CurrentQuantity)
-VALUES
-    ('P0001', 'PO0001', 100),
-    ('P0002', 'PO0002', 100),
-    ('P0003', 'PO0003', 100);
-GO
+--INSERT INTO Inventory (ProductID, OrderID, CurrentQuantity)
+--VALUES
+    --('P0001', 'PO0001', 100),
+    --('P0002', 'PO0002', 100),
+    --('P0003', 'PO0003', 100);
+--GO
 
 --Tao bang quan ly quyen
 create table [Role](
@@ -751,9 +751,9 @@ CREATE PROC SelectProductToPromotion
 	@PromotionID varchar(10)
 AS
 BEGIN
-	SELECT ProductID, [Name], TypeID, PromotionID, [Description]
-	FROM Product
-	WHERE (PromotionID != @PromotionID and isDeleted = '1') or PromotionID is null
+	SELECT ProductID, P.[Name], PT.Name, PromotionID, [Description]
+	FROM Product P, ProductType PT
+	WHERE (PromotionID != @PromotionID and P.TypeID = PT.TypeID and P.isDeleted = '1') or PromotionID is null
 END;
 GO
 
@@ -762,9 +762,9 @@ CREATE PROC SelectProductToPromotionApply
 	@PromotionID varchar(10)
 AS
 BEGIN
-	SELECT ProductID, [Name], TypeID, [Description]
-	FROM Product
-	WHERE PromotionID = @PromotionID and isDeleted = '1'
+	SELECT ProductID, P.[Name], PT.Name, [Description]
+	FROM Product P, ProductType PT
+	WHERE PromotionID = @PromotionID and P.isDeleted = '1' and P.TypeID = PT.TypeID
 END;
 GO
 
@@ -797,6 +797,38 @@ BEGIN
 	SELECT PromotionID
 	FROM Product
 	WHERE ProductID = @ProductID
+END;
+GO
+
+-- Tìm kiếm chương trình khuyến mãi theo mã CTKM
+CREATE PROC SearchPromotionByID
+	@PromotionID varchar(10)
+AS
+BEGIN
+	SELECT PM.PromotionID AS ID, PM.Name, PM.StartDate,
+	PM.EndDate, PM.Discount, PM.[Status]
+	FROM Promotion PM
+	WHERE PM.isDeleted = 1 and PM.PromotionID like '%'+@PromotionID+'%'
+END;
+GO
+
+-- Tìm kiếm chương trình khuyến mãi theo tên CTKM
+CREATE PROC SearchPromotionByName
+	@PromotionName nvarchar(50)
+AS
+BEGIN
+	SELECT PM.PromotionID AS ID, PM.Name, PM.StartDate,
+	PM.EndDate, PM.Discount, PM.[Status]
+	FROM Promotion PM
+	WHERE PM.isDeleted = 1 and PM.Name like '%'+@PromotionName+'%'
+END;
+GO
+
+CREATE PROC ClearAllProductsFromPromotion
+	@PromotionID varchar(10)
+AS
+BEGIN
+	UPDATE Product SET PromotionID = null WHERE PromotionID = @PromotionID
 END;
 GO
 
@@ -850,9 +882,9 @@ CREATE PROC SelectProductsToPurchaseOrder
 	@OrderID varchar(10)
 AS
 BEGIN
-	SELECT DPO.ProductID, P.Name, DPO.Quantity, P.Unit
-	FROM Product P, DetailPurchaseOrder DPO
-	WHERE isDeleted = '1' and P.ProductID = DPO.ProductID and DPO.OrderID != @OrderID
+	SELECT P.ProductID, P.Name, P.Quantity, P.Unit
+	FROM Product P
+	WHERE isDeleted = '1' and P.ProductID not in (SELECT DPO.ProductID FROM DetailPurchaseOrder DPO WHERE DPO.OrderID = @OrderID)
 END;
 GO
 
@@ -876,17 +908,41 @@ CREATE PROC AddProductToDetailOrder
 AS
 BEGIN
 	INSERT INTO DetailPurchaseOrder (OrderID,ProductID,Quantity,PurchasePrice)
-	VALUES (@Order,@ProductID,@Quantity,@PurchasePrice)
+	VALUES (@Order,@ProductID,@Quantity,@OrderPrice)
 END;
 GO
 
-CREATE PROC AddProductToInventory
+-- Thêm lô sản phẩm vào kho
+CREATE PROC AddProductsToInventory
 	@Order varchar(10),
 	@ProductID varchar(10),
 	@CurrentQuantity int
 AS
 BEGIN
-	INSERT INTO Inventory (@)
+	INSERT INTO Inventory (OrderID,ProductID,CurrentQuantity)
+	VALUES (@Order,@ProductID,@CurrentQuantity)
+END;
+GO
+
+-- Xoá sản phẩm khỏi danh sách chọn trong chi tiết phiếu nhập
+CREATE PROC DeleteProductFromDetailOrder
+	@OrderID varchar(10),
+	@ProductID varchar(10)
+AS
+BEGIN
+	DELETE FROM DetailPurchaseOrder WHERE OrderID = @OrderID and ProductID = @ProductID
+END;
+GO
+
+-- Thanh toán phiếu nhập
+CREATE PROC PayOrder
+	@OrderID varchar(10)
+AS
+BEGIN
+	UPDATE PurchaseOrder SET [Status] = '1' WHERE OrderID = @OrderID
+END;
+GO
+
  
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 -- Công Anh 

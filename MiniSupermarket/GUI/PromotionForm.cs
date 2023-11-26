@@ -94,6 +94,7 @@ namespace MiniSupermarket.GUI
             //dgvPromotions.Columns["Status"].HeaderText = "Trạng thái";
             LoadTheme();
             SetNull();
+            cbxTypeOfSearch.Text = "Mã CTKM";
         }
 
         public void ShowPromotion()
@@ -289,6 +290,7 @@ namespace MiniSupermarket.GUI
                 if (promotionBUS.deletePromotion(ID))
                 {
                     MessageBox.Show("Xoá chương trình khuyến mãi thành công", "Xoá thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    promotionBUS.clearAllProductsFromPromotion(ID);
                     SetNull();
                     return;
                 }
@@ -370,5 +372,25 @@ namespace MiniSupermarket.GUI
             }
         }
 
+
+        private void txtSearch_TextChanged_1(object sender, EventArgs e)
+        {
+            string search = txtSearch.Text;
+            if (search.Length == 0)
+            {
+                dgvPromotions.DataSource = promotionBUS.getAllPromotions();
+            }
+            else
+            {
+                if (cbxTypeOfSearch.SelectedIndex == 0)
+                {
+                    dgvPromotions.DataSource = promotionBUS.SearchPromotionsByID(search);
+                }
+                if (cbxTypeOfSearch.SelectedIndex == 1)
+                {
+                    dgvPromotions.DataSource = promotionBUS.SearchPromotionsByName(search);
+                }
+            }
+        }
     }
 }
