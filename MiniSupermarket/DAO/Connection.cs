@@ -138,5 +138,31 @@ namespace MiniSupermarket.DAO
             }
             return flag;
         }
+
+        public static object ExecuteScalar(string sql, params SqlParameter[] parameters)
+        {
+            object result = null;
+            try
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    if (parameters != null)
+                    {
+                        command.Parameters.AddRange(parameters);
+                    }
+                    result = command.ExecuteScalar();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return result;
+        }
     }
 }
