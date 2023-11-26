@@ -59,14 +59,15 @@
             // 
             // dgvProductPromotions
             // 
-            this.dgvProductPromotions.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProductPromotions.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvProductPromotions.Location = new System.Drawing.Point(0, 86);
-            this.dgvProductPromotions.Name = "dgvProductPromotions";
-            this.dgvProductPromotions.RowHeadersWidth = 51;
-            this.dgvProductPromotions.RowTemplate.Height = 29;
-            this.dgvProductPromotions.Size = new System.Drawing.Size(692, 447);
-            this.dgvProductPromotions.TabIndex = 1;
+            dgvProductPromotions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvProductPromotions.Dock = DockStyle.Bottom;
+            dgvProductPromotions.Location = new Point(0, 86);
+            dgvProductPromotions.Name = "dgvProductPromotions";
+            dgvProductPromotions.RowHeadersWidth = 51;
+            dgvProductPromotions.RowTemplate.Height = 29;
+            dgvProductPromotions.Size = new Size(692, 447);
+            dgvProductPromotions.TabIndex = 1;
+            dgvProductPromotions.CellMouseDoubleClick += dgvProductPromotions_CellMouseDoubleClick;
             // 
             // lblTitlePromotion
             // 
@@ -91,50 +92,51 @@
             // 
             // dgvProducts
             // 
-            this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvProducts.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvProducts.Location = new System.Drawing.Point(0, 163);
-            this.dgvProducts.Name = "dgvProducts";
-            this.dgvProducts.RowHeadersWidth = 51;
-            this.dgvProducts.RowTemplate.Height = 29;
-            this.dgvProducts.Size = new System.Drawing.Size(576, 370);
-            this.dgvProducts.TabIndex = 3;
+            dgvProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvProducts.Dock = DockStyle.Bottom;
+            dgvProducts.Location = new Point(0, 163);
+            dgvProducts.Name = "dgvProducts";
+            dgvProducts.RowHeadersWidth = 51;
+            dgvProducts.RowTemplate.Height = 29;
+            dgvProducts.Size = new Size(576, 370);
+            dgvProducts.TabIndex = 3;
+            dgvProducts.CellMouseDoubleClick += dgvProducts_CellMouseDoubleClick;
             // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.cbxTypeProduct);
-            this.groupBox2.Location = new System.Drawing.Point(347, 60);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(155, 71);
-            this.groupBox2.TabIndex = 2;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Lọc theo loại sản phẩm";
+            groupBox2.Controls.Add(cbxTypeProduct);
+            groupBox2.Location = new Point(377, 60);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Size = new Size(187, 71);
+            groupBox2.TabIndex = 2;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Lọc theo loại sản phẩm";
             // 
             // cbxTypeProduct
             // 
-            this.cbxTypeProduct.FormattingEnabled = true;
-            this.cbxTypeProduct.Location = new System.Drawing.Point(7, 26);
-            this.cbxTypeProduct.Name = "cbxTypeProduct";
-            this.cbxTypeProduct.Size = new System.Drawing.Size(139, 28);
-            this.cbxTypeProduct.TabIndex = 1;
+            cbxTypeProduct.FormattingEnabled = true;
+            cbxTypeProduct.Location = new Point(7, 26);
+            cbxTypeProduct.Name = "cbxTypeProduct";
+            cbxTypeProduct.Size = new Size(174, 28);
+            cbxTypeProduct.TabIndex = 1;
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.txtSearch);
-            this.groupBox1.Controls.Add(this.cbxTypeSearch);
-            this.groupBox1.Location = new System.Drawing.Point(3, 60);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(338, 71);
-            this.groupBox1.TabIndex = 1;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Tìm kiếm theo";
+            groupBox1.Controls.Add(txtSearch);
+            groupBox1.Controls.Add(cbxTypeSearch);
+            groupBox1.Location = new Point(3, 60);
+            groupBox1.Name = "groupBox1";
+            groupBox1.Size = new Size(368, 71);
+            groupBox1.TabIndex = 1;
+            groupBox1.TabStop = false;
+            groupBox1.Text = "Tìm kiếm theo";
             // 
             // txtSearch
             // 
-            this.txtSearch.Location = new System.Drawing.Point(193, 26);
-            this.txtSearch.Name = "txtSearch";
-            this.txtSearch.Size = new System.Drawing.Size(125, 27);
-            this.txtSearch.TabIndex = 1;
+            txtSearch.Location = new Point(193, 26);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(169, 27);
+            txtSearch.TabIndex = 1;
             // 
             // cbxTypeSearch
             // 

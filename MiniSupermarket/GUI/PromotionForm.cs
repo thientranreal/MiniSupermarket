@@ -85,7 +85,6 @@ namespace MiniSupermarket.GUI
         {
             dgvPromotions.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvPromotions.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            ShowPromotion();
             dgvPromotions.ReadOnly = true;
             //dgvPromotions.Columns["PromotionID"].HeaderText = "Mã CTKM";
             //dgvPromotions.Columns["Name"].HeaderText = "Tên CTKM";
@@ -93,21 +92,24 @@ namespace MiniSupermarket.GUI
             //dgvPromotions.Columns["EndDate"].HeaderText = "Ngày kết thúc";
             //dgvPromotions.Columns["Giảm"].HeaderText = "Giảm (%)";
             //dgvPromotions.Columns["Status"].HeaderText = "Trạng thái";
-            BindingPromotions();
             LoadTheme();
             SetNull();
+            cbxTypeOfSearch.Text = "Mã CTKM";
         }
 
         public void ShowPromotion()
         {
+            dgvPromotions.DataSource = null;
             dgvPromotions.DataSource = promotionBUS.getAllPromotions();
         }
 
         void SetNull()
         {
-            txtPromotionID.Text = null;
-            txtPromotionName.Text = null;
-            txtDiscount.Text = null;
+            ShowPromotion();
+            BindingPromotions();
+            txtPromotionID.Clear();
+            txtPromotionName.Clear();
+            txtDiscount.Clear();
             dtpkStartDate.Value = DateTime.Now;
             dtpkEndDate.Value = DateTime.Now;
         }
@@ -118,9 +120,15 @@ namespace MiniSupermarket.GUI
         }
         public void BindingPromotions()
         {
+            txtPromotionID.DataBindings.Clear();
+            txtPromotionName.DataBindings.Clear();
+            dtpkStartDate.DataBindings.Clear();
+            dtpkEndDate.DataBindings.Clear();
+            txtDiscount.DataBindings.Clear();
             BindingSource binding = new BindingSource();
             binding.DataSource = promotionBUS.getAllPromotions();
             dgvPromotions.DataSource = binding;
+
             txtPromotionID.DataBindings.Add("Text", binding, "ID");
             txtPromotionName.DataBindings.Add("Text", binding, "Name");
             dtpkStartDate.DataBindings.Add("Value", binding, "StartDate");
@@ -189,7 +197,6 @@ namespace MiniSupermarket.GUI
             if (promotionBUS.insertPromotion(Name, StartDate, EndDate, Discount))
             {
                 MessageBox.Show("Thêm chương trình khuyến mãi thành công", "Thêm thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ShowPromotion();
                 SetNull();
                 return;
             }
@@ -206,7 +213,6 @@ namespace MiniSupermarket.GUI
         private void btnRefresh_Click(object sender, EventArgs e)
         {
             SetNull();
-            ShowPromotion();
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -262,7 +268,6 @@ namespace MiniSupermarket.GUI
             if (promotionBUS.updatePromotion(ID, Name, StartDate, EndDate, Discount))
             {
                 MessageBox.Show("Sửa thông tin chương trình khuyến mãi thành công", "Xoá thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                ShowPromotion();
                 SetNull();
                 return;
             }
@@ -285,7 +290,7 @@ namespace MiniSupermarket.GUI
                 if (promotionBUS.deletePromotion(ID))
                 {
                     MessageBox.Show("Xoá chương trình khuyến mãi thành công", "Xoá thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    ShowPromotion();
+                    promotionBUS.clearAllProductsFromPromotion(ID);
                     SetNull();
                     return;
                 }
@@ -354,7 +359,7 @@ namespace MiniSupermarket.GUI
                             MessageBoxIcon.Warning);
                 return;
             }
-            DialogResult choice = MessageBox.Show($"Bạn có chắc muốn ngưng áp dụng chương trình khuyến mãi {ID} không","Ngưng hoạt động chương trình khuyến mãi",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            DialogResult choice = MessageBox.Show($"Bạn có chắc muốn ngưng áp dụng chương trình khuyến mãi {ID} không", "Ngưng hoạt động chương trình khuyến mãi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (choice == DialogResult.Yes)
             {
                 if (promotionBUS.stopWorkPromotion(ID))
@@ -363,6 +368,27 @@ namespace MiniSupermarket.GUI
                     ShowPromotion();
                     SetNull();
                     return;
+                }
+            }
+        }
+
+
+        private void txtSearch_TextChanged_1(object sender, EventArgs e)
+        {
+            string search = txtSearch.Text;
+            if (search.Length == 0)
+            {
+                dgvPromotions.DataSource = promotionBUS.getAllPromotions();
+            }
+            else
+            {
+                if (cbxTypeOfSearch.SelectedIndex == 0)
+                {
+                    dgvPromotions.DataSource = promotionBUS.SearchPromotionsByID(search);
+                }
+                if (cbxTypeOfSearch.SelectedIndex == 1)
+                {
+                    dgvPromotions.DataSource = promotionBUS.SearchPromotionsByName(search);
                 }
             }
         }
