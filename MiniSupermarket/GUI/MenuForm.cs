@@ -51,7 +51,7 @@ namespace MiniSupermarket.GUI
             forms.Add("Quản lý nhập hàng", new PurchaseOderForm());
             forms.Add("Quản lý nhân viên", new EmployeeForm());
             forms.Add("Quản lý khách hàng", new CustomerForm());
-
+            forms.Add("Thống kê", new Statistics());
 
             // Ẩn nút chức năng
             foreach (var control in panelMenu.Controls)
@@ -261,7 +261,9 @@ namespace MiniSupermarket.GUI
 
         private void btnStatistic_Click(object sender, EventArgs e)
         {
-
+            Statistics temp = (Statistics)forms["Thống kê"];
+            OpenChildForm(temp, sender, "Thống kê");
+            temp.LoadTheme();
         }
 
         private void btnSuppliers_Click(object sender, EventArgs e)

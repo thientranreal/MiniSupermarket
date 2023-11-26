@@ -94,15 +94,11 @@ namespace MiniSupermarket.GUI
             lb_MaLoaiSp.Font = ProjectFont.getNormalFont();
             cbx_MaLoai.Font = ProjectFont.getNormalFont();
 
-
-
             lb_DonGia.Font = ProjectFont.getNormalFont();
             lb_Kieu.Font = ProjectFont.getNormalFont();
             lb_MoTa.Font = ProjectFont.getNormalFont();
             lb_Soluong.Font = ProjectFont.getNormalFont();
             lb_TenSp.Font = ProjectFont.getNormalFont();
-
-
 
 
         }
