@@ -79,6 +79,7 @@
             cbx_TimKiem.Name = "cbx_TimKiem";
             cbx_TimKiem.Size = new Size(202, 28);
             cbx_TimKiem.TabIndex = 1;
+            
             // 
             // txt_TimKiem
             // 
@@ -86,6 +87,8 @@
             txt_TimKiem.Name = "txt_TimKiem";
             txt_TimKiem.Size = new Size(324, 27);
             txt_TimKiem.TabIndex = 0;
+            txt_TimKiem.TextChanged+=txt_TimKiem_TextChanged;
+            txt_TimKiem.KeyDown += txt_TimKiem_KeyDown;
             // 
             // panel1
             // 
@@ -193,6 +196,7 @@
             btn_Sua.TabIndex = 18;
             btn_Sua.Text = "Sửa";
             btn_Sua.UseVisualStyleBackColor = true;
+            btn_Sua.Click += btn_Sua_Click;
             // 
             // lb_MaLoaiSp
             // 

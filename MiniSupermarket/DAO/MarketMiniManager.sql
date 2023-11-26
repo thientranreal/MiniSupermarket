@@ -831,7 +831,6 @@ BEGIN
         CurrentPrice,
         [Description],
         Unit,
-        isDeleted,
 		 PromotionID
       FROM Product
     WHERE isDeleted = 1
