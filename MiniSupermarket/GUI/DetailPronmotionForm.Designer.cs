@@ -59,6 +59,7 @@
             // 
             // dgvProductPromotions
             // 
+            dgvProductPromotions.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvProductPromotions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvProductPromotions.Dock = DockStyle.Bottom;
             dgvProductPromotions.Location = new Point(0, 86);
@@ -92,6 +93,7 @@
             // 
             // dgvProducts
             // 
+            dgvProducts.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvProducts.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvProducts.Dock = DockStyle.Bottom;
             dgvProducts.Location = new Point(0, 163);
@@ -140,7 +142,9 @@
             // 
             // cbxTypeSearch
             // 
+            cbxTypeSearch.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxTypeSearch.FormattingEnabled = true;
+            cbxTypeSearch.Items.AddRange(new object[] { "Mã sản phẩm", "Tên sản phẩm" });
             cbxTypeSearch.Location = new Point(20, 26);
             cbxTypeSearch.Name = "cbxTypeSearch";
             cbxTypeSearch.Size = new Size(151, 28);

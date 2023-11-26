@@ -63,18 +63,19 @@ namespace MiniSupermarket.GUI
         {
             LoadTheme();
             HienThiPhieuNhap();
-            BindingSource binding = new BindingSource();
-            binding.DataSource = bus.getPurchaseOrders();
-            dgvPurchaseOders.DataSource = binding;
-            txtOrderID.DataBindings.Add("Text", binding, "OrderID");
-            cbxSupplier.DataBindings.Add("Text", binding, "Name1");
+            dgvPurchaseOders.Columns[0].HeaderText = "Mã phiếu nhập";
+            dgvPurchaseOders.Columns[1].HeaderText = "Tên nhân viên";
+            dgvPurchaseOders.Columns[2].HeaderText = "Nhà cung cấp";
+            dgvPurchaseOders.Columns[3].HeaderText = "Ngày nhập";
+            dgvPurchaseOders.Columns[4].HeaderText = "Tổng giá";
+            dgvPurchaseOders.Columns[5].HeaderText = "Thanh toán";
             ShowComboboxSupplier();
         }
 
         private void HienThiPhieuNhap()
         {
             dgvPurchaseOders.Rows.Clear();
-            dgvPurchaseOders.DataSource = bus.getPurchaseOrders();
+            dgvPurchaseOders.DataSource = bus.getPurchaseOrders(GlobalState.employeeId);
         }
 
         public void ShowComboboxSupplier()
@@ -168,7 +169,14 @@ namespace MiniSupermarket.GUI
                     return;
                 }
             }
-            
+
+        }
+
+        private void dgvPurchaseOders_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewRow row = dgvPurchaseOders.SelectedRows[0];
+            txtOrderID.Text = row.Cells[0].Value.ToString();
+            cbxSupplier.Text = row.Cells[2].Value.ToString();
         }
     }
 }

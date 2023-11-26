@@ -106,6 +106,7 @@
             // 
             // cbxTypeSearch
             // 
+            cbxTypeSearch.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxTypeSearch.FormattingEnabled = true;
             cbxTypeSearch.Items.AddRange(new object[] { "Mã phiếu", "Nhà cung cấp" });
             cbxTypeSearch.Location = new Point(6, 27);
@@ -251,6 +252,7 @@
             // 
             // dgvPurchaseOders
             // 
+            dgvPurchaseOders.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvPurchaseOders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvPurchaseOders.Dock = DockStyle.Fill;
             dgvPurchaseOders.Location = new Point(0, 0);
@@ -260,6 +262,7 @@
             dgvPurchaseOders.Size = new Size(1034, 283);
             dgvPurchaseOders.TabIndex = 0;
             dgvPurchaseOders.CellDoubleClick += dgvPurchaseOders_CellDoubleClick;
+            dgvPurchaseOders.CellMouseClick += dgvPurchaseOders_CellMouseClick;
             // 
             // PurchaseOderForm
             // 

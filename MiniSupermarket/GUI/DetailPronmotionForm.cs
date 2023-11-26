@@ -30,6 +30,16 @@ namespace MiniSupermarket.GUI
             dgvProductPromotions.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvProducts.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             ShowListProduct();
+            dgvProducts.Columns[0].HeaderText = "Mã sản phẩm";
+            dgvProducts.Columns[1].HeaderText = "Tên sản phẩm";
+            dgvProducts.Columns[2].HeaderText = "Loại sản phẩm";
+            dgvProducts.Columns[3].HeaderText = "Mã CTKM";
+            dgvProducts.Columns[4].HeaderText = "Mô tả";
+
+            dgvProductPromotions.Columns[0].HeaderText = "Mã sản phẩm";
+            dgvProductPromotions.Columns[1].HeaderText = "Tên sản phẩm";
+            dgvProductPromotions.Columns[2].HeaderText = "Loại sản phẩm";
+            dgvProductPromotions.Columns[3].HeaderText = "Mô tả";
         }
 
         public void ShowListProduct()

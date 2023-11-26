@@ -37,6 +37,16 @@ namespace MiniSupermarket.GUI
             {
                 Payed();
             }
+            dgvProducts.Columns[0].HeaderText = "Mã sản phẩm";
+            dgvProducts.Columns[1].HeaderText = "Tên sản phẩm";
+            dgvProducts.Columns[2].HeaderText = "Số lượng";
+            dgvProducts.Columns[3].HeaderText = "Đơn vị";
+
+            dgvProductOrders.Columns[0].HeaderText = "Mã sản phẩm";
+            dgvProductOrders.Columns[1].HeaderText = "Tên sản phẩm";
+            dgvProductOrders.Columns[2].HeaderText = "Số lượng";
+            dgvProductOrders.Columns[3].HeaderText = "Đơn vị";
+            dgvProductOrders.Columns[4].HeaderText = "Giá nhập";
         }
 
         void Payed()

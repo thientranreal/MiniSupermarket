@@ -439,6 +439,7 @@
             // 
             // dgvPromotions
             // 
+            dgvPromotions.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvPromotions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvPromotions.Dock = DockStyle.Fill;
             dgvPromotions.Location = new Point(0, 0);
@@ -448,6 +449,7 @@
             dgvPromotions.Size = new Size(832, 373);
             dgvPromotions.TabIndex = 0;
             dgvPromotions.CellDoubleClick += dgvPromotions_CellDoubleClick;
+            dgvPromotions.CellMouseClick += dgvPromotions_CellMouseClick;
             // 
             // PromotionForm
             // 
