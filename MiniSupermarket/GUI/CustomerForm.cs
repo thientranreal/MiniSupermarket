@@ -208,13 +208,19 @@ namespace MiniSupermarket.GUI {
         }
 
         private void dgvCustomer_CellClick(object sender, DataGridViewCellEventArgs e) {
-            DataGridViewRow selectedRow = dgvCustomer.Rows[e.RowIndex];
-            // Lấy giá trị từ các ô của hàng được chọn
-            txtCustomerID.Text = selectedRow.Cells["CustomerID"].Value.ToString();
-            txtCustomerName.Text = selectedRow.Cells["Name"].Value.ToString();
-            txtPhoneNumber.Text = selectedRow.Cells["PhoneNumber"].Value.ToString();
-            //txtGioiTinh.Text = selectedRow.Cells["Sex"].Value.ToString();
-            txtPoint.Text = selectedRow.Cells["Point"].Value.ToString();
+            try
+            {
+                DataGridViewRow selectedRow = dgvCustomer.Rows[e.RowIndex];
+                // Lấy giá trị từ các ô của hàng được chọn
+                txtCustomerID.Text = selectedRow.Cells["CustomerID"].Value.ToString();
+                txtCustomerName.Text = selectedRow.Cells["Name"].Value.ToString();
+                txtPhoneNumber.Text = selectedRow.Cells["PhoneNumber"].Value.ToString();
+                //txtGioiTinh.Text = selectedRow.Cells["Sex"].Value.ToString();
+                txtPoint.Text = selectedRow.Cells["Point"].Value.ToString();
+            } catch (Exception ex)
+            {
+                
+            }
         }
 
         private void cboFind_SelectedIndexChanged(object sender, EventArgs e) {

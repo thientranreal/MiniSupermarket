@@ -1145,12 +1145,13 @@ BEGIN
 END;
 GO
 
+-- Xóa khách hàng
 CREATE PROCEDURE [dbo].[DeleteCustomer]
     @CustomerID VARCHAR(10)
 AS
 BEGIN
     -- Your query to delete a customer by CustomerID
-    DELETE FROM customer WHERE CustomerID = @CustomerID;
+    UPDATE customer SET IsDeleted = 0 WHERE CustomerID = @CustomerID;
 END;
 GO
 
