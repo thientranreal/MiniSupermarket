@@ -456,13 +456,15 @@ GO
 -- Đếm số account
 CREATE PROCEDURE CountAccount
     @userName varchar(50),
-	@Password varchar(50)
+    @Password varchar(50)
 AS
 BEGIN
-	Select COUNT(*) from Employee
-	Where UserName = @userName and [Password] = @Password
+    SELECT COUNT(*) FROM Employee
+    WHERE UserName COLLATE SQL_Latin1_General_CP1_CS_AS = @userName 
+    AND [Password] = @Password
 END;
 GO
+
 
 -- Lấy các chức năng từ account
 CREATE PROCEDURE SelectFunctionNameFromAccount
@@ -980,7 +982,6 @@ BEGIN
         CurrentPrice,
         [Description],
         Unit,
-        isDeleted,
 		 PromotionID
       FROM Product
     WHERE isDeleted = 1
@@ -995,7 +996,6 @@ CREATE PROCEDURE InsertIntoProduct
     @CurrentPrice float(53),
     @Description nvarchar(100),
     @Unit nvarchar(20),
-    @Image varchar(50),
 	@PromotionID varchar(10)
     
 AS
@@ -1035,7 +1035,7 @@ CREATE PROCEDURE DeleteProduct
 AS
 BEGIN
     UPDATE Product
-    SET isDeleted = 0
+    SET isDeleted = '0'
     WHERE ProductID = @ProductID
 END;
 GO
@@ -1099,3 +1099,73 @@ BEGIN
 END;
 GO
 -- ===================================================End Sang
+
+-- ========================================================Tiến
+CREATE PROCEDURE [dbo].[SelectAllCustomer]
+AS
+BEGIN
+    SELECT * FROM Customer;
+END;
+GO
+
+CREATE PROCEDURE [dbo].[InsertCustomer]
+    @CustomerID VARCHAR(10),
+    @Name NVARCHAR(MAX),
+    @PhoneNumber NVARCHAR(MAX),
+    @Sex NVARCHAR(10),
+    @Point INT = NULL,  -- Set a default value to allow NULL
+    @isDeleted BIT
+AS
+BEGIN
+    -- Your query to insert a new customer
+    INSERT INTO customer (CustomerID, Name, PhoneNumber, Sex, Point, isDeleted)
+    VALUES (@CustomerID, @Name, @PhoneNumber, @Sex, COALESCE(@Point, 0), @isDeleted);
+END;
+GO
+
+CREATE PROCEDURE [dbo].[UpdateCustomer]
+    @CustomerID VARCHAR(10),
+    @Name NVARCHAR(MAX),
+    @PhoneNumber NVARCHAR(MAX),
+    @Sex NVARCHAR(10),
+    @Point INT = NULL,  -- Set a default value to allow NULL
+    @isDeleted BIT
+AS
+BEGIN
+    -- Your query to update customer information by CustomerID
+    UPDATE customer
+    SET
+        Name = @Name,
+        PhoneNumber = @PhoneNumber,
+        Sex = @Sex,
+        Point = COALESCE(@Point, 0),
+        isDeleted = @isDeleted
+    WHERE
+        CustomerID = @CustomerID;
+END;
+GO
+
+CREATE PROCEDURE [dbo].[DeleteCustomer]
+    @CustomerID VARCHAR(10)
+AS
+BEGIN
+    -- Your query to delete a customer by CustomerID
+    DELETE FROM customer WHERE CustomerID = @CustomerID;
+END;
+GO
+
+
+CREATE PROCEDURE [dbo].[GetAllDetailBills]
+AS
+BEGIN
+    SELECT
+        [BillID],
+        [ProductID],
+        [OrderID],
+        [SalePrice],
+        [Quantity]
+    FROM
+        [DetailBill];
+END;
+GO
+-- =========================================================End Tiến
