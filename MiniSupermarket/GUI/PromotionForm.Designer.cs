@@ -405,6 +405,7 @@
             txtSearch.Name = "txtSearch";
             txtSearch.Size = new Size(145, 27);
             txtSearch.TabIndex = 12;
+            txtSearch.TextChanged += txtSearch_TextChanged_1;
             // 
             // groupBox1
             // 
@@ -419,7 +420,9 @@
             // 
             // cbxTypeOfSearch
             // 
+            cbxTypeOfSearch.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxTypeOfSearch.FormattingEnabled = true;
+            cbxTypeOfSearch.Items.AddRange(new object[] { "Mã CTKM", "Tên CTKM" });
             cbxTypeOfSearch.Location = new Point(6, 23);
             cbxTypeOfSearch.Name = "cbxTypeOfSearch";
             cbxTypeOfSearch.Size = new Size(145, 28);

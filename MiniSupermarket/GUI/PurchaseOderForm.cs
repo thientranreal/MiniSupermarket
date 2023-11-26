@@ -97,8 +97,9 @@ namespace MiniSupermarket.GUI
         {
             int rowIndex = e.RowIndex;
             DataGridViewRow row = dgvPurchaseOders.Rows[rowIndex];
-            string promotionID = row.Cells["OrderID"].Value.ToString();
-            DetailPurchaseOrderForm form = new DetailPurchaseOrderForm(promotionID);
+            string promotionID = row.Cells[0].Value.ToString();
+            string status = row.Cells[5].Value.ToString();
+            DetailPurchaseOrderForm form = new DetailPurchaseOrderForm(promotionID, status);
             form.ShowDialog();
         }
 
