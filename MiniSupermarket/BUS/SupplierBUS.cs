@@ -58,7 +58,7 @@ namespace MiniSupermarket.BUS
             nhaCungCap = getSupplierWithID(id);
             return nhaCungCap;
         }
-        public bool addSupplier(string id, string name, string address, string phoneNumber, string email, string productID, string supplyDate)
+        public bool addSupplier(string id, string name, string address, string phoneNumber, string email)
         {
             string storedProcduredName = "AddSupplier";
             SqlParameter[] parameters = new SqlParameter[]
@@ -68,9 +68,8 @@ namespace MiniSupermarket.BUS
                 new SqlParameter("@Name",name),
                 new SqlParameter("@Address",address),
                 new SqlParameter("@PhoneNumber",phoneNumber),
-                new SqlParameter("@Email",email),
-                new SqlParameter("@ProductID",productID),
-                new SqlParameter("@Date",supplyDate)
+                new SqlParameter("@Email",email)
+                
         };
             bool result = false;
             try
@@ -99,6 +98,41 @@ namespace MiniSupermarket.BUS
 
             products= Connection.Execute(storedProcduredName, null);
             return products;
+        }
+        public bool AddDetailSupplier(string SupplierID,string ProductID,string SupplyStartDate)
+        {
+            string storedProcduredName = "AddDetailSupplier";
+            SqlParameter[] parameters = new SqlParameter[]
+
+            {
+                new SqlParameter("@SupplierID",SupplierID),
+                new SqlParameter("@ProductID",ProductID),
+                new SqlParameter("@SupplyStartDate",SupplyStartDate)
+                
+
+        };
+            bool result=false;
+
+            try
+            {
+                result = Connection.ExecuteNonQuery(storedProcduredName, parameters);
+                
+            } catch (SqlException ex) 
+            {
+                if (ex.Number == 2627)
+                {
+                    
+                    return result;
+                    
+                }
+                
+            }
+
+                
+            
+
+
+            return result;
         }
     }
 }

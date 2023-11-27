@@ -12,6 +12,7 @@ using MiniSupermarket.BUS;
 using MiniSupermarket.RegularExpression;
 using MiniSupermarket.CustomControl;
 using System.Diagnostics.Metrics;
+using System.Data.SqlClient;
 
 namespace MiniSupermarket.GUI
 {
@@ -35,9 +36,12 @@ namespace MiniSupermarket.GUI
             txtEmail.ReadOnly1 = true;
             dateTimePickerNgayNhap.Enabled = false;
 
-
+           
 
         }
+
+      
+
         private void ketnoicsdl()
         {
             dtSupplier = supplierBUS.getAllFromSupplier();
@@ -103,10 +107,7 @@ namespace MiniSupermarket.GUI
 
         private void NCCForm_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.R)
-            {
-                btnLoad.PerformClick();
-            }
+
         }
 
         private void panelThongTinNhaCungCap_Resize(object sender, EventArgs e)
@@ -186,17 +187,22 @@ namespace MiniSupermarket.GUI
 
         private void btnXoa_Click(object sender, EventArgs e)
         {
-            supplierBUS.delSupplier(txtID.Text);
-            foreach (Control c in panelThongTinNhaCungCap.Controls)
+            DialogResult rs = MessageBox.Show("Xác nhận xóa nhà cung cấp", "CONFIRM", MessageBoxButtons.YesNo);
+            if (rs == DialogResult.Yes)
             {
-                if (c.GetType() == typeof(CustomTextBox))
+                supplierBUS.delSupplier(txtID.Text);
+                foreach (Control c in panelThongTinNhaCungCap.Controls)
                 {
-                    c.Text = "";
+                    if (c.GetType() == typeof(CustomTextBox))
+                    {
+                        c.Text = "";
+                    }
                 }
+                dateTimePickerNgayNhap.Value = DateTime.Now;
+                dataGridViewLoaiSanPham.DataSource = null;
+                ketnoicsdl();
             }
-            dateTimePickerNgayNhap.Value = DateTime.Now;
-            dataGridViewLoaiSanPham.DataSource = null;
-            ketnoicsdl();
+
         }
 
         private void txtID_EnabledChanged(object sender, EventArgs e)
@@ -240,10 +246,7 @@ namespace MiniSupermarket.GUI
             {
                 MessageBox.Show("Email không hợp lệ ");
             }
-            foreach (DataGridViewRow row in dataGridViewLoaiSanPham.SelectedRows)
-            {
-                productId = row.Cells[0].Value.ToString();
-            }
+
             date = dateTimePickerNgayNhap.Value.ToString();
 
             int count1 = 4;
@@ -257,11 +260,17 @@ namespace MiniSupermarket.GUI
                     }
                 }
             }
-
+            bool check = false;
             if (count1 == 4)
             {
-
-                if (supplierBUS.addSupplier(id, name, address, phoneNumber, email, productId, date) == true)
+                supplierBUS.addSupplier(id, name, address, phoneNumber, email);
+                foreach (DataGridViewRow row in dataGridViewLoaiSanPham.SelectedRows)
+                {
+                    productId = row.Cells[0].Value.ToString();
+                    supplierBUS.AddDetailSupplier(id, productId, date);
+                    check = true;
+                }
+                if (check == true)
                 {
                     MessageBox.Show("Thêm thành công", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     btnThem.Enabled = true;
@@ -303,6 +312,47 @@ namespace MiniSupermarket.GUI
         private void btnCapNhat_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnThemChiTiet_Click(object sender, EventArgs e)
+        {
+            dateTimePickerNgayNhap.Enabled = true;
+            date = null;
+            
+            foreach (DataGridViewRow row in dataGridViewNCC.SelectedRows)
+            {
+                if (row != null)
+                {
+                    dtProduct = supplierBUS.AllProduct();
+                    dataGridViewLoaiSanPham.DataSource = dtProduct;
+                    id = row.Cells[0].Value.ToString();
+
+                }
+            }
+            
+        }
+
+        private void btnCapNhatChiTiet_Click(object sender, EventArgs e)
+        {
+            date = dateTimePickerNgayNhap.Value.ToString();
+            bool check=false;
+            foreach (DataGridViewRow row in dataGridViewLoaiSanPham.SelectedRows)
+            {
+                productId = row.Cells[0].Value.ToString();
+                
+                if(supplierBUS.AddDetailSupplier(id, productId, date)==true)
+                {
+                    MessageBox.Show("Success");
+                }
+                else
+                {
+                    MessageBox.Show("Fail");
+                }
+                
+               
+                
+            }
+            
         }
     }
 }

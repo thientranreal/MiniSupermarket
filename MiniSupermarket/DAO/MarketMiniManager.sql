@@ -563,23 +563,33 @@ BEGIN
 END;
 GO
 --Thêm nhà cung cấp 
-CREATE PROCEDURE AddSupplier
+ALTER PROCEDURE AddSupplier
 	@ID varchar(50),
 	@Name nvarchar(50),
 	@Address nvarchar(50),
 	@PhoneNumber varchar(50),
-	@Email varchar(50),
-	@ProductID varchar(10),
-	@Date datetime
-
+	@Email varchar(50)
 AS
 BEGIN
 	INSERT INTO Supplier(SupplierID,[Name],[Address],PhoneNumber,Email)
 	VALUES 
 		(@ID,@Name,@Address,@PhoneNumber,@Email)
-	INSERT INTO SupplierProduct(SupplierID,ProductID,SupplyStartDate)
+	
+
+END;
+GO
+--Thêm chi tiết nhà cung cấp
+ALTER PROCEDURE AddDetailSupplier
+	@SupplierID varchar(50),
+	@ProductID varchar(50),
+	@SupplyStartDate datetime
+AS
+BEGIN 
+	IF NOT EXISTS(SELECT SupplierProduct.SupplierID,SupplierProduct.ProductID FROM SupplierProduct WHERE SupplierProduct.SupplierID=@SupplierID AND SupplierProduct.ProductID=@ProductID)
+		INSERT INTO SupplierProduct(SupplierID,ProductID,SupplyStartDate)
 	VALUES
-		(@ID,@ProductID,@Date)
+		(@SupplierID,@ProductID,@SupplyStartDate)
+	
 
 END;
 GO
@@ -614,3 +624,8 @@ DELETE FROM Supplier
 	WHERE SupplierID='S0006'
 	DELETE FROM SupplierProduct
 	WHERE SupplierID='S0007'
+
+SET NOCOUNT ON INSERT INTO SupplierProduct(SupplierID,ProductID,SupplyStartDate)
+	VALUES
+		('S0005','P0001','2020-09-22')
+

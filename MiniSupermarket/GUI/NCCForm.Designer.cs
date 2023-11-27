@@ -63,6 +63,10 @@
             txtTimKiem = new CustomControl.CustomTextBox();
             btnTimKiem = new CustomControl.CustomButton();
             customPanel10 = new CustomControl.CustomPanel();
+            customPanel4 = new CustomControl.CustomPanel();
+            btnXoaChiTiet = new CustomControl.CustomButton();
+            btnCapNhatChiTiet = new CustomControl.CustomButton();
+            btnThemChiTiet = new CustomControl.CustomButton();
             dataGridViewLoaiSanPham = new DataGridView();
             customPanel11 = new CustomControl.CustomPanel();
             label7 = new Label();
@@ -81,6 +85,7 @@
             customPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewNCC).BeginInit();
             customPanel10.SuspendLayout();
+            customPanel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridViewLoaiSanPham).BeginInit();
             customPanel11.SuspendLayout();
             panelDataGridViewNCC.SuspendLayout();
@@ -657,6 +662,7 @@
             customPanel10.BorderColor = Color.FromArgb(14, 41, 84);
             customPanel10.BorderRadius = 20;
             customPanel10.BorderSize = 3;
+            customPanel10.Controls.Add(customPanel4);
             customPanel10.Controls.Add(dataGridViewLoaiSanPham);
             customPanel10.Controls.Add(customPanel11);
             customPanel10.ForeColor = Color.White;
@@ -665,6 +671,98 @@
             customPanel10.Size = new Size(475, 300);
             customPanel10.TabIndex = 6;
             customPanel10.TextColor = Color.White;
+            // 
+            // customPanel4
+            // 
+            customPanel4.BackColor = Color.FromArgb(14, 41, 84);
+            customPanel4.BackgroundColor = Color.FromArgb(14, 41, 84);
+            customPanel4.BorderColor = Color.PaleVioletRed;
+            customPanel4.BorderRadius = 20;
+            customPanel4.BorderSize = 0;
+            customPanel4.Controls.Add(btnXoaChiTiet);
+            customPanel4.Controls.Add(btnCapNhatChiTiet);
+            customPanel4.Controls.Add(btnThemChiTiet);
+            customPanel4.Dock = DockStyle.Bottom;
+            customPanel4.ForeColor = Color.White;
+            customPanel4.Location = new Point(0, 238);
+            customPanel4.Name = "customPanel4";
+            customPanel4.Size = new Size(475, 62);
+            customPanel4.TabIndex = 2;
+            customPanel4.TextColor = Color.White;
+            // 
+            // btnXoaChiTiet
+            // 
+            btnXoaChiTiet.BackColor = Color.FromArgb(55, 149, 189);
+            btnXoaChiTiet.BackgroundColor = Color.FromArgb(55, 149, 189);
+            btnXoaChiTiet.BorderColor = Color.FromArgb(14, 41, 84);
+            btnXoaChiTiet.BorderRadius = 20;
+            btnXoaChiTiet.BorderSize = 3;
+            btnXoaChiTiet.FlatAppearance.BorderSize = 0;
+            btnXoaChiTiet.FlatStyle = FlatStyle.Flat;
+            btnXoaChiTiet.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnXoaChiTiet.ForeColor = Color.White;
+            btnXoaChiTiet.Image = Properties.Resources.delete;
+            btnXoaChiTiet.ImageAlign = ContentAlignment.MiddleLeft;
+            btnXoaChiTiet.Location = new Point(317, 15);
+            btnXoaChiTiet.Margin = new Padding(0);
+            btnXoaChiTiet.Name = "btnXoaChiTiet";
+            btnXoaChiTiet.Padding = new Padding(10, 0, 5, 0);
+            btnXoaChiTiet.Size = new Size(109, 40);
+            btnXoaChiTiet.TabIndex = 5;
+            btnXoaChiTiet.Text = "Delete";
+            btnXoaChiTiet.TextAlign = ContentAlignment.MiddleRight;
+            btnXoaChiTiet.TextColor = Color.White;
+            btnXoaChiTiet.UseVisualStyleBackColor = false;
+            // 
+            // btnCapNhatChiTiet
+            // 
+            btnCapNhatChiTiet.BackColor = Color.FromArgb(55, 149, 189);
+            btnCapNhatChiTiet.BackgroundColor = Color.FromArgb(55, 149, 189);
+            btnCapNhatChiTiet.BorderColor = Color.FromArgb(14, 41, 84);
+            btnCapNhatChiTiet.BorderRadius = 20;
+            btnCapNhatChiTiet.BorderSize = 3;
+            btnCapNhatChiTiet.FlatAppearance.BorderSize = 0;
+            btnCapNhatChiTiet.FlatStyle = FlatStyle.Flat;
+            btnCapNhatChiTiet.Font = new Font("Arial", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnCapNhatChiTiet.ForeColor = Color.White;
+            btnCapNhatChiTiet.Image = Properties.Resources.update;
+            btnCapNhatChiTiet.ImageAlign = ContentAlignment.MiddleLeft;
+            btnCapNhatChiTiet.Location = new Point(183, 15);
+            btnCapNhatChiTiet.Margin = new Padding(0);
+            btnCapNhatChiTiet.Name = "btnCapNhatChiTiet";
+            btnCapNhatChiTiet.Padding = new Padding(5, 0, 5, 0);
+            btnCapNhatChiTiet.Size = new Size(109, 40);
+            btnCapNhatChiTiet.TabIndex = 5;
+            btnCapNhatChiTiet.Text = "Update";
+            btnCapNhatChiTiet.TextAlign = ContentAlignment.MiddleRight;
+            btnCapNhatChiTiet.TextColor = Color.White;
+            btnCapNhatChiTiet.UseVisualStyleBackColor = false;
+            btnCapNhatChiTiet.Click += btnCapNhatChiTiet_Click;
+            // 
+            // btnThemChiTiet
+            // 
+            btnThemChiTiet.BackColor = Color.FromArgb(55, 149, 189);
+            btnThemChiTiet.BackgroundColor = Color.FromArgb(55, 149, 189);
+            btnThemChiTiet.BorderColor = Color.FromArgb(14, 41, 84);
+            btnThemChiTiet.BorderRadius = 20;
+            btnThemChiTiet.BorderSize = 3;
+            btnThemChiTiet.FlatAppearance.BorderSize = 0;
+            btnThemChiTiet.FlatStyle = FlatStyle.Flat;
+            btnThemChiTiet.Font = new Font("Arial Rounded MT Bold", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnThemChiTiet.ForeColor = Color.White;
+            btnThemChiTiet.Image = Properties.Resources.add;
+            btnThemChiTiet.ImageAlign = ContentAlignment.MiddleLeft;
+            btnThemChiTiet.Location = new Point(49, 15);
+            btnThemChiTiet.Margin = new Padding(0);
+            btnThemChiTiet.Name = "btnThemChiTiet";
+            btnThemChiTiet.Padding = new Padding(10, 0, 20, 0);
+            btnThemChiTiet.Size = new Size(109, 40);
+            btnThemChiTiet.TabIndex = 5;
+            btnThemChiTiet.Text = "Add";
+            btnThemChiTiet.TextAlign = ContentAlignment.MiddleRight;
+            btnThemChiTiet.TextColor = Color.White;
+            btnThemChiTiet.UseVisualStyleBackColor = false;
+            btnThemChiTiet.Click += btnThemChiTiet_Click;
             // 
             // dataGridViewLoaiSanPham
             // 
@@ -701,7 +799,7 @@
             dataGridViewLoaiSanPham.RowHeadersVisible = false;
             dataGridViewLoaiSanPham.RowTemplate.Height = 25;
             dataGridViewLoaiSanPham.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dataGridViewLoaiSanPham.Size = new Size(444, 237);
+            dataGridViewLoaiSanPham.Size = new Size(444, 122);
             dataGridViewLoaiSanPham.TabIndex = 2;
             dataGridViewLoaiSanPham.CellClick += dataGridViewLoaiSanPham_CellClick;
             dataGridViewLoaiSanPham.DataBindingComplete += dataGridViewLoaiSanPham_DataBindingComplete;
@@ -844,6 +942,7 @@
             customPanel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewNCC).EndInit();
             customPanel10.ResumeLayout(false);
+            customPanel4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dataGridViewLoaiSanPham).EndInit();
             customPanel11.ResumeLayout(false);
             customPanel11.PerformLayout();
@@ -893,5 +992,9 @@
         private DataGridView dataGridViewNCC;
         private CustomControl.CustomPanel customPanel1;
         private CustomControl.CustomButton btnConfirm;
+        private CustomControl.CustomPanel customPanel4;
+        private CustomControl.CustomButton btnXoaChiTiet;
+        private CustomControl.CustomButton btnCapNhatChiTiet;
+        private CustomControl.CustomButton btnThemChiTiet;
     }
 }

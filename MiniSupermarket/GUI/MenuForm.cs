@@ -45,7 +45,7 @@ namespace MiniSupermarket.GUI
             // Khởi tạo giá trị cho dictionary
             forms = new Dictionary<string, Form>();
             forms.Add("Quản lý loại sản phẩm", new ProductTypeManage());
-            forms.Add("Quản lý nhà cung cấp",new NCCForm());
+            forms.Add("Quản lý nhà cung cấp",new Supplier());
             forms.Add("Quản lý bán hàng", new SaleForm());
 
             forms.Add("Quản lý chương trình khuyến mãi", new PromotionForm());
@@ -260,7 +260,7 @@ namespace MiniSupermarket.GUI
 
         private void btnSuppliers_Click(object sender, EventArgs e)
         {
-            NCCForm temp = (NCCForm)forms["Quản lý nhà cung cấp"];
+            Supplier temp = (Supplier)forms["Quản lý nhà cung cấp"];
             OpenChildForm(temp, sender, "Quản lý nhà cung cấp");
         }
     }
