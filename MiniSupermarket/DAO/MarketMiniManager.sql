@@ -450,6 +450,16 @@ BEGIN
 END;
 GO
 
+CREATE PROCEDURE CountAccount
+    @userName varchar(50),
+    @Password varchar(50)
+AS
+BEGIN
+    SELECT COUNT(*) FROM Employee
+    WHERE UserName COLLATE SQL_Latin1_General_CP1_CS_AS = @userName 
+    AND [Password] = @Password
+END;
+GO
 -- Lấy các chức năng từ account
 CREATE PROCEDURE SelectFunctionNameFromAccount
     @userName varchar(50),
