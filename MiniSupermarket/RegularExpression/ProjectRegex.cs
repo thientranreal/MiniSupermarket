@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Text.RegularExpressions;
+using System.Globalization;
 
 namespace MiniSupermarket.RegularExpression
 {
@@ -24,5 +25,32 @@ namespace MiniSupermarket.RegularExpression
             return regex.IsMatch(phoneNumber);
         }
 
+        public static Boolean checkDayAfterDay(string startDate, string endDate)
+        {
+            string format = "dd/MM/yyyy";
+            DateTime StartDate;
+            DateTime EndDate;
+            DateTime.TryParseExact(startDate, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out StartDate);
+            DateTime.TryParseExact(endDate, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out EndDate);
+            if (StartDate > EndDate)
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static Boolean checkDayBelongDay(string startDate, string endDate)
+        {
+            string format = "dd/MM/yyyy";
+            DateTime CurrentDate = DateTime.Now;
+            DateTime StartDate;
+            DateTime EndDate;
+            DateTime.TryParseExact(startDate, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out StartDate);
+            DateTime.TryParseExact(endDate, format, CultureInfo.InvariantCulture, DateTimeStyles.None, out EndDate);
+            if (CurrentDate < StartDate || CurrentDate > EndDate) { 
+                return false;
+            }
+            return true;
+        }
     }
 }

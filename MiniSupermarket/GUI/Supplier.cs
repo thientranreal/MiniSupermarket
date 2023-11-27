@@ -174,6 +174,7 @@ namespace MiniSupermarket.GUI
                 if (dtgvLoaiSanPham.SelectedRows.Count==0)
                 {
                     MessageBox.Show("Bạn chưa chọn loại sản phẩm cần thêm");
+                MessageBox.Show("");
                 }
                 else
                 {

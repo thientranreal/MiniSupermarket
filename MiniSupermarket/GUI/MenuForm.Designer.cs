@@ -75,7 +75,7 @@
             panelMenu.Location = new Point(0, 0);
             panelMenu.Margin = new Padding(3, 2, 3, 2);
             panelMenu.Name = "panelMenu";
-            panelMenu.Size = new Size(192, 613);
+            panelMenu.Size = new Size(219, 853);
             panelMenu.TabIndex = 0;
             // 
             // btnLogout
@@ -89,8 +89,8 @@
             btnLogout.Location = new Point(0, 555);
             btnLogout.Margin = new Padding(3, 2, 3, 2);
             btnLogout.Name = "btnLogout";
-            btnLogout.Padding = new Padding(10, 0, 0, 0);
-            btnLogout.Size = new Size(192, 45);
+            btnLogout.Padding = new Padding(11, 0, 0, 0);
+            btnLogout.Size = new Size(219, 60);
             btnLogout.TabIndex = 12;
             btnLogout.Text = "Đăng xuất";
             btnLogout.TextAlign = ContentAlignment.MiddleLeft;
@@ -109,8 +109,8 @@
             btnAccount.Location = new Point(0, 510);
             btnAccount.Margin = new Padding(3, 2, 3, 2);
             btnAccount.Name = "btnAccount";
-            btnAccount.Padding = new Padding(10, 0, 0, 0);
-            btnAccount.Size = new Size(192, 45);
+            btnAccount.Padding = new Padding(11, 0, 0, 0);
+            btnAccount.Size = new Size(219, 60);
             btnAccount.TabIndex = 11;
             btnAccount.Text = "Tài khoản";
             btnAccount.TextAlign = ContentAlignment.MiddleLeft;
@@ -129,8 +129,8 @@
             btnStatistic.Location = new Point(0, 465);
             btnStatistic.Margin = new Padding(3, 2, 3, 2);
             btnStatistic.Name = "btnStatistic";
-            btnStatistic.Padding = new Padding(10, 0, 0, 0);
-            btnStatistic.Size = new Size(192, 45);
+            btnStatistic.Padding = new Padding(11, 0, 0, 0);
+            btnStatistic.Size = new Size(219, 60);
             btnStatistic.TabIndex = 10;
             btnStatistic.Text = "Thống kê";
             btnStatistic.TextAlign = ContentAlignment.MiddleLeft;
@@ -149,8 +149,9 @@
             btnSuppliers.Location = new Point(0, 420);
             btnSuppliers.Margin = new Padding(3, 2, 3, 2);
             btnSuppliers.Name = "btnSuppliers";
-            btnSuppliers.Padding = new Padding(10, 0, 0, 0);
-            btnSuppliers.Size = new Size(192, 45);
+            btnSuppliers.Padding = new Padding(11, 0, 0, 0);
+            btnSuppliers.Size = new Size(219, 60);
+
             btnSuppliers.TabIndex = 9;
             btnSuppliers.Text = "Nhà cung cấp";
             btnSuppliers.TextAlign = ContentAlignment.MiddleLeft;
@@ -169,8 +170,8 @@
             btnPromotions.Location = new Point(0, 375);
             btnPromotions.Margin = new Padding(3, 2, 3, 2);
             btnPromotions.Name = "btnPromotions";
-            btnPromotions.Padding = new Padding(10, 0, 0, 0);
-            btnPromotions.Size = new Size(192, 45);
+            btnPromotions.Padding = new Padding(11, 0, 0, 0);
+            btnPromotions.Size = new Size(219, 60);
             btnPromotions.TabIndex = 8;
             btnPromotions.Text = "Chương trình khuyến mãi";
             btnPromotions.TextAlign = ContentAlignment.MiddleLeft;
@@ -189,8 +190,8 @@
             btnRoles.Location = new Point(0, 330);
             btnRoles.Margin = new Padding(3, 2, 3, 2);
             btnRoles.Name = "btnRoles";
-            btnRoles.Padding = new Padding(10, 0, 0, 0);
-            btnRoles.Size = new Size(192, 45);
+            btnRoles.Padding = new Padding(11, 0, 0, 0);
+            btnRoles.Size = new Size(219, 60);
             btnRoles.TabIndex = 7;
             btnRoles.Text = "Quyền";
             btnRoles.TextAlign = ContentAlignment.MiddleLeft;
@@ -208,8 +209,8 @@
             btnEmployees.Location = new Point(0, 285);
             btnEmployees.Margin = new Padding(3, 2, 3, 2);
             btnEmployees.Name = "btnEmployees";
-            btnEmployees.Padding = new Padding(10, 0, 0, 0);
-            btnEmployees.Size = new Size(192, 45);
+            btnEmployees.Padding = new Padding(11, 0, 0, 0);
+            btnEmployees.Size = new Size(219, 60);
             btnEmployees.TabIndex = 6;
             btnEmployees.Text = "Nhân viên";
             btnEmployees.TextAlign = ContentAlignment.MiddleLeft;
@@ -227,13 +228,14 @@
             btnImport.Location = new Point(0, 240);
             btnImport.Margin = new Padding(3, 2, 3, 2);
             btnImport.Name = "btnImport";
-            btnImport.Padding = new Padding(10, 0, 0, 0);
-            btnImport.Size = new Size(192, 45);
+            btnImport.Padding = new Padding(11, 0, 0, 0);
+            btnImport.Size = new Size(219, 60);
             btnImport.TabIndex = 5;
             btnImport.Text = "Nhập hàng";
             btnImport.TextAlign = ContentAlignment.MiddleLeft;
             btnImport.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnImport.UseVisualStyleBackColor = true;
+            btnImport.Click += btnImport_Click;
             // 
             // btnSale
             // 
@@ -246,8 +248,8 @@
             btnSale.Location = new Point(0, 195);
             btnSale.Margin = new Padding(3, 2, 3, 2);
             btnSale.Name = "btnSale";
-            btnSale.Padding = new Padding(10, 0, 0, 0);
-            btnSale.Size = new Size(192, 45);
+            btnSale.Padding = new Padding(11, 0, 0, 0);
+            btnSale.Size = new Size(219, 60);
             btnSale.TabIndex = 4;
             btnSale.Text = "Bán hàng";
             btnSale.TextAlign = ContentAlignment.MiddleLeft;
@@ -266,8 +268,8 @@
             btnCustomers.Location = new Point(0, 150);
             btnCustomers.Margin = new Padding(3, 2, 3, 2);
             btnCustomers.Name = "btnCustomers";
-            btnCustomers.Padding = new Padding(10, 0, 0, 0);
-            btnCustomers.Size = new Size(192, 45);
+            btnCustomers.Padding = new Padding(11, 0, 0, 0);
+            btnCustomers.Size = new Size(219, 60);
             btnCustomers.TabIndex = 3;
             btnCustomers.Text = "Khách hàng";
             btnCustomers.TextAlign = ContentAlignment.MiddleLeft;
@@ -285,8 +287,8 @@
             btnProducts.Location = new Point(0, 105);
             btnProducts.Margin = new Padding(3, 2, 3, 2);
             btnProducts.Name = "btnProducts";
-            btnProducts.Padding = new Padding(10, 0, 0, 0);
-            btnProducts.Size = new Size(192, 45);
+            btnProducts.Padding = new Padding(11, 0, 0, 0);
+            btnProducts.Size = new Size(219, 60);
             btnProducts.TabIndex = 2;
             btnProducts.Text = "Sản phẩm";
             btnProducts.TextAlign = ContentAlignment.MiddleLeft;
@@ -305,8 +307,8 @@
             btnProductType.Location = new Point(0, 60);
             btnProductType.Margin = new Padding(3, 2, 3, 2);
             btnProductType.Name = "btnProductType";
-            btnProductType.Padding = new Padding(10, 0, 0, 0);
-            btnProductType.Size = new Size(192, 45);
+            btnProductType.Padding = new Padding(11, 0, 0, 0);
+            btnProductType.Size = new Size(219, 60);
             btnProductType.TabIndex = 1;
             btnProductType.Text = "Loại sản phẩm";
             btnProductType.TextAlign = ContentAlignment.MiddleLeft;
@@ -322,7 +324,8 @@
             panelLogo.Location = new Point(0, 0);
             panelLogo.Margin = new Padding(3, 2, 3, 2);
             panelLogo.Name = "panelLogo";
-            panelLogo.Size = new Size(192, 60);
+            panelLogo.Size = new Size(219, 80);
+
             panelLogo.TabIndex = 0;
             // 
             // label1
@@ -330,7 +333,7 @@
             label1.AutoSize = true;
             label1.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
             label1.ForeColor = Color.LightGray;
-            label1.Location = new Point(61, 22);
+            label1.Location = new Point(70, 29);
             label1.Name = "label1";
             label1.Size = new Size(52, 20);
             label1.TabIndex = 0;
@@ -345,10 +348,9 @@
             panelTitleBar.Controls.Add(btnCloseChildForm);
             panelTitleBar.Controls.Add(lblTitle);
             panelTitleBar.Dock = DockStyle.Top;
-            panelTitleBar.Location = new Point(192, 0);
-            panelTitleBar.Margin = new Padding(3, 2, 3, 2);
+            panelTitleBar.Location = new Point(219, 0);
             panelTitleBar.Name = "panelTitleBar";
-            panelTitleBar.Size = new Size(845, 60);
+            panelTitleBar.Size = new Size(1363, 80);
             panelTitleBar.TabIndex = 1;
             panelTitleBar.MouseMove += panelTitleBar_MouseMove;
             // 
@@ -359,10 +361,9 @@
             bntMinimize.FlatStyle = FlatStyle.Flat;
             bntMinimize.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
             bntMinimize.ForeColor = Color.White;
-            bntMinimize.Location = new Point(756, 0);
-            bntMinimize.Margin = new Padding(3, 2, 3, 2);
+            bntMinimize.Location = new Point(1258, 3);
             bntMinimize.Name = "bntMinimize";
-            bntMinimize.Size = new Size(26, 22);
+            bntMinimize.Size = new Size(30, 29);
             bntMinimize.TabIndex = 4;
             bntMinimize.Text = "O";
             bntMinimize.UseVisualStyleBackColor = true;
@@ -375,10 +376,9 @@
             btnMaximize.FlatStyle = FlatStyle.Flat;
             btnMaximize.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnMaximize.ForeColor = Color.White;
-            btnMaximize.Location = new Point(788, 0);
-            btnMaximize.Margin = new Padding(3, 2, 3, 2);
+            btnMaximize.Location = new Point(1294, 3);
             btnMaximize.Name = "btnMaximize";
-            btnMaximize.Size = new Size(26, 22);
+            btnMaximize.Size = new Size(30, 29);
             btnMaximize.TabIndex = 3;
             btnMaximize.Text = "O";
             btnMaximize.UseVisualStyleBackColor = true;
@@ -391,10 +391,9 @@
             btnClose.FlatStyle = FlatStyle.Flat;
             btnClose.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnClose.ForeColor = Color.White;
-            btnClose.Location = new Point(819, 0);
-            btnClose.Margin = new Padding(3, 2, 3, 2);
+            btnClose.Location = new Point(1330, 3);
             btnClose.Name = "btnClose";
-            btnClose.Size = new Size(26, 22);
+            btnClose.Size = new Size(30, 29);
             btnClose.TabIndex = 2;
             btnClose.Text = "O";
             btnClose.UseVisualStyleBackColor = true;
@@ -421,7 +420,7 @@
             lblTitle.AutoSize = true;
             lblTitle.Font = new Font("Microsoft Sans Serif", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
             lblTitle.ForeColor = Color.White;
-            lblTitle.Location = new Point(386, 17);
+            lblTitle.Location = new Point(571, 9);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(78, 26);
             lblTitle.TabIndex = 0;
@@ -430,22 +429,22 @@
             // panelDesktopPane
             // 
             panelDesktopPane.Dock = DockStyle.Fill;
-            panelDesktopPane.Location = new Point(192, 60);
-            panelDesktopPane.Margin = new Padding(3, 2, 3, 2);
+            panelDesktopPane.Location = new Point(219, 80);
             panelDesktopPane.Name = "panelDesktopPane";
-            panelDesktopPane.Size = new Size(845, 553);
+            panelDesktopPane.Size = new Size(1363, 773);
             panelDesktopPane.TabIndex = 2;
             // 
             // MenuForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1037, 613);
+            ClientSize = new Size(1582, 853);
             Controls.Add(panelDesktopPane);
             Controls.Add(panelTitleBar);
             Controls.Add(panelMenu);
             Margin = new Padding(3, 2, 3, 2);
             Name = "MenuForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "MenuForm";
             panelMenu.ResumeLayout(false);
             panelLogo.ResumeLayout(false);
