@@ -246,9 +246,7 @@ namespace MiniSupermarket.GUI
 
         private void ShowProducts(object sender, EventArgs e)
         {
-            // Logic để hiển thị sản phẩm
-            dshd_sp.DataSource = DetalBillBus.getAllDetalBills();
-            // Các thao tác khác để hiển thị sản phẩm...
+            
         }
 
         private void ShowEmployeeInfo(object sender, EventArgs e)
