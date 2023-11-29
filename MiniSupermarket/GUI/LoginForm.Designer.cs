@@ -1,7 +1,5 @@
-﻿namespace MiniSupermarket.GUI
-{
-    partial class formLogin
-    {
+﻿namespace MiniSupermarket.GUI {
+    partial class formLogin {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,8 +22,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(formLogin));
             panel1 = new Panel();
@@ -70,7 +65,7 @@
             chbxShowPassword.AutoSize = true;
             chbxShowPassword.Location = new Point(101, 310);
             chbxShowPassword.Name = "chbxShowPassword";
-            chbxShowPassword.Size = new Size(173, 29);
+            chbxShowPassword.Size = new Size(140, 24);
             chbxShowPassword.TabIndex = 7;
             chbxShowPassword.Text = "Show password";
             chbxShowPassword.UseVisualStyleBackColor = true;
@@ -107,7 +102,7 @@
             label3.AutoSize = true;
             label3.Location = new Point(11, 258);
             label3.Name = "label3";
-            label3.Size = new Size(104, 25);
+            label3.Size = new Size(82, 20);
             label3.TabIndex = 4;
             label3.Text = "Password:";
             // 
@@ -115,22 +110,24 @@
             // 
             txtPassword.Location = new Point(129, 255);
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(184, 30);
+            txtPassword.Size = new Size(184, 26);
             txtPassword.TabIndex = 3;
+            txtPassword.Text = "1";
             // 
             // txtUsername
             // 
             txtUsername.Location = new Point(129, 204);
             txtUsername.Name = "txtUsername";
-            txtUsername.Size = new Size(184, 30);
+            txtUsername.Size = new Size(184, 26);
             txtUsername.TabIndex = 2;
+            txtUsername.Text = "E0002";
             // 
             // label2
             // 
             label2.AutoSize = true;
             label2.Location = new Point(11, 207);
             label2.Name = "label2";
-            label2.Size = new Size(108, 25);
+            label2.Size = new Size(87, 20);
             label2.TabIndex = 1;
             label2.Text = "Username:";
             // 
@@ -140,7 +137,7 @@
             label1.Font = new Font("Microsoft Sans Serif", 36F, FontStyle.Regular, GraphicsUnit.Point);
             label1.Location = new Point(89, 130);
             label1.Name = "label1";
-            label1.Size = new Size(176, 69);
+            label1.Size = new Size(142, 55);
             label1.TabIndex = 0;
             label1.Text = "Login";
             // 
@@ -182,7 +179,7 @@
             // formLogin
             // 
             AcceptButton = btnLogin;
-            AutoScaleDimensions = new SizeF(12F, 25F);
+            AutoScaleDimensions = new SizeF(9F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(870, 439);
             Controls.Add(panel2);
