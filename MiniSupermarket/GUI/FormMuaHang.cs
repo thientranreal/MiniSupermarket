@@ -14,10 +14,10 @@ using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace MiniSupermarket.GUI {
-    public partial class DetailFormMuaHang : Form {
+    public partial class FormMuaHang : Form {
         ProductBUS productBUS = new ProductBUS();
         DetalBillBus detalBillBus = new DetalBillBus();
-        public DetailFormMuaHang() {
+        public FormMuaHang() {
             InitializeComponent();
             this.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
         }
@@ -51,6 +51,22 @@ namespace MiniSupermarket.GUI {
             dgvProduct.Columns["Image"].HeaderText = "Hình ảnh";
             dgvProduct.Columns["PromotionID"].HeaderText = "Mã khuyến mãi";
             LoadTheme();
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e) {
+
+        }
+
+        private void dgvProduct_CellContentClick(object sender, DataGridViewCellEventArgs e) {
+
+        }
+
+        private void panel2_Paint(object sender, PaintEventArgs e) {
+
+        }
+
+        private void panel5_Paint(object sender, PaintEventArgs e) {
+
         }
     }
 }
