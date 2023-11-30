@@ -111,7 +111,7 @@
             // lb_DoanhThuMaxNv
             // 
             this.lb_DoanhThuMaxNv.AutoSize = true;
-            this.lb_DoanhThuMaxNv.Location = new System.Drawing.Point(186, 74);
+            this.lb_DoanhThuMaxNv.Location = new System.Drawing.Point(186, 69);
             this.lb_DoanhThuMaxNv.Name = "lb_DoanhThuMaxNv";
             this.lb_DoanhThuMaxNv.Size = new System.Drawing.Size(50, 20);
             this.lb_DoanhThuMaxNv.TabIndex = 12;
@@ -138,7 +138,7 @@
             // lb_DTHDCaoNhat
             // 
             this.lb_DTHDCaoNhat.AutoSize = true;
-            this.lb_DTHDCaoNhat.Location = new System.Drawing.Point(387, 37);
+            this.lb_DTHDCaoNhat.Location = new System.Drawing.Point(387, 32);
             this.lb_DTHDCaoNhat.Name = "lb_DTHDCaoNhat";
             this.lb_DTHDCaoNhat.Size = new System.Drawing.Size(17, 20);
             this.lb_DTHDCaoNhat.TabIndex = 9;
@@ -147,7 +147,7 @@
             // lb_HoaDonCaoNhat
             // 
             this.lb_HoaDonCaoNhat.AutoSize = true;
-            this.lb_HoaDonCaoNhat.Location = new System.Drawing.Point(62, 37);
+            this.lb_HoaDonCaoNhat.Location = new System.Drawing.Point(62, 32);
             this.lb_HoaDonCaoNhat.Name = "lb_HoaDonCaoNhat";
             this.lb_HoaDonCaoNhat.Size = new System.Drawing.Size(128, 20);
             this.lb_HoaDonCaoNhat.TabIndex = 8;

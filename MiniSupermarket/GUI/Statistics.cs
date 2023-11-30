@@ -175,8 +175,8 @@ namespace MiniSupermarket.GUI
                 // Lấy tổng tiền bé nhất từ tất cả hóa đơn
                 decimal minTotalPriceForAllBills = saleBUS.GetMinTotalPriceForAllBills();
 
-                lb_HoaDonCaoNhat.Text = $"Hóa đơn cao nhất:";
-                lb_HoaDonThapNhat.Text = $"Hóa đơn thấp nhất:";
+                lb_HoaDonCaoNhat.Text = $"Hóa đơn cao nhất            :";
+                lb_HoaDonThapNhat.Text = $"Hóa đơn thấp nhất           :";
                 string MaxBillID = saleBUS.GetIDfromTotalPrice(maxTotalPriceForAllBills);
                 string MinID = saleBUS.GetIDfromTotalPrice(minTotalPriceForAllBills);
                 lb_DTHDCaoNhat.Text = $" [{MaxBillID}] Giá: {maxTotalPriceForAllBills.ToString()}";
@@ -264,8 +264,8 @@ namespace MiniSupermarket.GUI
         }
         private void ShowInvoices(object sender, EventArgs e)
         {
-            lb_HoaDonCaoNhat.Text = $"Hóa đơn cao nhất:";
-            lb_HoaDonThapNhat.Text = $"Hóa đơn thấp nhất:";
+            lb_HoaDonCaoNhat.Text = $"Hóa đơn cao nhất            :";
+            lb_HoaDonThapNhat.Text = $"Hóa đơn thấp nhất           :";
             DateTime fromDate = dtp_TuNgay.Value;
             DateTime toDate = dtp_DenNgay.Value;
 
@@ -312,7 +312,7 @@ namespace MiniSupermarket.GUI
             lb_HoaDonCaoNhat.Text = $"Sản phẩm bán chạy nhất:";
             lb_DTHDCaoNhat.Text = $"[{MaxProductIdSale}] {nameProductMax}";
             lb_DoanhThuMaxNv.Text = $"-> Số lượng bán ra: {QuantityMax} ";
-            lb_HoaDonThapNhat.Text = $"Nhân viên bán ít nhất:";
+            lb_HoaDonThapNhat.Text = $"Sản phẩm bán ít nhất:";
             lb_DTHDThapNhat.Text = $"[{MinProductIdSale}] {nameProductMin}";
             lb_DoanhThuMinNv.Text = $"-> Số lượng bán ra: {QuantityMin}";
 
