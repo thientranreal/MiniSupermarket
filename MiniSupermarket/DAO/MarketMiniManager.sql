@@ -588,6 +588,24 @@ BEGIN
 
 END;
 GO
+--Chinh sửa nhà cung cấp
+CREATE PROCEDURE UpdateSupplier
+	@ID varchar(50),
+	@Name nvarchar(50),
+	@Address nvarchar(50),
+	@PhoneNumber varchar(50),
+	@Email varchar(50)
+AS
+BEGIN
+	UPDATE Supplier
+	SET 
+	[Name]=@Name,
+	[Address]=@Address,
+	PhoneNumber=@PhoneNumber,
+	Email=@Email
+	WHERE SupplierID=@ID
+END;
+GO
 --Thêm chi tiết nhà cung cấp
 ALTER PROCEDURE AddDetailSupplier
 	@SupplierID varchar(50),

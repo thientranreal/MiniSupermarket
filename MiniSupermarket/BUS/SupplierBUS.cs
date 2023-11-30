@@ -128,8 +128,30 @@ namespace MiniSupermarket.BUS
                 
             }
 
-                
-            
+            return result;
+        }
+        public bool updateSupplier(string id, string name, string address, string phoneNumber, string email)
+        {
+            string storedProcduredName = "UpdateSupplier";
+            SqlParameter[] parameters = new SqlParameter[]
+
+            {
+                new SqlParameter("@ID",id),
+                new SqlParameter("@Name",name),
+                new SqlParameter("@Address",address),
+                new SqlParameter("@PhoneNumber",phoneNumber),
+                new SqlParameter("@Email",email)
+
+        };
+            bool result = false;
+            try
+            {
+                result = Connection.ExecuteNonQuery(storedProcduredName, parameters);
+            }
+            catch (Exception ex)
+            {
+
+            }
 
 
             return result;

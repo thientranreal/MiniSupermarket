@@ -1,4 +1,6 @@
 ﻿using MiniSupermarket.BUS;
+using MiniSupermarket.CustomControl;
+using MiniSupermarket.RegularExpression;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -78,7 +80,13 @@ namespace MiniSupermarket.GUI
             dataLoaiSanPham = supplierBUS.AllProduct();
             dtgvLoaiSanPham.DataSource = dataLoaiSanPham;
         }
-
+        private string name;
+        private string address;
+        private string phoneNumber;
+        private string email;
+        private string productId;
+        private string date;
+        private int count;
         private void btnXacNhan_Click(object sender, EventArgs e)
         {
             int count = 0;
@@ -90,14 +98,24 @@ namespace MiniSupermarket.GUI
                     //MessageBox.Show(c.Name);
                 }
             }
+            name = textBoxTen.Text;
+            address = textBoxDiaChi.Text;
+            if (ProjectRegex.IsPhoneNumber(textBoxSDT.Text))
+            {
+                phoneNumber = textBoxSDT.Text;
+            }
+            if (ProjectRegex.IsEmail(textBoxEmail.Text))
+            {
+                email = textBoxEmail.Text;
+            }
             if (count == 0)
             {
                 supplierBUS.addSupplier(
                     textBoxID.Text,
-                    textBoxTen.Text,
-                    textBoxDiaChi.Text,
-                    textBoxSDT.Text,
-                    textBoxEmail.Text
+                    name,
+                    address,
+                    phoneNumber,
+                    email
                     );
                 foreach (DataGridViewRow row in dtgvLoaiSanPham.SelectedRows)
                 {
@@ -148,41 +166,125 @@ namespace MiniSupermarket.GUI
 
         private void btnThemLoai_Click(object sender, EventArgs e)
         {
-            
-                if (dtgvSupplier.SelectedRows.Count==0)
-                {
-                    MessageBox.Show("Chọn nhà cung cấp trước khi thêm loại sản phẩm","Thông báo",MessageBoxButtons.OK);
-                }
-                else
-                {
-                    btnXacNhanLoai.Enabled = true;
-                    btnHuyThemLoai.Enabled = true;
-                    btnThemLoai.Enabled = false;
 
-                    dateTimePickerNgayNhap.Enabled = true;
+            if (dtgvSupplier.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Chọn nhà cung cấp trước khi thêm loại sản phẩm", "Thông báo", MessageBoxButtons.OK);
+            }
+            else
+            {
+                btnXacNhanLoai.Enabled = true;
+                btnHuyThemLoai.Enabled = true;
+                btnThemLoai.Enabled = false;
 
-                    dataLoaiSanPham = supplierBUS.AllProduct();
-                    dtgvLoaiSanPham.DataSource = dataLoaiSanPham;
-                }
-            
+                dateTimePickerNgayNhap.Enabled = true;
+
+                dataLoaiSanPham = supplierBUS.AllProduct();
+                dtgvLoaiSanPham.DataSource = dataLoaiSanPham;
+            }
+
 
         }
 
         private void btnXacNhanLoai_Click(object sender, EventArgs e)
         {
-           
-                if (dtgvLoaiSanPham.SelectedRows.Count==0)
+
+            if (dtgvLoaiSanPham.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Bạn chưa chọn loại sản phẩm cần thêm");
+            }
+            else
+            {
+                foreach (DataGridViewRow rows in dtgvLoaiSanPham.SelectedRows)
                 {
-                    MessageBox.Show("Bạn chưa chọn loại sản phẩm cần thêm");
+                    supplierBUS.AddDetailSupplier(textBoxID.Text, rows.Cells[0].Value.ToString(), dateTimePickerNgayNhap.Value.ToString());
+                }
+                btnHuyThemLoai.Enabled = false;
+                btnThemLoai.Enabled = true;
+                btnXacNhanLoai.Enabled = false;
+
+                dataLoaiSanPham = supplierBUS.getAllFromSupplierDetail(textBoxID.Text);
+                dtgvLoaiSanPham.DataSource = dataLoaiSanPham;
+
+                MessageBox.Show("Thành công", "Thông báo", MessageBoxButtons.OK);
+            }
+
+        }
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            DialogResult rs = MessageBox.Show("Xác nhận xóa nhà cung cấp", "CONFIRM", MessageBoxButtons.YesNo);
+            if (rs == DialogResult.Yes)
+            {
+                supplierBUS.delSupplier(textBoxID.Text);
+                foreach (Control c in groupBoxThongTinNCC.Controls)
+                {
+                    if (c.GetType() == typeof(TextBox))
+                    {
+                        c.Text = "";
+                    }
+                }
+                dateTimePickerNgayNhap.Value = DateTime.Now;
+                dtgvLoaiSanPham.DataSource = null;
+                dataSupplier = supplierBUS.getAllFromSupplier();
+                dtgvSupplier.DataSource = dataSupplier;
+            }
+        }
+        bool click = false;
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            if (dtgvSupplier.SelectedRows.Count == 0)
+            {
+                MessageBox.Show("Chọn sản phẩm cần sửa trước", "Thông báo", MessageBoxButtons.OK);
+            }
+            else
+            {
+                if (click == false)
+                {
+                    btnThem.Enabled = false;
+                    btnHuy.Enabled = true;
+                    btnXoa.Enabled = false;
+                    click = true;
+
+                    textBoxTen.ReadOnly = false;
+                    textBoxDiaChi.ReadOnly = false;
+                    textBoxSDT.ReadOnly = false;
+                    textBoxEmail.ReadOnly = false;
                 }
                 else
                 {
-                    foreach(DataGridViewRow rows in dtgvLoaiSanPham.SelectedRows)
-                    {
-                    supplierBUS.AddDetailSupplier(textBoxID.Text, rows.Cells[0].Value.ToString(), dateTimePickerNgayNhap.Value.ToString());
-                    }
+                    supplierBUS.updateSupplier(
+                    textBoxID.Text,
+                    textBoxTen.Text,
+                    textBoxDiaChi.Text,
+                    textBoxSDT.Text,
+                    textBoxEmail.Text
+                        );
+                    MessageBox.Show("Thành công", "Thông báo", MessageBoxButtons.OK);
+                    dataSupplier = supplierBUS.getAllFromSupplier();
+                    dtgvSupplier.DataSource = dataSupplier;
+
+                    btnThem.Enabled = true;
+                    btnHuy.Enabled = false;
+                    btnXoa.Enabled = true;
+                    click = false;
+
+                    textBoxTen.ReadOnly = true;
+                    textBoxDiaChi.ReadOnly = true;
+                    textBoxSDT.ReadOnly = true;
+                    textBoxEmail.ReadOnly = true;
                 }
-            
+            }
+        }
+
+        private void btnHuyThemLoai_Click(object sender, EventArgs e)
+        {
+            btnThemLoai.Enabled = true;
+            btnXacNhanLoai.Enabled = false;
+            btnHuyThemLoai.Enabled = false;
+
+            dataLoaiSanPham = supplierBUS.getAllFromSupplierDetail(textBoxID.Text);
+            dtgvLoaiSanPham.DataSource = dataLoaiSanPham;
         }
     }
 }

@@ -215,6 +215,7 @@
             btnHuyThemLoai.TabIndex = 2;
             btnHuyThemLoai.Text = "Hủy thêm loại";
             btnHuyThemLoai.UseVisualStyleBackColor = true;
+            btnHuyThemLoai.Click += btnHuyThemLoai_Click;
             // 
             // btnThemLoai
             // 
@@ -288,6 +289,7 @@
             btnXoa.TabIndex = 4;
             btnXoa.Text = "Xóa";
             btnXoa.UseVisualStyleBackColor = true;
+            btnXoa.Click += btnXoa_Click;
             // 
             // btnHuy
             // 
@@ -319,6 +321,7 @@
             btnSua.TabIndex = 1;
             btnSua.Text = "Sửa";
             btnSua.UseVisualStyleBackColor = true;
+            btnSua.Click += btnSua_Click;
             // 
             // btnThem
             // 
