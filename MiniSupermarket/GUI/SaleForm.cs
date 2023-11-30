@@ -370,6 +370,14 @@ namespace MiniSupermarket.GUI
                 giaDen = int.MaxValue; // Giá trị mặc định khi không parse được
             }
 
+            // Nếu giá từ lớn hơn giá đến thì sẽ đổi chỗ 2 giá
+            if (giaTu > giaDen)
+            {
+                int temp = giaTu;
+                giaTu = giaDen;
+                giaDen = temp;
+            }
+
 
             if (dateFrom > dateTo)
             {
