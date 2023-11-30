@@ -156,5 +156,37 @@ namespace MiniSupermarket.BUS
 
             return result;
         }
+        public bool updateSupplierDetail(string supplierID,string productID,string supplyStartDate)
+        {
+            string storedProcduredName = "UpdateSupplierDetail";
+            SqlParameter[] parameters = new SqlParameter[]
+
+            {
+                new SqlParameter("@SupplierID",supplierID),
+                new SqlParameter("@ProductID",productID),
+                new SqlParameter("@SupplyStartDate",supplyStartDate)
+        };
+            bool result = false;
+            try
+            {
+                result = Connection.ExecuteNonQuery(storedProcduredName, parameters);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
+        }
+
+        public bool delSupplierDetail(string supplierID,string productID)
+        {
+            string storedProcduredName = "DelSupplierDetail";
+            SqlParameter[] parameters = new SqlParameter[] {
+                new SqlParameter("@SupplierID",supplierID),
+                new SqlParameter("@ProductID",productID)
+            };
+            bool result = Connection.ExecuteNonQuery(storedProcduredName, parameters);
+            return result;
+        }
     }
 }

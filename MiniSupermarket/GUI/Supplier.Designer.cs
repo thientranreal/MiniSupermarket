@@ -56,6 +56,7 @@
             textBoxTimKiem = new TextBox();
             comboBox1 = new ComboBox();
             btnTimKiem = new Button();
+            btnXoaLoai = new Button();
             groupBoxThongTinNCC.SuspendLayout();
             groupBoxLoaiSanPham.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dtgvLoaiSanPham).BeginInit();
@@ -87,6 +88,8 @@
             // 
             // dateTimePickerNgayNhap
             // 
+            dateTimePickerNgayNhap.CustomFormat = "dd/MM/yyyy";
+            dateTimePickerNgayNhap.Format = DateTimePickerFormat.Custom;
             dateTimePickerNgayNhap.Location = new Point(81, 183);
             dateTimePickerNgayNhap.Name = "dateTimePickerNgayNhap";
             dateTimePickerNgayNhap.Size = new Size(233, 23);
@@ -184,6 +187,7 @@
             // groupBoxLoaiSanPham
             // 
             groupBoxLoaiSanPham.Anchor = AnchorStyles.Top;
+            groupBoxLoaiSanPham.Controls.Add(btnXoaLoai);
             groupBoxLoaiSanPham.Controls.Add(btnXacNhanLoai);
             groupBoxLoaiSanPham.Controls.Add(btnHuyThemLoai);
             groupBoxLoaiSanPham.Controls.Add(btnThemLoai);
@@ -198,7 +202,7 @@
             // btnXacNhanLoai
             // 
             btnXacNhanLoai.Enabled = false;
-            btnXacNhanLoai.Location = new Point(88, 183);
+            btnXacNhanLoai.Location = new Point(28, 183);
             btnXacNhanLoai.Name = "btnXacNhanLoai";
             btnXacNhanLoai.Size = new Size(113, 30);
             btnXacNhanLoai.TabIndex = 3;
@@ -209,7 +213,7 @@
             // btnHuyThemLoai
             // 
             btnHuyThemLoai.Enabled = false;
-            btnHuyThemLoai.Location = new Point(326, 183);
+            btnHuyThemLoai.Location = new Point(266, 183);
             btnHuyThemLoai.Name = "btnHuyThemLoai";
             btnHuyThemLoai.Size = new Size(113, 30);
             btnHuyThemLoai.TabIndex = 2;
@@ -219,7 +223,7 @@
             // 
             // btnThemLoai
             // 
-            btnThemLoai.Location = new Point(207, 183);
+            btnThemLoai.Location = new Point(147, 183);
             btnThemLoai.Name = "btnThemLoai";
             btnThemLoai.Size = new Size(113, 30);
             btnThemLoai.TabIndex = 1;
@@ -244,6 +248,7 @@
             dtgvLoaiSanPham.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dtgvLoaiSanPham.Size = new Size(521, 153);
             dtgvLoaiSanPham.TabIndex = 0;
+            dtgvLoaiSanPham.CellClick += dtgvLoaiSanPham_CellClick;
             dtgvLoaiSanPham.DataBindingComplete += dtgvLoaiSanPham_DataBindingComplete;
             // 
             // dtgvSupplier
@@ -361,6 +366,17 @@
             btnTimKiem.Text = "Tìm";
             btnTimKiem.UseVisualStyleBackColor = true;
             // 
+            // btnXoaLoai
+            // 
+            btnXoaLoai.Enabled = false;
+            btnXoaLoai.Location = new Point(385, 183);
+            btnXoaLoai.Name = "btnXoaLoai";
+            btnXoaLoai.Size = new Size(113, 30);
+            btnXoaLoai.TabIndex = 4;
+            btnXoaLoai.Text = "Xóa loại";
+            btnXoaLoai.UseVisualStyleBackColor = true;
+            btnXoaLoai.Click += btnXoaLoai_Click;
+            // 
             // Supplier
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -417,5 +433,6 @@
         private Button btnThemLoai;
         private Button btnXacNhanLoai;
         private Button btnHuyThemLoai;
+        private Button btnXoaLoai;
     }
 }

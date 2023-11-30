@@ -18,6 +18,8 @@ namespace MiniSupermarket.GUI
         SupplierBUS supplierBUS = new SupplierBUS();
         DataTable dataSupplier = new DataTable();
         DataTable dataLoaiSanPham = new DataTable();
+
+        bool clickSua = false;
         public Supplier()
         {
             InitializeComponent();
@@ -72,6 +74,14 @@ namespace MiniSupermarket.GUI
             textBoxEmail.ReadOnly = false;
             textBoxDiaChi.ReadOnly = false;
             dateTimePickerNgayNhap.Enabled = true;
+
+            foreach (Control c in groupBoxThongTinNCC.Controls)
+            {
+                if (c.GetType() == typeof(TextBox))
+                {
+                    c.Text = "";
+                }
+            }
 
             btnHuy.Enabled = true;
             btnXacNhan.Enabled = true;
@@ -148,6 +158,8 @@ namespace MiniSupermarket.GUI
             btnHuy.Enabled = false;
             btnXacNhan.Enabled = false;
             btnThem.Enabled = true;
+
+            clickSua = false;
 
             foreach (Control c in groupBoxThongTinNCC.Controls)
             {
@@ -230,7 +242,7 @@ namespace MiniSupermarket.GUI
                 dtgvSupplier.DataSource = dataSupplier;
             }
         }
-        bool click = false;
+
         private void btnSua_Click(object sender, EventArgs e)
         {
             if (dtgvSupplier.SelectedRows.Count == 0)
@@ -239,17 +251,23 @@ namespace MiniSupermarket.GUI
             }
             else
             {
-                if (click == false)
+                if (clickSua == false)
                 {
                     btnThem.Enabled = false;
                     btnHuy.Enabled = true;
                     btnXoa.Enabled = false;
-                    click = true;
+                    clickSua = true;
 
                     textBoxTen.ReadOnly = false;
                     textBoxDiaChi.ReadOnly = false;
                     textBoxSDT.ReadOnly = false;
                     textBoxEmail.ReadOnly = false;
+                    if (dtgvLoaiSanPham.SelectedRows.Count > 0)
+                    {
+                        dateTimePickerNgayNhap.Enabled = true;
+                    }
+
+
                 }
                 else
                 {
@@ -260,19 +278,26 @@ namespace MiniSupermarket.GUI
                     textBoxSDT.Text,
                     textBoxEmail.Text
                         );
+                    foreach (DataGridViewRow row in dtgvLoaiSanPham.SelectedRows)
+                    {
+                        supplierBUS.updateSupplierDetail(textBoxID.Text, row.Cells[0].Value.ToString(), dateTimePickerNgayNhap.Value.ToString());
+                    }
                     MessageBox.Show("Thành công", "Thông báo", MessageBoxButtons.OK);
                     dataSupplier = supplierBUS.getAllFromSupplier();
                     dtgvSupplier.DataSource = dataSupplier;
 
+
+
                     btnThem.Enabled = true;
                     btnHuy.Enabled = false;
                     btnXoa.Enabled = true;
-                    click = false;
+                    clickSua = false;
 
                     textBoxTen.ReadOnly = true;
                     textBoxDiaChi.ReadOnly = true;
                     textBoxSDT.ReadOnly = true;
                     textBoxEmail.ReadOnly = true;
+                    dateTimePickerNgayNhap.Enabled = false;
                 }
             }
         }
@@ -285,6 +310,33 @@ namespace MiniSupermarket.GUI
 
             dataLoaiSanPham = supplierBUS.getAllFromSupplierDetail(textBoxID.Text);
             dtgvLoaiSanPham.DataSource = dataLoaiSanPham;
+        }
+
+        private void dtgvLoaiSanPham_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+
+            
+            btnXoaLoai.Enabled = true;
+        }
+
+        private void btnXoaLoai_Click(object sender, EventArgs e)
+        {
+            foreach(DataGridViewRow row in dtgvLoaiSanPham.SelectedRows)
+            {
+                supplierBUS.delSupplierDetail(textBoxID.Text, row.Cells[0].Value.ToString());
+            }
+            foreach (DataGridViewRow row in dtgvSupplier.SelectedRows)
+            {
+                dataLoaiSanPham = supplierBUS.getAllFromSupplierDetail(row.Cells[0].Value.ToString());
+                dtgvLoaiSanPham.DataSource = dataLoaiSanPham;
+
+                textBoxID.Text = row.Cells[0].Value.ToString();
+                textBoxTen.Text = row.Cells[1].Value.ToString();
+                textBoxDiaChi.Text = row.Cells[2].Value.ToString();
+                textBoxSDT.Text = row.Cells[3].Value.ToString();
+                textBoxEmail.Text = row.Cells[4].Value.ToString();
+
+            }
         }
     }
 }
