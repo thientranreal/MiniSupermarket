@@ -25,6 +25,7 @@ namespace MiniSupermarket.BUS
         public DataTable getAllBills()
         {
             // Lấy những bill chưa xóa
+            updateBills();
             DataRow[] selectedRows = bills.Select("isDeleted = 1");
             DataTable newTable = selectedRows.CopyToDataTable();
 
