@@ -987,6 +987,7 @@ GO
 
 --Công Anh--
 
+
 -- Tạo stored procedure để lấy hóa đơn trong khoảng thời gian
 CREATE PROCEDURE GetBillsByDateRange
     @FromDate DATETIME,
@@ -1036,6 +1037,7 @@ BEGIN
 	ON Bill.EmployeeID = Employee.EmployeeID 
 END;
 GO
+
 
 --Lấy danh sách sản phẩm 
 CREATE PROCEDURE SelectAllFromProduct

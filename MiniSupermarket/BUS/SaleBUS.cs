@@ -300,8 +300,22 @@ namespace MiniSupermarket.BUS
 
             return minTotalPrice;
         }
-        
-        
+        //lấy mã hóa đơn từ tổng tiền
+        public string GetIDfromTotalPrice(decimal totalPrice)
+        {
+            foreach (DataRow row in bills.Rows)
+            {
+                // Nếu TotalPrice khớp với giá trị cần tìm, trả về BillID tương ứng
+                if (Convert.ToDecimal(row["TotalPrice"]) == totalPrice)
+                {
+                    return row["BillID"].ToString();
+                }
+            }
+
+            // Trường hợp không tìm thấy
+            return "Không tìm thấy"; // hoặc có thể trả về một giá trị mặc định khác
+        }
+
 
 
     }

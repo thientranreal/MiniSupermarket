@@ -31,6 +31,8 @@
             this.panel1 = new System.Windows.Forms.Panel();
             this.grb_ThongTin = new System.Windows.Forms.GroupBox();
             this.grb_ChiTiet = new System.Windows.Forms.GroupBox();
+            this.lb_DoanhThuMinNv = new System.Windows.Forms.Label();
+            this.lb_DoanhThuMaxNv = new System.Windows.Forms.Label();
             this.lb_DTHDThapNhat = new System.Windows.Forms.Label();
             this.lb_HoaDonThapNhat = new System.Windows.Forms.Label();
             this.lb_DTHDCaoNhat = new System.Windows.Forms.Label();
@@ -81,6 +83,8 @@
             // 
             // grb_ChiTiet
             // 
+            this.grb_ChiTiet.Controls.Add(this.lb_DoanhThuMinNv);
+            this.grb_ChiTiet.Controls.Add(this.lb_DoanhThuMaxNv);
             this.grb_ChiTiet.Controls.Add(this.lb_DTHDThapNhat);
             this.grb_ChiTiet.Controls.Add(this.lb_HoaDonThapNhat);
             this.grb_ChiTiet.Controls.Add(this.lb_DTHDCaoNhat);
@@ -94,10 +98,29 @@
             this.grb_ChiTiet.TabStop = false;
             this.grb_ChiTiet.Text = "Chi tiết";
             // 
+            // lb_DoanhThuMinNv
+            // 
+            this.lb_DoanhThuMinNv.AutoSize = true;
+            this.lb_DoanhThuMinNv.Location = new System.Drawing.Point(186, 138);
+            this.lb_DoanhThuMinNv.Name = "lb_DoanhThuMinNv";
+            this.lb_DoanhThuMinNv.Size = new System.Drawing.Size(50, 20);
+            this.lb_DoanhThuMinNv.TabIndex = 13;
+            this.lb_DoanhThuMinNv.Text = "label2";
+            this.lb_DoanhThuMinNv.Click += new System.EventHandler(this.label2_Click_1);
+            // 
+            // lb_DoanhThuMaxNv
+            // 
+            this.lb_DoanhThuMaxNv.AutoSize = true;
+            this.lb_DoanhThuMaxNv.Location = new System.Drawing.Point(186, 69);
+            this.lb_DoanhThuMaxNv.Name = "lb_DoanhThuMaxNv";
+            this.lb_DoanhThuMaxNv.Size = new System.Drawing.Size(50, 20);
+            this.lb_DoanhThuMaxNv.TabIndex = 12;
+            this.lb_DoanhThuMaxNv.Text = "label1";
+            // 
             // lb_DTHDThapNhat
             // 
             this.lb_DTHDThapNhat.AutoSize = true;
-            this.lb_DTHDThapNhat.Location = new System.Drawing.Point(387, 82);
+            this.lb_DTHDThapNhat.Location = new System.Drawing.Point(387, 103);
             this.lb_DTHDThapNhat.Name = "lb_DTHDThapNhat";
             this.lb_DTHDThapNhat.Size = new System.Drawing.Size(17, 20);
             this.lb_DTHDThapNhat.TabIndex = 11;
@@ -106,7 +129,7 @@
             // lb_HoaDonThapNhat
             // 
             this.lb_HoaDonThapNhat.AutoSize = true;
-            this.lb_HoaDonThapNhat.Location = new System.Drawing.Point(62, 82);
+            this.lb_HoaDonThapNhat.Location = new System.Drawing.Point(62, 103);
             this.lb_HoaDonThapNhat.Name = "lb_HoaDonThapNhat";
             this.lb_HoaDonThapNhat.Size = new System.Drawing.Size(134, 20);
             this.lb_HoaDonThapNhat.TabIndex = 10;
@@ -115,7 +138,7 @@
             // lb_DTHDCaoNhat
             // 
             this.lb_DTHDCaoNhat.AutoSize = true;
-            this.lb_DTHDCaoNhat.Location = new System.Drawing.Point(387, 37);
+            this.lb_DTHDCaoNhat.Location = new System.Drawing.Point(387, 32);
             this.lb_DTHDCaoNhat.Name = "lb_DTHDCaoNhat";
             this.lb_DTHDCaoNhat.Size = new System.Drawing.Size(17, 20);
             this.lb_DTHDCaoNhat.TabIndex = 9;
@@ -124,7 +147,7 @@
             // lb_HoaDonCaoNhat
             // 
             this.lb_HoaDonCaoNhat.AutoSize = true;
-            this.lb_HoaDonCaoNhat.Location = new System.Drawing.Point(62, 37);
+            this.lb_HoaDonCaoNhat.Location = new System.Drawing.Point(62, 32);
             this.lb_HoaDonCaoNhat.Name = "lb_HoaDonCaoNhat";
             this.lb_HoaDonCaoNhat.Size = new System.Drawing.Size(128, 20);
             this.lb_HoaDonCaoNhat.TabIndex = 8;
@@ -133,7 +156,7 @@
             // lb_TongDoanhThu
             // 
             this.lb_TongDoanhThu.AutoSize = true;
-            this.lb_TongDoanhThu.Location = new System.Drawing.Point(157, 142);
+            this.lb_TongDoanhThu.Location = new System.Drawing.Point(156, 158);
             this.lb_TongDoanhThu.Name = "lb_TongDoanhThu";
             this.lb_TongDoanhThu.Size = new System.Drawing.Size(117, 20);
             this.lb_TongDoanhThu.TabIndex = 6;
@@ -143,12 +166,11 @@
             // lb_DoanhThu
             // 
             this.lb_DoanhThu.AutoSize = true;
-            this.lb_DoanhThu.Location = new System.Drawing.Point(387, 142);
+            this.lb_DoanhThu.Location = new System.Drawing.Point(387, 158);
             this.lb_DoanhThu.Name = "lb_DoanhThu";
             this.lb_DoanhThu.Size = new System.Drawing.Size(17, 20);
             this.lb_DoanhThu.TabIndex = 7;
             this.lb_DoanhThu.Text = "0";
-            this.lb_DoanhThu.Click += new System.EventHandler(this.lb_DoanhThu_Click);
             // 
             // lb_ThongKeTheo
             // 
@@ -272,5 +294,7 @@
         private Label lb_HoaDonThapNhat;
         private Label lb_DTHDCaoNhat;
         private Label lb_HoaDonCaoNhat;
+        private Label lb_DoanhThuMinNv;
+        private Label lb_DoanhThuMaxNv;
     }
 }
