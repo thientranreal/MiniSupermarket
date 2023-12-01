@@ -120,7 +120,6 @@ namespace MiniSupermarket.GUI
             int rowIndex = e.RowIndex;
             DataGridViewRow row = dgvPurchaseOders.Rows[rowIndex];
             string promotionID = row.Cells[0].Value.ToString();
-            //string status = row.Cells[5].Value.ToString();
             string supplierID = bus.GetSupplierIDByName(row.Cells[2].Value.ToString());
             DetailPurchaseOrderForm form = new DetailPurchaseOrderForm(promotionID, status, supplierID, this);
             form.ShowDialog();

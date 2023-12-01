@@ -88,7 +88,6 @@ namespace MiniSupermarket.BUS
             string EmployeeID = GlobalState.employeeId;
             DateTime currentDate = DateTime.Now;
             string date = String.Format("{0:dd/MM/yyyy}", currentDate);
-            MessageBox.Show(ID +"   "+EmployeeID+"   "+SupplierID);
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@OrderID",ID),
