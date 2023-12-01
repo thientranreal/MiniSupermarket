@@ -13,12 +13,13 @@ namespace MiniSupermarket.BUS
     {
         private DataTable products, productOrders;
 
-        public DataTable getProducts(string OrderID)
+        public DataTable getProducts(string OrderID, string SupplierID)
         {
             string storedProcedure = "SelectProductsToPurchaseOrder";
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@OrderID",OrderID),
+                new SqlParameter("@SupplierID",SupplierID)
             };
             products = Connection.Execute(storedProcedure,parameters);
             return products;
