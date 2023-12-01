@@ -53,8 +53,7 @@ namespace MiniSupermarket.GUI
             LoadTheme();
         }
 
-        public void BindingPromotions()
-        {
+        public void BindingPromotions() {
             BindingSource binding = new BindingSource();
             List<Customer> filteredCustomers = customerBus.getAllCustomers().Where(c => c.IsDeleted == "1").ToList();
             binding.DataSource = filteredCustomers;
