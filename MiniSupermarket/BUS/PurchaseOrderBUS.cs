@@ -24,6 +24,13 @@ namespace MiniSupermarket.BUS
             return purchaseOrders;
         }
 
+        public DataTable getAllOrders()
+        {
+            string storedProcedure = "SelectAllOrders";
+            DataTable purchaseOrders = Connection.Execute(storedProcedure, null);
+            return purchaseOrders;
+        }
+
         public DataTable getSuppliers()
         {
             string sql = "SELECT SupplierID, Name From Supplier Where isDeleted = 1";
@@ -33,6 +40,7 @@ namespace MiniSupermarket.BUS
 
         public Boolean checkExistedID(string id)
         {
+            purchaseOrders = getAllOrders();
             foreach (DataRow row in purchaseOrders.Rows)
             {
                 if (id.Equals(row["OrderID"].ToString()))
@@ -66,7 +74,7 @@ namespace MiniSupermarket.BUS
             string EmployeeID = GlobalState.employeeId;
             DateTime currentDate = DateTime.Now;
             string date = String.Format("{0:dd/MM/yyyy}", currentDate);
-            MessageBox.Show(ID +"   "+EmployeeID+"   "+date);
+            MessageBox.Show(ID +"   "+EmployeeID+"   "+SupplierID);
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@OrderID",ID),
@@ -97,6 +105,61 @@ namespace MiniSupermarket.BUS
                 new SqlParameter("@OrderID",OrderID)
             };
             return Connection.ExecuteNonQuery(storedProcedure, parameters);
+        }
+
+        public string GetSupplierIDByName(string Name)
+        {
+            string storedProcedure = "GetSupplierIDByName";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@Name",Name)
+            };
+            return Connection.Execute(storedProcedure, parameters).Rows[0].ItemArray[0].ToString();
+        }
+        public Boolean ClearAllProductInDetailOrder(string OrderID)
+        {
+            string storedProcedure = "ClearAllProductInDetailOrder";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@OrderID",OrderID)
+            };
+            return Connection.ExecuteNonQuery(storedProcedure, parameters);
+        }
+
+        public DataTable getListExportTextFile(string OrderID)
+        {
+            string storedProcedure = "ExportTextFileOrder";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@OrderID",OrderID)
+            };
+            return Connection.Execute(storedProcedure, parameters);
+        }
+
+        public void ExportTextFile(string OrderID, string EmployeeName, string SupplierName, string DateImport, string TotalPrice)
+        {
+            FileStream fileStream = new FileStream("HoaDonNhap.txt", FileMode.Create, FileAccess.Write);
+            StreamWriter writer = new StreamWriter(fileStream);
+            writer.WriteLine("                                   PHIẾU NHẬP                                  ");
+            writer.WriteLine();
+            writer.WriteLine("Mã phiếu nhập: "+OrderID);
+            writer.WriteLine("Đơn vị bán: "+SupplierName);
+            writer.WriteLine("Đơn vị mua: "+SupplierName);
+            writer.WriteLine("Ngày nhập: "+DateImport);
+
+            writer.WriteLine();
+            writer.WriteLine(String.Format("{0,10}| {1,10}| {2,10}| {3,10}| {4,10}","Mã sản phẩm","Tên sản phẩm","Đơn vị","Số lượng","Giá mua"));
+
+            DataTable dataTable = getListExportTextFile(OrderID);
+            foreach (DataRow row in dataTable.Rows)
+            {
+                writer.WriteLine(String.Format("{0,10}| {1,10}| {2,10}| {3,10}| {4,10}", row[0].ToString(), row[1].ToString(), row[2].ToString(), row[3].ToString(), row[4].ToString()));
+            }
+            writer.WriteLine();
+            writer.WriteLine("                                         Tổng giá: "+TotalPrice);
+            writer.WriteLine("                                         Thanh toán: "+TotalPrice);
+            writer.Close();
+            fileStream.Close();
         }
     }
 }

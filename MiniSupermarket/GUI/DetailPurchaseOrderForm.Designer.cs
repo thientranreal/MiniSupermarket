@@ -29,6 +29,9 @@
         private void InitializeComponent()
         {
             pnlDetailOrders = new Panel();
+            groupBox2 = new GroupBox();
+            txtSearchOrder = new TextBox();
+            cbxTypeOfSearchOrder = new ComboBox();
             btnPay = new Button();
             dgvProductOrders = new DataGridView();
             lblProductOrder = new Label();
@@ -50,11 +53,10 @@
             label1 = new Label();
             lblProduct = new Label();
             groupBox1 = new GroupBox();
-            textBox1 = new TextBox();
-            comboBox1 = new ComboBox();
-            groupBox2 = new GroupBox();
-            comboBox2 = new ComboBox();
+            txtSearch = new TextBox();
+            cbxTypeOfSearch = new ComboBox();
             pnlDetailOrders.SuspendLayout();
+            groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProductOrders).BeginInit();
             panel2.SuspendLayout();
             panel4.SuspendLayout();
@@ -64,11 +66,11 @@
             pnlInformation.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudQuantity).BeginInit();
             groupBox1.SuspendLayout();
-            groupBox2.SuspendLayout();
             SuspendLayout();
             // 
             // pnlDetailOrders
             // 
+            pnlDetailOrders.Controls.Add(groupBox2);
             pnlDetailOrders.Controls.Add(btnPay);
             pnlDetailOrders.Controls.Add(dgvProductOrders);
             pnlDetailOrders.Controls.Add(lblProductOrder);
@@ -78,6 +80,38 @@
             pnlDetailOrders.Name = "pnlDetailOrders";
             pnlDetailOrders.Size = new Size(557, 596);
             pnlDetailOrders.TabIndex = 0;
+            // 
+            // groupBox2
+            // 
+            groupBox2.Controls.Add(txtSearchOrder);
+            groupBox2.Controls.Add(cbxTypeOfSearchOrder);
+            groupBox2.Location = new Point(8, 67);
+            groupBox2.Margin = new Padding(3, 4, 3, 4);
+            groupBox2.Name = "groupBox2";
+            groupBox2.Padding = new Padding(3, 4, 3, 4);
+            groupBox2.Size = new Size(543, 63);
+            groupBox2.TabIndex = 4;
+            groupBox2.TabStop = false;
+            groupBox2.Text = "Tìm kiếm theo";
+            // 
+            // txtSearchOrder
+            // 
+            txtSearchOrder.Location = new Point(178, 24);
+            txtSearchOrder.Margin = new Padding(3, 4, 3, 4);
+            txtSearchOrder.Name = "txtSearchOrder";
+            txtSearchOrder.Size = new Size(359, 27);
+            txtSearchOrder.TabIndex = 1;
+            txtSearchOrder.KeyUp += txtSearchOrder_KeyUp;
+            // 
+            // cbxTypeOfSearchOrder
+            // 
+            cbxTypeOfSearchOrder.FormattingEnabled = true;
+            cbxTypeOfSearchOrder.Items.AddRange(new object[] { "Mã sản phẩm", "Tên sản phẩm" });
+            cbxTypeOfSearchOrder.Location = new Point(7, 24);
+            cbxTypeOfSearchOrder.Margin = new Padding(3, 4, 3, 4);
+            cbxTypeOfSearchOrder.Name = "cbxTypeOfSearchOrder";
+            cbxTypeOfSearchOrder.Size = new Size(138, 28);
+            cbxTypeOfSearchOrder.TabIndex = 0;
             // 
             // btnPay
             // 
@@ -96,12 +130,12 @@
             dgvProductOrders.Anchor = AnchorStyles.Left | AnchorStyles.Right;
             dgvProductOrders.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvProductOrders.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvProductOrders.Location = new Point(0, 86);
+            dgvProductOrders.Location = new Point(0, 138);
             dgvProductOrders.Margin = new Padding(3, 4, 3, 4);
             dgvProductOrders.Name = "dgvProductOrders";
             dgvProductOrders.RowHeadersWidth = 51;
             dgvProductOrders.RowTemplate.Height = 25;
-            dgvProductOrders.Size = new Size(557, 454);
+            dgvProductOrders.Size = new Size(557, 402);
             dgvProductOrders.TabIndex = 1;
             dgvProductOrders.CellDoubleClick += dgvProductOrders_CellDoubleClick;
             // 
@@ -182,7 +216,6 @@
             pnlInformation.Controls.Add(label1);
             pnlInformation.Controls.Add(lblProduct);
             pnlInformation.Controls.Add(groupBox1);
-            pnlInformation.Controls.Add(groupBox2);
             pnlInformation.Dock = DockStyle.Top;
             pnlInformation.Location = new Point(0, 0);
             pnlInformation.Margin = new Padding(3, 4, 3, 4);
@@ -228,6 +261,7 @@
             txtOrderPrice.Name = "txtOrderPrice";
             txtOrderPrice.Size = new Size(114, 27);
             txtOrderPrice.TabIndex = 12;
+            txtOrderPrice.KeyPress += txtOrderPrice_KeyPress;
             // 
             // label4
             // 
@@ -292,54 +326,35 @@
             // 
             // groupBox1
             // 
-            groupBox1.Controls.Add(textBox1);
-            groupBox1.Controls.Add(comboBox1);
+            groupBox1.Controls.Add(txtSearch);
+            groupBox1.Controls.Add(cbxTypeOfSearch);
             groupBox1.Location = new Point(6, 190);
             groupBox1.Margin = new Padding(3, 4, 3, 4);
             groupBox1.Name = "groupBox1";
             groupBox1.Padding = new Padding(3, 4, 3, 4);
-            groupBox1.Size = new Size(299, 63);
+            groupBox1.Size = new Size(566, 63);
             groupBox1.TabIndex = 3;
             groupBox1.TabStop = false;
-            groupBox1.Text = "groupBox1";
+            groupBox1.Text = "Tìm kiếm theo";
             // 
-            // textBox1
+            // txtSearch
             // 
-            textBox1.Location = new Point(178, 24);
-            textBox1.Margin = new Padding(3, 4, 3, 4);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(114, 27);
-            textBox1.TabIndex = 1;
+            txtSearch.Location = new Point(178, 24);
+            txtSearch.Margin = new Padding(3, 4, 3, 4);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(382, 27);
+            txtSearch.TabIndex = 1;
+            txtSearch.KeyUp += txtSearch_KeyUp;
             // 
-            // comboBox1
+            // cbxTypeOfSearch
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(7, 24);
-            comboBox1.Margin = new Padding(3, 4, 3, 4);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(138, 28);
-            comboBox1.TabIndex = 0;
-            // 
-            // groupBox2
-            // 
-            groupBox2.Controls.Add(comboBox2);
-            groupBox2.Location = new Point(311, 190);
-            groupBox2.Margin = new Padding(3, 4, 3, 4);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Padding = new Padding(3, 4, 3, 4);
-            groupBox2.Size = new Size(203, 63);
-            groupBox2.TabIndex = 4;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "groupBox2";
-            // 
-            // comboBox2
-            // 
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(23, 24);
-            comboBox2.Margin = new Padding(3, 4, 3, 4);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(138, 28);
-            comboBox2.TabIndex = 1;
+            cbxTypeOfSearch.FormattingEnabled = true;
+            cbxTypeOfSearch.Items.AddRange(new object[] { "Mã sản phẩm", "Tên sản phẩm" });
+            cbxTypeOfSearch.Location = new Point(7, 24);
+            cbxTypeOfSearch.Margin = new Padding(3, 4, 3, 4);
+            cbxTypeOfSearch.Name = "cbxTypeOfSearch";
+            cbxTypeOfSearch.Size = new Size(138, 28);
+            cbxTypeOfSearch.TabIndex = 0;
             // 
             // DetailPurchaseOrderForm
             // 
@@ -347,12 +362,18 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1132, 595);
             Controls.Add(panel2);
+            FormBorderStyle = FormBorderStyle.FixedSingle;
             Margin = new Padding(3, 4, 3, 4);
+            MaximizeBox = false;
+            MinimizeBox = false;
             Name = "DetailPurchaseOrderForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Chi tiết phiếu nhập";
             Load += DetailPurchaseOrderForm_Load;
             pnlDetailOrders.ResumeLayout(false);
             pnlDetailOrders.PerformLayout();
+            groupBox2.ResumeLayout(false);
+            groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProductOrders).EndInit();
             panel2.ResumeLayout(false);
             panel4.ResumeLayout(false);
@@ -364,7 +385,6 @@
             ((System.ComponentModel.ISupportInitialize)nudQuantity).EndInit();
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
-            groupBox2.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -375,11 +395,9 @@
         private Panel panel2;
         private Label lblProduct;
         private DataGridView dgvProductOrders;
-        private GroupBox groupBox2;
         private GroupBox groupBox1;
-        private ComboBox comboBox2;
-        private TextBox textBox1;
-        private ComboBox comboBox1;
+        private TextBox txtSearch;
+        private ComboBox cbxTypeOfSearch;
         private Panel panel4;
         private Panel pnlInformation;
         private Label label3;
@@ -396,5 +414,8 @@
         private Panel panel3;
         private Panel panel5;
         private Button btnPay;
+        private GroupBox groupBox2;
+        private TextBox txtSearchOrder;
+        private ComboBox cbxTypeOfSearchOrder;
     }
 }

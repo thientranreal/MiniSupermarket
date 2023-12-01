@@ -802,30 +802,6 @@ BEGIN
 END;
 GO
 
--- Tìm kiếm chương trình khuyến mãi theo mã CTKM
-CREATE PROC SearchPromotionByID
-	@PromotionID varchar(10)
-AS
-BEGIN
-	SELECT PM.PromotionID AS ID, PM.Name, PM.StartDate,
-	PM.EndDate, PM.Discount, PM.[Status]
-	FROM Promotion PM
-	WHERE PM.isDeleted = 1 and PM.PromotionID like '%'+@PromotionID+'%'
-END;
-GO
-
--- Tìm kiếm chương trình khuyến mãi theo tên CTKM
-CREATE PROC SearchPromotionByName
-	@PromotionName nvarchar(50)
-AS
-BEGIN
-	SELECT PM.PromotionID AS ID, PM.Name, PM.StartDate,
-	PM.EndDate, PM.Discount, PM.[Status]
-	FROM Promotion PM
-	WHERE PM.isDeleted = 1 and PM.Name like '%'+@PromotionName+'%'
-END;
-GO
-
 CREATE PROC ClearAllProductsFromPromotion
 	@PromotionID varchar(10)
 AS
@@ -844,6 +820,14 @@ BEGIN
 	SELECT OrderID, E.Name, S.Name, PO.importDate, PO.TotalPrice, PO.Status
 	FROM PurchaseOrder PO, Employee E, Supplier S
 	WHERE PO.EmployeeID = E.EmployeeID and PO.SupplierID = S.SupplierID and PO.isDeleted = '1' and E.EmployeeID = @EmployeeID
+END;
+GO
+
+CREATE PROC SelectAllOrders
+AS
+BEGIN
+	SELECT OrderID
+	FROM PurchaseOrder
 END;
 GO
 
@@ -882,12 +866,13 @@ GO
 
 --Tải danh sách các sản phẩm vào chi tiết phiếu nhập( Tất cả sản phẩm)
 CREATE PROC SelectProductsToPurchaseOrder
-	@OrderID varchar(10)
+	@OrderID varchar(10),
+	@SupplierID varchar(50)
 AS
 BEGIN
 	SELECT P.ProductID, P.Name, P.Quantity, P.Unit
-	FROM Product P
-	WHERE isDeleted = '1' and P.ProductID not in (SELECT DPO.ProductID FROM DetailPurchaseOrder DPO WHERE DPO.OrderID = @OrderID)
+	FROM Product P, SupplierProduct SP
+	WHERE isDeleted = '1' and P.ProductID not in (SELECT DPO.ProductID FROM DetailPurchaseOrder DPO WHERE DPO.OrderID = @OrderID) and P.ProductID = SP.ProductID and SP.SupplierID = @SupplierID
 END;
 GO
 
@@ -919,7 +904,7 @@ GO
 CREATE PROC AddProductsToInventory
 	@Order varchar(10),
 	@ProductID varchar(10),
-	@CurrentQuantity int
+	@CurrentQuantity int	
 AS
 BEGIN
 	INSERT INTO Inventory (OrderID,ProductID,CurrentQuantity)
@@ -967,9 +952,41 @@ BEGIN
 							GROUP BY ProductID),0)
 END;
 GO
+
+-- Lấy mã nhà cung cấp bằng tên nhà cung cấp
+CREATE PROC GetSupplierIDByName
+	@Name nvarchar(50)
+AS
+BEGIN
+	SELECT SupplierID
+	FROM Supplier
+	WHERE Name = @Name
+END;
+GO
+
+CREATE PROC ClearAllProductInDetailOrder
+	@OrderID varchar(10)
+AS
+BEGIN
+	DELETE FROM DetailPurchaseOrder WHERE @OrderID = @OrderID
+END;
+GO
+
+-- Lấy danh sách để xuất file text
+CREATE PROC ExportTextFileOrder
+	@OrderID varchar(10)
+AS
+BEGIN
+	SELECT P.ProductID, P.Name, P.Unit, DPO.Quantity, DPO.PurchasePrice
+	FROM PurchaseOrder PO, Product P, DetailPurchaseOrder DPO
+	WHERE PO.OrderID = DPO.OrderID and P.ProductID = DPO.ProductID and PO.OrderID = @OrderID
+END;
+GO
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 --Công Anh--
+
 
 -- Tạo stored procedure để lấy hóa đơn trong khoảng thời gian
 CREATE PROCEDURE GetBillsByDateRange
@@ -1020,6 +1037,7 @@ BEGIN
 	ON Bill.EmployeeID = Employee.EmployeeID 
 END;
 GO
+
 
 --Lấy danh sách sản phẩm 
 CREATE PROCEDURE SelectAllFromProduct
