@@ -1,5 +1,7 @@
 ﻿using MiniSupermarket.BUS;
 using MiniSupermarket.ImageAndFont;
+using System.Data;
+using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
 
@@ -15,14 +17,23 @@ namespace MiniSupermarket.BUS
             this.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
 
             cb_sex.DropDownStyle = ComboBoxStyle.DropDownList;
+            cb_sex.Items.Add("Chọn giới tính");
             cb_sex.Items.Add("Nam");
             cb_sex.Items.Add("Nữ");
+            cb_sex.SelectedIndex = 0;
+
+            cb_find.DropDownStyle = ComboBoxStyle.DropDownList;
+            cb_find.Items.Add("Tìm kiếm");
+            cb_find.Items.Add("Mã nhân viên");
+            cb_find.Items.Add("Tên nhân viên");
 
             ds_qlnv.BackgroundColor = Color.White;
             ds_qlnv.ReadOnly = true;
             ds_qlnv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             ds_qlnv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             ds_qlnv.SelectionChanged += DataGridView_SelectionChanged;
+
+            tb_id.ReadOnly = true;
         }
 
         public void LoadTheme()
@@ -138,15 +149,10 @@ namespace MiniSupermarket.BUS
             }
         }
 
-        private void ds_qlnv_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
-
         private void btn_reset_Click(object sender, EventArgs e)
         {
             ds_qlnv.DataSource = employeeBUS.getAllEmployee();
-            EmployeeBUS.Reset(gb_Info.Controls, ds_qlnv);
+            EmployeeBUS.Reset(gb_Info.Controls, ds_qlnv, gb_Function.Controls);
         }
 
         void setNull()
@@ -275,6 +281,31 @@ namespace MiniSupermarket.BUS
             {
                 MessageBox.Show("Vui lòng chọn một nhân viên để chỉnh sửa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
+        }
+
+        private void btn_find_Click(object sender, EventArgs e)
+        {
+            string searchTerm = tb_find.Text.Trim();
+
+            // Kiểm tra xem ComboBox chọn là ID hay Tên
+            string searchType = cb_find.SelectedItem.ToString();
+
+            // Gọi phương thức tìm kiếm từ EmployeeBUS
+            DataTable searchResult = null;
+
+            if (searchType == "Mã nhân viên")
+            {
+                // Gọi phương thức tìm kiếm theo ID
+                searchResult = employeeBUS.SearchEmployeeByID(searchTerm);
+            }
+            else if (searchType == "Tên nhân viên")
+            {
+                // Gọi phương thức tìm kiếm theo Tên
+                searchResult = employeeBUS.SearchEmployeeByName(searchTerm);
+            }
+
+            // Hiển thị kết quả trong DataGridView hoặc bảng dữ liệu của bạn
+            ds_qlnv.DataSource = searchResult;
         }
     }
 }

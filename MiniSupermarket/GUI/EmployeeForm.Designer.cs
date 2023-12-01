@@ -30,11 +30,10 @@
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployeeForm));
             button2 = new Button();
-            comboBox2 = new ComboBox();
+            cb_role = new ComboBox();
             ds_qlnv = new DataGridView();
             btn_reset = new Button();
             lb_title = new Label();
-            cb_sex = new ComboBox();
             label5 = new Label();
             tb_pass = new TextBox();
             tb_name = new TextBox();
@@ -47,12 +46,16 @@
             textBox1 = new TextBox();
             tb_email = new TextBox();
             label1 = new Label();
+            cb_sex = new ComboBox();
             label8 = new Label();
             tb_pNumber = new TextBox();
             label7 = new Label();
             dtp_birth = new DateTimePicker();
             label6 = new Label();
+            label9 = new Label();
             gb_Function = new GroupBox();
+            tb_find = new TextBox();
+            cb_find = new ComboBox();
             btn_add = new Button();
             btn_edit = new Button();
             btn_delete = new Button();
@@ -66,23 +69,26 @@
             // 
             // button2
             // 
-            button2.Font = new Font("Segoe UI", 13F, FontStyle.Bold, GraphicsUnit.Point);
-            button2.Location = new Point(964, 464);
+            button2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            button2.Image = (Image)resources.GetObject("button2.Image");
+            button2.ImageAlign = ContentAlignment.MiddleLeft;
+            button2.Location = new Point(185, 200);
             button2.Name = "button2";
-            button2.Size = new Size(231, 52);
+            button2.Size = new Size(164, 52);
             button2.TabIndex = 2;
             button2.Text = "Xuất File";
+            button2.TextAlign = ContentAlignment.MiddleRight;
             button2.UseVisualStyleBackColor = true;
             // 
-            // comboBox2
+            // cb_role
             // 
-            comboBox2.Font = new Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point);
-            comboBox2.FormattingEnabled = true;
-            comboBox2.Location = new Point(673, 472);
-            comboBox2.Name = "comboBox2";
-            comboBox2.Size = new Size(182, 44);
-            comboBox2.TabIndex = 7;
-            comboBox2.Text = "Phòng Ban";
+            cb_role.DropDownStyle = ComboBoxStyle.DropDownList;
+            cb_role.Font = new Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point);
+            cb_role.FormattingEnabled = true;
+            cb_role.Location = new Point(232, 361);
+            cb_role.Name = "cb_role";
+            cb_role.Size = new Size(300, 44);
+            cb_role.TabIndex = 7;
             // 
             // ds_qlnv
             // 
@@ -94,14 +100,13 @@
             ds_qlnv.RowTemplate.Height = 33;
             ds_qlnv.Size = new Size(1777, 324);
             ds_qlnv.TabIndex = 9;
-            ds_qlnv.CellContentClick += ds_qlnv_CellContentClick;
             // 
             // btn_reset
             // 
-            btn_reset.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_reset.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btn_reset.Image = (Image)resources.GetObject("btn_reset.Image");
             btn_reset.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_reset.Location = new Point(29, 274);
+            btn_reset.Location = new Point(185, 122);
             btn_reset.Name = "btn_reset";
             btn_reset.Size = new Size(128, 47);
             btn_reset.TabIndex = 10;
@@ -119,16 +124,6 @@
             lb_title.Size = new Size(342, 48);
             lb_title.TabIndex = 11;
             lb_title.Text = "Quản Lý Nhân Viên";
-            // 
-            // cb_sex
-            // 
-            cb_sex.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
-            cb_sex.FormattingEnabled = true;
-            cb_sex.Location = new Point(232, 274);
-            cb_sex.Name = "cb_sex";
-            cb_sex.Size = new Size(300, 46);
-            cb_sex.TabIndex = 24;
-            cb_sex.Text = "Giới Tính";
             // 
             // label5
             // 
@@ -197,14 +192,16 @@
             gb_Info.Controls.Add(textBox1);
             gb_Info.Controls.Add(tb_email);
             gb_Info.Controls.Add(label1);
+            gb_Info.Controls.Add(cb_sex);
+            gb_Info.Controls.Add(cb_role);
             gb_Info.Controls.Add(label8);
             gb_Info.Controls.Add(tb_pNumber);
             gb_Info.Controls.Add(label7);
             gb_Info.Controls.Add(dtp_birth);
             gb_Info.Controls.Add(label6);
             gb_Info.Controls.Add(label2);
-            gb_Info.Controls.Add(cb_sex);
             gb_Info.Controls.Add(label3);
+            gb_Info.Controls.Add(label9);
             gb_Info.Controls.Add(label5);
             gb_Info.Controls.Add(label4);
             gb_Info.Controls.Add(tb_pass);
@@ -213,7 +210,7 @@
             gb_Info.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             gb_Info.Location = new Point(12, 50);
             gb_Info.Name = "gb_Info";
-            gb_Info.Size = new Size(1173, 363);
+            gb_Info.Size = new Size(1173, 416);
             gb_Info.TabIndex = 25;
             gb_Info.TabStop = false;
             gb_Info.Text = "Thông Tin Nhân Viên";
@@ -248,6 +245,16 @@
             label1.Size = new Size(114, 38);
             label1.TabIndex = 30;
             label1.Text = "Địa Chỉ:";
+            // 
+            // cb_sex
+            // 
+            cb_sex.DropDownStyle = ComboBoxStyle.DropDownList;
+            cb_sex.Font = new Font("Segoe UI", 13F, FontStyle.Regular, GraphicsUnit.Point);
+            cb_sex.FormattingEnabled = true;
+            cb_sex.Location = new Point(232, 283);
+            cb_sex.Name = "cb_sex";
+            cb_sex.Size = new Size(300, 44);
+            cb_sex.TabIndex = 7;
             // 
             // label8
             // 
@@ -294,23 +301,54 @@
             label6.TabIndex = 26;
             label6.Text = "Ngày Sinh:";
             // 
+            // label9
+            // 
+            label9.AutoSize = true;
+            label9.Font = new Font("Segoe UI Semibold", 14F, FontStyle.Bold, GraphicsUnit.Point);
+            label9.Location = new Point(6, 367);
+            label9.Name = "label9";
+            label9.Size = new Size(166, 38);
+            label9.TabIndex = 23;
+            label9.Text = "Phân quyền";
+            // 
             // gb_Function
             // 
+            gb_Function.Controls.Add(tb_find);
+            gb_Function.Controls.Add(cb_find);
             gb_Function.Controls.Add(btn_add);
             gb_Function.Controls.Add(btn_edit);
+            gb_Function.Controls.Add(button2);
             gb_Function.Controls.Add(btn_delete);
             gb_Function.Controls.Add(btn_reset);
             gb_Function.Controls.Add(btn_find);
             gb_Function.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             gb_Function.Location = new Point(1191, 50);
             gb_Function.Name = "gb_Function";
-            gb_Function.Size = new Size(256, 408);
+            gb_Function.Size = new Size(445, 416);
             gb_Function.TabIndex = 27;
             gb_Function.TabStop = false;
             gb_Function.Text = "Chức Năng";
             // 
+            // tb_find
+            // 
+            tb_find.Location = new Point(29, 347);
+            tb_find.Name = "tb_find";
+            tb_find.Size = new Size(284, 39);
+            tb_find.TabIndex = 26;
+            // 
+            // cb_find
+            // 
+            cb_find.DropDownStyle = ComboBoxStyle.DropDownList;
+            cb_find.Font = new Font("Segoe UI", 14F, FontStyle.Regular, GraphicsUnit.Point);
+            cb_find.FormattingEnabled = true;
+            cb_find.Location = new Point(29, 275);
+            cb_find.Name = "cb_find";
+            cb_find.Size = new Size(284, 46);
+            cb_find.TabIndex = 25;
+            // 
             // btn_add
             // 
+            btn_add.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btn_add.Image = (Image)resources.GetObject("btn_add.Image");
             btn_add.ImageAlign = ContentAlignment.MiddleLeft;
             btn_add.Location = new Point(29, 45);
@@ -324,9 +362,10 @@
             // 
             // btn_edit
             // 
+            btn_edit.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btn_edit.Image = (Image)resources.GetObject("btn_edit.Image");
             btn_edit.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_edit.Location = new Point(29, 120);
+            btn_edit.Location = new Point(185, 45);
             btn_edit.Name = "btn_edit";
             btn_edit.Size = new Size(128, 49);
             btn_edit.TabIndex = 22;
@@ -337,9 +376,10 @@
             // 
             // btn_delete
             // 
+            btn_delete.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btn_delete.Image = (Image)resources.GetObject("btn_delete.Image");
             btn_delete.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_delete.Location = new Point(29, 198);
+            btn_delete.Location = new Point(29, 120);
             btn_delete.Name = "btn_delete";
             btn_delete.Size = new Size(128, 49);
             btn_delete.TabIndex = 23;
@@ -350,24 +390,25 @@
             // 
             // btn_find
             // 
-            btn_find.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_find.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btn_find.Image = (Image)resources.GetObject("btn_find.Image");
             btn_find.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_find.Location = new Point(29, 344);
+            btn_find.Location = new Point(29, 200);
             btn_find.Name = "btn_find";
             btn_find.Size = new Size(128, 56);
             btn_find.TabIndex = 8;
             btn_find.Text = "Tìm";
             btn_find.TextAlign = ContentAlignment.MiddleRight;
             btn_find.UseVisualStyleBackColor = true;
+            btn_find.Click += btn_find_Click;
             // 
             // gb_List
             // 
             gb_List.Controls.Add(ds_qlnv);
             gb_List.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            gb_List.Location = new Point(12, 464);
+            gb_List.Location = new Point(12, 484);
             gb_List.Name = "gb_List";
-            gb_List.Size = new Size(1789, 368);
+            gb_List.Size = new Size(1789, 348);
             gb_List.TabIndex = 28;
             gb_List.TabStop = false;
             gb_List.Text = "Danh Sách Nhân Viên";
@@ -381,8 +422,6 @@
             Controls.Add(gb_Function);
             Controls.Add(gb_Info);
             Controls.Add(lb_title);
-            Controls.Add(comboBox2);
-            Controls.Add(button2);
             Name = "EmployeeForm";
             Text = "EmployeeManage";
             Load += EmployeeForm_Load;
@@ -390,6 +429,7 @@
             gb_Info.ResumeLayout(false);
             gb_Info.PerformLayout();
             gb_Function.ResumeLayout(false);
+            gb_Function.PerformLayout();
             gb_List.ResumeLayout(false);
             ResumeLayout(false);
             PerformLayout();
@@ -397,11 +437,10 @@
 
         #endregion
         private Button button2;
-        private ComboBox comboBox2;
+        private ComboBox cb_role;
         private DataGridView ds_qlnv;
         private Button btn_reset;
         private Label lb_title;
-        private ComboBox cb_sex;
         private Label label5;
         private TextBox tb_pass;
         private TextBox tb_name;
@@ -425,5 +464,9 @@
         private Label label1;
         private TextBox tb_address;
         private TextBox textBox1;
+        private TextBox tb_find;
+        private ComboBox cb_find;
+        private Label label9;
+        private ComboBox cb_sex;
     }
 }
