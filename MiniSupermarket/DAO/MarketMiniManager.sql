@@ -323,13 +323,11 @@ GO
 --Rot du lieu vao bang chuc nang cho quyen cua nhan vien
 INSERT INTO RoleFunction (RoleID, FunctionID)
 VALUES
-	('R0001', 'F0001'),
-	('R0001', 'F0003'),
-	('R0001', 'F0004'),
 	('R0001', 'F0006'),
     ('R0001', 'F0007'),
     ('R0001', 'F0008'),
     ('R0001', 'F0009'),
+	('R0001', 'F0010'),
     ('R0002', 'F0001'),
     ('R0002', 'F0002'),
     ('R0002', 'F0003'),
@@ -1193,6 +1191,7 @@ BEGIN
     FROM dbo.Employee
     WHERE EmployeeID = @SearchTerm;
 END;
+GO
 
 -- Tìm kiếm theo tên
 CREATE PROCEDURE SearchEmployeeByName
@@ -1205,6 +1204,7 @@ BEGIN
     FROM dbo.Employee
     WHERE Name LIKE '%' + @SearchTerm + '%';
 END;
+GO
 
 -- Lấy danh sách chức vụ
 CREATE PROCEDURE SelectAllFromRole

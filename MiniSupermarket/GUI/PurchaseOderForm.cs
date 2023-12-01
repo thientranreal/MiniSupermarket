@@ -88,9 +88,8 @@ namespace MiniSupermarket.GUI
             Payed(true);
         }
 
-        private void HienThiPhieuNhap()
+        public void HienThiPhieuNhap()
         {
-            dgvPurchaseOders.Rows.Clear();
             dgvPurchaseOders.DataSource = bus.getPurchaseOrders(GlobalState.employeeId);
         }
 
@@ -123,7 +122,7 @@ namespace MiniSupermarket.GUI
             string promotionID = row.Cells[0].Value.ToString();
             //string status = row.Cells[5].Value.ToString();
             string supplierID = bus.GetSupplierIDByName(row.Cells[2].Value.ToString());
-            DetailPurchaseOrderForm form = new DetailPurchaseOrderForm(promotionID, status, supplierID);
+            DetailPurchaseOrderForm form = new DetailPurchaseOrderForm(promotionID, status, supplierID, this);
             form.ShowDialog();
         }
 
@@ -233,7 +232,7 @@ namespace MiniSupermarket.GUI
 
         void Payed(Boolean yes)
         {
-            btnAddPurchaseOder.Enabled = yes;
+            btnDeletePurchaseOder.Enabled = yes;
             btnUpdate.Enabled = yes;
             btnPrintOrder.Enabled = !yes;
         }

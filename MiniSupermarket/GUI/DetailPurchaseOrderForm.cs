@@ -16,12 +16,14 @@ namespace MiniSupermarket.GUI
     {
         private string purchaseOrderID, status, supplierID;
         private DetailPurchaseOrderBUS bus = new DetailPurchaseOrderBUS();
-        public DetailPurchaseOrderForm(string PurchaseOrderID, string Status, string SupplierID)
+        private PurchaseOderForm OrderForm;
+        public DetailPurchaseOrderForm(string PurchaseOrderID, string Status, string SupplierID, PurchaseOderForm OrderForm)
         {
             InitializeComponent();
             purchaseOrderID = PurchaseOrderID;
             status = Status;
             supplierID = SupplierID;
+            this.OrderForm = OrderForm;
         }
 
         private void DetailPurchaseOrderForm_Load(object sender, EventArgs e)
@@ -50,6 +52,8 @@ namespace MiniSupermarket.GUI
             dgvProductOrders.Columns[4].HeaderText = "Giá nhập";
             cbxTypeOfSearch.SelectedIndex = 0;
             cbxTypeOfSearchOrder.SelectedIndex = 0;
+
+            nudQuantity.Maximum = int.MaxValue;
         }
 
         void Payed()
@@ -234,6 +238,7 @@ namespace MiniSupermarket.GUI
                     ShowProducts();
                     setNull();
                     Payed();
+                    OrderForm.HienThiPhieuNhap();
                     return;
                 }
             }
