@@ -681,13 +681,21 @@ GO
 
 -- Đại
 -- Lấy tất cả thông tin chương trình khuyến mãi
-CREATE PROC SelectAllPromotions
+CREATE PROC SelectAllPromotionsToShow
 AS
 BEGIN
 	SELECT Promotion.PromotionID AS ID, Promotion.Name, Promotion.StartDate,
 	Promotion.EndDate, Promotion.Discount, Promotion.[Status]
 	FROM Promotion
 	WHERE Promotion.isDeleted = 1
+END;
+GO
+
+CREATE PROC SelectAllPromotionsToCreateID
+AS
+BEGIN
+	SELECT PromotionID
+	FROM Promotion
 END;
 GO
 
