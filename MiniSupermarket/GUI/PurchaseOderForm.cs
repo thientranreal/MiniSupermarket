@@ -12,12 +12,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Forms.VisualStyles;
+using System.IO;
 
 namespace MiniSupermarket.GUI
 {
     public partial class PurchaseOderForm : Form
     {
         private PurchaseOrderBUS bus = new PurchaseOrderBUS();
+        private string status;
         public PurchaseOderForm()
         {
             InitializeComponent();
@@ -119,7 +121,7 @@ namespace MiniSupermarket.GUI
             int rowIndex = e.RowIndex;
             DataGridViewRow row = dgvPurchaseOders.Rows[rowIndex];
             string promotionID = row.Cells[0].Value.ToString();
-            string status = row.Cells[5].Value.ToString();
+            //string status = row.Cells[5].Value.ToString();
             string supplierID = bus.GetSupplierIDByName(row.Cells[2].Value.ToString());
             DetailPurchaseOrderForm form = new DetailPurchaseOrderForm(promotionID, status, supplierID);
             form.ShowDialog();
@@ -208,14 +210,22 @@ namespace MiniSupermarket.GUI
             DataGridViewRow row = dgvPurchaseOders.SelectedRows[0];
             txtOrderID.Text = row.Cells[0].Value.ToString();
             cbxSupplier.Text = row.Cells[2].Value.ToString();
-            int Status = Convert.ToInt32(row.Cells[5].Value);
-            if (Status == 1)
+            object Status = row.Cells[5].Value;
+            if (Status == "")
             {
+                Payed(true);
+                return;
+            }
+            bool isCheckOut = (bool)Status;
+            if (isCheckOut)
+            {
+                status = "1";
                 Payed(false);
                 return;
             }
-            else if (Status == 0) { }
+            else
             {
+                status="0";
                 Payed(true);
                 return;
             }
@@ -320,17 +330,26 @@ namespace MiniSupermarket.GUI
 
         private void btnPrintOrder_Click(object sender, EventArgs e)
         {
-            DataGridViewRow row = dgvPurchaseOders.SelectedRows[0];
-            string OrderID = row.Cells[0].Value.ToString();
-            string EmployeeName = row.Cells[1].Value.ToString();
-            string SupplietName = row.Cells[2].Value.ToString();
-            DateTime Date;
-            DateTime.TryParse(row.Cells[3].Value.ToString(), out Date);
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                MessageBox.Show(saveFileDialog1.FileName);
+                DataGridViewRow row = dgvPurchaseOders.SelectedRows[0];
+                string OrderID = row.Cells[0].Value.ToString();
+                string EmployeeName = row.Cells[1].Value.ToString();
+                string SupplietName = row.Cells[2].Value.ToString();
+                DateTime Date;
+                DateTime.TryParse(row.Cells[3].Value.ToString(), out Date);
 
-            string DateImport = String.Format("{0:dd/MM/yyyy}",Date);
-            string TotalPrice = row.Cells[4].Value.ToString();
+                string DateImport = String.Format("{0:dd/MM/yyyy}", Date);
+                string TotalPrice = row.Cells[4].Value.ToString();
 
-            bus.ExportTextFile(OrderID,EmployeeName,SupplietName,DateImport,TotalPrice);
+                if (bus.ExportTextFile(OrderID, EmployeeName, SupplietName, DateImport, TotalPrice))
+                {
+                    MessageBox.Show("Xuất phiếu nhập thành công","Thành công",MessageBoxButtons.OK,MessageBoxIcon.Information);
+                    setNull();
+                    return;
+                }
+            }
         }
     }
 }
