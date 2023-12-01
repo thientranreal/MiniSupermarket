@@ -150,9 +150,9 @@ namespace MiniSupermarket.BUS
             return Connection.Execute(storedProcedure, parameters);
         }
 
-        public Boolean ExportTextFile(string OrderID, string EmployeeName, string SupplierName, string DateImport, string TotalPrice)
+        public Boolean ExportTextFile(string filename,string OrderID, string EmployeeName, string SupplierName, string DateImport, string TotalPrice)
         {
-            FileStream fileStream = new FileStream("HoaDonNhap.txt", FileMode.Create, FileAccess.Write);
+            FileStream fileStream = new FileStream(filename, FileMode.Create, FileAccess.Write);
             StreamWriter writer = new StreamWriter(fileStream);
             writer.WriteLine("                                   PHIẾU NHẬP                                  ");
             writer.WriteLine();

@@ -330,9 +330,10 @@ namespace MiniSupermarket.GUI
 
         private void btnPrintOrder_Click(object sender, EventArgs e)
         {
+            saveFileDialog1.Filter = "Text file|*.txt";
             if (saveFileDialog1.ShowDialog() == DialogResult.OK)
             {
-                MessageBox.Show(saveFileDialog1.FileName);
+                string filename = saveFileDialog1.FileName;
                 DataGridViewRow row = dgvPurchaseOders.SelectedRows[0];
                 string OrderID = row.Cells[0].Value.ToString();
                 string EmployeeName = row.Cells[1].Value.ToString();
@@ -343,7 +344,7 @@ namespace MiniSupermarket.GUI
                 string DateImport = String.Format("{0:dd/MM/yyyy}", Date);
                 string TotalPrice = row.Cells[4].Value.ToString();
 
-                if (bus.ExportTextFile(OrderID, EmployeeName, SupplietName, DateImport, TotalPrice))
+                if (bus.ExportTextFile(filename, OrderID, EmployeeName, SupplietName, DateImport, TotalPrice))
                 {
                     MessageBox.Show("Xuất phiếu nhập thành công","Thành công",MessageBoxButtons.OK,MessageBoxIcon.Information);
                     setNull();
