@@ -420,7 +420,7 @@ GO
 CREATE PROCEDURE SelectAllFromProductType
 AS
 BEGIN
-    SELECT TypeID, [Name] FROM ProductType Where isDeleted = 1
+    SELECT * FROM ProductType
 END;
 GO
 

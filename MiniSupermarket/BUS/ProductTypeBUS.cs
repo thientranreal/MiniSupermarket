@@ -28,7 +28,9 @@ namespace MiniSupermarket.BUS
 
         public DataTable getAllProducts()
         {
-            return getAllProductTypes();
+            DataTable newDt = productTypes.Select("isDeleted = 1").CopyToDataTable();
+            newDt.Columns.Remove("isDeleted");
+            return newDt;
         }
 
         // Nếu tồn tại trả về true, nếu không tồn tại trả về false
@@ -94,7 +96,7 @@ namespace MiniSupermarket.BUS
             // Nếu thêm thành công thì sẽ cập nhật lại danh sách
             if (result)
             {
-                productTypes = getAllProducts();
+                productTypes = getAllProductTypes();
             }
             return result;
         }
@@ -109,7 +111,7 @@ namespace MiniSupermarket.BUS
             // Nếu xóa thành công thì cập nhật lại danh sách
             if (result)
             {
-                productTypes = getAllProducts();
+                productTypes = getAllProductTypes();
             }
             return result;
         }
@@ -126,7 +128,7 @@ namespace MiniSupermarket.BUS
             // Nếu cập nhật thành công thì cập nhật lại danh sách
             if (result)
             {
-                productTypes = getAllProducts();
+                productTypes = getAllProductTypes();
             }
             return result;
         }
