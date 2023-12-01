@@ -1,5 +1,5 @@
 ﻿namespace MiniSupermarket.GUI {
-    partial class DetailFormMuaHang {
+    partial class FormMuaHang {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -24,11 +24,6 @@
         /// </summary>
         private void InitializeComponent() {
             components = new System.ComponentModel.Container();
-            pnlInformation = new Panel();
-            panel4 = new Panel();
-            dgvDetalBill = new DataGridView();
-            panel1 = new Panel();
-            label1 = new Label();
             panel2 = new Panel();
             groupBox2 = new GroupBox();
             comboBox1 = new ComboBox();
@@ -39,66 +34,22 @@
             panel3 = new Panel();
             dgvProduct = new DataGridView();
             errorProvider1 = new ErrorProvider(components);
-            pnlInformation.SuspendLayout();
-            panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvDetalBill).BeginInit();
-            panel1.SuspendLayout();
+            panel1 = new Panel();
+            label1 = new Label();
+            panel4 = new Panel();
+            dgvDetalBill = new DataGridView();
+            pnlInformation = new Panel();
             panel2.SuspendLayout();
             groupBox2.SuspendLayout();
             groupBox1.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProduct).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).BeginInit();
+            panel1.SuspendLayout();
+            panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvDetalBill).BeginInit();
+            pnlInformation.SuspendLayout();
             SuspendLayout();
-            // 
-            // pnlInformation
-            // 
-            pnlInformation.Controls.Add(panel4);
-            pnlInformation.Controls.Add(panel1);
-            pnlInformation.Dock = DockStyle.Left;
-            pnlInformation.Location = new Point(0, 0);
-            pnlInformation.Margin = new Padding(3, 2, 3, 2);
-            pnlInformation.Name = "pnlInformation";
-            pnlInformation.Size = new Size(488, 428);
-            pnlInformation.TabIndex = 0;
-            // 
-            // panel4
-            // 
-            panel4.Controls.Add(dgvDetalBill);
-            panel4.Dock = DockStyle.Fill;
-            panel4.Location = new Point(0, 46);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(488, 382);
-            panel4.TabIndex = 2;
-            // 
-            // dgvDetalBill
-            // 
-            dgvDetalBill.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dgvDetalBill.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvDetalBill.Dock = DockStyle.Fill;
-            dgvDetalBill.Location = new Point(0, 0);
-            dgvDetalBill.Name = "dgvDetalBill";
-            dgvDetalBill.RowTemplate.Height = 25;
-            dgvDetalBill.Size = new Size(488, 382);
-            dgvDetalBill.TabIndex = 0;
-            // 
-            // panel1
-            // 
-            panel1.Controls.Add(label1);
-            panel1.Dock = DockStyle.Top;
-            panel1.Location = new Point(0, 0);
-            panel1.Name = "panel1";
-            panel1.Size = new Size(488, 46);
-            panel1.TabIndex = 1;
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(12, 9);
-            label1.Name = "label1";
-            label1.Size = new Size(94, 15);
-            label1.TabIndex = 0;
-            label1.Text = "Chi Tiết hóa đơn";
             // 
             // panel2
             // 
@@ -111,6 +62,7 @@
             panel2.Name = "panel2";
             panel2.Size = new Size(644, 80);
             panel2.TabIndex = 1;
+            panel2.Paint += panel2_Paint;
             // 
             // groupBox2
             // 
@@ -196,12 +148,63 @@
             dgvProduct.RowTemplate.Height = 29;
             dgvProduct.Size = new Size(644, 348);
             dgvProduct.TabIndex = 0;
+            dgvProduct.CellContentClick += dgvProduct_CellContentClick;
             // 
             // errorProvider1
             // 
             errorProvider1.ContainerControl = this;
             // 
-            // DetailFormMuaHang
+            // panel1
+            // 
+            panel1.Controls.Add(label1);
+            panel1.Dock = DockStyle.Top;
+            panel1.Location = new Point(0, 0);
+            panel1.Name = "panel1";
+            panel1.Size = new Size(488, 46);
+            panel1.TabIndex = 1;
+            panel1.Paint += panel1_Paint;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(12, 9);
+            label1.Name = "label1";
+            label1.Size = new Size(94, 15);
+            label1.TabIndex = 0;
+            label1.Text = "Chi Tiết hóa đơn";
+            // 
+            // panel4
+            // 
+            panel4.Controls.Add(dgvDetalBill);
+            panel4.Dock = DockStyle.Fill;
+            panel4.Location = new Point(0, 46);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(488, 382);
+            panel4.TabIndex = 2;
+            // 
+            // dgvDetalBill
+            // 
+            dgvDetalBill.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dgvDetalBill.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvDetalBill.Dock = DockStyle.Fill;
+            dgvDetalBill.Location = new Point(0, 0);
+            dgvDetalBill.Name = "dgvDetalBill";
+            dgvDetalBill.RowTemplate.Height = 25;
+            dgvDetalBill.Size = new Size(488, 382);
+            dgvDetalBill.TabIndex = 0;
+            // 
+            // pnlInformation
+            // 
+            pnlInformation.Controls.Add(panel4);
+            pnlInformation.Controls.Add(panel1);
+            pnlInformation.Dock = DockStyle.Left;
+            pnlInformation.Location = new Point(0, 0);
+            pnlInformation.Margin = new Padding(3, 2, 3, 2);
+            pnlInformation.Name = "pnlInformation";
+            pnlInformation.Size = new Size(488, 428);
+            pnlInformation.TabIndex = 0;
+            // 
+            // FormMuaHang
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
@@ -210,14 +213,9 @@
             Controls.Add(panel2);
             Controls.Add(pnlInformation);
             Margin = new Padding(3, 2, 3, 2);
-            Name = "DetailFormMuaHang";
+            Name = "FormMuaHang";
             Text = "PromotionForm";
             Load += DetailFormMuaHang_Load;
-            pnlInformation.ResumeLayout(false);
-            panel4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dgvDetalBill).EndInit();
-            panel1.ResumeLayout(false);
-            panel1.PerformLayout();
             panel2.ResumeLayout(false);
             panel2.PerformLayout();
             groupBox2.ResumeLayout(false);
@@ -226,12 +224,15 @@
             panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvProduct).EndInit();
             ((System.ComponentModel.ISupportInitialize)errorProvider1).EndInit();
+            panel1.ResumeLayout(false);
+            panel1.PerformLayout();
+            panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvDetalBill).EndInit();
+            pnlInformation.ResumeLayout(false);
             ResumeLayout(false);
         }
 
         #endregion
-
-        private Panel pnlInformation;
         private Panel panel2;
         private Panel panel3;
         private DataGridView dgvProduct;
@@ -242,9 +243,10 @@
         private ErrorProvider errorProvider1;
         private GroupBox groupBox2;
         private ComboBox comboBox1;
+        private Panel pnlInformation;
+        private Panel panel4;
         private DataGridView dgvDetalBill;
         private Panel panel1;
         private Label label1;
-        private Panel panel4;
     }
 }

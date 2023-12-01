@@ -17,6 +17,7 @@ namespace MiniSupermarket.GUI {
     public partial class CustomerForm : Form {
         CustomerBus customerBus = new CustomerBus();
         public CustomerForm() {
+
             InitializeComponent();
             this.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
         }
@@ -39,51 +40,69 @@ namespace MiniSupermarket.GUI {
         }
 
         private void CustomerForm_Load(object sender, EventArgs e) {
-            dgvCustomer.DataSource = customerBus.getAllCustomers();
             BindingPromotions();
             LoadTheme();
         }
 
+
+
         public void BindingPromotions() {
             BindingSource binding = new BindingSource();
-            binding.DataSource = customerBus.getAllCustomers();
+            List<Customer> filteredCustomers = customerBus.getAllCustomers().Where(c => c.IsDeleted == "1").ToList();
+            binding.DataSource = filteredCustomers;
             dgvCustomer.DataSource = binding;
+
+            dgvCustomer.Columns["IsDeleted"].Visible = false;
+
+            // Đổi tên các cột
+            dgvCustomer.Columns["CustomerID"].HeaderText = "ID Khách Hàng";
+            dgvCustomer.Columns["Name"].HeaderText = "Họ Và Tên";
+            dgvCustomer.Columns["PhoneNumber"].HeaderText = "Số Điện Thoại";
+            dgvCustomer.Columns["Sex"].HeaderText = "Giới Tính";
+            dgvCustomer.Columns["Point"].HeaderText = "Điểm";
         }
 
         private void btnRefresh_Click(object sender, EventArgs e) {
             txtCustomerID.Text = null;
             txtCustomerName.Text = null;
             txtPhoneNumber.Text = null;
-            txtGioiTinh.Text = null;
             txtPoint.Text = null;
+            txtFind.Text = null;
+            cboFind.SelectedItem = null;
+
+            rdoNam.Checked = false;
+            rdoNu.Checked = false;
+            grb_rdoNam.Checked = false;
+            grb_rdoNu.Checked = false;
+
+
+
             errorProvider1.Clear();
-            radNam.Checked = false;
-            radNu.Checked = false;
         }
 
         private bool check_empty() {
             errorProvider1.Clear();
-            bool result;
-            if (txtCustomerID.Text == "") {
-                MessageBox.Show("Mã khách hàng đang rỗng");
-                errorProvider1.SetError(txtCustomerID, "Mã khánh hàng không được để trống");
-            }
+            bool result = true;
             if (txtCustomerName.Text == "") {
+                result = false;
                 MessageBox.Show("Bạn chưa nhập tên khách hàng");
                 errorProvider1.SetError(txtCustomerName, "Tên khách hàng không được để trống");
             }
             if (txtPhoneNumber.Text == "") {
+                result = false;
                 MessageBox.Show("Bạn chưa nhập số điện thoại");
                 errorProvider1.SetError(txtPhoneNumber, "Số điện thoại không được để trống");
             } else if (!IsValidVietnamesePhoneNumber(txtPhoneNumber.Text)) {
+                result = false;
                 MessageBox.Show("Số điện thoại không hợp lệ");
                 errorProvider1.SetError(txtPhoneNumber, "SDT có dạng 037-6714-453");
             }
-            if (txtGioiTinh.Text == "") {
+            if (rdoNam.Checked == false && rdoNu.Checked == false) {
+                result = false;
                 MessageBox.Show("Giới tính không được để trống");
-                errorProvider1.SetError(txtGioiTinh, "Giới tính là nam hoặc nữ");
+                //errorProvider1.SetError(txtGioiTinh, "Giới tính là nam hoặc nữ");
             }
-            return true;
+            return result;
         }
 
         static bool IsValidVietnamesePhoneNumber(string phoneNumber) {
@@ -98,32 +117,18 @@ namespace MiniSupermarket.GUI {
         }
 
         private void btnUpdate_Click(object sender, EventArgs e) {
-            string id = txtCustomerID.Text.Trim().ToUpper();
-            string name = ProjectFont.upperFirstLetter(txtCustomerName.Text);
-            string phoneNumber = ProjectFont.upperFirstLetter(txtPhoneNumber.Text);
-            string sex = ProjectFont.upperFirstLetter(txtGioiTinh.Text);
-            string point = ProjectFont.upperFirstLetter(txtPoint.Text);
+            if (txtCustomerID.Text == "") {
+                MessageBox.Show("Bạn chưa chọn mã khách khách hàng cần cập nhật");
+            } else {
+                if (check_empty()) {
 
-            if (check_empty()) {
-                if (txtCustomerID.Text.Length != 0) {
-                    // Nếu mã loại đã tồn tại trong hệ thống thì hiện lỗi
-                    if (!customerBus.checkIdExist(id)) {
-                        MessageBox.Show(
-                            "Mã sản phẩm không tồn tại trong hệ thống",
-                            "Warning",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Warning); // cho cảnh báo
-                        txtCustomerID.Focus();
-                        return;
-                    } else if (!customerBus.checkIdExist(id)) {
-                        MessageBox.Show(
-                            "Mã sản phẩm không tồn tại trong hệ thống",
-                            "Warning",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Warning); // cho cảnh báo
-                        txtCustomerID.Focus();
-                        return;
-                    } else if (customerBus.updateProduct(id, name, phoneNumber, sex, point, "1")) {
+                    string id = txtCustomerID.Text.Trim().ToUpper();
+                    string name = ProjectFont.upperFirstLetter(txtCustomerName.Text);
+                    string phoneNumber = ProjectFont.upperFirstLetter(txtPhoneNumber.Text);
+                    string sex = rdoNam.Checked ? "Nam" : rdoNu.Checked ? "Nữ" : "";
+                    string point = ProjectFont.upperFirstLetter(txtPoint.Text);
+
+                    if (customerBus.updateCustomer(id, name, phoneNumber, sex, point, "1")) {
                         BindingPromotions();
                         MessageBox.Show("Sửa thành công!",
                             "Thông báo",
@@ -143,34 +148,21 @@ namespace MiniSupermarket.GUI {
 
         private void btnDelete_Click(object sender, EventArgs e) {
             if (txtCustomerID.Text == "") {
-                MessageBox.Show("Mã khách hàng đang rỗng");
-                errorProvider1.SetError(txtCustomerID, "Mã khánh hàng không được để trống");
+                MessageBox.Show("Bạn chưa chọn mã khách khách hàng cần xóa");
             } else {
                 string id = txtCustomerID.Text.Trim().ToUpper();
-                if (txtCustomerID.Text.Length != 0) {
-                    // Nếu mã loại đã tồn tại trong hệ thống thì hiện lỗi
-                    if (!customerBus.checkIdExist(id)) {
-                        MessageBox.Show(
-                            "Mã sản phẩm không tồn tại trong hệ thống",
-                            "Warning",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Warning); // cho cảnh báo
-                        txtCustomerID.Focus();
-                        return;
-                    } else if (customerBus.deleteProduct(id)) {
-                        BindingPromotions();
-                        MessageBox.Show("Xóa thành công!",
-                            "Thông báo",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information); // Thêm thành công
+                if (customerBus.deleteCustomer(id)) {
+                    BindingPromotions();
+                    MessageBox.Show("Xóa thành công!",
+                        "Thông báo",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information); // Thêm thành công
 
-                    } else {
-                        MessageBox.Show("Xóa thất bại!",
-                            "Thông báo",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error); // Thêm thất bại
-                        return;
-                    }
+                } else {
+                    MessageBox.Show("Xóa thất bại!",
+                        "Thông báo",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error); // Thêm thất bại
                 }
             }
         }
@@ -180,79 +172,61 @@ namespace MiniSupermarket.GUI {
                 string id = txtCustomerID.Text.Trim().ToUpper();
                 string name = ProjectFont.upperFirstLetter(txtCustomerName.Text);
                 string phoneNumber = ProjectFont.upperFirstLetter(txtPhoneNumber.Text);
-                string sex = ProjectFont.upperFirstLetter(txtGioiTinh.Text);
+                string sex = rdoNam.Checked ? "Nam" : rdoNu.Checked ? "Nữ" : "";
                 string point = ProjectFont.upperFirstLetter(txtPoint.Text);
 
 
-                if (txtCustomerID.Text.Length != 0) {
-                    // Nếu mã loại đã tồn tại trong hệ thống thì hiện lỗi
+                if (customerBus.addCustomer(name, phoneNumber, sex, point, "1")) {
                     if (customerBus.checkIdExist(id)) {
                         MessageBox.Show(
-                            "Mã sản phẩm đã tồn tại trong hệ thống",
-                            "Warning",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Warning); // cho cảnh báo
-                        txtCustomerID.Focus();
-                        return;
+                            "Mã Khách Hàng đã tồn tại->Hệ thống sẽ tự động tạo mã khách hàng mới");
                     }
-                }
-                // Nếu mà mã loại rỗng thì sẽ tự tạo mã id
-                if (id.Length == 0) {
-                    if (customerBus.addProduct(id, name, phoneNumber, sex, point, "1")) {
-                        BindingPromotions();
-                        MessageBox.Show("Thêm thành công!",
-                            "Thông báo",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information); // Thêm thành công
+                    BindingPromotions();
+                    MessageBox.Show("Thêm thành công!",
+                        "Thông báo",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Information); // Thêm thành công
 
-                    } else {
-                        MessageBox.Show("Thêm thất bại!",
-                            "Thông báo",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error); // Thêm thất bại
-                        return;
-                    }
-                } else // Nếu mà nhập đầy đủ thông tin thì thêm đầy đủ
-                  {
-                    if (customerBus.addProduct(id, name, phoneNumber, sex, point, "1")) {
-                        MessageBox.Show("Thêm thành công!",
-                            "Thông báo",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Information); // Thêm thành công
-
-                    } else {
-                        MessageBox.Show("Thêm thất bại!",
-                            "Thông báo",
-                            MessageBoxButtons.OK,
-                            MessageBoxIcon.Error); // Thêm thất bại
-                        txtCustomerID.Focus();
-                        return;
-                    }
+                } else {
+                    MessageBox.Show("Thêm thất bại!",
+                        "Thông báo",
+                        MessageBoxButtons.OK,
+                        MessageBoxIcon.Error); // Thêm thất bại
                 }
             }
         }
 
-        private void txtFind_TextChanged(object sender, EventArgs e) {
+        private void Find_Changed(object sender, EventArgs e) {
             string selectedValue = cboFind.SelectedItem != null ? cboFind.SelectedItem.ToString() : string.Empty;
 
             string input = txtFind.Text;
             string sex = "";
-            if (radNam.Checked) {
+            if (grb_rdoNam.Checked) {
                 sex = "Nam";
-            } else if (radNam.Checked) {
+            } else if (grb_rdoNu.Checked) {
                 sex = "Nữ";
             }
             dgvCustomer.DataSource = customerBus.FindCustomer(selectedValue, input, sex);
         }
 
         private void dgvCustomer_CellClick(object sender, DataGridViewCellEventArgs e) {
-            DataGridViewRow selectedRow = dgvCustomer.Rows[e.RowIndex];
-            // Lấy giá trị từ các ô của hàng được chọn
-            txtCustomerID.Text = selectedRow.Cells["CustomerID"].Value.ToString();
-            txtCustomerName.Text = selectedRow.Cells["Name"].Value.ToString();
-            txtPhoneNumber.Text = selectedRow.Cells["PhoneNumber"].Value.ToString();
-            txtGioiTinh.Text = selectedRow.Cells["Sex"].Value.ToString();
-            txtPoint.Text = selectedRow.Cells["Point"].Value.ToString();
+            try
+            {
+                DataGridViewRow selectedRow = dgvCustomer.Rows[e.RowIndex];
+                // Lấy giá trị từ các ô của hàng được chọn
+                txtCustomerID.Text = selectedRow.Cells["CustomerID"].Value.ToString();
+                txtCustomerName.Text = selectedRow.Cells["Name"].Value.ToString();
+                txtPhoneNumber.Text = selectedRow.Cells["PhoneNumber"].Value.ToString();
+                //txtGioiTinh.Text = selectedRow.Cells["Sex"].Value.ToString();
+                txtPoint.Text = selectedRow.Cells["Point"].Value.ToString();
+            } catch (Exception ex)
+            {
+                
+            }
+        }
+
+        private void cboFind_SelectedIndexChanged(object sender, EventArgs e) {
+
         }
     }
 }

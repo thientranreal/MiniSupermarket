@@ -113,5 +113,15 @@ namespace MiniSupermarket.BUS
             };
             return Connection.ExecuteNonQuery(storedProcedure, parameters);
         }
+
+        public Boolean clearAllProductsFromPromotion(string ID)
+        {
+            string storedProcedure = "ClearAllProductsFromPromotion";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@PromotionID",ID)
+            };
+            return Connection.ExecuteNonQuery(storedProcedure, parameters);
+        }
     }
 }
