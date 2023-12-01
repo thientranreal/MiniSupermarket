@@ -29,12 +29,14 @@ namespace MiniSupermarket.GUI
             textBoxEmail.ReadOnly = true;
             textBoxDiaChi.ReadOnly = true;
             dateTimePickerNgayNhap.Enabled = false;
+
         }
 
         private void Supplier_Load(object sender, EventArgs e)
         {
             dataSupplier = supplierBUS.getAllFromSupplier();
             dtgvSupplier.DataSource = dataSupplier;
+            comboBoxTimKiem.SelectedText = "ID";
         }
 
         private void dtgvSupplier_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -65,16 +67,6 @@ namespace MiniSupermarket.GUI
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            int count = dtgvSupplier.Rows.Count;
-            count = count + 1;
-            textBoxID.Text = "S" + count.ToString("D4");
-
-            textBoxTen.ReadOnly = false;
-            textBoxSDT.ReadOnly = false;
-            textBoxEmail.ReadOnly = false;
-            textBoxDiaChi.ReadOnly = false;
-            dateTimePickerNgayNhap.Enabled = true;
-
             foreach (Control c in groupBoxThongTinNCC.Controls)
             {
                 if (c.GetType() == typeof(TextBox))
@@ -82,6 +74,20 @@ namespace MiniSupermarket.GUI
                     c.Text = "";
                 }
             }
+
+            int count = dtgvSupplier.Rows.Count;
+            count = count + 1;
+
+            textBoxID.Text = "S" + count.ToString("D4");
+
+
+            textBoxTen.ReadOnly = false;
+            textBoxSDT.ReadOnly = false;
+            textBoxEmail.ReadOnly = false;
+            textBoxDiaChi.ReadOnly = false;
+            dateTimePickerNgayNhap.Enabled = true;
+
+
 
             btnHuy.Enabled = true;
             btnXacNhan.Enabled = true;
@@ -100,6 +106,7 @@ namespace MiniSupermarket.GUI
         private void btnXacNhan_Click(object sender, EventArgs e)
         {
             int count = 0;
+            
             foreach (Control c in groupBoxThongTinNCC.Controls)
             {
                 if (c.GetType() == typeof(TextBox) && c.Text.Equals(""))
@@ -110,13 +117,21 @@ namespace MiniSupermarket.GUI
             }
             name = textBoxTen.Text;
             address = textBoxDiaChi.Text;
+            
             if (ProjectRegex.IsPhoneNumber(textBoxSDT.Text))
             {
                 phoneNumber = textBoxSDT.Text;
+            } else
+            {
+                count = count + 1;
             }
             if (ProjectRegex.IsEmail(textBoxEmail.Text))
             {
                 email = textBoxEmail.Text;
+            }
+            else
+            {
+                count = count + 1;
             }
             if (count == 0)
             {
@@ -139,10 +154,15 @@ namespace MiniSupermarket.GUI
 
                 dataSupplier = supplierBUS.getAllFromSupplier();
                 dtgvSupplier.DataSource = dataSupplier;
+                textBoxTen.ReadOnly = true;
+                textBoxSDT.ReadOnly = true;
+                textBoxEmail.ReadOnly = true;
+                textBoxDiaChi.ReadOnly = true;
+                dateTimePickerNgayNhap.Enabled = false;
             }
             else
             {
-                MessageBox.Show("Không được bỏ trống thông tin");
+                MessageBox.Show("Thông tin bị bỏ trống hoặc không đúng format");
             }
         }
 
@@ -285,7 +305,8 @@ namespace MiniSupermarket.GUI
                     MessageBox.Show("Thành công", "Thông báo", MessageBoxButtons.OK);
                     dataSupplier = supplierBUS.getAllFromSupplier();
                     dtgvSupplier.DataSource = dataSupplier;
-
+                    dataLoaiSanPham = supplierBUS.getAllFromSupplierDetail(textBoxID.Text);
+                    dtgvLoaiSanPham.DataSource = dataLoaiSanPham;
 
 
                     btnThem.Enabled = true;
@@ -315,13 +336,13 @@ namespace MiniSupermarket.GUI
         private void dtgvLoaiSanPham_CellClick(object sender, DataGridViewCellEventArgs e)
         {
 
-            
+
             btnXoaLoai.Enabled = true;
         }
 
         private void btnXoaLoai_Click(object sender, EventArgs e)
         {
-            foreach(DataGridViewRow row in dtgvLoaiSanPham.SelectedRows)
+            foreach (DataGridViewRow row in dtgvLoaiSanPham.SelectedRows)
             {
                 supplierBUS.delSupplierDetail(textBoxID.Text, row.Cells[0].Value.ToString());
             }
@@ -337,6 +358,40 @@ namespace MiniSupermarket.GUI
                 textBoxEmail.Text = row.Cells[4].Value.ToString();
 
             }
+        }
+
+        private void btnTimKiem_Click(object sender, EventArgs e)
+        {
+            string selected = comboBoxTimKiem.Text;
+            switch (selected)
+            {
+                case "ID":
+                    dataSupplier = supplierBUS.getSupplierWithIDFromSupplier(textBoxTimKiem.Text);
+                    dtgvSupplier.DataSource = dataSupplier;
+                    break;
+                case "Tên":
+                    dataSupplier = supplierBUS.getSupplierWithName(textBoxTimKiem.Text);
+                    dtgvSupplier.DataSource = dataSupplier;
+                    break;
+                case "Địa chỉ":
+                    dataSupplier = supplierBUS.getSupplierWithAddress(textBoxTimKiem.Text);
+                    dtgvSupplier.DataSource=dataSupplier;
+                    break;
+                case "SĐT":
+                    dataSupplier=supplierBUS.getSupplierWithPhoneNumber(textBoxTimKiem.Text);
+                    dtgvSupplier.DataSource=dataSupplier;
+                    break;
+                case "Email":
+                    dataSupplier=supplierBUS.getSupplierWithEmail(textBoxTimKiem.Text);
+                    dtgvSupplier.DataSource=dataSupplier;
+                    break;
+            }
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            dataSupplier = supplierBUS.getAllFromSupplier();
+            dtgvSupplier.DataSource = dataSupplier;
         }
     }
 }

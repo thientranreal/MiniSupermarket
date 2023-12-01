@@ -42,6 +42,7 @@
             labelTen = new Label();
             labelID = new Label();
             groupBoxLoaiSanPham = new GroupBox();
+            btnXoaLoai = new Button();
             btnXacNhanLoai = new Button();
             btnHuyThemLoai = new Button();
             btnThemLoai = new Button();
@@ -54,9 +55,9 @@
             btnSua = new Button();
             btnThem = new Button();
             textBoxTimKiem = new TextBox();
-            comboBox1 = new ComboBox();
+            comboBoxTimKiem = new ComboBox();
             btnTimKiem = new Button();
-            btnXoaLoai = new Button();
+            btnLoad = new Button();
             groupBoxThongTinNCC.SuspendLayout();
             groupBoxLoaiSanPham.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dtgvLoaiSanPham).BeginInit();
@@ -198,6 +199,17 @@
             groupBoxLoaiSanPham.TabIndex = 1;
             groupBoxLoaiSanPham.TabStop = false;
             groupBoxLoaiSanPham.Text = "Loại sản phẩm";
+            // 
+            // btnXoaLoai
+            // 
+            btnXoaLoai.Enabled = false;
+            btnXoaLoai.Location = new Point(385, 183);
+            btnXoaLoai.Name = "btnXoaLoai";
+            btnXoaLoai.Size = new Size(113, 30);
+            btnXoaLoai.TabIndex = 4;
+            btnXoaLoai.Text = "Xóa loại";
+            btnXoaLoai.UseVisualStyleBackColor = true;
+            btnXoaLoai.Click += btnXoaLoai_Click;
             // 
             // btnXacNhanLoai
             // 
@@ -346,15 +358,15 @@
             textBoxTimKiem.Size = new Size(233, 23);
             textBoxTimKiem.TabIndex = 12;
             // 
-            // comboBox1
+            // comboBoxTimKiem
             // 
-            comboBox1.Anchor = AnchorStyles.Top;
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "ID", "Tên", "Địa chỉ", "SĐT", "Email" });
-            comboBox1.Location = new Point(578, 355);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(77, 23);
-            comboBox1.TabIndex = 13;
+            comboBoxTimKiem.Anchor = AnchorStyles.Top;
+            comboBoxTimKiem.FormattingEnabled = true;
+            comboBoxTimKiem.Items.AddRange(new object[] { "ID", "Tên", "Địa chỉ", "SĐT", "Email" });
+            comboBoxTimKiem.Location = new Point(578, 355);
+            comboBoxTimKiem.Name = "comboBoxTimKiem";
+            comboBoxTimKiem.Size = new Size(77, 23);
+            comboBoxTimKiem.TabIndex = 13;
             // 
             // btnTimKiem
             // 
@@ -365,25 +377,27 @@
             btnTimKiem.TabIndex = 14;
             btnTimKiem.Text = "Tìm";
             btnTimKiem.UseVisualStyleBackColor = true;
+            btnTimKiem.Click += btnTimKiem_Click;
             // 
-            // btnXoaLoai
+            // btnLoad
             // 
-            btnXoaLoai.Enabled = false;
-            btnXoaLoai.Location = new Point(385, 183);
-            btnXoaLoai.Name = "btnXoaLoai";
-            btnXoaLoai.Size = new Size(113, 30);
-            btnXoaLoai.TabIndex = 4;
-            btnXoaLoai.Text = "Xóa loại";
-            btnXoaLoai.UseVisualStyleBackColor = true;
-            btnXoaLoai.Click += btnXoaLoai_Click;
+            btnLoad.Anchor = AnchorStyles.Top;
+            btnLoad.Location = new Point(418, 584);
+            btnLoad.Name = "btnLoad";
+            btnLoad.Size = new Size(75, 23);
+            btnLoad.TabIndex = 15;
+            btnLoad.Text = "Tải lại";
+            btnLoad.UseVisualStyleBackColor = true;
+            btnLoad.Click += btnLoad_Click;
             // 
             // Supplier
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(910, 618);
+            Controls.Add(btnLoad);
             Controls.Add(btnTimKiem);
-            Controls.Add(comboBox1);
+            Controls.Add(comboBoxTimKiem);
             Controls.Add(textBoxTimKiem);
             Controls.Add(dtgvSupplier);
             Controls.Add(groupBoxLoaiSanPham);
@@ -428,11 +442,12 @@
         private TextBox textBoxTen;
         private TextBox textBoxID;
         private TextBox textBoxTimKiem;
-        private ComboBox comboBox1;
+        private ComboBox comboBoxTimKiem;
         private Button btnTimKiem;
         private Button btnThemLoai;
         private Button btnXacNhanLoai;
         private Button btnHuyThemLoai;
         private Button btnXoaLoai;
+        private Button btnLoad;
     }
 }

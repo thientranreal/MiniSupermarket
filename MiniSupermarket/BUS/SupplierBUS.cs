@@ -188,5 +188,41 @@ namespace MiniSupermarket.BUS
             bool result = Connection.ExecuteNonQuery(storedProcduredName, parameters);
             return result;
         }
+        public DataTable getSupplierWithName(string name)
+        {
+            string storedProcedureName = "FindSupplierWithName";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@Name",name)
+            };
+            return Connection.Execute(storedProcedureName, parameters);
+        }
+        public DataTable getSupplierWithAddress(string address)
+        {
+            string storedProcedureName = "FindSupplierWithAddress";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@Address",address)
+            };
+            return Connection.Execute(storedProcedureName, parameters);
+        }
+        public DataTable getSupplierWithPhoneNumber(string phoneNumber)
+        {
+            string storedProcedureName = "FindSupplierWithPhoneNumber";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@PhoneNumber",phoneNumber)
+            };
+            return Connection.Execute(storedProcedureName, parameters);
+        }
+        public DataTable getSupplierWithEmail(string email)
+        {
+            string storedProcedureName = "FindSupplierWithEmail";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@Email",email)
+            };
+            return Connection.Execute(storedProcedureName, parameters);
+        }
     }
 }
