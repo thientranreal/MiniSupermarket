@@ -323,10 +323,13 @@ GO
 --Rot du lieu vao bang chuc nang cho quyen cua nhan vien
 INSERT INTO RoleFunction (RoleID, FunctionID)
 VALUES
-    ('R0001', 'F0006'),
+	('R0001', 'F0001'),
+	('R0001', 'F0003'),
+	('R0001', 'F0004'),
+	('R0001', 'F0006'),
     ('R0001', 'F0007'),
     ('R0001', 'F0008'),
-    ('R0001', 'F0010'),
+    ('R0001', 'F0009'),
     ('R0002', 'F0001'),
     ('R0002', 'F0002'),
     ('R0002', 'F0003'),
@@ -1140,7 +1143,7 @@ END;
 GO
 
 
--- Xóa nhân viên
+-- Sửa nhân viên
 CREATE PROCEDURE EditEmployee
     @EmployeeID varchar(10),
 	@Name nvarchar(50),
@@ -1167,6 +1170,92 @@ BEGIN
     WHERE EmployeeID = @EmployeeID
 END;
 GO
+
+-- Xóa nhân viên 
+CREATE PROCEDURE DeleteEmployee
+    @EmployeeID varchar(10)
+AS
+BEGIN
+    UPDATE Employee
+    SET isDeleted = '0'
+    WHERE EmployeeID = @EmployeeID
+END;
+GO
+
+-- Tìm kiếm theo ID
+CREATE PROCEDURE SearchEmployeeByID
+    @SearchTerm NVARCHAR(50)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT EmployeeID, [Password], [Name], Sex, BirthDate, PhoneNumber, Email, [Address]
+    FROM dbo.Employee
+    WHERE EmployeeID = @SearchTerm;
+END;
+
+-- Tìm kiếm theo tên
+CREATE PROCEDURE SearchEmployeeByName
+    @SearchTerm NVARCHAR(50)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT EmployeeID, [Password], [Name], Sex, BirthDate, PhoneNumber, Email, [Address]
+    FROM dbo.Employee
+    WHERE Name LIKE '%' + @SearchTerm + '%';
+END;
+
+-- Lấy danh sách chức vụ
+CREATE PROCEDURE SelectAllFromRole
+AS
+BEGIN
+		SELECT Role.RoleID, [Name], [Description]
+		FROM Role
+		WHERE isDeleted = 1;
+
+END;
+GO
+
+-- Thêm chức vụ
+CREATE PROCEDURE InsertIntoRole
+    @RoleID varchar(10),
+	@Name nvarchar(50),
+	@Description nvarchar(100)
+AS
+BEGIN
+        INSERT INTO Role (RoleID, [Name], [Description])
+        VALUES (@RoleID, @Name, @Description );
+END;
+GO
+
+-- Sửa chức vụ
+CREATE PROCEDURE EditRole
+    @RoleID varchar(10),
+	@Name nvarchar(50),
+	@Description nvarchar(100)
+AS
+BEGIN
+    UPDATE Role
+    SET
+        [Name] = @Name,
+        Description = @Description
+        
+    WHERE RoleID = @RoleID
+END;
+GO
+
+-- Xóa Chức vụ
+CREATE PROCEDURE DeleteRole
+    @RoleID varchar(10)
+AS
+BEGIN
+    UPDATE Role
+    SET isDeleted = '0'
+    WHERE RoleID = @RoleID
+END;
+GO
+
 -- ===================================================End Sang
 
 -- ========================================================Tiến

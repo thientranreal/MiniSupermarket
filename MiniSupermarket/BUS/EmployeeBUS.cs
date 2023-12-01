@@ -28,11 +28,6 @@ namespace MiniSupermarket.BUS
             return Connection.Execute(storedProcedureName, null);
         }
 
-        public DataTable getAllEmployeee()
-        {
-            return getAllEmployee();
-        }
-
         public bool checkIdExist(string id)
         {
             string query = "SELECT COUNT(*) FROM dbo.Employee WHERE EmployeeID = @EmployeeID";
@@ -64,19 +59,48 @@ namespace MiniSupermarket.BUS
             throw new Exception("Không thể tạo ID mới sau " + maxAttempts + " lần thử.");
         }
 
-        public static void Reset(Control.ControlCollection controls, DataGridView dataGridView)
+        public static void Reset(Control.ControlCollection infocontrols, DataGridView dataGridView, Control.ControlCollection functionControls)
         {
-            foreach (Control control in controls)
+            foreach (Control control in infocontrols)
             {
                 if (control is TextBox)
                 {
                     TextBox textBox = (TextBox)control;
                     textBox.Text = string.Empty;
                 }
+                else if (control is ComboBox)
+                {
+                    ComboBox comboBox = (ComboBox)control;
+                    // Check if the ComboBox has items before setting the SelectedIndex
+                    if (comboBox.Items.Count > 0)
+                    {
+                        comboBox.SelectedIndex = 0; // You can also use comboBox.SelectedItem = null; if you prefer
+                    }
+                }
             }
+
+            foreach (Control control in functionControls)
+            {
+                if (control is TextBox)
+                {
+                    TextBox textBox = (TextBox)control;
+                    textBox.Text = string.Empty;
+                }
+                else if (control is ComboBox)
+                {
+                    ComboBox comboBox = (ComboBox)control;
+                    // Check if the ComboBox has items before setting the SelectedIndex
+                    if (comboBox.Items.Count > 0)
+                    {
+                        comboBox.SelectedIndex = 0; // You can also use comboBox.SelectedItem = null; if you prefer
+                    }
+                }
+            }
+
             dataGridView.ClearSelection();
-            
         }
+
+
 
         public bool addEmployee(string id, string username, string name, string address, string pnumber, string email, DateTime birthdate, string password, string sex)
         {
@@ -150,6 +174,27 @@ namespace MiniSupermarket.BUS
             return result;
         }
 
+        public DataTable SearchEmployeeByID(string id)
+        {
+            string storedProcedureName = "SearchEmployeeByID";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+        new SqlParameter("@SearchTerm", id)
+            };
+
+            return Connection.Execute(storedProcedureName, parameters);
+        }
+
+        public DataTable SearchEmployeeByName(string name)
+        {
+            string storedProcedureName = "SearchEmployeeByName";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+        new SqlParameter("@SearchTerm", name)
+            };
+
+            return Connection.Execute(storedProcedureName, parameters);
+        }
 
     }
 }
