@@ -606,6 +606,20 @@ BEGIN
 	WHERE SupplierID=@ID
 END;
 GO
+--Chỉnh sửa chi tiết nhà cung cấp
+ALTER PROCEDURE UpdateSupplierDetail
+	@SupplierID varchar(50),
+	@ProductID varchar(50),
+	@SupplyStartDate datetime
+AS
+BEGIN 
+	UPDATE SupplierProduct
+	SET 
+	
+	[SupplyStartDate]=@SupplyStartDate
+	WHERE SupplierID=@SupplierID AND ProductID=@ProductID
+END;
+GO
 --Thêm chi tiết nhà cung cấp
 ALTER PROCEDURE AddDetailSupplier
 	@SupplierID varchar(50),
@@ -633,6 +647,16 @@ BEGIN
 	
 END;
 GO
+--Xóa chi tiết nhà cung cấp
+CREATE PROCEDURE DelSupplierDetail
+	@SupplierID varchar(50),
+	@ProductID varchar(50)
+AS
+BEGIN 
+	DELETE FROM SupplierProduct
+	WHERE SupplierID=@SupplierID AND ProductID=@ProductID
+END;
+GO
 --Lấy thông tin sản phẩm
 CREATE PROCEDURE AllProduct
 AS
@@ -647,13 +671,10 @@ BEGIN
 END;
 GO
 
+UPDATE SupplierProduct
+	SET 
+	
+	[SupplyStartDate]='2021-12-12'
+	WHERE SupplierID='S0001'
 
-DELETE FROM Supplier
-	WHERE SupplierID='S0006'
-	DELETE FROM SupplierProduct
-	WHERE SupplierID='S0007'
-
-SET NOCOUNT ON INSERT INTO SupplierProduct(SupplierID,ProductID,SupplyStartDate)
-	VALUES
-		('S0005','P0001','2020-09-22')
 
