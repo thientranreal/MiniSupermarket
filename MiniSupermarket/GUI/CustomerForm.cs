@@ -13,24 +13,32 @@ using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
-namespace MiniSupermarket.GUI {
-    public partial class CustomerForm : Form {
+namespace MiniSupermarket.GUI
+{
+    public partial class CustomerForm : Form
+    {
         CustomerBus customerBus = new CustomerBus();
-        public CustomerForm() {
+        public CustomerForm()
+        {
 
             InitializeComponent();
             this.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
         }
 
-        public void LoadTheme() {
+        public void LoadTheme()
+        {
             // Thêm màu cho tất cả các nút ở panel top
-            foreach (Control btns in this.pnlInformation.Controls) {
-                if (btns.GetType() == typeof(Button)) {
+            foreach (Control btns in this.pnlInformation.Controls)
+            {
+                if (btns.GetType() == typeof(Button))
+                {
                     Button btn = (Button)btns;
                     btn.BackColor = ThemeColor.PrimaryColor;
                     btn.ForeColor = Color.White;
                     btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
-                } else if (btns.GetType() == typeof(Label)) {
+                }
+                else if (btns.GetType() == typeof(Label))
+                {
                     Label lb = (Label)btns;
                     lb.ForeColor = ThemeColor.SecondaryColor;
                     lb.Font = ProjectFont.getNormalFont();
@@ -39,12 +47,14 @@ namespace MiniSupermarket.GUI {
             lblTitle.Font = ProjectFont.getTitleFont();
         }
 
-        private void CustomerForm_Load(object sender, EventArgs e) {
+        private void CustomerForm_Load(object sender, EventArgs e)
+        {
             BindingPromotions();
             LoadTheme();
         }
 
-        public void BindingPromotions() {
+        public void BindingPromotions()
+        {
             BindingSource binding = new BindingSource();
             List<Customer> filteredCustomers = customerBus.getAllCustomers().Where(c => c.IsDeleted == "1").ToList();
             binding.DataSource = filteredCustomers;
@@ -60,7 +70,8 @@ namespace MiniSupermarket.GUI {
             dgvCustomer.Columns["Point"].HeaderText = "Điểm";
         }
 
-        private void btnRefresh_Click(object sender, EventArgs e) {
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
             txtCustomerID.Text = null;
             txtCustomerName.Text = null;
             txtPhoneNumber.Text = null;
@@ -78,24 +89,30 @@ namespace MiniSupermarket.GUI {
             errorProvider1.Clear();
         }
 
-        private bool check_empty() {
+        private bool check_empty()
+        {
             errorProvider1.Clear();
             bool result = true;
-            if (txtCustomerName.Text == "") {
+            if (txtCustomerName.Text == "")
+            {
                 result = false;
                 MessageBox.Show("Bạn chưa nhập tên khách hàng");
                 errorProvider1.SetError(txtCustomerName, "Tên khách hàng không được để trống");
             }
-            if (txtPhoneNumber.Text == "") {
+            if (txtPhoneNumber.Text == "")
+            {
                 result = false;
                 MessageBox.Show("Bạn chưa nhập số điện thoại");
                 errorProvider1.SetError(txtPhoneNumber, "Số điện thoại không được để trống");
-            } else if (!IsValidVietnamesePhoneNumber(txtPhoneNumber.Text)) {
+            }
+            else if (!IsValidVietnamesePhoneNumber(txtPhoneNumber.Text))
+            {
                 result = false;
                 MessageBox.Show("Số điện thoại không hợp lệ");
                 errorProvider1.SetError(txtPhoneNumber, "SDT có dạng 037-6714-453");
             }
-            if (rdoNam.Checked == false && rdoNu.Checked == false) {
+            if (rdoNam.Checked == false && rdoNu.Checked == false)
+            {
                 result = false;
                 MessageBox.Show("Giới tính không được để trống");
                 //errorProvider1.SetError(txtGioiTinh, "Giới tính là nam hoặc nữ");
@@ -103,7 +120,8 @@ namespace MiniSupermarket.GUI {
             return result;
         }
 
-        static bool IsValidVietnamesePhoneNumber(string phoneNumber) {
+        static bool IsValidVietnamesePhoneNumber(string phoneNumber)
+        {
             // Mẫu regex cho số điện thoại ở Việt Nam
             string pattern = @"^(0[0-9]{9}|84[0-9]{9})$";
 
@@ -114,11 +132,16 @@ namespace MiniSupermarket.GUI {
             return match.Success;
         }
 
-        private void btnUpdate_Click(object sender, EventArgs e) {
-            if (txtCustomerID.Text == "") {
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+            if (txtCustomerID.Text == "")
+            {
                 MessageBox.Show("Bạn chưa chọn mã khách khách hàng cần cập nhật");
-            } else {
-                if (check_empty()) {
+            }
+            else
+            {
+                if (check_empty())
+                {
 
                     string id = txtCustomerID.Text.Trim().ToUpper();
                     string name = ProjectFont.upperFirstLetter(txtCustomerName.Text);
@@ -126,14 +149,17 @@ namespace MiniSupermarket.GUI {
                     string sex = rdoNam.Checked ? "Nam" : rdoNu.Checked ? "Nữ" : "";
                     string point = ProjectFont.upperFirstLetter(txtPoint.Text);
 
-                    if (customerBus.updateCustomer(id, name, phoneNumber, sex, point, "1")) {
+                    if (customerBus.updateCustomer(id, name, phoneNumber, sex, point, "1"))
+                    {
                         BindingPromotions();
                         MessageBox.Show("Sửa thành công!",
                             "Thông báo",
                             MessageBoxButtons.OK,
                             MessageBoxIcon.Information); // Thêm thành công
 
-                    } else {
+                    }
+                    else
+                    {
                         MessageBox.Show("Sửa thất bại!",
                             "Thông báo",
                             MessageBoxButtons.OK,
@@ -144,19 +170,26 @@ namespace MiniSupermarket.GUI {
             }
         }
 
-        private void btnDelete_Click(object sender, EventArgs e) {
-            if (txtCustomerID.Text == "") {
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (txtCustomerID.Text == "")
+            {
                 MessageBox.Show("Bạn chưa chọn mã khách khách hàng cần xóa");
-            } else {
+            }
+            else
+            {
                 string id = txtCustomerID.Text.Trim().ToUpper();
-                if (customerBus.deleteCustomer(id)) {
+                if (customerBus.deleteCustomer(id))
+                {
                     BindingPromotions();
                     MessageBox.Show("Xóa thành công!",
                         "Thông báo",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information); // Thêm thành công
 
-                } else {
+                }
+                else
+                {
                     MessageBox.Show("Xóa thất bại!",
                         "Thông báo",
                         MessageBoxButtons.OK,
@@ -165,8 +198,10 @@ namespace MiniSupermarket.GUI {
             }
         }
 
-        private void btnAdd_Click(object sender, EventArgs e) {
-            if (check_empty()) {
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if (check_empty())
+            {
                 string id = txtCustomerID.Text.Trim().ToUpper();
                 string name = ProjectFont.upperFirstLetter(txtCustomerName.Text);
                 string phoneNumber = ProjectFont.upperFirstLetter(txtPhoneNumber.Text);
@@ -174,8 +209,10 @@ namespace MiniSupermarket.GUI {
                 string point = ProjectFont.upperFirstLetter(txtPoint.Text);
 
 
-                if (customerBus.addCustomer(name, phoneNumber, sex, point, "1")) {
-                    if (customerBus.checkIdExist(id)) {
+                if (customerBus.addCustomer(name, phoneNumber, sex, point, "1"))
+                {
+                    if (customerBus.checkIdExist(id))
+                    {
                         MessageBox.Show(
                             "Mã Khách Hàng đã tồn tại->Hệ thống sẽ tự động tạo mã khách hàng mới");
                     }
@@ -185,7 +222,9 @@ namespace MiniSupermarket.GUI {
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information); // Thêm thành công
 
-                } else {
+                }
+                else
+                {
                     MessageBox.Show("Thêm thất bại!",
                         "Thông báo",
                         MessageBoxButtons.OK,
@@ -194,20 +233,25 @@ namespace MiniSupermarket.GUI {
             }
         }
 
-        private void Find_Changed(object sender, EventArgs e) {
+        private void Find_Changed(object sender, EventArgs e)
+        {
             string selectedValue = cboFind.SelectedItem != null ? cboFind.SelectedItem.ToString() : string.Empty;
 
             string input = txtFind.Text;
             string sex = "";
-            if (grb_rdoNam.Checked) {
+            if (grb_rdoNam.Checked)
+            {
                 sex = "Nam";
-            } else if (grb_rdoNu.Checked) {
+            }
+            else if (grb_rdoNu.Checked)
+            {
                 sex = "Nữ";
             }
             dgvCustomer.DataSource = customerBus.FindCustomer(selectedValue, input, sex);
         }
 
-        private void dgvCustomer_CellClick(object sender, DataGridViewCellEventArgs e) {
+        private void dgvCustomer_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
             try
             {
                 DataGridViewRow selectedRow = dgvCustomer.Rows[e.RowIndex];
@@ -217,13 +261,15 @@ namespace MiniSupermarket.GUI {
                 txtPhoneNumber.Text = selectedRow.Cells["PhoneNumber"].Value.ToString();
                 //txtGioiTinh.Text = selectedRow.Cells["Sex"].Value.ToString();
                 txtPoint.Text = selectedRow.Cells["Point"].Value.ToString();
-            } catch (Exception ex)
+            }
+            catch (Exception ex)
             {
-                
+
             }
         }
 
-        private void cboFind_SelectedIndexChanged(object sender, EventArgs e) {
+        private void cboFind_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
     }
