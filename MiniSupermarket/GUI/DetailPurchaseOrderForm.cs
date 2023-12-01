@@ -222,7 +222,7 @@ namespace MiniSupermarket.GUI
 
         private void btnPay_Click(object sender, EventArgs e)
         {
-            if (dgvProductOrders.Rows.Count <= 0)
+            if (bus.getProductOrders(purchaseOrderID).Rows.Count <= 0)
             {
                 MessageBox.Show("Phiếu nhập không có sản phẩm để thanh toán",
                             "Thông báo",
