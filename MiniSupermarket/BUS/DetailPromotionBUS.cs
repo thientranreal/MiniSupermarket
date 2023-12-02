@@ -13,10 +13,14 @@ namespace MiniSupermarket.BUS
     {
         private DataTable products, productPromotions;
 
-        public DataTable getProducts()
+        public DataTable getProducts(string ID)
         {
             string storedProcedure = "SelectProductToPromotion";
-            products = Connection.Execute(storedProcedure,null);
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@PromotionID",ID)
+            };
+            products = Connection.Execute(storedProcedure,parameters);
             return products;
         }
 
@@ -29,6 +33,38 @@ namespace MiniSupermarket.BUS
             };
             productPromotions = Connection.Execute(storedProcedure, parameters);
             return productPromotions;
+        }
+
+        public Boolean DeleteProductFromDetailPromotion(string id)
+        {
+            string storedProcedure = "DeleteProductFromPromotionProduct";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@ProductID",id)
+            };
+            return Connection.ExecuteNonQuery(storedProcedure, parameters);
+            
+        }
+
+        public Boolean AddProductFromDetailPromotion(string id, string PromotionID)
+        {
+            string storedProcedure = "AddProductToPromotionProduct";
+            SqlParameter[] parameters = new SqlParameter[]{
+                new SqlParameter("@ProductID",id),
+                new SqlParameter("@PromotionID", PromotionID)
+            };
+            return Connection.ExecuteNonQuery(storedProcedure,parameters);
+        }
+
+        public String getPromotionIDFromProductID(string id)
+        {
+            string storedProcedure = "GetPromotionIDFromProductID";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@ProductID",id)
+            };
+            string PromotionID = Connection.Execute(storedProcedure, parameters).Rows[0].ItemArray[0].ToString();
+            return PromotionID;
         }
     }
 }

@@ -59,7 +59,7 @@ namespace MiniSupermarket.GUI
                         MessageBoxIcon.Warning); // Mật khẩu không được bỏ trống
                 return;
             }
-            
+
             switch (loginBus.countAccount(username, password))
             {
                 case 0:
