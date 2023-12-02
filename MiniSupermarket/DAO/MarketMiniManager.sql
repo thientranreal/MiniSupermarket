@@ -572,6 +572,67 @@ BEGIN
 	WHERE Supplier.SupplierID=@ID
 END;
 GO
+--Tìm thông tin theo tên nhà cung cấp
+CREATE PROCEDURE FindSupplierWithName
+	@Name varchar(50)
+AS 
+BEGIN
+	SELECT
+	Supplier.SupplierID AS ID,
+	Supplier.[Name] AS TÊN ,
+	Supplier.[Address] [Địa chỉ],
+	Supplier.PhoneNumber AS [Số điện thoại],
+	Supplier.Email
+	FROM Supplier 
+	WHERE Supplier.[Name]=@Name
+END;
+GO
+--Tìm thông tin theo địa chỉ nhà cung cấp
+CREATE PROCEDURE FindSupplierWithAddress
+	@Address varchar(50)
+AS 
+BEGIN
+	SELECT
+	Supplier.SupplierID AS ID,
+	Supplier.[Name] AS TÊN ,
+	Supplier.[Address] [Địa chỉ],
+	Supplier.PhoneNumber AS [Số điện thoại],
+	Supplier.Email
+	FROM Supplier 
+	WHERE Supplier.[Address]=@Address
+END;
+GO
+--Tìm kiếm theo số điện thoại nhà cung cấp
+CREATE PROCEDURE FindSupplierWithPhoneNumber
+	@PhoneNumber varchar(50)
+AS 
+BEGIN
+	SELECT
+	Supplier.SupplierID AS ID,
+	Supplier.[Name] AS TÊN ,
+	Supplier.[Address] [Địa chỉ],
+	Supplier.PhoneNumber AS [Số điện thoại],
+	Supplier.Email
+	FROM Supplier 
+	WHERE Supplier.PhoneNumber=@PhoneNumber
+END;
+GO
+--Tìm kiếm theo email nhà cung cấp
+CREATE PROCEDURE FindSupplierWithEmail
+	@Email varchar(50)
+AS 
+BEGIN
+	SELECT
+	Supplier.SupplierID AS ID,
+	Supplier.[Name] AS TÊN ,
+	Supplier.[Address] [Địa chỉ],
+	Supplier.PhoneNumber AS [Số điện thoại],
+	Supplier.Email
+	FROM Supplier 
+	WHERE Supplier.Email=@Email
+END;
+GO
+
 --Thêm nhà cung cấp 
 ALTER PROCEDURE AddSupplier
 	@ID varchar(50),
