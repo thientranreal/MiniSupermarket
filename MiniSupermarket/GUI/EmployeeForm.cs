@@ -1,9 +1,12 @@
 ﻿using MiniSupermarket.BUS;
 using MiniSupermarket.ImageAndFont;
 using System.Data;
+using ExcelDataReader;
+using Excel = Microsoft.Office.Interop.Excel;
 using System.Windows.Forms;
 using System.Xml.Linq;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using ClosedXML.Excel;
 
 namespace MiniSupermarket.BUS
 {
@@ -26,6 +29,7 @@ namespace MiniSupermarket.BUS
             cb_find.Items.Add("Tìm kiếm");
             cb_find.Items.Add("Mã nhân viên");
             cb_find.Items.Add("Tên nhân viên");
+            cb_find.SelectedIndex = 0;
 
             ds_qlnv.BackgroundColor = Color.White;
             ds_qlnv.ReadOnly = true;
@@ -45,8 +49,6 @@ namespace MiniSupermarket.BUS
             gb_Info.Font = ProjectFont.getTitleFont();
             gb_List.ForeColor = ThemeColor.SecondaryColor;
             gb_List.Font = ProjectFont.getTitleFont();
-            lb_title.ForeColor = ThemeColor.SecondaryColor;
-            lb_title.Font = ProjectFont.getTitleFont();
 
             // Thêm màu và chỉnh font cho các button
             foreach (Control btns in this.gb_Function.Controls)
@@ -89,10 +91,47 @@ namespace MiniSupermarket.BUS
             string address = ProjectFont.upperFirstLetter(tb_address.Text);
             string pnumber = ProjectFont.upperFirstLetter(tb_pNumber.Text);
             string email = ProjectFont.upperFirstLetter(tb_email.Text);
-            //DateTime birthdate = ProjectFont.upperFirstLetter(dtp_birth.Text);
             string password = ProjectFont.upperFirstLetter(tb_pass.Text);
             string sex = ProjectFont.upperFirstLetter(cb_sex.Text);
             string username = ProjectFont.upperFirstLetter(tb_id.Text);
+            string roleid = ProjectFont.upperFirstLetter(cb_role.Text);
+
+            if (string.IsNullOrWhiteSpace(tb_name.Text) ||
+              string.IsNullOrWhiteSpace(tb_address.Text) ||
+              string.IsNullOrWhiteSpace(tb_pNumber.Text) ||
+              string.IsNullOrWhiteSpace(tb_email.Text) ||
+              string.IsNullOrWhiteSpace(tb_pass.Text) ||
+              cb_sex.SelectedItem == null)
+            {
+                MessageBox.Show("Vui lòng điền đầy đủ thông tin.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!IsValidEmail(email))
+            {
+                MessageBox.Show("Email không hợp lệ. Vui lòng nhập theo định dạng username@gmail.com.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!IsNameValid(name))
+            {
+                MessageBox.Show("Tên chỉ được chứa chữ cái.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (!IsValidPhoneNumber(pnumber))
+            {
+                MessageBox.Show("Số điện thoại không hợp lệ. Vui lòng nhập theo định dạng Việt Nam.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            string selectedGender = cb_sex.SelectedItem.ToString().ToUpper();
+            if (selectedGender != "NAM" && selectedGender != "NỮ")
+            {
+                MessageBox.Show("Vui lòng chọn giới tính 'Nam' hoặc 'Nữ'.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
             if (id.Length != 0) // Nếu người dùng nhập mã loại
             {
                 // Nếu mã loại đã tồn tại trong hệ thống thì hiện lỗi
@@ -110,7 +149,7 @@ namespace MiniSupermarket.BUS
             // Nếu mà mã loại rỗng thì sẽ tự tạo mã id
             if (id.Length == 0)
             {
-                if (employeeBUS.addEmployee(id, username, name, address, pnumber, email, dtp_birth.Value, password, sex))
+                if (employeeBUS.addEmployee(id, username, name, address, pnumber, email, dtp_birth.Value, password, sex, roleid))
                 {
                     MessageBox.Show("Thêm thành công!",
                         "Thông báo",
@@ -129,7 +168,7 @@ namespace MiniSupermarket.BUS
             }
             else // Nếu mà nhập đầy đủ thông tin thì thêm đầy đủ
             {
-                if (employeeBUS.addEmployee(id, username, name, address, pnumber, email, dtp_birth.Value, password, sex))
+                if (employeeBUS.addEmployee(id, username, name, address, pnumber, email, dtp_birth.Value, password, sex, roleid))
                 {
                     MessageBox.Show("Thêm thành công!",
                         "Thông báo",
@@ -182,6 +221,7 @@ namespace MiniSupermarket.BUS
             ds_qlnv.Columns["Email"].HeaderText = "Email";
             ds_qlnv.Columns["Sex"].HeaderText = "Giới tính";
             ds_qlnv.Columns["Password"].HeaderText = "Mật khẩu";
+            ds_qlnv.Columns["RoleID"].HeaderText = "Quyền";
 
             ds_qlnv.Columns["EmployeeID"].Width = 115;
             ds_qlnv.Columns["Password"].Width = 90;
@@ -189,8 +229,10 @@ namespace MiniSupermarket.BUS
             ds_qlnv.Columns["BirthDate"].Width = 180;
             ds_qlnv.Columns["PhoneNumber"].Width = 200;
             ds_qlnv.Columns["Email"].Width = 200;
+            ds_qlnv.Columns["RoleID"].Width = 115;
 
             LoadTheme();
+            Roles();
         }
 
         private void DataGridView_SelectionChanged(object sender, EventArgs e)
@@ -205,9 +247,18 @@ namespace MiniSupermarket.BUS
                 tb_email.Text = ds_qlnv.SelectedRows[0].Cells["Email"].Value.ToString();
                 cb_sex.Text = ds_qlnv.SelectedRows[0].Cells["Sex"].Value.ToString();
                 tb_pass.Text = ds_qlnv.SelectedRows[0].Cells["Password"].Value.ToString();
+                cb_role.Text = ds_qlnv.SelectedRows[0].Cells["RoleID"].Value.ToString();
 
-                DateTime BirthDate = (DateTime)ds_qlnv.SelectedRows[0].Cells["BirthDate"].Value;
-                dtp_birth.Text = BirthDate.ToShortDateString();
+                object birthDateValue = ds_qlnv.SelectedRows[0].Cells["BirthDate"].Value;
+                if (birthDateValue != DBNull.Value)
+                {
+                    DateTime BirthDate = (DateTime)birthDateValue;
+                    dtp_birth.Text = BirthDate.ToShortDateString();
+                }
+                else
+                {
+                    dtp_birth.Text = string.Empty; // Handle the case when BirthDate is DBNull
+                }
 
             }
         }
@@ -260,9 +311,45 @@ namespace MiniSupermarket.BUS
                 string sex = ProjectFont.upperFirstLetter(cb_sex.Text);
                 string password = ProjectFont.upperFirstLetter(tb_pass.Text);
                 string username = ProjectFont.upperFirstLetter(tb_id.Text);
+                string roleid = ProjectFont.upperFirstLetter(cb_role.Text);
 
-                // Gọi phương thức chỉnh sửa từ EmployeeBUS
-                bool editResult = employeeBUS.editEmployee(id, name, address, pnumber, email, sex, dtp_birth.Value, password, username);
+                if (string.IsNullOrWhiteSpace(tb_name.Text) ||
+                  string.IsNullOrWhiteSpace(tb_address.Text) ||
+                  string.IsNullOrWhiteSpace(tb_pNumber.Text) ||
+                  string.IsNullOrWhiteSpace(tb_email.Text) ||
+                  string.IsNullOrWhiteSpace(tb_pass.Text) ||
+                  cb_sex.SelectedItem == null)
+                {
+                    MessageBox.Show("Vui lòng điền đầy đủ thông tin.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (!IsValidEmail(email))
+                {
+                    MessageBox.Show("Email không hợp lệ. Vui lòng nhập theo định dạng username@gmail.com.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (!IsNameValid(name))
+                {
+                    MessageBox.Show("Tên chỉ được chứa chữ cái.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                if (!IsValidPhoneNumber(pnumber))
+                {
+                    MessageBox.Show("Số điện thoại không hợp lệ. Vui lòng nhập theo định dạng Việt Nam.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                string selectedGender = cb_sex.SelectedItem.ToString().ToUpper();
+                if (selectedGender != "NAM" && selectedGender != "NỮ")
+                {
+                    MessageBox.Show("Vui lòng chọn giới tính 'Nam' hoặc 'Nữ'.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                bool editResult = employeeBUS.editEmployee(id, name, address, pnumber, email, sex, dtp_birth.Value, password, username, roleid);
 
                 // Kiểm tra kết quả chỉnh sửa
                 if (editResult)
@@ -287,11 +374,22 @@ namespace MiniSupermarket.BUS
         {
             string searchTerm = tb_find.Text.Trim();
 
-            // Kiểm tra xem ComboBox chọn là ID hay Tên
             string searchType = cb_find.SelectedItem.ToString();
 
-            // Gọi phương thức tìm kiếm từ EmployeeBUS
+
             DataTable searchResult = null;
+
+            if (cb_find.SelectedIndex == 0)
+            {
+                MessageBox.Show("Vui lòng chọn loại tìm kiếm (Mã nhân viên hoặc Tên nhân viên).", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (string.IsNullOrWhiteSpace(tb_find.Text))
+            {
+                MessageBox.Show("Vui lòng điền thông tin cần tìm.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             if (searchType == "Mã nhân viên")
             {
@@ -306,6 +404,114 @@ namespace MiniSupermarket.BUS
 
             // Hiển thị kết quả trong DataGridView hoặc bảng dữ liệu của bạn
             ds_qlnv.DataSource = searchResult;
+        }
+
+        private void Roles()
+        {
+            DataTable roles = employeeBUS.GetRoles();
+
+            if (roles != null && roles.Rows.Count > 0)
+            {
+                cb_role.ValueMember = "RoleID";
+                cb_role.DataSource = roles;
+                cb_role.SelectedIndex = 0;
+            }
+        }
+
+        private bool IsValidPhoneNumber(string phoneNumber)
+        {
+            // Biểu thức chính quy cho định dạng số điện thoại ở Việt Nam
+            string pattern = @"^(0[0-9]{9})$";
+
+            // Kiểm tra xem chuỗi nhập vào có khớp với biểu thức chính quy không
+            return System.Text.RegularExpressions.Regex.IsMatch(phoneNumber, pattern);
+        }
+
+        private bool IsNameValid(string name)
+        {
+            // Kiểm tra từng ký tự trong tên
+            foreach (char character in name)
+            {
+                if (!char.IsLetter(character) && !char.IsWhiteSpace(character))
+                {
+                    // Nếu ký tự không phải là chữ cái hoặc khoảng trắng, trả về false
+                    return false;
+                }
+            }
+
+            // Nếu tất cả các ký tự đều là chữ cái hoặc khoảng trắng, trả về true
+            return true;
+        }
+
+        private bool IsValidEmail(string email)
+        {
+            // Biểu thức chính quy cho định dạng email
+            string pattern = @"^[a-zA-Z0-9._%+-]+@gmail\.com$";
+
+            // Kiểm tra xem chuỗi nhập vào có khớp với biểu thức chính quy không
+            return System.Text.RegularExpressions.Regex.IsMatch(email, pattern);
+        }
+
+        private void btn_xuatexcel_Click(object sender, EventArgs e)
+        {
+            ExportToExcel(ds_qlnv);
+        }
+
+        private void ExportToExcel(DataGridView gridView)
+        {
+
+            try
+            {
+                Excel.Application excelApp = new Excel.Application();
+                excelApp.Visible = true;
+
+                Excel.Workbook workbook = excelApp.Workbooks.Add();
+
+                Excel.Worksheet worksheet = workbook.Sheets[1];
+
+                for (int i = 0; i < gridView.Columns.Count; i++)
+                {
+                    worksheet.Cells[1, i + 1] = gridView.Columns[i].HeaderText;
+                }
+
+                for (int i = 0; i < gridView.Rows.Count; i++)
+                {
+                    for (int j = 0; j < gridView.Columns.Count; j++)
+                    {
+                        object cellValue = gridView.Rows[i].Cells[j].Value;
+
+                        if (cellValue != null)
+                        {
+                            worksheet.Cells[i + 2, j + 1] = cellValue.ToString();
+                        }
+                        else
+                        {
+                            worksheet.Cells[i + 2, j + 1] = "";
+                        }
+                    }
+                }
+
+                SaveFileDialog saveFileDialog = new SaveFileDialog();
+                saveFileDialog.Filter = "Excel Files|*.xlsx|All Files|*.*";
+                saveFileDialog.Title = "Save Excel File";
+                saveFileDialog.FileName = "BackUp_Employee";
+
+                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    workbook.SaveAs(saveFileDialog.FileName);
+                    excelApp.Quit();
+
+                    MessageBox.Show("Exported successfully!");
+                }
+                else
+                {
+                    excelApp.Quit();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Error: " + ex.Message);
+            }
         }
     }
 }

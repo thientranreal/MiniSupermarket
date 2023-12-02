@@ -266,7 +266,156 @@ namespace MiniSupermarket.GUI
             }
             else
             {
+<<<<<<< Updated upstream
                 MessageBox.Show("Vui lòng chọn một chức vụ để chỉnh sửa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+=======
+                MessageBox.Show("Vui lòng chọn một quyền để chỉnh sửa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+
+        private bool checkFunction(string text, List<string> functions)
+        {
+            // Duyệt qua từng chức năng trong danh sách
+            foreach (string function in functions)
+            {
+                // Nếu có chức năng trong danh sách thì hiện checkbox
+                if (function == text)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
+
+        private void ds_qlcv_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (ds_qlcv.SelectedRows.Count > 0)
+            {
+                string roleID = ds_qlcv.SelectedRows[0].Cells["RoleID"].Value + string.Empty;
+                List<string> functions = roleBUS.selectFunctionFromRoleID(roleID);
+                // Nếu roleID đang chọn không rỗng
+                if (roleID.Length > 0)
+                {
+                    foreach (Control control in this.gb_Info.Controls)
+                    {
+                        if (control.GetType() == typeof(CheckBox))
+                        {
+                            CheckBox ck = (CheckBox)control;
+                            if (checkFunction(ck.Text, functions))
+                            {
+                                ck.Checked = true;
+                            }
+                            else { ck.Checked = false; }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void resetText()
+        {
+            tb_name.Clear();
+            rtb_explain.Clear();
+        }
+
+        private void DataGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            if (ds_qlcv.SelectedRows.Count > 0)
+            {
+                tb_name.Text = ds_qlcv.SelectedRows[0].Cells["Name"].Value.ToString();
+                rtb_explain.Text = ds_qlcv.SelectedRows[0].Cells["Description"].Value.ToString();
+            }
+        }
+
+        private void btnUpdateFunction_Click(object sender, EventArgs e)
+        {
+            if (ds_qlcv.SelectedRows.Count > 0)
+            {
+                string roleID = ds_qlcv.SelectedRows[0].Cells["RoleID"].Value + string.Empty;
+                string roleName = ds_qlcv.SelectedRows[0].Cells["Name"].Value + string.Empty;
+                bool result = true;
+                List<string> funcIDsActivate = new List<string>();
+                bool isReturnToMenu = true;
+
+                if (roleID.Length == 0)
+                {
+                    MessageBox.Show("Vui lòng chọn quyền!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                DialogResult dialogResult = MessageBox.Show($"Bạn có muốn cập nhật chức năng cho {roleName}?", "Xác nhận", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+                    // Nếu roleID đang chọn không rỗng
+                    if (roleID.Length > 0)
+                    {
+                        if (roleBUS.deleteFunctionFromRoleID(roleID))
+                        {
+                            foreach (Control control in this.gb_Info.Controls)
+                            {
+                                if (control.GetType() == typeof(CheckBox))
+                                {
+                                    CheckBox ck = (CheckBox)control;
+                                    // Nếu check box đang được chọn thì thêm chức năng vào database
+                                    if (ck.Checked == true)
+                                    {
+                                        if (!roleBUS.insertIntoRoleFunction(roleID, ck.Tag.ToString()))
+                                        {
+                                            result = false;
+                                        }
+                                        else
+                                        {
+                                            funcIDsActivate.Add(ck.Tag.ToString());
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                        else
+                        {
+                            // Nếu xóa thất bại
+                            result = false;
+                        }
+                    }
+                    // Nếu result là true thì hiện thông báo cập nhật chức năng thành công
+                    if (result)
+                    {
+                        MessageBox.Show("Cập nhật chức năng thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        // Nếu cập nhật chức năng mà là nhóm quyền của tài khoản đang đăng nhập
+                        // thì sẽ cập nhật chức năng trực tiếp trên thanh menu
+                        if (roleID == GlobalState.roleId)
+                        {
+                            // Ẩn hết tất cả các chức năng
+                            foreach (KeyValuePair<string, Button> item in GlobalState.functionsButton)
+                            {
+                                item.Value.Visible = false;
+                            }
+
+                            // Chỉ hiển thị các nút chức năng trong danh sách
+                            foreach (string item in funcIDsActivate)
+                            {
+                                if (item == "F0007")
+                                {
+                                    // Nếu mà có chức năng quyền thì sẽ set isReturnToMenu là false
+                                    isReturnToMenu = false;
+                                }
+                                GlobalState.functionsButton[item].Visible = true;
+                            }
+
+                            // isReturnToMenu là true thì sẽ ra trang menu
+                            if (isReturnToMenu)
+                            {
+                                GlobalState.menuForm.closeChildForm();
+                            }
+
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Cập nhật chức năng thất bại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+>>>>>>> Stashed changes
             }
         }
     }
