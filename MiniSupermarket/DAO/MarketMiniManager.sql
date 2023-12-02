@@ -68,7 +68,7 @@ create table Product(
 	Unit nvarchar(20) not null,
 	PromotionID varchar(10),
 	isDeleted tinyint not null default(1),
-	
+	PromotionID varchar(10),
 	primary key (ProductID)
 )
 GO
@@ -101,14 +101,14 @@ create table Promotion(
 	StartDate datetime not null,
 	EndDate datetime not null,
 	Discount float(50) not null,
-	[Status] nvarchar(50) not null,
+	[Status] tinyint not null default(0),
 	isDeleted tinyint not null default(1),
 	primary key (PromotionID)
 )
 GO
 
 -- Rot du lieu vao bang khuyen mai
-INSERT INTO Promotion (PromotionID, [Name], StartDate, EndDate, Discount, [Status])
+INSERT INTO Promotion (PromotionID, [Name], StartDate, EndDate, Discount)
 VALUES
     ('PM0001', N'Khuyến mãi giờ vàng', '2023-9-24', '2023-11-24', 10,N'Không hoạt động'),
     ('PM0002', N'Khuyến mãi lễ 2/9', '2023-08-30', '2023-09-03', 20, N'Không hoạt động'),
@@ -140,19 +140,18 @@ create table Bill(
 	BillID varchar(10) not null,
 	[Date] datetime not null,
 	EmployeeID varchar(10) not null,
-	CustomerID varchar(10),
-	EstimatedPrice float(50) not null default(0),
-	ReducePrice float(50) not null default(0),
-	TotalPrice float(50) not null default(0),
+	CustomerID varchar(10) not null,
+	EstimatedPrice float(50) not null,
+	ReducePrice float(50) not null,
+	TotalPrice float(50) not null,
 	[Status] tinyint not null default(0),
 	isDeleted tinyint not null default(1),
 	primary key(BillID)
 )
 GO
 
-
 -- Rot du lieu vao bang hoa don
-INSERT INTO Bill (BillID, [Date], EmployeeID, CustomerID, EstimatedPrice, ReducePrice, TotalPrice, [Status])
+INSERT INTO Bill (BillID, [Date], EmployeeID, CustomerID, EstimatedPrice, ReducePrice, TotalPrice)
 VALUES
     ('B0001', '2023-09-23', 'E0002', 'C0001', 40000, 0, 40000, 1);
 GO
@@ -405,9 +404,6 @@ add constraint fk_RoleFunction_Functions foreign key (FunctionID) references Fun
 GO
 
 -- Tạo các procedures
-
--- Thien ======================================================================================================
-
 -- Select * from ProductType
 CREATE PROCEDURE SelectAllFromProductType
 AS
@@ -446,7 +442,6 @@ BEGIN
 END;
 GO
 
--- Đếm số account
 CREATE PROCEDURE CountAccount
     @userName varchar(50),
     @Password varchar(50)
@@ -457,7 +452,6 @@ BEGIN
     AND [Password] = @Password
 END;
 GO
-
 
 -- Lấy các chức năng từ account
 CREATE PROCEDURE SelectFunctionNameFromAccount
@@ -517,10 +511,10 @@ BEGIN
 	SELECT Bill.BillID, Bill.[Date], Bill.EmployeeID,
     Employee.[Name] AS EmployeeName, Bill.CustomerID,
     Customer.[Name] AS CustomerName, 
-    Bill.EstimatedPrice, Bill.ReducePrice, Bill.TotalPrice, Bill.[Status], Bill.isDeleted
-	FROM Bill INNER JOIN Employee
-	ON Bill.EmployeeID = Employee.EmployeeID LEFT JOIN Customer
+    Bill.TotalPrice, Bill.[Status] FROM Bill INNER JOIN Employee
+	ON Bill.EmployeeID = Employee.EmployeeID INNER JOIN Customer
 	ON Bill.CustomerID = Customer.CustomerID
+    WHERE Bill.isDeleted = 1
 END;
 GO
 --Lấy tất cả thông tin nhà cung cấp
@@ -570,92 +564,75 @@ BEGIN
 	WHERE Supplier.SupplierID=@ID
 END;
 GO
---Thêm nhà cung cấp 
-CREATE PROCEDURE AddSupplier
-	@ID varchar(50),
-	@Name nvarchar(50),
-	@Address nvarchar(50),
-	@PhoneNumber varchar(50),
-	@Email varchar(50),
-	@ProductID varchar(10),
-	@Date datetime
-
-AS
+--Tìm thông tin theo tên nhà cung cấp
+CREATE PROCEDURE FindSupplierWithName
+	@Name varchar(50)
+AS 
 BEGIN
-	INSERT INTO Supplier(SupplierID,[Name],[Address],PhoneNumber,Email)
-	VALUES 
-		(@ID,@Name,@Address,@PhoneNumber,@Email)
-	INSERT INTO SupplierProduct(SupplierID,ProductID,SupplyStartDate)
-	VALUES
-		(@ID,@ProductID,@Date)
-
+	SELECT
+	Supplier.SupplierID AS ID,
+	Supplier.[Name] AS TÊN ,
+	Supplier.[Address] [Địa chỉ],
+	Supplier.PhoneNumber AS [Số điện thoại],
+	Supplier.Email
+	FROM Supplier 
+	WHERE Supplier.[Name]=@Name
 END;
 GO
+
 --Xóa nhà cung cấp
 Create PROCEDURE DelSupplier
 	@ID varchar(10)
 AS
 BEGIN
-	DELETE FROM SupplierProduct
-	WHERE SupplierID=@ID
-	DELETE FROM Supplier
-	WHERE SupplierID=@ID
-	
+	SELECT
+	Supplier.SupplierID AS ID,
+	Supplier.[Name] AS TÊN ,
+	Supplier.[Address] [Địa chỉ],
+	Supplier.PhoneNumber AS [Số điện thoại],
+	Supplier.Email
+	FROM Supplier 
+	WHERE Supplier.[Address]=@Address
 END;
 GO
---Lấy thông tin sản phẩm
-CREATE PROCEDURE AllProduct
-AS
+--Tìm kiếm theo số điện thoại nhà cung cấp
+CREATE PROCEDURE FindSupplierWithPhoneNumber
+	@PhoneNumber varchar(50)
+AS 
 BEGIN
-	SELECT 
-	Product.ProductID AS ID,
-	Product.[Name] AS Tên,
-	Product.TypeID AS Loại,
-	Product.CurrentPrice AS Giá
-	FROM Product
-	WHERE Product.isDeleted=1;
+	SELECT
+	Supplier.SupplierID AS ID,
+	Supplier.[Name] AS TÊN ,
+	Supplier.[Address] [Địa chỉ],
+	Supplier.PhoneNumber AS [Số điện thoại],
+	Supplier.Email
+	FROM Supplier 
+	WHERE Supplier.PhoneNumber=@PhoneNumber
+END;
+GO
+--Tìm kiếm theo email nhà cung cấp
+CREATE PROCEDURE FindSupplierWithEmail
+	@Email varchar(50)
+AS 
+BEGIN
+	SELECT
+	Supplier.SupplierID AS ID,
+	Supplier.[Name] AS TÊN ,
+	Supplier.[Address] [Địa chỉ],
+	Supplier.PhoneNumber AS [Số điện thoại],
+	Supplier.Email
+	FROM Supplier 
+	WHERE Supplier.Email=@Email
 END;
 GO
 
--- Lấy mã KH và tên KH
-CREATE PROCEDURE SelectCustomerIdAndName
-AS
-BEGIN
-	SELECT CustomerID, [Name]
-	FROM Customer
-    WHERE isDeleted = 1
-END;
-GO
-
--- Thêm một bill mới
-CREATE PROCEDURE InsertIntoBill
-	@BillID varchar(10),
-	@Date datetime,
-	@EmployeeID varchar(10),
-	@CustomerID varchar(10) = NULL
-AS
-BEGIN
-	INSERT INTO Bill(BillID, [Date], EmployeeID, CustomerID)
-	VALUES (@BillID, @Date, @EmployeeID, @CustomerID)
-END;
-GO
-
--- Thêm khách hàng cho hóa đơn
-CREATE PROC InsertCustomerSale
-	@CustomerID varchar(10),
+--Thêm nhà cung cấp 
+ALTER PROCEDURE AddSupplier
+	@ID varchar(50),
 	@Name nvarchar(50),
+	@Address nvarchar(50),
 	@PhoneNumber varchar(50),
-	@Sex nvarchar(10)
-AS
-BEGIN
-	INSERT INTO Customer(CustomerID, [Name], PhoneNumber, Sex)
-	VALUES (@CustomerID, @Name, @PhoneNumber, @Sex)
-END;
-GO
-
--- Xóa hóa đơn
-CREATE PROC DeleteBill
-	@BillID varchar(10)
+	@Email varchar(50)
 AS
 BEGIN
 	UPDATE Bill
@@ -694,57 +671,59 @@ GO
 CREATE PROC InsertPromotion
 	@PromotionID varchar(10),
 	@Name nvarchar(50),
-	@StartDate datetime,
-	@EndDate datetime,
-	@Discount float(50)
+	@Address nvarchar(50),
+	@PhoneNumber varchar(50),
+	@Email varchar(50)
 AS
 BEGIN
-	INSERT INTO Promotion(PromotionID,[Name],StartDate,EndDate,Discount,[Status])
-	VALUES (@PromotionID,@Name,@StartDate,@EndDate,@Discount,N'Không hoạt động')
+	UPDATE Supplier
+	SET 
+	[Name]=@Name,
+	[Address]=@Address,
+	PhoneNumber=@PhoneNumber,
+	Email=@Email
+	WHERE SupplierID=@ID
 END;
 GO
-
--- Sửa thông tin chương trình khuyến mãi
-CREATE PROC UpdatePromotion
-	@PromotionID varchar(10),
-	@Name nvarchar(50),
-	@StartDate datetime,
-	@EndDate datetime,
-	@Discount float(50)
+--Chỉnh sửa chi tiết nhà cung cấp
+ALTER PROCEDURE UpdateSupplierDetail
+	@SupplierID varchar(50),
+	@ProductID varchar(50),
+	@SupplyStartDate datetime
 AS
-BEGIN
-	UPDATE Promotion SET Name = @Name, StartDate = @StartDate, EndDate = @EndDate, Discount = @Discount
-	WHERE PromotionID = @PromotionID
+BEGIN 
+	UPDATE SupplierProduct
+	SET 
+	
+	[SupplyStartDate]=@SupplyStartDate
+	WHERE SupplierID=@SupplierID AND ProductID=@ProductID
 END;
 GO
-
--- Xoá chương trình khuyến mãi
-CREATE PROC DeletePromotion
-	@PromotionID varchar(10)
+--Thêm chi tiết nhà cung cấp
+ALTER PROCEDURE AddDetailSupplier
+	@SupplierID varchar(50),
+	@ProductID varchar(50),
+	@SupplyStartDate datetime
 AS
-BEGIN
-	UPDATE Promotion SET isDeleted = '0'
-	WHERE PromotionID = @PromotionID
+BEGIN 
+	IF NOT EXISTS(SELECT SupplierProduct.SupplierID,SupplierProduct.ProductID FROM SupplierProduct WHERE SupplierProduct.SupplierID=@SupplierID AND SupplierProduct.ProductID=@ProductID)
+		INSERT INTO SupplierProduct(SupplierID,ProductID,SupplyStartDate)
+	VALUES
+		(@SupplierID,@ProductID,@SupplyStartDate)
+	
+
 END;
 GO
-
--- Áp dụng chương trình khuyến mãi
-CREATE PROC StartWork
-	@PromotionID varchar(10)
+--Xóa nhà cung cấp
+ALTER PROCEDURE DelSupplier
+	@ID varchar(10)
 AS
 BEGIN
-	UPDATE Promotion SET [Status] = N'Đang hoạt động'
-	WHERE PromotionID = @PromotionID
-END;
-GO
-
--- Ngưng áp dụng chương trình khuyến mãi
-CREATE PROC StopWork
-	@PromotionID varchar(10)
-AS
-BEGIN
-	UPDATE Promotion SET [Status] = N'Không hoạt động'
-	WHERE PromotionID = @PromotionID
+	DELETE FROM SupplierProduct
+	WHERE SupplierID=@ID
+	DELETE FROM Supplier
+	WHERE SupplierID=@ID
+	
 END;
 GO
 
@@ -758,10 +737,8 @@ BEGIN
 	WHERE (PromotionID != @PromotionID and P.TypeID = PT.TypeID and P.isDeleted = '1') or PromotionID is null
 END;
 GO
-
--- Tải danh sách sản phẩm cho chương trình khuyến mãi (danh sách đã chọn)
-CREATE PROC SelectProductToPromotionApply
-	@PromotionID varchar(10)
+--Lấy thông tin sản phẩm
+CREATE PROCEDURE AllProduct
 AS
 BEGIN
 	SELECT ProductID, P.[Name], PT.Name, [Description]
@@ -1482,4 +1459,4 @@ BEGIN
     END
 END;
 GO
--- =========================================================End Tiến
+-- =========================================================End Tiế
