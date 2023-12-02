@@ -43,17 +43,18 @@ create table Employee(
 	UserName varchar(50) not null,
 	[Password] varchar(50) not null,
 	BirthDate DATE,
+	RoleID varchar(10),
 	isDeleted tinyint not null default(1),
 	primary key (EmployeeID)
 )
 GO
 
 -- Rot du lieu vao bang nhan vien
-insert into Employee(EmployeeID,Name,Password,Sex,BirthDate,PhoneNumber,Email,Address,UserName)
+insert into Employee(EmployeeID,Name,Password,Sex,BirthDate,PhoneNumber,Email,Address,UserName, RoleID)
 values
-	('E0001',N'Nguyễn Văn A','1',N'Nam','2003-01-01','0912312371','NguyenVanA@gmail.com',N'123 An Dương Vương, Phường 3, Quận 2, TPHCM','admin'),
-	('E0002',N'Nguyễn Văn B','1',N'Nữ','2003-02-15','0914736281','NguyenVanB@gmail.com',N'456 Hoàng Hoa Thám, Phường 1, Quận Bình Tân, TPHCM','E0002'),
-	('E0003',N'Nguyễn Văn C','1',N'Nam','2003-08-30','0936271371','NguyenVanC@gmail.com',N'789 Nam Kỳ Khởi Nghĩa, Phường 9, Quận 8, TPHCM','E0003');
+	('E0001',N'Nguyễn Văn A','1',N'Nam','2003-01-01','0912312371','NguyenVanA@gmail.com',N'123 An Dương Vương, Phường 3, Quận 2, TPHCM','admin', 'R0001'),
+	('E0002',N'Nguyễn Văn B','1',N'Nữ','2003-02-15','0914736281','NguyenVanB@gmail.com',N'456 Hoàng Hoa Thám, Phường 1, Quận Bình Tân, TPHCM','E0002', 'R0002'),
+	('E0003',N'Nguyễn Văn C','1',N'Nam','2003-08-30','0936271371','NguyenVanC@gmail.com',N'789 Nam Kỳ Khởi Nghĩa, Phường 9, Quận 8, TPHCM','E0003', 'R0003');
 GO
 
 --Tao bang san pham
@@ -307,22 +308,6 @@ VALUES
     ('F0010', N'Thống kê', N'Thống kê.');
 GO
 
--- Tao bang quyen cua nhan vien
-create table EmployeeRole(
-	EmployeeID varchar(10) not null,
-	RoleID varchar(10) not null,
-	primary key(EmployeeID,RoleID)
-)
-GO
-
--- Rot du lieu cho bang quyen cua nhan vien
-INSERT INTO EmployeeRole (EmployeeID, RoleID)
-VALUES
-    ('E0001', 'R0001'),
-    ('E0002', 'R0002'),
-    ('E0003', 'R0003');
-GO
-
 -- Tao bang chuc nang cho quyen quyen nhan vien
 create table RoleFunction(
 	RoleID varchar(10) not null,
@@ -347,6 +332,11 @@ VALUES
 GO
 
 --Them khoa ngoai cho tung bang
+--Bang nhan vien
+alter table Employee
+add constraint fk_Employee_Role foreign key (RoleID) references [Role] (RoleID)
+GO
+
 --Bang san pham
 alter table Product
 add constraint fk_Product_ProductType foreign key (TypeID) references ProductType (TypeID)
@@ -404,14 +394,6 @@ add constraint fk_Inventory_PurchaseOrder foreign key (OrderID) references Purch
 GO
 alter table Inventory
 add constraint fk_Inventory_Product foreign key (ProductID) references Product (ProductID)
-GO
-
--- Bang quyen cua nhan vien
-alter table EmployeeRole
-add constraint fk_EmployeeRole_Employee foreign key (EmployeeID) references Employee (EmployeeID)
-GO
-alter table EmployeeRole
-add constraint fk_EmployeeRole_Role foreign key (RoleID) references Role (RoleID)
 GO
 
 -- bang chuc nang cua quyen
@@ -484,9 +466,8 @@ CREATE PROCEDURE SelectFunctionNameFromAccount
 AS
 BEGIN
 	SELECT Functions.[Name]
-	FROM Employee, EmployeeRole, [Role], RoleFunction, Functions
-    Where Employee.EmployeeID = EmployeeRole.EmployeeID 
-	AND EmployeeRole.RoleID = [Role].RoleID
+	FROM Employee, [Role], RoleFunction, Functions
+    Where Employee.RoleID = [Role].RoleID
     AND [Role].RoleID = RoleFunction.RoleID
     AND RoleFunction.FunctionID = Functions.FunctionID
     AND UserName = @userName AND [Password] = @Password
@@ -1228,10 +1209,7 @@ GO
 CREATE PROCEDURE SelectAllFromRole
 AS
 BEGIN
-		SELECT Role.RoleID, [Name], [Description]
-		FROM Role
-		WHERE isDeleted = 1;
-
+		SELECT * FROM [Role]
 END;
 GO
 
@@ -1274,6 +1252,45 @@ BEGIN
 END;
 GO
 
+-- Lấy các chức năng từ mã quyền
+Create PROCEDURE SelectAllFunctionAndRoleID
+AS
+BEGIN
+    Select [Role].RoleID, Functions.[Name] From Functions, RoleFunction, [Role]
+	Where RoleFunction.FunctionID = Functions.FunctionID and [Role].RoleID = RoleFunction.RoleID
+	and isDeleted = 1
+END;
+GO
+
+-- Xóa chức năng từ quyền
+Create PROCEDURE DeleteFunctionFromRoleID
+    @RoleID varchar(10)
+AS
+BEGIN
+    Delete From RoleFunction
+	Where RoleFunction.RoleID = @RoleID
+END;
+GO
+
+-- Thêm chức năng vào quyền
+Create PROCEDURE InsertIntoRoleFunction
+    @RoleID varchar(10),
+	@FunctionID varchar(10)
+AS
+BEGIN
+    Insert Into RoleFunction
+	Values(@RoleID, @FunctionID)
+END;
+GO
+-- Lấy mã quyền từ employeeID
+Create PROCEDURE SelectRoleIDFromEmployeeID
+    @EmployeeID varchar(10)
+AS
+BEGIN
+    Select RoleID From Employee
+	Where EmployeeID = @EmployeeID
+END;
+GO
 -- ===================================================End Sang
 
 -- ========================================================Tiến

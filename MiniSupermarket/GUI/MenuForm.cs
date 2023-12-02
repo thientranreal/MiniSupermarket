@@ -37,6 +37,10 @@ namespace MiniSupermarket.GUI
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
             this.loginForm = loginForm;
 
+            // Gán biến toàn cục của menu form, login form
+            GlobalState.menuForm = this;
+            GlobalState.loginForm = loginForm;
+
             // Khởi tạo giá trị cho dictionary
             forms = new Dictionary<string, Form>();
             forms.Add("Quản lý sản phẩm", new ProductManage());
@@ -50,6 +54,19 @@ namespace MiniSupermarket.GUI
             forms.Add("Quản lý nhân viên", new EmployeeForm());
             forms.Add("Quản lý khách hàng", new CustomerForm());
             forms.Add("Thống kê", new Statistics());
+
+            // Gán những nút chức năng vào global state
+            GlobalState.functionsButton = new Dictionary<string, Button>();
+            GlobalState.functionsButton.Add("F0001", btnProducts);
+            GlobalState.functionsButton.Add("F0002", btnProductType);
+            GlobalState.functionsButton.Add("F0003", btnCustomers);
+            GlobalState.functionsButton.Add("F0004", btnImport);
+            GlobalState.functionsButton.Add("F0005", btnSale);
+            GlobalState.functionsButton.Add("F0006", btnEmployees);
+            GlobalState.functionsButton.Add("F0007", btnRoles);
+            GlobalState.functionsButton.Add("F0008", btnPromotions);
+            GlobalState.functionsButton.Add("F0009", btnSuppliers);
+            GlobalState.functionsButton.Add("F0010", btnStatistic);
 
             // Ẩn nút chức năng
             foreach (var control in panelMenu.Controls)
@@ -184,6 +201,13 @@ namespace MiniSupermarket.GUI
         }
 
         private void btnCloseChildForm_Click(object sender, EventArgs e)
+        {
+            if (activeForm != null)
+                activeForm.Hide();
+            Reset();
+        }
+
+        public void closeChildForm()
         {
             if (activeForm != null)
                 activeForm.Hide();
