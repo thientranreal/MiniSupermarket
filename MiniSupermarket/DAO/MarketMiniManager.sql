@@ -1260,7 +1260,15 @@ END;
 GO
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> Sang
+>>>>>>> Stashed changes
 -- Lấy các chức năng từ mã quyền
 Create PROCEDURE SelectAllFunctionAndRoleID
 AS
@@ -1300,6 +1308,11 @@ BEGIN
 	Where EmployeeID = @EmployeeID
 END;
 GO
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
 
 CREATE PROCEDURE GetRoles
 AS
@@ -1307,6 +1320,10 @@ BEGIN
     SELECT RoleID FROM Role;
 END;
 GO
+>>>>>>> Stashed changes
+<<<<<<< Updated upstream
+=======
+>>>>>>> Sang
 >>>>>>> Stashed changes
 -- ===================================================End Sang
 
@@ -1380,7 +1397,15 @@ BEGIN
 END;
 GO
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 =======
+=======
+<<<<<<< HEAD
+=======
+<<<<<<< Updated upstream
+=======
+>>>>>>> Sang
+>>>>>>> Stashed changes
 
 CREATE PROCEDURE [dbo].[AddDetailBill]
     @BillID varchar(10),
@@ -1497,5 +1522,14 @@ BEGIN
     END
 END;
 GO
+<<<<<<< Updated upstream
 >>>>>>> Stashed changes
 -- =========================================================End Tiến
+=======
+<<<<<<< HEAD
+-- =========================================================End Tiế
+=======
+>>>>>>> Stashed changes
+-- =========================================================End Tiến
+>>>>>>> Sang
+>>>>>>> Stashed changes

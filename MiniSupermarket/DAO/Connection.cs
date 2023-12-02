@@ -10,6 +10,14 @@ namespace MiniSupermarket.DAO
     internal static class Connection
     {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+
+=======
+<<<<<<< Updated upstream
+>>>>>>> Sang
+>>>>>>> Stashed changes
         private static string serverName = "MSI\\THIENTRAN";
 =======
 

@@ -318,6 +318,11 @@ namespace MiniSupermarket.GUI
             rtb_explain.Clear();
         }
 
+<<<<<<< Updated upstream
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
         private void DataGridView_SelectionChanged(object sender, EventArgs e)
         {
             if (ds_qlcv.SelectedRows.Count > 0)
@@ -327,6 +332,7 @@ namespace MiniSupermarket.GUI
             }
         }
 
+>>>>>>> Sang
         private void btnUpdateFunction_Click(object sender, EventArgs e)
         {
             if (ds_qlcv.SelectedRows.Count > 0)
@@ -415,6 +421,13 @@ namespace MiniSupermarket.GUI
                         MessageBox.Show("Cập nhật chức năng thất bại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
+<<<<<<< Updated upstream
+>>>>>>> Stashed changes
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> Stashed changes
+>>>>>>> Sang
 >>>>>>> Stashed changes
             }
         }
