@@ -28,7 +28,9 @@ namespace MiniSupermarket.BUS
 
         public DataTable getAllProducts()
         {
-            return getAllProductTypes();
+            DataTable newDt = productTypes.Select("isDeleted = 1").CopyToDataTable();
+            newDt.Columns.Remove("isDeleted");
+            return newDt;
         }
 
         // Nếu tồn tại trả về true, nếu không tồn tại trả về false
@@ -94,7 +96,7 @@ namespace MiniSupermarket.BUS
             // Nếu thêm thành công thì sẽ cập nhật lại danh sách
             if (result)
             {
-                productTypes = getAllProducts();
+                productTypes = getAllProductTypes();
             }
             return result;
         }
@@ -109,7 +111,7 @@ namespace MiniSupermarket.BUS
             // Nếu xóa thành công thì cập nhật lại danh sách
             if (result)
             {
-                productTypes = getAllProducts();
+                productTypes = getAllProductTypes();
             }
             return result;
         }
@@ -126,7 +128,7 @@ namespace MiniSupermarket.BUS
             // Nếu cập nhật thành công thì cập nhật lại danh sách
             if (result)
             {
-                productTypes = getAllProducts();
+                productTypes = getAllProductTypes();
             }
             return result;
         }
@@ -200,5 +202,39 @@ namespace MiniSupermarket.BUS
 
             return result;
         }
+
+        //=====================Công Anh thêm======================= 
+
+        //Lấy ra id và tên loại sản phẩm theo dạng: [id]name
+        public string[] getProductTypesWithIdAndName()
+        {
+            List<(string Id, string Name)> types = new List<(string Id, string Name)>();
+
+            foreach (DataRow row in productTypes.Rows)
+            {
+                string typeId = row["TypeID"].ToString();
+                string name = row["Name"].ToString();
+                types.Add((typeId, name));
+            }
+
+            return types.Select(t => $"[{t.Id}] {t.Name}").ToArray();
+        }
+
+        //lấy ra tên từ mã loại sản phẩm
+        public string GetNameFromId(string id)
+        {
+            foreach (DataRow row in productTypes.Rows)
+            {
+                // Nếu TypeID khớp với ID cần tìm, trả về Name tương ứng
+                if (row["TypeID"].ToString().Equals(id, StringComparison.OrdinalIgnoreCase))
+                {
+                    return row["Name"].ToString();
+                }
+            }
+
+            // Trường hợp không tìm thấy
+            return "Không tìm thấy"; // hoặc có thể trả về một giá trị mặc định khác
+        }
+
     }
 }

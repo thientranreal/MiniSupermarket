@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             pnlInformation = new Panel();
+            label1 = new Label();
             dtpkEndDate = new DateTimePicker();
             dtpkStartDate = new DateTimePicker();
             btnStartWork = new Button();
@@ -47,38 +48,31 @@
             txtPromotionName = new TextBox();
             lblTitle = new Label();
             panel2 = new Panel();
-            panel5 = new Panel();
             grbDateFilter = new GroupBox();
+            btnFilterDate = new Button();
             lblDateTo = new Label();
             lblDateFrom = new Label();
             dtpkSearchEndDate = new DateTimePicker();
             dtpkSearchStartDate = new DateTimePicker();
-            grbPriceFilter = new GroupBox();
-            txtEndDiscount = new TextBox();
-            txtStartDiscount = new TextBox();
-            lblPriceTo = new Label();
-            lblPriceFrom = new Label();
-            panel4 = new Panel();
-            groupBox2 = new GroupBox();
-            txtSearch = new TextBox();
             groupBox1 = new GroupBox();
+            txtSearch = new TextBox();
             cbxTypeOfSearch = new ComboBox();
+            grbPriceFilter = new GroupBox();
+            cbxFilterPrice = new ComboBox();
             panel3 = new Panel();
             dgvPromotions = new DataGridView();
             pnlInformation.SuspendLayout();
             panel2.SuspendLayout();
-            panel5.SuspendLayout();
             grbDateFilter.SuspendLayout();
-            grbPriceFilter.SuspendLayout();
-            panel4.SuspendLayout();
-            groupBox2.SuspendLayout();
             groupBox1.SuspendLayout();
+            grbPriceFilter.SuspendLayout();
             panel3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvPromotions).BeginInit();
             SuspendLayout();
             // 
             // pnlInformation
             // 
+            pnlInformation.Controls.Add(label1);
             pnlInformation.Controls.Add(dtpkEndDate);
             pnlInformation.Controls.Add(dtpkStartDate);
             pnlInformation.Controls.Add(btnStartWork);
@@ -101,6 +95,15 @@
             pnlInformation.Name = "pnlInformation";
             pnlInformation.Size = new Size(462, 485);
             pnlInformation.TabIndex = 0;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(395, 293);
+            label1.Name = "label1";
+            label1.Size = new Size(21, 20);
+            label1.TabIndex = 32;
+            label1.Text = "%";
             // 
             // dtpkEndDate
             // 
@@ -236,7 +239,7 @@
             // 
             txtDiscount.Location = new Point(217, 290);
             txtDiscount.Name = "txtDiscount";
-            txtDiscount.Size = new Size(214, 27);
+            txtDiscount.Size = new Size(167, 27);
             txtDiscount.TabIndex = 3;
             txtDiscount.KeyPress += txtDiscount_KeyPress;
             // 
@@ -268,42 +271,45 @@
             // 
             // panel2
             // 
-            panel2.Controls.Add(panel5);
-            panel2.Controls.Add(panel4);
+            panel2.Controls.Add(grbDateFilter);
+            panel2.Controls.Add(groupBox1);
+            panel2.Controls.Add(grbPriceFilter);
             panel2.Dock = DockStyle.Top;
             panel2.Location = new Point(462, 0);
             panel2.Name = "panel2";
-            panel2.Size = new Size(832, 112);
+            panel2.Size = new Size(931, 169);
             panel2.TabIndex = 1;
-            // 
-            // panel5
-            // 
-            panel5.Controls.Add(grbDateFilter);
-            panel5.Controls.Add(grbPriceFilter);
-            panel5.Dock = DockStyle.Right;
-            panel5.Location = new Point(157, 0);
-            panel5.Name = "panel5";
-            panel5.Size = new Size(675, 112);
-            panel5.TabIndex = 1;
             // 
             // grbDateFilter
             // 
+            grbDateFilter.Controls.Add(btnFilterDate);
             grbDateFilter.Controls.Add(lblDateTo);
             grbDateFilter.Controls.Add(lblDateFrom);
             grbDateFilter.Controls.Add(dtpkSearchEndDate);
             grbDateFilter.Controls.Add(dtpkSearchStartDate);
-            grbDateFilter.Dock = DockStyle.Fill;
-            grbDateFilter.Location = new Point(186, 0);
+            grbDateFilter.Location = new Point(9, 81);
             grbDateFilter.Name = "grbDateFilter";
-            grbDateFilter.Size = new Size(489, 112);
+            grbDateFilter.Size = new Size(904, 64);
             grbDateFilter.TabIndex = 0;
             grbDateFilter.TabStop = false;
             grbDateFilter.Text = "Lọc theo ngày";
             // 
+            // btnFilterDate
+            // 
+            btnFilterDate.FlatAppearance.BorderSize = 0;
+            btnFilterDate.FlatStyle = FlatStyle.Flat;
+            btnFilterDate.Location = new Point(758, 22);
+            btnFilterDate.Name = "btnFilterDate";
+            btnFilterDate.Size = new Size(140, 31);
+            btnFilterDate.TabIndex = 33;
+            btnFilterDate.Text = "Lọc";
+            btnFilterDate.UseVisualStyleBackColor = true;
+            btnFilterDate.Click += btnFilterDate_Click;
+            // 
             // lblDateTo
             // 
             lblDateTo.AutoSize = true;
-            lblDateTo.Location = new Point(18, 74);
+            lblDateTo.Location = new Point(388, 27);
             lblDateTo.Name = "lblDateTo";
             lblDateTo.Size = new Size(37, 20);
             lblDateTo.TabIndex = 29;
@@ -312,7 +318,7 @@
             // lblDateFrom
             // 
             lblDateFrom.AutoSize = true;
-            lblDateFrom.Location = new Point(18, 29);
+            lblDateFrom.Location = new Point(15, 27);
             lblDateFrom.Name = "lblDateFrom";
             lblDateFrom.Size = new Size(65, 20);
             lblDateFrom.TabIndex = 28;
@@ -320,137 +326,97 @@
             // 
             // dtpkSearchEndDate
             // 
-            dtpkSearchEndDate.Location = new Point(113, 69);
+            dtpkSearchEndDate.Location = new Point(473, 22);
             dtpkSearchEndDate.Name = "dtpkSearchEndDate";
             dtpkSearchEndDate.Size = new Size(214, 27);
             dtpkSearchEndDate.TabIndex = 1;
             // 
             // dtpkSearchStartDate
             // 
-            dtpkSearchStartDate.Location = new Point(113, 24);
+            dtpkSearchStartDate.Location = new Point(125, 22);
             dtpkSearchStartDate.Name = "dtpkSearchStartDate";
             dtpkSearchStartDate.Size = new Size(214, 27);
             dtpkSearchStartDate.TabIndex = 0;
             // 
-            // grbPriceFilter
-            // 
-            grbPriceFilter.Controls.Add(txtEndDiscount);
-            grbPriceFilter.Controls.Add(txtStartDiscount);
-            grbPriceFilter.Controls.Add(lblPriceTo);
-            grbPriceFilter.Controls.Add(lblPriceFrom);
-            grbPriceFilter.Dock = DockStyle.Left;
-            grbPriceFilter.Location = new Point(0, 0);
-            grbPriceFilter.Name = "grbPriceFilter";
-            grbPriceFilter.Size = new Size(186, 112);
-            grbPriceFilter.TabIndex = 0;
-            grbPriceFilter.TabStop = false;
-            grbPriceFilter.Text = "Lọc theo giá";
-            // 
-            // txtEndDiscount
-            // 
-            txtEndDiscount.Location = new Point(70, 71);
-            txtEndDiscount.Name = "txtEndDiscount";
-            txtEndDiscount.Size = new Size(110, 27);
-            txtEndDiscount.TabIndex = 27;
-            // 
-            // txtStartDiscount
-            // 
-            txtStartDiscount.Location = new Point(70, 26);
-            txtStartDiscount.Name = "txtStartDiscount";
-            txtStartDiscount.Size = new Size(110, 27);
-            txtStartDiscount.TabIndex = 25;
-            // 
-            // lblPriceTo
-            // 
-            lblPriceTo.AutoSize = true;
-            lblPriceTo.Location = new Point(6, 76);
-            lblPriceTo.Name = "lblPriceTo";
-            lblPriceTo.Size = new Size(37, 20);
-            lblPriceTo.TabIndex = 26;
-            lblPriceTo.Text = "đến:";
-            // 
-            // lblPriceFrom
-            // 
-            lblPriceFrom.AutoSize = true;
-            lblPriceFrom.Location = new Point(6, 29);
-            lblPriceFrom.Name = "lblPriceFrom";
-            lblPriceFrom.Size = new Size(52, 20);
-            lblPriceFrom.TabIndex = 25;
-            lblPriceFrom.Text = "Giá từ:";
-            // 
-            // panel4
-            // 
-            panel4.Controls.Add(groupBox2);
-            panel4.Controls.Add(groupBox1);
-            panel4.Dock = DockStyle.Left;
-            panel4.Location = new Point(0, 0);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(161, 112);
-            panel4.TabIndex = 0;
-            // 
-            // groupBox2
-            // 
-            groupBox2.Controls.Add(txtSearch);
-            groupBox2.Dock = DockStyle.Fill;
-            groupBox2.Location = new Point(0, 53);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Size = new Size(161, 59);
-            groupBox2.TabIndex = 0;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Từ khoá tìm kiếm";
-            // 
-            // txtSearch
-            // 
-            txtSearch.Location = new Point(6, 25);
-            txtSearch.Name = "txtSearch";
-            txtSearch.Size = new Size(145, 27);
-            txtSearch.TabIndex = 12;
-            // 
             // groupBox1
             // 
+            groupBox1.Controls.Add(txtSearch);
             groupBox1.Controls.Add(cbxTypeOfSearch);
-            groupBox1.Dock = DockStyle.Top;
-            groupBox1.Location = new Point(0, 0);
+            groupBox1.Location = new Point(3, 3);
             groupBox1.Name = "groupBox1";
-            groupBox1.Size = new Size(161, 53);
+            groupBox1.Size = new Size(629, 71);
             groupBox1.TabIndex = 0;
             groupBox1.TabStop = false;
             groupBox1.Text = "Tìm kiếm theo";
             // 
+            // txtSearch
+            // 
+            txtSearch.Location = new Point(157, 24);
+            txtSearch.Name = "txtSearch";
+            txtSearch.Size = new Size(466, 27);
+            txtSearch.TabIndex = 12;
+            txtSearch.KeyPress += txtSearch_KeyPress;
+            txtSearch.KeyUp += txtSearch_KeyUp;
+            // 
             // cbxTypeOfSearch
             // 
+            cbxTypeOfSearch.DropDownStyle = ComboBoxStyle.DropDownList;
             cbxTypeOfSearch.FormattingEnabled = true;
+            cbxTypeOfSearch.Items.AddRange(new object[] { "Mã CTKM", "Tên CTKM" });
             cbxTypeOfSearch.Location = new Point(6, 23);
             cbxTypeOfSearch.Name = "cbxTypeOfSearch";
             cbxTypeOfSearch.Size = new Size(145, 28);
             cbxTypeOfSearch.TabIndex = 0;
             // 
+            // grbPriceFilter
+            // 
+            grbPriceFilter.Controls.Add(cbxFilterPrice);
+            grbPriceFilter.Location = new Point(638, 3);
+            grbPriceFilter.Name = "grbPriceFilter";
+            grbPriceFilter.Size = new Size(281, 71);
+            grbPriceFilter.TabIndex = 0;
+            grbPriceFilter.TabStop = false;
+            grbPriceFilter.Text = "Lọc theo giá";
+            // 
+            // cbxFilterPrice
+            // 
+            cbxFilterPrice.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbxFilterPrice.FormattingEnabled = true;
+            cbxFilterPrice.Items.AddRange(new object[] { "Tất cả", "Dưới 15%", "Từ 15 % đến 40%", "Trên 40%" });
+            cbxFilterPrice.Location = new Point(18, 26);
+            cbxFilterPrice.Name = "cbxFilterPrice";
+            cbxFilterPrice.Size = new Size(257, 28);
+            cbxFilterPrice.TabIndex = 1;
+            cbxFilterPrice.SelectedIndexChanged += cbxFilterPrice_SelectedIndexChanged;
+            // 
             // panel3
             // 
             panel3.Controls.Add(dgvPromotions);
             panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(462, 112);
+            panel3.Location = new Point(462, 169);
             panel3.Name = "panel3";
-            panel3.Size = new Size(832, 373);
+            panel3.Size = new Size(931, 316);
             panel3.TabIndex = 2;
             // 
             // dgvPromotions
             // 
+            dgvPromotions.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvPromotions.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvPromotions.Dock = DockStyle.Fill;
             dgvPromotions.Location = new Point(0, 0);
             dgvPromotions.Name = "dgvPromotions";
             dgvPromotions.RowHeadersWidth = 51;
             dgvPromotions.RowTemplate.Height = 29;
-            dgvPromotions.Size = new Size(832, 373);
+            dgvPromotions.Size = new Size(931, 316);
             dgvPromotions.TabIndex = 0;
             dgvPromotions.CellDoubleClick += dgvPromotions_CellDoubleClick;
+            dgvPromotions.CellMouseClick += dgvPromotions_CellMouseClick;
             // 
             // PromotionForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1294, 485);
+            ClientSize = new Size(1393, 485);
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(pnlInformation);
@@ -460,15 +426,11 @@
             pnlInformation.ResumeLayout(false);
             pnlInformation.PerformLayout();
             panel2.ResumeLayout(false);
-            panel5.ResumeLayout(false);
             grbDateFilter.ResumeLayout(false);
             grbDateFilter.PerformLayout();
-            grbPriceFilter.ResumeLayout(false);
-            grbPriceFilter.PerformLayout();
-            panel4.ResumeLayout(false);
-            groupBox2.ResumeLayout(false);
-            groupBox2.PerformLayout();
             groupBox1.ResumeLayout(false);
+            groupBox1.PerformLayout();
+            grbPriceFilter.ResumeLayout(false);
             panel3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvPromotions).EndInit();
             ResumeLayout(false);
@@ -502,11 +464,6 @@
         private Button btnStopWork;
         private Button btnRefresh;
         private Button btnAdd;
-
-        private TextBox txtEndDiscount;
-        private TextBox txtStartDiscount;
-        private Label lblPriceTo;
-        private Label lblPriceFrom;
         private TextBox txtSearch;
         private DataGridView dgvPromotions;
         private DateTimePicker dtpkSearchStartDate;
@@ -516,5 +473,8 @@
         private DateTimePicker dtpkSearchEndDate;
         private DateTimePicker dtpkEndDate;
         private DateTimePicker dtpkStartDate;
+        private ComboBox cbxFilterPrice;
+        private Label label1;
+        private Button btnFilterDate;
     }
 }

@@ -5,21 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Data;
-
 namespace MiniSupermarket.DAO
 {
     internal static class Connection
     {
+
         private static string serverName = "LAPTOP-9OVFB8F1";
         private static string databaseName = "MarketMiniManager";
-
         private static string connectionString = $"Data Source={serverName};Initial Catalog={databaseName};Integrated Security=True";
         private static SqlConnection connection = new SqlConnection(connectionString);
         public static SqlConnection GetConnection()
         {
             return connection;
         }
-
         // Câu lệnh lấy dữ liệu
         public static DataTable Execute(string sql)
         {
@@ -52,7 +50,6 @@ namespace MiniSupermarket.DAO
             }
             return table;
         }
-
         // Câu lệnh update, delete, insert
         public static bool ExecuteNonQuery(string sql)
         {
@@ -78,7 +75,6 @@ namespace MiniSupermarket.DAO
             }
             return flag;
         }
-
         // Câu lệnh lấy dữ liệu theo stored procedure
         public static DataTable Execute(string sql, params SqlParameter[] parameters)
         {
@@ -109,7 +105,6 @@ namespace MiniSupermarket.DAO
             }
             return table;
         }
-
         // Câu lệnh update, delete, insert theo stored procedure
         public static bool ExecuteNonQuery(string sql, params SqlParameter[] parameters)
         {
@@ -137,6 +132,57 @@ namespace MiniSupermarket.DAO
                 connection.Close();
             }
             return flag;
+        }
+
+        public static object ExecuteScalar(string sql, params SqlParameter[] parameters)
+        {
+            object result = null;
+            try
+            {
+                connection.Open();
+                using (SqlCommand command = new SqlCommand(sql, connection))
+                {
+                    if (parameters != null)
+                    {
+                        command.Parameters.AddRange(parameters);
+                    }
+                    result = command.ExecuteScalar();
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                connection.Close();
+            }
+            return result;
+        }
+
+        public static SqlDataReader ExecuteTotalRevenueByDate(DateTime fromDate, DateTime toDate)
+        {
+            SqlDataReader reader = null;
+            try
+            {
+                using (SqlConnection connection = new SqlConnection(connectionString))
+                {
+                    using (SqlCommand command = new SqlCommand("GetTotalRevenueByDate", connection))
+                    {
+                        command.CommandType = CommandType.StoredProcedure;
+                        command.Parameters.Add("@FromDate", SqlDbType.Date).Value = fromDate;
+                        command.Parameters.Add("@ToDate", SqlDbType.Date).Value = toDate;
+
+                        connection.Open();
+                        reader = command.ExecuteReader();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            return reader;
         }
     }
 }

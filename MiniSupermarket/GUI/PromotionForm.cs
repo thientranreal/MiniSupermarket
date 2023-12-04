@@ -64,7 +64,11 @@ namespace MiniSupermarket.GUI
                     lb.Font = ProjectFont.getNormalFont();
                 }
             }
+            btnFilterDate.BackColor = ThemeColor.PrimaryColor;
+            btnFilterDate.ForeColor = Color.White;
+            btnFilterDate.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
             lblTitle.Font = ProjectFont.getTitleFont();
+            lblTitle.ForeColor = ThemeColor.SecondaryColor;
         }
 
         private void groupBox3_Enter(object sender, EventArgs e)
@@ -83,19 +87,20 @@ namespace MiniSupermarket.GUI
 
         private void PromotionForm_Load(object sender, EventArgs e)
         {
+            ShowPromotion();
             dgvPromotions.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvPromotions.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            ShowPromotion();
             dgvPromotions.ReadOnly = true;
-            //dgvPromotions.Columns["PromotionID"].HeaderText = "Mã CTKM";
-            //dgvPromotions.Columns["Name"].HeaderText = "Tên CTKM";
-            //dgvPromotions.Columns["StartDate"].HeaderText = "Ngày bắt đầu";
-            //dgvPromotions.Columns["EndDate"].HeaderText = "Ngày kết thúc";
-            //dgvPromotions.Columns["Giảm"].HeaderText = "Giảm (%)";
-            //dgvPromotions.Columns["Status"].HeaderText = "Trạng thái";
-            BindingPromotions();
-            LoadTheme();
             SetNull();
+            dgvPromotions.Columns[0].HeaderText = "Mã CTKM";
+            dgvPromotions.Columns[1].HeaderText = "Tên CTKM";
+            dgvPromotions.Columns[2].HeaderText = "Ngày bắt đầu";
+            dgvPromotions.Columns[3].HeaderText = "Ngày kết thúc";
+            dgvPromotions.Columns[4].HeaderText = "Giảm (%)";
+            dgvPromotions.Columns[5].HeaderText = "Trạng thái";
+            LoadTheme();
+            cbxTypeOfSearch.Text = "Mã CTKM";
+            cbxFilterPrice.Text = "Tất cả";
         }
 
         public void ShowPromotion()
@@ -105,34 +110,28 @@ namespace MiniSupermarket.GUI
 
         void SetNull()
         {
-            txtPromotionID.Text = null;
-            txtPromotionName.Text = null;
-            txtDiscount.Text = null;
+            txtPromotionID.Clear();
+            txtPromotionName.Clear();
+            txtDiscount.Clear();
             dtpkStartDate.Value = DateTime.Now;
             dtpkEndDate.Value = DateTime.Now;
+            cbxTypeOfSearch.SelectedIndex = 0;
+            cbxFilterPrice.SelectedIndex = 0;
+            txtSearch.Clear();
+            dtpkSearchStartDate.Value = DateTime.Now;
+            dtpkSearchEndDate.Value = DateTime.Now;
         }
 
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
         }
-        public void BindingPromotions()
-        {
-            BindingSource binding = new BindingSource();
-            binding.DataSource = promotionBUS.getAllPromotions();
-            dgvPromotions.DataSource = binding;
-            txtPromotionID.DataBindings.Add("Text", binding, "ID");
-            txtPromotionName.DataBindings.Add("Text", binding, "Name");
-            dtpkStartDate.DataBindings.Add("Value", binding, "StartDate");
-            dtpkEndDate.DataBindings.Add("Value", binding, "EndDate");
-            txtDiscount.DataBindings.Add("Text", binding, "Discount");
-        }
 
         private void dgvPromotions_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             int rowIndex = e.RowIndex;
             DataGridViewRow row = dgvPromotions.Rows[rowIndex];
-            string promotionID = row.Cells["ID"].Value.ToString();
+            string promotionID = row.Cells[0].Value.ToString();
             DetailPronmotionForm form = new DetailPronmotionForm(promotionID);
             form.ShowDialog();
         }
@@ -205,8 +204,8 @@ namespace MiniSupermarket.GUI
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
-            SetNull();
             ShowPromotion();
+            SetNull();
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -285,6 +284,7 @@ namespace MiniSupermarket.GUI
                 if (promotionBUS.deletePromotion(ID))
                 {
                     MessageBox.Show("Xoá chương trình khuyến mãi thành công", "Xoá thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    promotionBUS.clearAllProductsFromPromotion(ID);
                     ShowPromotion();
                     SetNull();
                     return;
@@ -354,7 +354,7 @@ namespace MiniSupermarket.GUI
                             MessageBoxIcon.Warning);
                 return;
             }
-            DialogResult choice = MessageBox.Show($"Bạn có chắc muốn ngưng áp dụng chương trình khuyến mãi {ID} không","Ngưng hoạt động chương trình khuyến mãi",MessageBoxButtons.YesNo,MessageBoxIcon.Question);
+            DialogResult choice = MessageBox.Show($"Bạn có chắc muốn ngưng áp dụng chương trình khuyến mãi {ID} không", "Ngưng hoạt động chương trình khuyến mãi", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (choice == DialogResult.Yes)
             {
                 if (promotionBUS.stopWorkPromotion(ID))
@@ -365,6 +365,108 @@ namespace MiniSupermarket.GUI
                     return;
                 }
             }
+        }
+
+        private void dgvPromotions_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)
+        {
+            DataGridViewRow row = dgvPromotions.SelectedRows[0];
+            txtPromotionID.Text = row.Cells[0].Value.ToString();
+            txtPromotionName.Text = row.Cells[1].Value.ToString();
+            DateTime startDate = DateTime.Parse(row.Cells[2].Value.ToString());
+            DateTime endDate = DateTime.Parse(row.Cells[3].Value.ToString());
+            dtpkStartDate.Value = startDate;
+            dtpkEndDate.Value = endDate;
+            txtDiscount.Text = row.Cells[4].Value.ToString();
+        }
+
+        private void txtSearch_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            //MessageBox.Show(txtSearch.Text);
+        }
+
+        private void txtSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            Filter();
+        }
+
+        private void cbxFilterPrice_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Filter();
+        }
+
+        private void btnFilterDate_Click(object sender, EventArgs e)
+        {
+            Filter();
+        }
+
+        public void Filter()
+        {
+            int index_Type_Search = cbxTypeOfSearch.SelectedIndex;
+            string key_Search = txtSearch.Text.ToLower();
+            int index_Filter_Price = cbxFilterPrice.SelectedIndex;
+            DateTime searchStartDate = dtpkSearchStartDate.Value.Date; //== DateTime.Now.Date ? searchStartDate = new DateTime(1970,1,1) : searchStartDate = dtpkSearchStartDate.Value;
+            DateTime searchEndDate = dtpkSearchEndDate.Value.Date; //== DateTime.Now.Date ? searchEndDate = new DateTime(2050, 12, 31) : searchEndDate = dtpkSearchEndDate.Value;
+            if (searchStartDate == DateTime.Now.Date && searchEndDate == DateTime.Now.Date)
+            {
+                searchStartDate = new DateTime(1970, 1, 1);
+                searchEndDate = new DateTime(2050, 12, 31);
+            }
+            else
+            {
+                searchStartDate = dtpkSearchStartDate.Value;
+                searchEndDate = dtpkSearchEndDate.Value;
+            }
+            string searchStartDateString = String.Format("{0:dd/MM/yyyy}", searchStartDate);
+            string searchEndDateString = String.Format("{0:dd/MM/yyyy}", searchEndDate);
+
+            if (!ProjectRegex.checkDayAfterDay(searchStartDateString,searchEndDateString))
+            {
+                MessageBox.Show("Ngày kết thúc phải sau ngày bắt đầu",
+                            "Thông báo",
+                            MessageBoxButtons.OK,
+                            MessageBoxIcon.Warning);
+                return;
+            }
+
+            int startDiscount = 0, endDiscount= 101;
+            switch (index_Filter_Price)
+            {
+                case 0: startDiscount = 0; endDiscount = 101 ; break;
+                case 1: startDiscount = 0; endDiscount = 15; break;
+                case 2: startDiscount = 15; endDiscount = 40 ; break;
+                case 3: startDiscount = 40; endDiscount = 101; break;
+            }
+
+            DataTable promotions = promotionBUS.getAllPromotions();
+            DataTable searchPromotion = promotions.Clone();
+
+            foreach (DataRow row in promotions.Rows)
+            { 
+                string rowID = row[0].ToString().ToLower();
+                string rowName = row[1].ToString().ToLower();
+                DateTime rowStartDate;
+                DateTime.TryParse(row[2].ToString(), out rowStartDate);
+                DateTime rowEndDate;
+                DateTime.TryParse(row[3].ToString(), out rowEndDate);
+                string discount = row[4].ToString();
+                int discoutnInt = Convert.ToInt32(discount);
+
+                switch (index_Type_Search)
+                {
+                    case 0: if (rowID.Contains(key_Search) && discoutnInt >= startDiscount && discoutnInt < endDiscount && searchStartDate.Date <= rowStartDate.Date && searchEndDate.Date >= rowEndDate.Date)
+                        {
+                            searchPromotion.ImportRow(row);
+                        }
+                        break;
+                    case 1:
+                        if (rowName.Contains(key_Search) && discoutnInt >= startDiscount && discoutnInt < endDiscount && searchStartDate.Date <= rowStartDate.Date && searchEndDate.Date >= rowEndDate.Date)
+                        {
+                            searchPromotion.ImportRow(row);
+                        }
+                        break;
+                }
+            }
+            dgvPromotions.DataSource = searchPromotion;
         }
     }
 }
