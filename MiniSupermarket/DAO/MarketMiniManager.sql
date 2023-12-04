@@ -1162,9 +1162,9 @@ BEGIN
         CurrentPrice,
         [Description],
         Unit,
-		 PromotionID
+	PromotionID,
+	isDeleted
       FROM Product
-    WHERE isDeleted = 1
 END;
 GO
 -- Thêm sản phẩm
