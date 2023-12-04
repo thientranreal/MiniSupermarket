@@ -732,10 +732,6 @@ BEGIN
 END;
 GO
 
-UPDATE SupplierProduct
-	SET 
-	
-	[SupplyStartDate]='2021-12-12'
-	WHERE SupplierID='S0001'
+
 
 
