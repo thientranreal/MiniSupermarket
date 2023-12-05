@@ -168,6 +168,8 @@ namespace MiniSupermarket.GUI
 
             ds_qlcv.Columns["RoleID"].Width = 120;
             ds_qlcv.Columns["Name"].Width = 340;
+
+            ds_qlcv.ClearSelection();
         }
 
         private void bt_delete_Click(object sender, EventArgs e)

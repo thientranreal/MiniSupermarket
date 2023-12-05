@@ -27,7 +27,16 @@ namespace MiniSupermarket.BUS
         }
         public DataTable getAllProducts()
         {
-            return getAllProduct();
+            // Chỉ hiển thị những sản phẩm mà is deleted là 1
+            DataRow[] selectedRows = product.Select("isDeleted = 1");
+            DataTable newTable = selectedRows.CopyToDataTable();
+
+            if (newTable.Columns.Contains("isDeleted"))
+            {
+                newTable.Columns.Remove("isDeleted");
+            }
+
+            return newTable;
         }
         // Nếu tồn tại trả về true, nếu không tồn tại trả về false
         public bool checkIdExist(string id)
@@ -49,7 +58,7 @@ namespace MiniSupermarket.BUS
             string id;
             while (true)
             {
-                id = "SP" + i.ToString();
+                id = "P" + i.ToString("D4");
                 // Nếu ID chưa tồn tại
                 if (!checkIdExist(id))
                 {
@@ -57,39 +66,6 @@ namespace MiniSupermarket.BUS
                 }
                 ++i;
             }
-        }
-        // Lấy tất cả các tên  sp bỏ vào hộp gợi ý
-        public string[] getNameForSuggestionBox()
-        {
-            List<string> names = new List<string>();
-
-            foreach (DataRow row in product.Rows)
-            {
-                names.Add(row["Name"].ToString());
-            }
-            return names.ToArray();
-        }
-        // Lấy tất cả các mã loại sp bỏ vào hộp gợi ý
-        public string[] getTypeIdForSuggestionBox()
-        {
-            List<string> names = new List<string>();
-
-            foreach (DataRow row in product.Rows)
-            {
-                names.Add(row["TypeID"].ToString());
-            }
-            return names.ToArray();
-        }
-        // Lấy tất cả các mã sp bỏ vào hộp gợi ý
-        public string[] getIdForSuggestionBox()
-        {
-            List<string> names = new List<string>();
-
-            foreach (DataRow row in product.Rows)
-            {
-                names.Add(row["ProductID"].ToString());
-            }
-            return names.ToArray();
         }
         public bool addProduct(string name, string typeid, string quantity, string price, string des, string unit , string id=null)
         {
@@ -118,7 +94,7 @@ namespace MiniSupermarket.BUS
             // Nếu thêm thành công thì sẽ cập nhật lại danh sách
             if (result)
             {
-                product = getAllProducts();
+                product = getAllProduct();
             }
             return result;
         }
@@ -133,7 +109,7 @@ namespace MiniSupermarket.BUS
             // Nếu xóa thành công thì cập nhật lại danh sách
             if (result)
             {
-                product = getAllProducts();
+                product = getAllProduct();
             }
             return result;
         }
@@ -157,7 +133,7 @@ namespace MiniSupermarket.BUS
             // Nếu cập nhật thành công thì cập nhật lại danh sách
             if (result)
             {
-                product = getAllProducts();
+                product = getAllProduct();
             }
             return result;
         }
@@ -179,20 +155,23 @@ namespace MiniSupermarket.BUS
 
             foreach (DataRow row in product.Rows)
             {
-                // Nếu dòng đó chứa ID như ID cần tìm thì thêm dòng đó vào result
-                if (row["ProductID"].ToString().ToLower().Contains(id.ToLower()))
+                if (row["isDeleted"].ToString() == "1")
                 {
-                    // Thêm dữ liệu
-                    rowTemp = result.NewRow();
-                    rowTemp["ProductID"] = row["ProductID"].ToString();
-                    rowTemp["Name"] = row["Name"].ToString();
-                    rowTemp["TypeID"] = row["TypeID"].ToString();
-                    rowTemp["Quantity"] = row["Quantity"].ToString();
-                    rowTemp["CurrentPrice"] = row["CurrentPrice"].ToString();
-                    rowTemp["Description"] = row["Description"].ToString();
-                    rowTemp["Unit"] = row["Unit"].ToString();
-                    rowTemp["PromotionID"] = row["PromotionID"].ToString();
-                    result.Rows.Add(rowTemp);
+                    // Nếu dòng đó chứa ID như ID cần tìm thì thêm dòng đó vào result
+                    if (row["ProductID"].ToString().ToLower().Contains(id.ToLower()))
+                    {
+                        // Thêm dữ liệu
+                        rowTemp = result.NewRow();
+                        rowTemp["ProductID"] = row["ProductID"].ToString();
+                        rowTemp["Name"] = row["Name"].ToString();
+                        rowTemp["TypeID"] = row["TypeID"].ToString();
+                        rowTemp["Quantity"] = row["Quantity"].ToString();
+                        rowTemp["CurrentPrice"] = row["CurrentPrice"].ToString();
+                        rowTemp["Description"] = row["Description"].ToString();
+                        rowTemp["Unit"] = row["Unit"].ToString();
+                        rowTemp["PromotionID"] = row["PromotionID"].ToString();
+                        result.Rows.Add(rowTemp);
+                    }
                 }
             }
 
@@ -216,20 +195,23 @@ namespace MiniSupermarket.BUS
 
             foreach (DataRow row in product.Rows)
             {
-                // Nếu dòng đó chứa name như name cần tìm thì thêm dòng đó vào result
-                if (row["Name"].ToString().ToLower().Contains(name.ToLower()))
+                if (row["isDeleted"].ToString() == "1")
                 {
-                    // Thêm dữ liệu
-                    rowTemp = result.NewRow();
-                    rowTemp["ProductID"] = row["ProductID"].ToString();
-                    rowTemp["Name"] = row["Name"].ToString();
-                    rowTemp["TypeID"] = row["TypeID"].ToString();
-                    rowTemp["Quantity"] = row["Quantity"].ToString();
-                    rowTemp["CurrentPrice"] = row["CurrentPrice"].ToString();
-                    rowTemp["Description"] = row["Description"].ToString();
-                    rowTemp["Unit"] = row["Unit"].ToString();
-                    rowTemp["PromotionID"] = row["PromotionID"].ToString();
-                    result.Rows.Add(rowTemp);
+                    // Nếu dòng đó chứa name như name cần tìm thì thêm dòng đó vào result
+                    if (row["Name"].ToString().ToLower().Contains(name.ToLower()))
+                    {
+                        // Thêm dữ liệu
+                        rowTemp = result.NewRow();
+                        rowTemp["ProductID"] = row["ProductID"].ToString();
+                        rowTemp["Name"] = row["Name"].ToString();
+                        rowTemp["TypeID"] = row["TypeID"].ToString();
+                        rowTemp["Quantity"] = row["Quantity"].ToString();
+                        rowTemp["CurrentPrice"] = row["CurrentPrice"].ToString();
+                        rowTemp["Description"] = row["Description"].ToString();
+                        rowTemp["Unit"] = row["Unit"].ToString();
+                        rowTemp["PromotionID"] = row["PromotionID"].ToString();
+                        result.Rows.Add(rowTemp);
+                    }
                 }
             }
 
@@ -252,20 +234,23 @@ namespace MiniSupermarket.BUS
 
             foreach (DataRow row in product.Rows)
             {
-                // Nếu dòng đó chứa TypeID như TypeID cần tìm thì thêm dòng đó vào result
-                if (row["TypeID"].ToString().ToLower().Contains(typeId.ToLower()))
+                if (row["isDeleted"].ToString() == "1")
                 {
-                    // Thêm dữ liệu
-                    rowTemp = result.NewRow();
-                    rowTemp["ProductID"] = row["ProductID"].ToString();
-                    rowTemp["Name"] = row["Name"].ToString();
-                    rowTemp["TypeID"] = row["TypeID"].ToString();
-                    rowTemp["Quantity"] = row["Quantity"].ToString();
-                    rowTemp["CurrentPrice"] = row["CurrentPrice"].ToString();
-                    rowTemp["Description"] = row["Description"].ToString();
-                    rowTemp["Unit"] = row["Unit"].ToString();
-                    rowTemp["PromotionID"] = row["PromotionID"].ToString();
-                    result.Rows.Add(rowTemp);
+                    // Nếu dòng đó chứa TypeID như TypeID cần tìm thì thêm dòng đó vào result
+                    if (row["TypeID"].ToString().ToLower().Contains(typeId.ToLower()))
+                    {
+                        // Thêm dữ liệu
+                        rowTemp = result.NewRow();
+                        rowTemp["ProductID"] = row["ProductID"].ToString();
+                        rowTemp["Name"] = row["Name"].ToString();
+                        rowTemp["TypeID"] = row["TypeID"].ToString();
+                        rowTemp["Quantity"] = row["Quantity"].ToString();
+                        rowTemp["CurrentPrice"] = row["CurrentPrice"].ToString();
+                        rowTemp["Description"] = row["Description"].ToString();
+                        rowTemp["Unit"] = row["Unit"].ToString();
+                        rowTemp["PromotionID"] = row["PromotionID"].ToString();
+                        result.Rows.Add(rowTemp);
+                    }
                 }
             }
 
@@ -276,10 +261,13 @@ namespace MiniSupermarket.BUS
         {
             foreach (DataRow row in product.Rows)
             {
-                // Nếu TypeID khớp với ID cần tìm, trả về Name tương ứng
-                if (row["ProductID"].ToString().Equals(id, StringComparison.OrdinalIgnoreCase))
+                if (row["isDeleted"].ToString() == "1")
                 {
-                    return row["Name"].ToString();
+                    // Nếu TypeID khớp với ID cần tìm, trả về Name tương ứng
+                    if (row["ProductID"].ToString().Equals(id, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return row["Name"].ToString();
+                    }
                 }
             }
 
