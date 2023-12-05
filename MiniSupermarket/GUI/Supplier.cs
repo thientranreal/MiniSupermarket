@@ -74,8 +74,9 @@ namespace MiniSupermarket.GUI
                     c.Text = "";
                 }
             }
-
-            int count = dtgvSupplier.Rows.Count;
+            DataTable dt=new DataTable();
+            dt = supplierBUS.getAllSupplierWithout();
+            int count = dt.Rows.Count;
             count = count + 1;
 
             textBoxID.Text = "S" + count.ToString("D4");
@@ -93,7 +94,7 @@ namespace MiniSupermarket.GUI
             btnXacNhan.Enabled = true;
             btnThem.Enabled = false;
 
-            dataLoaiSanPham = supplierBUS.AllProduct();
+            dataLoaiSanPham = supplierBUS.AllProduct(textBoxID.Text);
             dtgvLoaiSanPham.DataSource = dataLoaiSanPham;
         }
         private string name;
@@ -211,7 +212,7 @@ namespace MiniSupermarket.GUI
 
                 dateTimePickerNgayNhap.Enabled = true;
 
-                dataLoaiSanPham = supplierBUS.AllProduct();
+                dataLoaiSanPham = supplierBUS.AllProduct(textBoxID.Text);
                 dtgvLoaiSanPham.DataSource = dataLoaiSanPham;
             }
 

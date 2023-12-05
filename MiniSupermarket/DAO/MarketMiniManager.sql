@@ -537,6 +537,19 @@ BEGIN
 	WHERE Supplier.isDeleted=1;
 END;
 GO
+--Lấy toàn bộ thông tin nhà cung cấp 
+CREATE PROCEDURE SelectAllSupplierWithoutIsDeleted
+AS
+BEGIN
+	SELECT 
+	Supplier.SupplierID AS ID,
+	Supplier.[Name] AS TÊN ,
+	Supplier.[Address] [Địa chỉ],
+	Supplier.PhoneNumber AS [Số điện thoại],
+	Supplier.Email
+	FROM Supplier 
+END;
+GO
 --Lấy thông tin chi tiết nhà cung cấp
 CREATE PROCEDURE SelectAllSupplierDetail
 	@ID varchar(10)
