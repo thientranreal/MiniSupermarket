@@ -1235,7 +1235,7 @@ GO
 
 -- =================================================Sang
 -- Lấy danh sách nhân viên
-CREATE PROCEDURE SelectAllEmployee
+CREATE PROCEDURE SelectAllFromEmployee
 AS
 BEGIN
 		SELECT Employee.EmployeeID, [Password], [Name], Sex, BirthDate, PhoneNumber, Email, [Address], RoleID
