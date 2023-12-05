@@ -8,16 +8,19 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace MiniSupermarket.BUS
 {
     internal class RoleBUS
     {
         private DataTable role;
+        private DataTable roleFunction;
 
         public RoleBUS() 
         {
             role = getAllRole();
+            updateRoleFunction();
         }
 
         public DataTable getAllRole()
@@ -26,17 +29,29 @@ namespace MiniSupermarket.BUS
             return Connection.Execute(storedProcedureName, null);
         }
 
+        public DataTable getAllRoleToDisplay()
+        {
+            DataTable filteredTable = role.Select("isDeleted = 1").CopyToDataTable();
+            filteredTable.Columns.Remove("isDeleted");
+            return filteredTable;
+        }
+
+        public void updateRoleFunction()
+        {
+            string storedProcedureName = "SelectAllFunctionAndRoleID";
+            roleFunction = Connection.Execute(storedProcedureName, null);
+        }
+
         public bool checkIdExist(string id)
         {
-            string query = "SELECT COUNT(*) FROM dbo.Role WHERE RoleID = @RoleID";
-            SqlParameter[] parameters = new SqlParameter[]
+            foreach (DataRow row in role.Rows)
             {
-                new SqlParameter("@RoleID", id)
-            };
-
-            int count = (int)Connection.ExecuteScalar(query, parameters);
-
-            return count > 0;
+                if (row["RoleID"].ToString() == id)
+                {
+                    return true;
+                }
+            }
+            return false;
         }
 
         private string generateNewID()
@@ -57,29 +72,9 @@ namespace MiniSupermarket.BUS
             throw new Exception("Không thể tạo ID mới sau " + maxAttempts + " lần thử.");
         }
 
-        public static void Reset(Control.ControlCollection controls, DataGridView dataGridView)
+        public bool addRole(string name, string description)
         {
-            foreach (Control control in controls)
-            {
-                if (control is TextBox textBox)
-                {
-                    textBox.Text = string.Empty;
-                }
-                else if (control is RichTextBox richTextBox)
-                {
-                    richTextBox.Text = string.Empty;
-                }
-            }
-            dataGridView.ClearSelection();
-
-        }
-
-        public bool addRole(string id, string name, string description)
-        {
-            if (string.IsNullOrEmpty(id))
-            {
-                id = generateNewID();
-            }
+            string id = generateNewID();
 
             string storedProcedureName = "InsertIntoRole";
             SqlParameter[] parameters = new SqlParameter[]
@@ -133,6 +128,68 @@ namespace MiniSupermarket.BUS
             return result;
         }
 
+        public List<string> selectFunctionFromRoleID(string roleID)
+        {
+            List<string> functions = new List<string>();
+            DataRow[] selectedRows = roleFunction.Select($"RoleID = '{roleID}'");
+            foreach (DataRow row in selectedRows)
+            {
+                functions.Add(row["Name"].ToString() + string.Empty);
+            }
+            return functions;
+        }
+
+        // Xóa các chức năng của quyền
+        public bool deleteFunctionFromRoleID(string id)
+        {
+            string storedProcedureName = "DeleteFunctionFromRoleID";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@RoleID", id)
+            };
+            // Nếu xóa chức năng từ quyền thành công thì cập nhật lại danh sách
+            if (Connection.ExecuteNonQuery(storedProcedureName, parameters))
+            {
+                updateRoleFunction();
+                return true;
+            }
+            return false;
+        }
+
+        // Thêm các chức năng vào quyền
+        public bool insertIntoRoleFunction(string id, string function)
+        {
+            string storedProcedureName = "InsertIntoRoleFunction";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@RoleID", id),
+                new SqlParameter("@FunctionID", function)
+            };
+            // Nếu thêm chức năng từ quyền thành công thì cập nhật lại danh sách
+            if (Connection.ExecuteNonQuery(storedProcedureName, parameters))
+            {
+                updateRoleFunction();
+                return true;
+            }
+            return false;
+        }
+
+        // Lấy quyền từ mã nhân viên
+        public string SelectRoleIDFromEmployeeID(string employeeId)
+        {
+            string result = "";
+            string storedProcedureName = "SelectRoleIDFromEmployeeID";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@EmployeeID", employeeId)
+            };
+            DataTable dt = Connection.Execute(storedProcedureName, parameters);
+            if (dt != null)
+            {
+                result = dt.Rows[0][0].ToString() + string.Empty;
+            }
+            return result;
+        }
     }
 }
 

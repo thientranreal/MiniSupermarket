@@ -29,11 +29,10 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(EmployeeForm));
-            button2 = new Button();
+            btn_xuatexcel = new Button();
             cb_role = new ComboBox();
             ds_qlnv = new DataGridView();
             btn_reset = new Button();
-            lb_title = new Label();
             label5 = new Label();
             tb_pass = new TextBox();
             tb_name = new TextBox();
@@ -67,18 +66,19 @@
             gb_List.SuspendLayout();
             SuspendLayout();
             // 
-            // button2
+            // btn_xuatexcel
             // 
-            button2.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            button2.Image = (Image)resources.GetObject("button2.Image");
-            button2.ImageAlign = ContentAlignment.MiddleLeft;
-            button2.Location = new Point(185, 200);
-            button2.Name = "button2";
-            button2.Size = new Size(164, 52);
-            button2.TabIndex = 2;
-            button2.Text = "Xuất File";
-            button2.TextAlign = ContentAlignment.MiddleRight;
-            button2.UseVisualStyleBackColor = true;
+            btn_xuatexcel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btn_xuatexcel.Image = (Image)resources.GetObject("btn_xuatexcel.Image");
+            btn_xuatexcel.ImageAlign = ContentAlignment.MiddleLeft;
+            btn_xuatexcel.Location = new Point(185, 198);
+            btn_xuatexcel.Name = "btn_xuatexcel";
+            btn_xuatexcel.Size = new Size(164, 52);
+            btn_xuatexcel.TabIndex = 2;
+            btn_xuatexcel.Text = "Xuất File";
+            btn_xuatexcel.TextAlign = ContentAlignment.MiddleRight;
+            btn_xuatexcel.UseVisualStyleBackColor = true;
+            btn_xuatexcel.Click += btn_xuatexcel_Click;
             // 
             // cb_role
             // 
@@ -98,7 +98,7 @@
             ds_qlnv.RowHeadersVisible = false;
             ds_qlnv.RowHeadersWidth = 62;
             ds_qlnv.RowTemplate.Height = 33;
-            ds_qlnv.Size = new Size(1777, 324);
+            ds_qlnv.Size = new Size(1533, 324);
             ds_qlnv.TabIndex = 9;
             // 
             // btn_reset
@@ -106,7 +106,7 @@
             btn_reset.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btn_reset.Image = (Image)resources.GetObject("btn_reset.Image");
             btn_reset.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_reset.Location = new Point(185, 122);
+            btn_reset.Location = new Point(29, 119);
             btn_reset.Name = "btn_reset";
             btn_reset.Size = new Size(128, 47);
             btn_reset.TabIndex = 10;
@@ -114,16 +114,6 @@
             btn_reset.TextAlign = ContentAlignment.MiddleRight;
             btn_reset.UseVisualStyleBackColor = true;
             btn_reset.Click += btn_reset_Click;
-            // 
-            // lb_title
-            // 
-            lb_title.AutoSize = true;
-            lb_title.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
-            lb_title.Location = new Point(533, -1);
-            lb_title.Name = "lb_title";
-            lb_title.Size = new Size(342, 48);
-            lb_title.TabIndex = 11;
-            lb_title.Text = "Quản Lý Nhân Viên";
             // 
             // label5
             // 
@@ -317,14 +307,14 @@
             gb_Function.Controls.Add(cb_find);
             gb_Function.Controls.Add(btn_add);
             gb_Function.Controls.Add(btn_edit);
-            gb_Function.Controls.Add(button2);
+            gb_Function.Controls.Add(btn_xuatexcel);
             gb_Function.Controls.Add(btn_delete);
             gb_Function.Controls.Add(btn_reset);
             gb_Function.Controls.Add(btn_find);
             gb_Function.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             gb_Function.Location = new Point(1191, 50);
             gb_Function.Name = "gb_Function";
-            gb_Function.Size = new Size(445, 416);
+            gb_Function.Size = new Size(366, 416);
             gb_Function.TabIndex = 27;
             gb_Function.TabStop = false;
             gb_Function.Text = "Chức Năng";
@@ -379,7 +369,7 @@
             btn_delete.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btn_delete.Image = (Image)resources.GetObject("btn_delete.Image");
             btn_delete.ImageAlign = ContentAlignment.MiddleLeft;
-            btn_delete.Location = new Point(29, 120);
+            btn_delete.Location = new Point(185, 120);
             btn_delete.Name = "btn_delete";
             btn_delete.Size = new Size(128, 49);
             btn_delete.TabIndex = 23;
@@ -408,7 +398,7 @@
             gb_List.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             gb_List.Location = new Point(12, 484);
             gb_List.Name = "gb_List";
-            gb_List.Size = new Size(1789, 348);
+            gb_List.Size = new Size(1545, 348);
             gb_List.TabIndex = 28;
             gb_List.TabStop = false;
             gb_List.Text = "Danh Sách Nhân Viên";
@@ -421,7 +411,6 @@
             Controls.Add(gb_List);
             Controls.Add(gb_Function);
             Controls.Add(gb_Info);
-            Controls.Add(lb_title);
             Name = "EmployeeForm";
             Text = "EmployeeManage";
             Load += EmployeeForm_Load;
@@ -432,15 +421,13 @@
             gb_Function.PerformLayout();
             gb_List.ResumeLayout(false);
             ResumeLayout(false);
-            PerformLayout();
         }
 
         #endregion
-        private Button button2;
+        private Button btn_exel;
         private ComboBox cb_role;
         private DataGridView ds_qlnv;
         private Button btn_reset;
-        private Label lb_title;
         private Label label5;
         private TextBox tb_pass;
         private TextBox tb_name;
@@ -468,5 +455,6 @@
         private ComboBox cb_find;
         private Label label9;
         private ComboBox cb_sex;
+        private Button btn_xuatexcel;
     }
 }

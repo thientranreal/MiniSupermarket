@@ -26,6 +26,11 @@ namespace MiniSupermarket.BUS
             string storedProcedureName = "SelectAllSupplier";
             return Connection.Execute(storedProcedureName, null);
         }
+        public DataTable getAllSupplierWithout()
+        {
+            string storedProcedureName = "SelectAllSupplierWithoutIsDeleted";
+            return Connection.Execute(storedProcedureName, null);
+        }
         private DataTable getAllSupplierDetail(string id)
         {
             string storedProcedureName = "SelectAllSupplierDetail";
@@ -58,7 +63,7 @@ namespace MiniSupermarket.BUS
             nhaCungCap = getSupplierWithID(id);
             return nhaCungCap;
         }
-        public bool addSupplier(string id, string name, string address, string phoneNumber, string email, string productID, string supplyDate)
+        public bool addSupplier(string id, string name, string address, string phoneNumber, string email)
         {
             string storedProcduredName = "AddSupplier";
             SqlParameter[] parameters = new SqlParameter[]
@@ -68,9 +73,8 @@ namespace MiniSupermarket.BUS
                 new SqlParameter("@Name",name),
                 new SqlParameter("@Address",address),
                 new SqlParameter("@PhoneNumber",phoneNumber),
-                new SqlParameter("@Email",email),
-                new SqlParameter("@ProductID",productID),
-                new SqlParameter("@Date",supplyDate)
+                new SqlParameter("@Email",email)
+                
         };
             bool result = false;
             try
@@ -93,12 +97,139 @@ namespace MiniSupermarket.BUS
             bool result = Connection.ExecuteNonQuery(storedProcduredName, parameters);
             return result;
         }
-        public DataTable AllProduct()
+        public DataTable AllProduct(string supplierID)
         {
             string storedProcduredName = "AllProduct";
-
-            products= Connection.Execute(storedProcduredName, null);
+            SqlParameter[] parameters = new SqlParameter[] {
+                new SqlParameter("@ID",supplierID)
+            };
+            products = Connection.Execute(storedProcduredName, parameters);
             return products;
+        }
+        public bool AddDetailSupplier(string SupplierID,string ProductID,string SupplyStartDate)
+        {
+            string storedProcduredName = "AddDetailSupplier";
+            SqlParameter[] parameters = new SqlParameter[]
+
+            {
+                new SqlParameter("@SupplierID",SupplierID),
+                new SqlParameter("@ProductID",ProductID),
+                new SqlParameter("@SupplyStartDate",SupplyStartDate)
+                
+
+        };
+            bool result=false;
+
+            try
+            {
+                result = Connection.ExecuteNonQuery(storedProcduredName, parameters);
+                
+            } catch (SqlException ex) 
+            {
+                if (ex.Number == 2627)
+                {
+                    
+                    return result;
+                    
+                }
+                
+            }
+
+            return result;
+        }
+        public bool updateSupplier(string id, string name, string address, string phoneNumber, string email)
+        {
+            string storedProcduredName = "UpdateSupplier";
+            SqlParameter[] parameters = new SqlParameter[]
+
+            {
+                new SqlParameter("@ID",id),
+                new SqlParameter("@Name",name),
+                new SqlParameter("@Address",address),
+                new SqlParameter("@PhoneNumber",phoneNumber),
+                new SqlParameter("@Email",email)
+
+        };
+            bool result = false;
+            try
+            {
+                result = Connection.ExecuteNonQuery(storedProcduredName, parameters);
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+
+            return result;
+        }
+        public bool updateSupplierDetail(string supplierID,string productID,string supplyStartDate)
+        {
+            string storedProcduredName = "UpdateSupplierDetail";
+            SqlParameter[] parameters = new SqlParameter[]
+
+            {
+                new SqlParameter("@SupplierID",supplierID),
+                new SqlParameter("@ProductID",productID),
+                new SqlParameter("@SupplyStartDate",supplyStartDate)
+        };
+            bool result = false;
+            try
+            {
+                result = Connection.ExecuteNonQuery(storedProcduredName, parameters);
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return result;
+        }
+
+        public bool delSupplierDetail(string supplierID,string productID)
+        {
+            string storedProcduredName = "DelSupplierDetail";
+            SqlParameter[] parameters = new SqlParameter[] {
+                new SqlParameter("@SupplierID",supplierID),
+                new SqlParameter("@ProductID",productID)
+            };
+            bool result = Connection.ExecuteNonQuery(storedProcduredName, parameters);
+            return result;
+        }
+        public DataTable getSupplierWithName(string name)
+        {
+            string storedProcedureName = "FindSupplierWithName";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@Name",name)
+            };
+            return Connection.Execute(storedProcedureName, parameters);
+        }
+        public DataTable getSupplierWithAddress(string address)
+        {
+            string storedProcedureName = "FindSupplierWithAddress";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@Address",address)
+            };
+            return Connection.Execute(storedProcedureName, parameters);
+        }
+        public DataTable getSupplierWithPhoneNumber(string phoneNumber)
+        {
+            string storedProcedureName = "FindSupplierWithPhoneNumber";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@PhoneNumber",phoneNumber)
+            };
+            return Connection.Execute(storedProcedureName, parameters);
+        }
+        public DataTable getSupplierWithEmail(string email)
+        {
+            string storedProcedureName = "FindSupplierWithEmail";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@Email",email)
+            };
+            return Connection.Execute(storedProcedureName, parameters);
         }
     }
 }
