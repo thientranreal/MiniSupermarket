@@ -144,6 +144,7 @@
             this.btn_NhapExcel.TabIndex = 21;
             this.btn_NhapExcel.Text = "Nhập ";
             this.btn_NhapExcel.UseVisualStyleBackColor = true;
+            btn_NhapExcel.Click += btn_NhapExcel_Click;
             // 
             // txt_MaSp
             // 
@@ -438,6 +439,7 @@
             btn_XuatExcel.TabIndex = 20;
             btn_XuatExcel.Text = "Xuất ";
             btn_XuatExcel.UseVisualStyleBackColor = true;
+            btn_XuatExcel.Click += btn_XuatExcel_Click;
             // 
             // lb_MaSp
             // 

@@ -1179,6 +1179,8 @@ BEGIN
         Product.isDeleted
     FROM Product
     INNER JOIN ProductType ON Product.TypeID = ProductType.TypeID
+	LEFT JOIN Promotion ON Product.PromotionID = Promotion.PromotionID 
+	
 END;
 GO
 

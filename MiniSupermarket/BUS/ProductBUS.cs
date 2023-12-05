@@ -67,7 +67,7 @@ namespace MiniSupermarket.BUS
                 ++i;
             }
         }
-        public bool addProduct(string name, string typeid, string quantity, string price, string des, string unit , string id=null)
+        public bool addProduct(string name, string typeid, string quantity, string price, string des, string unit, string promotionID, string id=null)
         {
             // Nếu không nhập mã id thì sẽ tự tạo mã mới
             if (id == null)
@@ -86,7 +86,7 @@ namespace MiniSupermarket.BUS
                 new SqlParameter("@Description",des),
                 new SqlParameter("@Unit", unit),
 
-                new SqlParameter("@PromotionID", DBNull.Value)
+                new SqlParameter("@PromotionID", promotionID)
             };
 
             bool result = Connection.ExecuteNonQuery(storedProcedureName, parameters);
@@ -113,7 +113,7 @@ namespace MiniSupermarket.BUS
             }
             return result;
         }
-        public bool updateProduct(string name, string id, string typeid, string quantity, string price, string des, string unit)
+        public bool updateProduct(string name, string id, string typeid, string quantity, string price, string des, string unit,string promotionID)
         {
             string storedProcedureName = "UpdateProduct";
             
@@ -127,7 +127,7 @@ namespace MiniSupermarket.BUS
                 new SqlParameter("@Description",des),
                 new SqlParameter("@Unit", unit),
               
-                new SqlParameter("@PromotionID", DBNull.Value)
+                new SqlParameter("@PromotionID", promotionID)
             };
             bool result = Connection.ExecuteNonQuery(storedProcedureName, parameters);
             // Nếu cập nhật thành công thì cập nhật lại danh sách

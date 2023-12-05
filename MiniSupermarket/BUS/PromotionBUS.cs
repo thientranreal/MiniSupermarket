@@ -142,12 +142,12 @@ namespace MiniSupermarket.BUS
             List<(string Id, string Name)> types = new List<(string Id, string Name)>();
 
             // Kiểm tra xem promotions có dữ liệu không trước khi truy cập
-            if (promotions != null && promotions.Rows.Count > 0 && promotions.Columns.Contains("PromotionID") && promotions.Columns.Contains("Name"))
+            if (promotions != null && promotions.Rows.Count > 0 && promotions.Columns.Contains("ID") && promotions.Columns.Contains("Name"))
             {
                 foreach (DataRow row in promotions.Rows)
                 {
                     // Lấy thông tin mã khuyến mãi mà không cần kiểm tra isDeleted
-                    string PromotionID = row["PromotionID"].ToString();
+                    string PromotionID = row["ID"].ToString();
                     string name = row["Name"].ToString();
                     types.Add((PromotionID, name));
                 }
@@ -155,5 +155,22 @@ namespace MiniSupermarket.BUS
             return types.Select(t => $"[{t.Id}] {t.Name}").ToArray();
         }
 
+        public string GetNameFromID(string id)
+        {
+            foreach (DataRow row in promotions.Rows)
+            {
+                // Nếu TypeID khớp với ID cần tìm, trả về Name tương ứng
+                if (row["ID"].ToString().Equals(id, StringComparison.OrdinalIgnoreCase))
+                {
+                    return row["Name"].ToString();
+                }else 
+                {
+                    return null;
+                }
+            }
+
+            // Trường hợp không tìm thấy
+            return "Không tìm thấy"; // hoặc có thể trả về một giá trị mặc định khác
+        }
     }
 }
