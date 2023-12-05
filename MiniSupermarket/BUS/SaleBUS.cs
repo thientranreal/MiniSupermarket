@@ -6,7 +6,9 @@ using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 using System.Xml.Linq;
+using static System.ComponentModel.Design.ObjectSelectorEditor;
 
 namespace MiniSupermarket.BUS
 {

@@ -71,10 +71,9 @@ namespace MiniSupermarket.BUS
                 else if (control is ComboBox)
                 {
                     ComboBox comboBox = (ComboBox)control;
-                    // Check if the ComboBox has items before setting the SelectedIndex
                     if (comboBox.Items.Count > 0)
                     {
-                        comboBox.SelectedIndex = 0; // You can also use comboBox.SelectedItem = null; if you prefer
+                        comboBox.SelectedIndex = 0; 
                     }
                 }
             }
@@ -89,10 +88,9 @@ namespace MiniSupermarket.BUS
                 else if (control is ComboBox)
                 {
                     ComboBox comboBox = (ComboBox)control;
-                    // Check if the ComboBox has items before setting the SelectedIndex
                     if (comboBox.Items.Count > 0)
                     {
-                        comboBox.SelectedIndex = 0; // You can also use comboBox.SelectedItem = null; if you prefer
+                        comboBox.SelectedIndex = 0; 
                     }
                 }
             }
@@ -102,7 +100,7 @@ namespace MiniSupermarket.BUS
 
 
 
-        public bool addEmployee(string id, string username, string name, string address, string pnumber, string email, DateTime birthdate, string password, string sex)
+        public bool addEmployee(string id, string username, string name, string address, string pnumber, string email, DateTime birthdate, string password, string sex, string roleid)
         {
             if (string.IsNullOrEmpty(id))
             {
@@ -121,6 +119,7 @@ namespace MiniSupermarket.BUS
                 new SqlParameter("@BirthDate", birthdate),
                 new SqlParameter("@Password", password),
                 new SqlParameter("@UserName", username),
+                new SqlParameter("@RoleID", roleid),
 
             };
 
@@ -150,7 +149,7 @@ namespace MiniSupermarket.BUS
             return result;
         }
 
-        public bool editEmployee(string id, string name, string address, string pnumber, string email, string sex, DateTime birthdate, string password, string username)
+        public bool editEmployee(string id, string name, string address, string pnumber, string email, string sex, DateTime birthdate, string password, string username, string roleid)
         {
             string storedProcedureName = "EditEmployee";
             SqlParameter[] parameters = new SqlParameter[]
@@ -164,6 +163,7 @@ namespace MiniSupermarket.BUS
                 new SqlParameter("@BirthDate", birthdate),
                 new SqlParameter("@Password", password),
                 new SqlParameter("@UserName", username),
+                new SqlParameter("@RoleID", roleid),
             };
             bool result = Connection.ExecuteNonQuery(storedProcedureName, parameters);
             // Nếu cập nhật thành công thì cập nhật lại danh sách
@@ -194,6 +194,16 @@ namespace MiniSupermarket.BUS
             };
 
             return Connection.Execute(storedProcedureName, parameters);
+        }
+
+        public DataTable GetRoles()
+        {
+            string storedProcedureName = "GetRoles";
+            SqlParameter[] parameters = new SqlParameter[] { };
+
+
+            return Connection.Execute(storedProcedureName, parameters);
+
         }
 
     }

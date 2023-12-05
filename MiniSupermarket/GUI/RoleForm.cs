@@ -268,7 +268,6 @@ namespace MiniSupermarket.GUI
             tb_name.Clear();
             rtb_explain.Clear();
         }
-
         private void btnUpdateFunction_Click(object sender, EventArgs e)
         {
             if (ds_qlcv.SelectedRows.Count > 0)
