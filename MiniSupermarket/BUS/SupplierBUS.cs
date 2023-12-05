@@ -26,6 +26,11 @@ namespace MiniSupermarket.BUS
             string storedProcedureName = "SelectAllSupplier";
             return Connection.Execute(storedProcedureName, null);
         }
+        public DataTable getAllSupplierWithout()
+        {
+            string storedProcedureName = "SelectAllSupplierWithoutIsDeleted";
+            return Connection.Execute(storedProcedureName, null);
+        }
         private DataTable getAllSupplierDetail(string id)
         {
             string storedProcedureName = "SelectAllSupplierDetail";
@@ -92,11 +97,13 @@ namespace MiniSupermarket.BUS
             bool result = Connection.ExecuteNonQuery(storedProcduredName, parameters);
             return result;
         }
-        public DataTable AllProduct()
+        public DataTable AllProduct(string supplierID)
         {
             string storedProcduredName = "AllProduct";
-
-            products= Connection.Execute(storedProcduredName, null);
+            SqlParameter[] parameters = new SqlParameter[] {
+                new SqlParameter("@ID",supplierID)
+            };
+            products = Connection.Execute(storedProcduredName, parameters);
             return products;
         }
         public bool AddDetailSupplier(string SupplierID,string ProductID,string SupplyStartDate)

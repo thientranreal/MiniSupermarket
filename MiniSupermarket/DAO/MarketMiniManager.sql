@@ -537,6 +537,19 @@ BEGIN
 	WHERE Supplier.isDeleted=1;
 END;
 GO
+--Lấy toàn bộ thông tin nhà cung cấp 
+CREATE PROCEDURE SelectAllSupplierWithoutIsDeleted
+AS
+BEGIN
+	SELECT 
+	Supplier.SupplierID AS ID,
+	Supplier.[Name] AS TÊN ,
+	Supplier.[Address] [Địa chỉ],
+	Supplier.PhoneNumber AS [Số điện thoại],
+	Supplier.Email
+	FROM Supplier 
+END;
+GO
 --Lấy thông tin chi tiết nhà cung cấp
 CREATE PROCEDURE SelectAllSupplierDetail
 	@ID varchar(10)
@@ -715,7 +728,8 @@ BEGIN
 END;
 GO
 --Lấy thông tin sản phẩm
-CREATE PROCEDURE AllProduct
+ALTER PROCEDURE AllProduct
+	@ID varchar(50)
 AS
 BEGIN
 	SELECT 
@@ -724,7 +738,8 @@ BEGIN
 	Product.TypeID AS Loại,
 	Product.CurrentPrice AS Giá
 	FROM Product
-	WHERE Product.isDeleted=1;
+	WHERE Product.isDeleted=1 
+		
 END;
 GO
 
