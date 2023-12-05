@@ -7,6 +7,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -22,34 +23,14 @@ namespace MiniSupermarket.GUI
             this.AutoSize = true;
             this.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
 
-            SetupComboBox(cb_sanpham);
-            SetupComboBox(cb_loaisp);
-            SetupComboBox(cb_banhang);
-            SetupComboBox(cb_nhaphang);
-            SetupComboBox(cb_khachhang);
-            SetupComboBox(cb_nhanvien);
-            SetupComboBox(cb_quyen);
-            SetupComboBox(cb_thongke);
-            SetupComboBox(cb_nhacungcap);
-            SetupComboBox(cb_ctkm);
-
             ds_qlcv.BackgroundColor = Color.White;
             ds_qlcv.ReadOnly = true;
             ds_qlcv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             ds_qlcv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            ds_qlcv.SelectionChanged += DataGridView_SelectionChanged;
 
-            tb_id.ReadOnly = true;
-        }
-
-        private void SetupComboBox(ComboBox comboBox)
-        {
-            comboBox.DropDownStyle = ComboBoxStyle.DropDownList;
-
-            comboBox.Items.Add("Không phân quyền");
-            comboBox.Items.Add("Có phân quyền");
-
-            comboBox.SelectedIndex = 0;
+            // set biến toàn cục cho role id
+            string temp = GlobalState.employeeId;
+            GlobalState.roleId = roleBUS.SelectRoleIDFromEmployeeID(GlobalState.employeeId);
         }
 
         public void LoadTheme()
@@ -62,8 +43,6 @@ namespace MiniSupermarket.GUI
             gb_List.Font = ProjectFont.getTitleFont();
             gb_role.ForeColor = ThemeColor.SecondaryColor;
             gb_role.Font = ProjectFont.getTitleFont();
-            lb_title.ForeColor = ThemeColor.SecondaryColor;
-            lb_title.Font = ProjectFont.getTitleFont();
 
 
             foreach (Control btns in this.gb_Function.Controls)
@@ -90,10 +69,18 @@ namespace MiniSupermarket.GUI
                     TextBox tb = (TextBox)control;
                     tb.Font = ProjectFont.getNormalFont();
                 }
-                else if (control.GetType() == typeof(ComboBox))
+                else if (control.GetType() == typeof(CheckBox))
                 {
-                    ComboBox cb = (ComboBox)control;
-                    cb.Font = ProjectFont.getNormalFont();
+                    CheckBox ck = (CheckBox)control;
+                    ck.Font = ProjectFont.getNormalFont();
+                }
+                else if (control.GetType() == typeof(Button))
+                {
+                    Button btn = (Button)control;
+                    btn.BackColor = ThemeColor.PrimaryColor;
+                    btn.ForeColor = Color.White;
+                    btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
+                    btn.Font = ProjectFont.getNormalFont();
                 }
             }
 
@@ -119,98 +106,70 @@ namespace MiniSupermarket.GUI
 
         void setNull()
         {
-            tb_id.Text = "";
             tb_name.Text = "";
             rtb_explain.Text = "";
         }
 
-        private void DataGridView_SelectionChanged(object sender, EventArgs e)
+        public void updateDataGridView()
         {
-            if (ds_qlcv.SelectedRows.Count > 0)
-            {
-                tb_id.Text = ds_qlcv.SelectedRows[0].Cells["RoleID"].Value.ToString();
-                tb_name.Text = ds_qlcv.SelectedRows[0].Cells["Name"].Value.ToString();
-                rtb_explain.Text = ds_qlcv.SelectedRows[0].Cells["Description"].Value.ToString();
-            }
+            ds_qlcv.DataSource = roleBUS.getAllRoleToDisplay();
         }
 
         private void bt_add_Click(object sender, EventArgs e)
         {
-            string id = tb_id.Text.Trim().ToUpper();
             string name = ProjectFont.upperFirstLetter(tb_name.Text);
             string description = ProjectFont.upperFirstLetter(rtb_explain.Text);
-            if (id.Length != 0) 
-            {
-                if (roleBUS.checkIdExist(id))
-                {
-                    MessageBox.Show(
-                        "Mã sản phẩm đã tồn tại trong hệ thống",
-                        "Warning",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Warning); 
-                    tb_id.Focus();
-                    return;
-                }
-            }
-            if (id.Length == 0)
-            {
-                if (roleBUS.addRole(id, name, description))
-                {
-                    MessageBox.Show("Thêm thành công!",
-                        "Thông báo",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information); 
 
-                }
-                else
-                {
-                    MessageBox.Show("Thêm thất bại!",
-                        "Thông báo",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error); 
-                    return;
-                }
-            }
-            else 
+            if (roleBUS.addRole(name, description))
             {
-                if (roleBUS.addRole(id, name, description))
-                {
-                    MessageBox.Show("Thêm thành công!",
-                        "Thông báo",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Information); 
-
-                }
-                else
-                {
-                    MessageBox.Show("Thêm thất bại!",
-                        "Thông báo",
-                        MessageBoxButtons.OK,
-                        MessageBoxIcon.Error); 
-                    tb_id.Focus();
-                    return;
-                }
+                MessageBox.Show("Thêm thành công!",
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Information);
+                // cập nhật lại datagridview
+                updateDataGridView();
+                resetText();
+            }
+            else
+            {
+                MessageBox.Show("Thêm thất bại!",
+                    "Thông báo",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                return;
             }
         }
 
         private void bt_reset_Click(object sender, EventArgs e)
         {
-            ds_qlcv.DataSource = roleBUS.getAllRole();
-            RoleBUS.Reset(gb_role.Controls, ds_qlcv);
+            ds_qlcv.DataSource = roleBUS.getAllRoleToDisplay();
+            foreach (Control control in gb_role.Controls)
+            {
+                if (control is TextBox textBox)
+                {
+                    textBox.Text = string.Empty;
+                }
+                else if (control is RichTextBox richTextBox)
+                {
+                    richTextBox.Text = string.Empty;
+                }
+            }
         }
 
         private void RoleForm_Load(object sender, EventArgs e)
         {
             setNull();
 
-            ds_qlcv.DataSource = roleBUS.getAllRole();
+            ds_qlcv.DataSource = roleBUS.getAllRoleToDisplay();
 
-            ds_qlcv.Columns["RoleID"].HeaderText = "Mã chức vụ";
-            ds_qlcv.Columns["Name"].HeaderText = "Tên chức vụ";
-            ds_qlcv.Columns["Description"].HeaderText = "Mô tả chức vụ";
+            ds_qlcv.Columns["RoleID"].HeaderText = "Mã quyền";
+            ds_qlcv.Columns["Name"].HeaderText = "Tên quyền";
+            ds_qlcv.Columns["Description"].HeaderText = "Mô tả quyền";
 
             ds_qlcv.Columns["RoleID"].Width = 120;
             ds_qlcv.Columns["Name"].Width = 340;
+
+            ds_qlcv.ClearSelection();
         }
 
         private void bt_delete_Click(object sender, EventArgs e)
@@ -219,17 +178,14 @@ namespace MiniSupermarket.GUI
             {
                 string roleId = ds_qlcv.SelectedRows[0].Cells["RoleID"].Value.ToString();
 
-                DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa nhân viên này?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn xóa quyền này?", "Xác nhận xóa", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
 
                 if (result == DialogResult.Yes)
                 {
-                    bool deleteResult = roleBUS.deleteRole(roleId);
-
-                    if (deleteResult)
+                    if (roleBUS.deleteRole(roleId))
                     {
                         MessageBox.Show("Xóa thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                        ds_qlcv.DataSource = roleBUS.getAllRole();
+                        ds_qlcv.DataSource = roleBUS.getAllRoleToDisplay();
                     }
                     else
                     {
@@ -239,7 +195,7 @@ namespace MiniSupermarket.GUI
             }
             else
             {
-                MessageBox.Show("Vui lòng chọn một chức vụ để xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Vui lòng chọn quyền để xóa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
 
@@ -247,17 +203,15 @@ namespace MiniSupermarket.GUI
         {
             if (ds_qlcv.SelectedRows.Count > 0)
             {
-                string id = tb_id.Text.Trim().ToUpper();
+                string id = ds_qlcv.SelectedRows[0].Cells["RoleID"].Value.ToString();
                 string name = ProjectFont.upperFirstLetter(tb_name.Text);
                 string description = ProjectFont.upperFirstLetter(rtb_explain.Text);
-
-                bool editResult = roleBUS.editRole(id, name, description);
-
-                if (editResult)
+                if (roleBUS.editRole(id, name, description))
                 {
                     MessageBox.Show("Chỉnh sửa thành công!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
 
-                    ds_qlcv.DataSource = roleBUS.getAllRole();
+                    ds_qlcv.DataSource = roleBUS.getAllRoleToDisplay();
+                    resetText();
                 }
                 else
                 {
@@ -266,9 +220,6 @@ namespace MiniSupermarket.GUI
             }
             else
             {
-<<<<<<< Updated upstream
-                MessageBox.Show("Vui lòng chọn một chức vụ để chỉnh sửa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-=======
                 MessageBox.Show("Vui lòng chọn một quyền để chỉnh sửa.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
@@ -317,22 +268,6 @@ namespace MiniSupermarket.GUI
             tb_name.Clear();
             rtb_explain.Clear();
         }
-
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
-        private void DataGridView_SelectionChanged(object sender, EventArgs e)
-        {
-            if (ds_qlcv.SelectedRows.Count > 0)
-            {
-                tb_name.Text = ds_qlcv.SelectedRows[0].Cells["Name"].Value.ToString();
-                rtb_explain.Text = ds_qlcv.SelectedRows[0].Cells["Description"].Value.ToString();
-            }
-        }
-
->>>>>>> Sang
         private void btnUpdateFunction_Click(object sender, EventArgs e)
         {
             if (ds_qlcv.SelectedRows.Count > 0)
@@ -421,14 +356,6 @@ namespace MiniSupermarket.GUI
                         MessageBox.Show("Cập nhật chức năng thất bại!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
-<<<<<<< Updated upstream
->>>>>>> Stashed changes
-=======
-<<<<<<< HEAD
-=======
->>>>>>> Stashed changes
->>>>>>> Sang
->>>>>>> Stashed changes
             }
         }
     }

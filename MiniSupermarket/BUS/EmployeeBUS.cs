@@ -24,7 +24,7 @@ namespace MiniSupermarket.BUS
 
         public DataTable getAllEmployee()
         {
-            string storedProcedureName = "SelectAllEmployee";
+            string storedProcedureName = "SelectAllFromEmployee";
             return Connection.Execute(storedProcedureName, null);
         }
 

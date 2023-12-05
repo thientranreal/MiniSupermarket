@@ -33,7 +33,6 @@ namespace MiniSupermarket.BUS
                 new SqlParameter("@OrderID",OrderID),
             };
             productOrders = Connection.Execute(storedProcedure, parameters);
-            //MessageBox.Show(pro);
             return productOrders;
         }
 

@@ -9,19 +9,7 @@ namespace MiniSupermarket.DAO
 {
     internal static class Connection
     {
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-=======
-<<<<<<< HEAD
-
-=======
-<<<<<<< Updated upstream
->>>>>>> Sang
->>>>>>> Stashed changes
         private static string serverName = "MSI\\THIENTRAN";
-=======
-
->>>>>>> Stashed changes
         private static string databaseName = "MarketMiniManager";
         private static string connectionString = $"Data Source={serverName};Initial Catalog={databaseName};Integrated Security=True";
         private static SqlConnection connection = new SqlConnection(connectionString);

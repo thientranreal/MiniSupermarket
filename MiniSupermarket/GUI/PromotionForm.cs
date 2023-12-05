@@ -87,6 +87,7 @@ namespace MiniSupermarket.GUI
 
         private void PromotionForm_Load(object sender, EventArgs e)
         {
+            ShowPromotion();
             dgvPromotions.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvPromotions.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvPromotions.ReadOnly = true;
@@ -104,13 +105,11 @@ namespace MiniSupermarket.GUI
 
         public void ShowPromotion()
         {
-            dgvPromotions.DataSource = null;
             dgvPromotions.DataSource = promotionBUS.getAllPromotions();
         }
 
         void SetNull()
         {
-            ShowPromotion();
             txtPromotionID.Clear();
             txtPromotionName.Clear();
             txtDiscount.Clear();
@@ -189,6 +188,7 @@ namespace MiniSupermarket.GUI
             if (promotionBUS.insertPromotion(Name, StartDate, EndDate, Discount))
             {
                 MessageBox.Show("Thêm chương trình khuyến mãi thành công", "Thêm thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ShowPromotion();
                 SetNull();
                 return;
             }
@@ -204,6 +204,7 @@ namespace MiniSupermarket.GUI
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+            ShowPromotion();
             SetNull();
         }
 
@@ -260,6 +261,7 @@ namespace MiniSupermarket.GUI
             if (promotionBUS.updatePromotion(ID, Name, StartDate, EndDate, Discount))
             {
                 MessageBox.Show("Sửa thông tin chương trình khuyến mãi thành công", "Xoá thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                ShowPromotion();
                 SetNull();
                 return;
             }
@@ -283,6 +285,7 @@ namespace MiniSupermarket.GUI
                 {
                     MessageBox.Show("Xoá chương trình khuyến mãi thành công", "Xoá thành công", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     promotionBUS.clearAllProductsFromPromotion(ID);
+                    ShowPromotion();
                     SetNull();
                     return;
                 }
@@ -362,44 +365,6 @@ namespace MiniSupermarket.GUI
                     return;
                 }
             }
-        }
-
-
-        private void txtSearch_TextChanged_1(object sender, EventArgs e)
-        {
-            string search = txtSearch.Text.Trim();
-            DataTable promotions = promotionBUS.getAllPromotions();
-            DataTable resultSearch = promotions.Clone();
-            if (search.Length == 0)
-            {
-                dgvPromotions.DataSource = promotionBUS.getAllPromotions();
-            }
-            else
-            {
-                if (cbxTypeOfSearch.SelectedIndex == 0)
-                {
-                    foreach (DataRow row in promotions.Rows)
-                    {
-                        if (row[0].ToString().Contains(search))
-                        {
-                            resultSearch.ImportRow(row);
-                            dgvPromotions.DataSource = resultSearch;
-                        }
-                    }
-                }
-                if (cbxTypeOfSearch.SelectedIndex == 1)
-                {
-                    foreach (DataRow row in promotions.Rows)
-                    {
-                        if (row[1].ToString().Contains(search))
-                        {
-                            resultSearch.ImportRow(row);
-                            dgvPromotions.DataSource = resultSearch;
-                        }
-                    }
-                }
-            }
-
         }
 
         private void dgvPromotions_CellMouseClick(object sender, DataGridViewCellMouseEventArgs e)

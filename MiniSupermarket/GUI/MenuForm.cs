@@ -37,11 +37,15 @@ namespace MiniSupermarket.GUI
             this.MaximizedBounds = Screen.FromHandle(this.Handle).WorkingArea;
             this.loginForm = loginForm;
 
+            // Gán biến toàn cục của menu form, login form
+            GlobalState.menuForm = this;
+            GlobalState.loginForm = loginForm;
+
             // Khởi tạo giá trị cho dictionary
             forms = new Dictionary<string, Form>();
             forms.Add("Quản lý sản phẩm", new ProductManage());
             forms.Add("Quản lý loại sản phẩm", new ProductTypeManage());
-            forms.Add("Quản lý nhà cung cấp", new NCCForm());
+            forms.Add("Quản lý nhà cung cấp",new Supplier());
             forms.Add("Quản lý bán hàng", new SaleForm());
             forms.Add("Quản lý chương trình khuyến mãi", new PromotionForm());
             forms.Add("Tài khoản", new UserAccount());
@@ -50,6 +54,19 @@ namespace MiniSupermarket.GUI
             forms.Add("Quản lý nhân viên", new EmployeeForm());
             forms.Add("Quản lý khách hàng", new CustomerForm());
             forms.Add("Thống kê", new Statistics());
+
+            // Gán những nút chức năng vào global state
+            GlobalState.functionsButton = new Dictionary<string, Button>();
+            GlobalState.functionsButton.Add("F0001", btnProducts);
+            GlobalState.functionsButton.Add("F0002", btnProductType);
+            GlobalState.functionsButton.Add("F0003", btnCustomers);
+            GlobalState.functionsButton.Add("F0004", btnImport);
+            GlobalState.functionsButton.Add("F0005", btnSale);
+            GlobalState.functionsButton.Add("F0006", btnEmployees);
+            GlobalState.functionsButton.Add("F0007", btnRoles);
+            GlobalState.functionsButton.Add("F0008", btnPromotions);
+            GlobalState.functionsButton.Add("F0009", btnSuppliers);
+            GlobalState.functionsButton.Add("F0010", btnStatistic);
 
             // Ẩn nút chức năng
             foreach (var control in panelMenu.Controls)
@@ -190,6 +207,13 @@ namespace MiniSupermarket.GUI
             Reset();
         }
 
+        public void closeChildForm()
+        {
+            if (activeForm != null)
+                activeForm.Hide();
+            Reset();
+        }
+
         private void panelTitleBar_MouseMove(object sender, MouseEventArgs e)
         {
             ReleaseCapture();
@@ -267,8 +291,14 @@ namespace MiniSupermarket.GUI
 
         private void btnSuppliers_Click(object sender, EventArgs e)
         {
-            NCCForm temp = (NCCForm)forms["Quản lý nhà cung cấp"];
+            Supplier temp = (Supplier)forms["Quản lý nhà cung cấp"];
             OpenChildForm(temp, sender, "Quản lý nhà cung cấp");
+        }
+        private void btnProducts_Click_1(object sender, EventArgs e)
+        {
+            ProductManage temp = (ProductManage)forms["Quản lý sản phẩm"];
+            OpenChildForm(temp, sender, "Quản lý sản phẩm");
+            temp.LoadTheme();
         }
 
         private void btnImport_Click(object sender, EventArgs e)

@@ -46,6 +46,8 @@ namespace MiniSupermarket.BUS {
         {
             Dictionary<string, int> productSales = new Dictionary<string, int>();
 
+            DataTable detalBill = getAllDetalBill();
+
             foreach (DataRow row in detalBill.Rows)
             {
                 string productId = row.Field<string>("ProductID");
@@ -73,6 +75,7 @@ namespace MiniSupermarket.BUS {
         public string GetLeastSoldProduct()
         {
             Dictionary<string, int> productSales = new Dictionary<string, int>();
+            DataTable detalBill = getAllDetalBill();
 
             foreach (DataRow row in detalBill.Rows)
             {
@@ -101,6 +104,7 @@ namespace MiniSupermarket.BUS {
         public int GetMostSoldProductQuantity()
         {
             Dictionary<string, int> productSales = new Dictionary<string, int>();
+            DataTable detalBill = getAllDetalBill();
 
             foreach (DataRow row in detalBill.Rows)
             {
@@ -129,6 +133,7 @@ namespace MiniSupermarket.BUS {
         public int GetLeastSoldProductQuantity()
         {
             Dictionary<string, int> productSales = new Dictionary<string, int>();
+            DataTable detalBill = getAllDetalBill();
 
             foreach (DataRow row in detalBill.Rows)
             {

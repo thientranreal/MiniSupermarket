@@ -21,8 +21,22 @@ namespace MiniSupermarket.BUS
                 new SqlParameter("@EmployeeID",employeeID)
             };
             purchaseOrders = Connection.Execute(storedProcedure, parameters);
+
+            if (purchaseOrders != null )
+            {
+                DataTable orderClone = purchaseOrders.Clone();
+                orderClone.Columns[5].DataType = typeof(Boolean);
+
+                foreach (DataRow row in purchaseOrders.Rows)
+                {
+                    orderClone.ImportRow(row);
+                }
+                purchaseOrders = orderClone;
+            }
+
             return purchaseOrders;
         }
+
 
         public DataTable getAllOrders()
         {
@@ -74,7 +88,6 @@ namespace MiniSupermarket.BUS
             string EmployeeID = GlobalState.employeeId;
             DateTime currentDate = DateTime.Now;
             string date = String.Format("{0:dd/MM/yyyy}", currentDate);
-            MessageBox.Show(ID +"   "+EmployeeID+"   "+SupplierID);
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@OrderID",ID),
@@ -136,15 +149,15 @@ namespace MiniSupermarket.BUS
             return Connection.Execute(storedProcedure, parameters);
         }
 
-        public void ExportTextFile(string OrderID, string EmployeeName, string SupplierName, string DateImport, string TotalPrice)
+        public Boolean ExportTextFile(string filename,string OrderID, string EmployeeName, string SupplierName, string DateImport, string TotalPrice)
         {
-            FileStream fileStream = new FileStream("HoaDonNhap.txt", FileMode.Create, FileAccess.Write);
+            FileStream fileStream = new FileStream(filename, FileMode.Create, FileAccess.Write);
             StreamWriter writer = new StreamWriter(fileStream);
             writer.WriteLine("                                   PHIẾU NHẬP                                  ");
             writer.WriteLine();
             writer.WriteLine("Mã phiếu nhập: "+OrderID);
             writer.WriteLine("Đơn vị bán: "+SupplierName);
-            writer.WriteLine("Đơn vị mua: "+SupplierName);
+            writer.WriteLine("Đơn vị mua: "+EmployeeName);
             writer.WriteLine("Ngày nhập: "+DateImport);
 
             writer.WriteLine();
@@ -160,6 +173,7 @@ namespace MiniSupermarket.BUS
             writer.WriteLine("                                         Thanh toán: "+TotalPrice);
             writer.Close();
             fileStream.Close();
+            return true;
         }
     }
 }

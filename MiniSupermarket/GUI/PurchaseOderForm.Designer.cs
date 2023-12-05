@@ -54,6 +54,7 @@
             lblTitle = new Label();
             panel2 = new Panel();
             dgvPurchaseOders = new DataGridView();
+            saveFileDialog1 = new SaveFileDialog();
             panel1.SuspendLayout();
             groupBox1.SuspendLayout();
             groupBox4.SuspendLayout();
@@ -390,5 +391,6 @@
         private DateTimePicker dtpkFilterEndDate;
         private GroupBox groupBox1;
         private ComboBox cbxFilterTotalPrice;
+        private SaveFileDialog saveFileDialog1;
     }
 }
