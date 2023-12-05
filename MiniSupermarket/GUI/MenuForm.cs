@@ -43,11 +43,9 @@ namespace MiniSupermarket.GUI
             forms.Add("Quản lý loại sản phẩm", new ProductTypeManage());
             forms.Add("Quản lý nhà cung cấp", new NCCForm());
             forms.Add("Quản lý bán hàng", new SaleForm());
-
             forms.Add("Quản lý chương trình khuyến mãi", new PromotionForm());
-
             forms.Add("Tài khoản", new UserAccount());
-
+            forms.Add("Quản lý quyền", new RoleForm());
             forms.Add("Quản lý nhập hàng", new PurchaseOderForm());
             forms.Add("Quản lý nhân viên", new EmployeeForm());
             forms.Add("Quản lý khách hàng", new CustomerForm());
@@ -272,14 +270,7 @@ namespace MiniSupermarket.GUI
             NCCForm temp = (NCCForm)forms["Quản lý nhà cung cấp"];
             OpenChildForm(temp, sender, "Quản lý nhà cung cấp");
         }
-        private void btnProducts_Click_1(object sender, EventArgs e)
-        {
 
-            ProductManage temp = (ProductManage)forms["Quản lý sản phẩm"];
-            OpenChildForm(temp, sender, "Quản lý sản phẩm");
-            temp.LoadTheme();
-            
-        }
         private void btnImport_Click(object sender, EventArgs e)
         {
             PurchaseOderForm temp = (PurchaseOderForm)forms["Quản lý nhập hàng"];
@@ -290,6 +281,13 @@ namespace MiniSupermarket.GUI
         {
             EmployeeForm temp = (EmployeeForm)forms["Quản lý nhân viên"];
             OpenChildForm(temp, sender, "Quản lý nhân viên");
+            temp.LoadTheme();
+        }
+
+        private void btnRoles_Click(object sender, EventArgs e)
+        {
+            RoleForm temp = (RoleForm)forms["Quản lý quyền"];
+            OpenChildForm(temp, sender, "Quản lý quyền");
             temp.LoadTheme();
         }
 

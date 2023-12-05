@@ -14,13 +14,16 @@ namespace MiniSupermarket.GUI
 {
     public partial class DetailPurchaseOrderForm : Form
     {
-        private string purchaseOrderID, status;
+        private string purchaseOrderID, status, supplierID;
         private DetailPurchaseOrderBUS bus = new DetailPurchaseOrderBUS();
-        public DetailPurchaseOrderForm(string PurchaseOrderID, string Status)
+        private PurchaseOderForm OrderForm;
+        public DetailPurchaseOrderForm(string PurchaseOrderID, string Status, string SupplierID, PurchaseOderForm OrderForm)
         {
             InitializeComponent();
             purchaseOrderID = PurchaseOrderID;
             status = Status;
+            supplierID = SupplierID;
+            this.OrderForm = OrderForm;
         }
 
         private void DetailPurchaseOrderForm_Load(object sender, EventArgs e)
@@ -47,6 +50,10 @@ namespace MiniSupermarket.GUI
             dgvProductOrders.Columns[2].HeaderText = "Số lượng";
             dgvProductOrders.Columns[3].HeaderText = "Đơn vị";
             dgvProductOrders.Columns[4].HeaderText = "Giá nhập";
+            cbxTypeOfSearch.SelectedIndex = 0;
+            cbxTypeOfSearchOrder.SelectedIndex = 0;
+
+            nudQuantity.Maximum = int.MaxValue;
         }
 
         void Payed()
@@ -86,7 +93,7 @@ namespace MiniSupermarket.GUI
 
         public void ShowProducts()
         {
-            dgvProducts.DataSource = bus.getProducts(purchaseOrderID);
+            dgvProducts.DataSource = bus.getProducts(purchaseOrderID, supplierID);
             dgvProductOrders.DataSource = bus.getProductOrders(purchaseOrderID);
         }
 
@@ -215,7 +222,7 @@ namespace MiniSupermarket.GUI
 
         private void btnPay_Click(object sender, EventArgs e)
         {
-            if(dgvProductOrders.Rows.Count <= 0)
+            if (bus.getProductOrders(purchaseOrderID).Rows.Count <= 0)
             {
                 MessageBox.Show("Phiếu nhập không có sản phẩm để thanh toán",
                             "Thông báo",
@@ -231,8 +238,91 @@ namespace MiniSupermarket.GUI
                     ShowProducts();
                     setNull();
                     Payed();
+                    OrderForm.HienThiPhieuNhap();
                     return;
                 }
+            }
+        }
+
+        public void FilterProducts()
+        {
+            int index_Type_Search = cbxTypeOfSearch.SelectedIndex;
+            string key_Search = txtSearch.Text.ToLower();
+
+            DataTable promotions = bus.getProducts(purchaseOrderID, supplierID);
+            DataTable searchPromotion = promotions.Clone();
+
+            foreach (DataRow row in promotions.Rows)
+            {
+                string rowID = row[0].ToString().ToLower();
+                string rowName = row[1].ToString().ToLower();
+
+                switch (index_Type_Search)
+                {
+                    case 0:
+                        if (rowID.Contains(key_Search))
+                        {
+                            searchPromotion.ImportRow(row);
+                        }
+                        break;
+                    case 1:
+                        if (rowName.Contains(key_Search))
+                        {
+                            searchPromotion.ImportRow(row);
+                        }
+                        break;
+                }
+            }
+            dgvProducts.DataSource = searchPromotion;
+        }
+
+        public void FilterProductOrders()
+        {
+            int index_Type_Search = cbxTypeOfSearchOrder.SelectedIndex;
+            string key_Search = txtSearchOrder.Text.ToLower();
+
+            DataTable promotions = bus.getProductOrders(purchaseOrderID);
+            DataTable searchPromotion = promotions.Clone();
+
+            foreach (DataRow row in promotions.Rows)
+            {
+                string rowID = row[0].ToString().ToLower();
+                string rowName = row[1].ToString().ToLower();
+
+                switch (index_Type_Search)
+                {
+                    case 0:
+                        if (rowID.Contains(key_Search))
+                        {
+                            searchPromotion.ImportRow(row);
+                        }
+                        break;
+                    case 1:
+                        if (rowName.Contains(key_Search))
+                        {
+                            searchPromotion.ImportRow(row);
+                        }
+                        break;
+                }
+            }
+            dgvProductOrders.DataSource = searchPromotion;
+        }
+
+        private void txtSearchOrder_KeyUp(object sender, KeyEventArgs e)
+        {
+            FilterProductOrders();
+        }
+
+        private void txtSearch_KeyUp(object sender, KeyEventArgs e)
+        {
+            FilterProducts();
+        }
+
+        private void txtOrderPrice_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsWhiteSpace(e.KeyChar) || !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
             }
         }
     }

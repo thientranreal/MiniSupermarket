@@ -19,38 +19,24 @@ namespace MiniSupermarket.BUS
 
         public DataTable getAllPromotions()
         {
-            string storedProcedureName = "SelectAllPromotions";
+            string storedProcedureName = "SelectAllPromotionsToShow";
             promotions = Connection.Execute(storedProcedureName, null);
             return promotions;
         }
 
-        public DataTable SearchPromotionsByID(string searchID)
+        public DataTable getAllPromotionsToCreateID()
         {
-            string storedProcedureName = "SearchPromotionByID";
-            SqlParameter[] sp = new SqlParameter[]
-            {
-                new SqlParameter("@PromotionID",searchID)
-            };
-            promotions = Connection.Execute(storedProcedureName, sp);
-            return promotions;
-        }
-
-        public DataTable SearchPromotionsByName(string searchName)
-        {
-            string storedProcedureName = "SearchPromotionByName";
-            SqlParameter[] sp = new SqlParameter[]
-            {
-                new SqlParameter("@PromotionName",searchName)
-            };
-            promotions = Connection.Execute(storedProcedureName, sp);
-            return promotions;
+            string storedProcedureName = "SelectAllPromotionsToCreateID";
+            DataTable promotionsToCreateID = Connection.Execute(storedProcedureName, null);
+            return promotionsToCreateID;
         }
 
         public Boolean checkExistedID(string id)
         {
-            foreach(DataRow row in promotions.Rows)
+            DataTable promotionsToCreateID = getAllPromotionsToCreateID();
+            foreach (DataRow row in promotionsToCreateID.Rows)
             {
-                if (id.Equals(row["ID"].ToString())) {
+                if (id.Equals(row[0].ToString())) {
                     return true;
                 }
             }

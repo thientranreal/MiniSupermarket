@@ -323,10 +323,11 @@ GO
 --Rot du lieu vao bang chuc nang cho quyen cua nhan vien
 INSERT INTO RoleFunction (RoleID, FunctionID)
 VALUES
-    ('R0001', 'F0006'),
+	('R0001', 'F0006'),
     ('R0001', 'F0007'),
     ('R0001', 'F0008'),
-    ('R0001', 'F0010'),
+    ('R0001', 'F0009'),
+	('R0001', 'F0010'),
     ('R0002', 'F0001'),
     ('R0002', 'F0002'),
     ('R0002', 'F0003'),
@@ -419,7 +420,7 @@ GO
 CREATE PROCEDURE SelectAllFromProductType
 AS
 BEGIN
-    SELECT TypeID, [Name] FROM ProductType Where isDeleted = 1
+    SELECT * FROM ProductType
 END;
 GO
 
@@ -680,13 +681,21 @@ GO
 
 -- Đại
 -- Lấy tất cả thông tin chương trình khuyến mãi
-CREATE PROC SelectAllPromotions
+CREATE PROC SelectAllPromotionsToShow
 AS
 BEGIN
 	SELECT Promotion.PromotionID AS ID, Promotion.Name, Promotion.StartDate,
 	Promotion.EndDate, Promotion.Discount, Promotion.[Status]
 	FROM Promotion
 	WHERE Promotion.isDeleted = 1
+END;
+GO
+
+CREATE PROC SelectAllPromotionsToCreateID
+AS
+BEGIN
+	SELECT PromotionID
+	FROM Promotion
 END;
 GO
 
@@ -802,30 +811,6 @@ BEGIN
 END;
 GO
 
--- Tìm kiếm chương trình khuyến mãi theo mã CTKM
-CREATE PROC SearchPromotionByID
-	@PromotionID varchar(10)
-AS
-BEGIN
-	SELECT PM.PromotionID AS ID, PM.Name, PM.StartDate,
-	PM.EndDate, PM.Discount, PM.[Status]
-	FROM Promotion PM
-	WHERE PM.isDeleted = 1 and PM.PromotionID like '%'+@PromotionID+'%'
-END;
-GO
-
--- Tìm kiếm chương trình khuyến mãi theo tên CTKM
-CREATE PROC SearchPromotionByName
-	@PromotionName nvarchar(50)
-AS
-BEGIN
-	SELECT PM.PromotionID AS ID, PM.Name, PM.StartDate,
-	PM.EndDate, PM.Discount, PM.[Status]
-	FROM Promotion PM
-	WHERE PM.isDeleted = 1 and PM.Name like '%'+@PromotionName+'%'
-END;
-GO
-
 CREATE PROC ClearAllProductsFromPromotion
 	@PromotionID varchar(10)
 AS
@@ -844,6 +829,14 @@ BEGIN
 	SELECT OrderID, E.Name, S.Name, PO.importDate, PO.TotalPrice, PO.Status
 	FROM PurchaseOrder PO, Employee E, Supplier S
 	WHERE PO.EmployeeID = E.EmployeeID and PO.SupplierID = S.SupplierID and PO.isDeleted = '1' and E.EmployeeID = @EmployeeID
+END;
+GO
+
+CREATE PROC SelectAllOrders
+AS
+BEGIN
+	SELECT OrderID
+	FROM PurchaseOrder
 END;
 GO
 
@@ -882,12 +875,13 @@ GO
 
 --Tải danh sách các sản phẩm vào chi tiết phiếu nhập( Tất cả sản phẩm)
 CREATE PROC SelectProductsToPurchaseOrder
-	@OrderID varchar(10)
+	@OrderID varchar(10),
+	@SupplierID varchar(50)
 AS
 BEGIN
 	SELECT P.ProductID, P.Name, P.Quantity, P.Unit
-	FROM Product P
-	WHERE isDeleted = '1' and P.ProductID not in (SELECT DPO.ProductID FROM DetailPurchaseOrder DPO WHERE DPO.OrderID = @OrderID)
+	FROM Product P, SupplierProduct SP
+	WHERE isDeleted = '1' and P.ProductID not in (SELECT DPO.ProductID FROM DetailPurchaseOrder DPO WHERE DPO.OrderID = @OrderID) and P.ProductID = SP.ProductID and SP.SupplierID = @SupplierID
 END;
 GO
 
@@ -919,7 +913,7 @@ GO
 CREATE PROC AddProductsToInventory
 	@Order varchar(10),
 	@ProductID varchar(10),
-	@CurrentQuantity int
+	@CurrentQuantity int	
 AS
 BEGIN
 	INSERT INTO Inventory (OrderID,ProductID,CurrentQuantity)
@@ -967,9 +961,41 @@ BEGIN
 							GROUP BY ProductID),0)
 END;
 GO
+
+-- Lấy mã nhà cung cấp bằng tên nhà cung cấp
+CREATE PROC GetSupplierIDByName
+	@Name nvarchar(50)
+AS
+BEGIN
+	SELECT SupplierID
+	FROM Supplier
+	WHERE Name = @Name
+END;
+GO
+
+CREATE PROC ClearAllProductInDetailOrder
+	@OrderID varchar(10)
+AS
+BEGIN
+	DELETE FROM DetailPurchaseOrder WHERE @OrderID = @OrderID
+END;
+GO
+
+-- Lấy danh sách để xuất file text
+CREATE PROC ExportTextFileOrder
+	@OrderID varchar(10)
+AS
+BEGIN
+	SELECT P.ProductID, P.Name, P.Unit, DPO.Quantity, DPO.PurchasePrice
+	FROM PurchaseOrder PO, Product P, DetailPurchaseOrder DPO
+	WHERE PO.OrderID = DPO.OrderID and P.ProductID = DPO.ProductID and PO.OrderID = @OrderID
+END;
+GO
+
 ----------------------------------------------------------------------------------------------------------------------------------------------------------
 
 --Công Anh--
+
 
 -- Tạo stored procedure để lấy hóa đơn trong khoảng thời gian
 CREATE PROCEDURE GetBillsByDateRange
@@ -1020,6 +1046,7 @@ BEGIN
 	ON Bill.EmployeeID = Employee.EmployeeID 
 END;
 GO
+
 
 --Lấy danh sách sản phẩm 
 CREATE PROCEDURE SelectAllFromProduct
@@ -1122,7 +1149,7 @@ END;
 GO
 
 
--- Xóa nhân viên
+-- Sửa nhân viên
 CREATE PROCEDURE EditEmployee
     @EmployeeID varchar(10),
 	@Name nvarchar(50),
@@ -1149,6 +1176,94 @@ BEGIN
     WHERE EmployeeID = @EmployeeID
 END;
 GO
+
+-- Xóa nhân viên 
+CREATE PROCEDURE DeleteEmployee
+    @EmployeeID varchar(10)
+AS
+BEGIN
+    UPDATE Employee
+    SET isDeleted = '0'
+    WHERE EmployeeID = @EmployeeID
+END;
+GO
+
+-- Tìm kiếm theo ID
+CREATE PROCEDURE SearchEmployeeByID
+    @SearchTerm NVARCHAR(50)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT EmployeeID, [Password], [Name], Sex, BirthDate, PhoneNumber, Email, [Address]
+    FROM dbo.Employee
+    WHERE EmployeeID = @SearchTerm;
+END;
+GO
+
+-- Tìm kiếm theo tên
+CREATE PROCEDURE SearchEmployeeByName
+    @SearchTerm NVARCHAR(50)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    SELECT EmployeeID, [Password], [Name], Sex, BirthDate, PhoneNumber, Email, [Address]
+    FROM dbo.Employee
+    WHERE Name LIKE '%' + @SearchTerm + '%';
+END;
+GO
+
+-- Lấy danh sách chức vụ
+CREATE PROCEDURE SelectAllFromRole
+AS
+BEGIN
+		SELECT Role.RoleID, [Name], [Description]
+		FROM Role
+		WHERE isDeleted = 1;
+
+END;
+GO
+
+-- Thêm chức vụ
+CREATE PROCEDURE InsertIntoRole
+    @RoleID varchar(10),
+	@Name nvarchar(50),
+	@Description nvarchar(100)
+AS
+BEGIN
+        INSERT INTO Role (RoleID, [Name], [Description])
+        VALUES (@RoleID, @Name, @Description );
+END;
+GO
+
+-- Sửa chức vụ
+CREATE PROCEDURE EditRole
+    @RoleID varchar(10),
+	@Name nvarchar(50),
+	@Description nvarchar(100)
+AS
+BEGIN
+    UPDATE Role
+    SET
+        [Name] = @Name,
+        Description = @Description
+        
+    WHERE RoleID = @RoleID
+END;
+GO
+
+-- Xóa Chức vụ
+CREATE PROCEDURE DeleteRole
+    @RoleID varchar(10)
+AS
+BEGIN
+    UPDATE Role
+    SET isDeleted = '0'
+    WHERE RoleID = @RoleID
+END;
+GO
+
 -- ===================================================End Sang
 
 -- ========================================================Tiến
@@ -1206,18 +1321,138 @@ BEGIN
 END;
 GO
 
-
 CREATE PROCEDURE [dbo].[GetAllDetailBills]
 AS
 BEGIN
     SELECT
-        [BillID],
-        [ProductID],
-        [OrderID],
-        [SalePrice],
-        [Quantity]
+        DB.[BillID],
+        DB.[ProductID],
+        DB.[OrderID],
+        P.[Name],
+        P.[CurrentPrice],
+        P.[Unit],
+        DB.[SalePrice],
+        DB.[Quantity]
     FROM
-        [DetailBill];
+        DetailBill DB
+    INNER JOIN
+        Product P ON DB.[ProductID] = P.[ProductID];
+END;
+GO
+
+CREATE PROCEDURE [dbo].[AddDetailBill]
+    @BillID varchar(10),
+    @ProductID varchar(10),
+    @OrderID varchar(10),
+    @SalePrice float,
+    @Quantity int
+AS
+BEGIN
+    -- Thêm DetailBill
+    INSERT INTO DetailBill (BillID, ProductID, OrderID, SalePrice, Quantity)
+    VALUES (@BillID, @ProductID, @OrderID, @SalePrice, @Quantity);
+
+    -- Kiểm tra xem INSERT có thành công hay không
+    --@ROWCOUNT sẽ trả về số dòng bị ảnh hưởng bởi câu lệnh INSERT
+    IF @@ROWCOUNT > 0
+    BEGIN
+        -- Cập nhật Quantity từ Product và Iventory
+        UPDATE Product
+        SET Quantity = Quantity - @Quantity
+        WHERE ProductID = @ProductID;
+
+        UPDATE Inventory
+        SET CurrentQuantity = CurrentQuantity - @Quantity
+        WHERE ProductID = @ProductID AND OrderID = @OrderID;
+    END
+END;
+GO
+
+CREATE PROCEDURE [dbo].[UpdateDetailBill]
+    @BillID varchar(10),
+    @ProductID varchar(10),
+    @OrderID varchar(10),
+    @SalePrice float,
+    @Quantity int
+AS
+BEGIN
+    -- Lấy giá trị Quantity hiện tại từ DetailBill để so sánh
+    DECLARE @CurrentQuantity int;
+    SELECT @CurrentQuantity = Quantity
+    FROM DetailBill
+    WHERE BillID = @BillID AND ProductID = @ProductID AND OrderID = @OrderID;
+
+    -- Cập nhật DetailBill
+    UPDATE DetailBill
+    SET OrderID = @OrderID, SalePrice = @SalePrice, Quantity = @Quantity
+    WHERE BillID = @BillID AND ProductID = @ProductID AND OrderID = @OrderID;
+
+    -- Kiểm tra xem UPDATE có thành công hay không
+    --@ROWCOUNT sẽ trả về số dòng bị ảnh hưởng bởi câu lệnh UPDATE
+    IF @@ROWCOUNT > 0
+    BEGIN
+        -- Cập nhật Quantity từ Product và Iventory
+        IF @Quantity > @CurrentQuantity
+        BEGIN
+            -- Tăng Quantity
+            UPDATE Product
+            SET Quantity = Quantity - (@Quantity - @CurrentQuantity)
+            WHERE ProductID = @ProductID;
+
+            -- Giảm CurrentQuantity
+            UPDATE Inventory
+            SET CurrentQuantity = CurrentQuantity - (@Quantity - @CurrentQuantity)
+            WHERE ProductID = @ProductID AND OrderID = @OrderID;
+        END
+        ELSE IF @Quantity < @CurrentQuantity
+        BEGIN
+            -- Giảm Quantity
+            UPDATE Product
+            SET Quantity = Quantity + (@CurrentQuantity - @Quantity)
+            WHERE ProductID = @ProductID;
+
+            -- Tăng CurrentQuantity
+            UPDATE Inventory
+            SET CurrentQuantity = CurrentQuantity + (@CurrentQuantity - @Quantity)
+            WHERE ProductID = @ProductID AND OrderID = @OrderID;
+        END
+        -- Trường hợp không thay đổi Quantity, không cần làm gì cả
+    END
+END;
+GO
+
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[DeleteDetailBill]
+    @BillID varchar(10),
+    @ProductID varchar(10),
+    @OrderID varchar(10)
+AS
+BEGIN
+    -- Lấy giá trị Quantity từ DetailBill để giảm đi từ bảng Product
+    DECLARE @Quantity int;
+    SELECT @Quantity = Quantity
+    FROM DetailBill
+    WHERE BillID = @BillID AND ProductID = @ProductID AND OrderID = @OrderID;
+
+    -- Xóa DetailBill
+    DELETE FROM DetailBill
+    WHERE BillID = @BillID AND ProductID = @ProductID AND OrderID = @OrderID;
+
+    -- Kiểm tra xem DELETE có thành công hay không
+    -- @ROWCOUNT sẽ trả về số dòng bị ảnh hưởng bởi câu lệnh DetailBill.
+    IF @@ROWCOUNT > 0
+    BEGIN
+        -- Giảm Quantity từ bảng Product
+        UPDATE Product
+        SET Quantity = Quantity + @Quantity
+        WHERE ProductID = @ProductID;
+
+        -- Cập nhật lại CurrentQuantity trong bảng Inventory
+        UPDATE Inventory
+        SET CurrentQuantity = CurrentQuantity - @Quantity
+        WHERE ProductID = @ProductID AND OrderID = @OrderID;
+    END
 END;
 GO
 -- =========================================================End Tiến

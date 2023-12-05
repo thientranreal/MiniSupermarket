@@ -271,6 +271,20 @@ namespace MiniSupermarket.BUS
 
             return result;
         }
+        //Lấy tên sản phẩm từ mã sản phẩm
+        public string GetNameFromId(string id)
+        {
+            foreach (DataRow row in product.Rows)
+            {
+                // Nếu TypeID khớp với ID cần tìm, trả về Name tương ứng
+                if (row["ProductID"].ToString().Equals(id, StringComparison.OrdinalIgnoreCase))
+                {
+                    return row["Name"].ToString();
+                }
+            }
 
+            // Trường hợp không tìm thấy
+            return "Không tìm thấy"; // hoặc có thể trả về một giá trị mặc định khác
+        }
     }
 }
