@@ -732,13 +732,14 @@ ALTER PROCEDURE AllProduct
 	@ID varchar(50)
 AS
 BEGIN
-	SELECT 
-	Product.ProductID AS ID,
-	Product.[Name] AS Tên,
-	Product.TypeID AS Loại,
-	Product.CurrentPrice AS Giá
-	FROM Product
-	WHERE Product.isDeleted=1 
+	
+		SELECT 
+		Product.ProductID AS ID,
+		Product.[Name] AS Tên,
+		Product.TypeID AS Loại,
+		Product.CurrentPrice AS Giá
+		FROM Product
+		WHERE NOT EXISTS (SELECT * FROM SupplierProduct WHERE Product.ProductID=SupplierProduct.ProductID);
 		
 END;
 GO
