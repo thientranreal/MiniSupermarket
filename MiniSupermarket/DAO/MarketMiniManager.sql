@@ -1168,18 +1168,20 @@ CREATE PROCEDURE SelectAllFromProduct
 AS
 BEGIN
     SELECT
-        ProductID,
-        [Name],
-        TypeID,
-        Quantity,
-        CurrentPrice,
-        [Description],
-        Unit,
-	PromotionID,
-	isDeleted
-      FROM Product
+        Product.ProductID,
+        Product.[Name],
+        ProductType.[Name] AS ProductTypeName,
+        Product.Quantity,
+        Product.CurrentPrice,
+        Product.[Description],
+        Product.Unit,
+        Product.PromotionID,
+        Product.isDeleted
+    FROM Product
+    INNER JOIN ProductType ON Product.TypeID = ProductType.TypeID
 END;
 GO
+
 -- Thêm sản phẩm
 CREATE PROCEDURE InsertIntoProduct
     @ProductID varchar(10),

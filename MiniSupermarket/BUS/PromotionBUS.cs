@@ -15,6 +15,7 @@ namespace MiniSupermarket.BUS
 
         public PromotionBUS() {
             promotions = getAllPromotions();
+            
         }
 
         public DataTable getAllPromotions()
@@ -131,5 +132,28 @@ namespace MiniSupermarket.BUS
             };
             return Connection.ExecuteNonQuery(storedProcedure, parameters);
         }
+
+
+
+        //Công ANh thêm==============
+        //Lấy ra id và tên khuyến mãi theo dạng: [id]name
+        public string[] getPromotionsWithIdAndName()
+        {
+            List<(string Id, string Name)> types = new List<(string Id, string Name)>();
+
+            // Kiểm tra xem promotions có dữ liệu không trước khi truy cập
+            if (promotions != null && promotions.Rows.Count > 0 && promotions.Columns.Contains("PromotionID") && promotions.Columns.Contains("Name"))
+            {
+                foreach (DataRow row in promotions.Rows)
+                {
+                    // Lấy thông tin mã khuyến mãi mà không cần kiểm tra isDeleted
+                    string PromotionID = row["PromotionID"].ToString();
+                    string name = row["Name"].ToString();
+                    types.Add((PromotionID, name));
+                }
+            }
+            return types.Select(t => $"[{t.Id}] {t.Name}").ToArray();
+        }
+
     }
 }
