@@ -8,7 +8,7 @@ using System.Data;
 
 namespace MiniSupermarket.DAO {
     internal static class Connection {
-        private static string serverName = "DESKTOP-JKV4PQG\\SQLEXPRESS";
+        private static string serverName = "VCA\\SQLEXPRESS2012";
         private static string databaseName = "MarketMiniManager";
 
         private static string connectionString = $"Data Source={serverName};Initial Catalog={databaseName};Integrated Security=True";

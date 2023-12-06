@@ -128,7 +128,7 @@ namespace MiniSupermarket.GUI
             dssp_DSSP.Columns["CurrentPrice"].HeaderText = "Đơn giá";
             dssp_DSSP.Columns["Description"].HeaderText = "Mô tả";
             dssp_DSSP.Columns["Unit"].HeaderText = "Kiểu";
-            dssp_DSSP.Columns["PromotionID"].HeaderText = "Mã khuyến mãi";
+            dssp_DSSP.Columns["PromotionName"].HeaderText = "Tên khuyến mãi";
             cbx_MaLoai.DropDownStyle = ComboBoxStyle.DropDownList;
             cbx_MaKm.DropDownStyle = ComboBoxStyle.DropDownList;
 
@@ -186,12 +186,12 @@ namespace MiniSupermarket.GUI
                 txt_Kieu.Text = row.Cells["Unit"].Value.ToString();
 
 
-                if (row.Cells["PromotionID"].Value != null && !string.IsNullOrWhiteSpace(row.Cells["PromotionID"].Value.ToString()))
+                if (row.Cells["PromotionName"].Value != null && !string.IsNullOrWhiteSpace(row.Cells["PromotionName"].Value.ToString()))
                 {
                     // Kiểm tra xem PromotionID có giá trị rỗng không
-                    string promoID = row.Cells["PromotionID"].Value.ToString();
+                    string ProMoName = row.Cells["PromotionName"].Value.ToString();
                     PromotionBUS promotionBUS = new PromotionBUS();
-                    string ProMoName = promotionBUS.GetNameFromID(promoID);
+                    string promoID = promotionBUS.GetIDFromName(ProMoName);
                     string display = $"[{promoID}] {ProMoName}";
                     cbx_MaKm.Text = display;
                 }
