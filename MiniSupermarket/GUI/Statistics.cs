@@ -189,7 +189,7 @@ namespace MiniSupermarket.GUI
             }
             else if (cbx_TimKiem.Text == "Sản phẩm")
             {
-                dshd_sp.DataSource = DetalBillBus.getAllDetalBills();
+                dshd_sp.DataSource = DetalBillBus.getAllDetalBill();
                 // Đổi tên cột
                 dshd_sp.Columns["BillID"].HeaderText = "Mã hóa đơn";
                 dshd_sp.Columns["ProductID"].HeaderText = "Mã sản phẩm";
@@ -289,7 +289,7 @@ namespace MiniSupermarket.GUI
 
         private void ShowProducts(object sender, EventArgs e)
         {
-            dshd_sp.DataSource = DetalBillBus.getAllDetalBills();
+            dshd_sp.DataSource = DetalBillBus.getAllDetalBill();
             // Đổi tên cột
             dshd_sp.Columns["BillID"].HeaderText = "Mã hóa đơn";
             dshd_sp.Columns["ProductID"].HeaderText = "Mã sản phẩm";

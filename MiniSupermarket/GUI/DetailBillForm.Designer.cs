@@ -38,6 +38,10 @@
             btnThem = new Button();
             label1 = new Label();
             panel4 = new Panel();
+            panel5 = new Panel();
+            label2 = new Label();
+            txtQuantity = new TextBox();
+            btnThanhToan = new Button();
             dgvDetalBill = new DataGridView();
             pnlInformation = new Panel();
             panel2.SuspendLayout();
@@ -47,6 +51,7 @@
             ((System.ComponentModel.ISupportInitialize)dgvProduct).BeginInit();
             panel1.SuspendLayout();
             panel4.SuspendLayout();
+            panel5.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvDetalBill).BeginInit();
             pnlInformation.SuspendLayout();
             SuspendLayout();
@@ -60,7 +65,7 @@
             panel2.Location = new Point(488, 0);
             panel2.Margin = new Padding(3, 2, 3, 2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(838, 80);
+            panel2.Size = new Size(859, 80);
             panel2.TabIndex = 1;
             // 
             // groupBox2
@@ -132,7 +137,7 @@
             panel3.Location = new Point(488, 80);
             panel3.Margin = new Padding(3, 2, 3, 2);
             panel3.Name = "panel3";
-            panel3.Size = new Size(838, 348);
+            panel3.Size = new Size(859, 550);
             panel3.TabIndex = 2;
             // 
             // dgvProduct
@@ -146,7 +151,7 @@
             dgvProduct.RowHeadersWidth = 51;
             dgvProduct.RowTemplate.Height = 29;
             dgvProduct.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvProduct.Size = new Size(838, 348);
+            dgvProduct.Size = new Size(859, 550);
             dgvProduct.TabIndex = 0;
             // 
             // panel1
@@ -165,11 +170,11 @@
             // 
             btnXoa.AutoSize = true;
             btnXoa.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnXoa.Location = new Point(368, 38);
+            btnXoa.Location = new Point(308, 36);
             btnXoa.Name = "btnXoa";
-            btnXoa.Size = new Size(92, 25);
+            btnXoa.Size = new Size(174, 25);
             btnXoa.TabIndex = 1;
-            btnXoa.Text = "Xóa sản phẩm";
+            btnXoa.Text = "Xóa sản phẩm trong giỏ hàng";
             btnXoa.UseVisualStyleBackColor = true;
             btnXoa.Click += btnXoa_Click;
             // 
@@ -177,11 +182,11 @@
             // 
             btnSua.AutoSize = true;
             btnSua.AutoSizeMode = AutoSizeMode.GrowAndShrink;
-            btnSua.Location = new Point(180, 38);
+            btnSua.Location = new Point(161, 36);
             btnSua.Name = "btnSua";
-            btnSua.Size = new Size(123, 25);
+            btnSua.Size = new Size(117, 25);
             btnSua.TabIndex = 1;
-            btnSua.Text = "Cập nhập sản phẩm";
+            btnSua.Text = "Cập nhập số lượng";
             btnSua.UseVisualStyleBackColor = true;
             btnSua.Click += btnSua_Click;
             // 
@@ -208,12 +213,49 @@
             // 
             // panel4
             // 
+            panel4.Controls.Add(panel5);
             panel4.Controls.Add(dgvDetalBill);
             panel4.Dock = DockStyle.Fill;
             panel4.Location = new Point(0, 80);
             panel4.Name = "panel4";
-            panel4.Size = new Size(488, 348);
+            panel4.Size = new Size(488, 550);
             panel4.TabIndex = 2;
+            // 
+            // panel5
+            // 
+            panel5.Controls.Add(label2);
+            panel5.Controls.Add(txtQuantity);
+            panel5.Controls.Add(btnThanhToan);
+            panel5.Dock = DockStyle.Bottom;
+            panel5.Location = new Point(0, 450);
+            panel5.Name = "panel5";
+            panel5.Size = new Size(488, 100);
+            panel5.TabIndex = 1;
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(24, 25);
+            label2.Name = "label2";
+            label2.Size = new Size(54, 15);
+            label2.TabIndex = 4;
+            label2.Text = "Số lượng";
+            // 
+            // txtQuantity
+            // 
+            txtQuantity.Location = new Point(84, 17);
+            txtQuantity.Name = "txtQuantity";
+            txtQuantity.Size = new Size(85, 23);
+            txtQuantity.TabIndex = 3;
+            // 
+            // btnThanhToan
+            // 
+            btnThanhToan.Location = new Point(321, 16);
+            btnThanhToan.Name = "btnThanhToan";
+            btnThanhToan.Size = new Size(139, 33);
+            btnThanhToan.TabIndex = 0;
+            btnThanhToan.Text = "Thanh Toán";
+            btnThanhToan.UseVisualStyleBackColor = true;
             // 
             // dgvDetalBill
             // 
@@ -224,7 +266,7 @@
             dgvDetalBill.Name = "dgvDetalBill";
             dgvDetalBill.RowTemplate.Height = 25;
             dgvDetalBill.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvDetalBill.Size = new Size(488, 348);
+            dgvDetalBill.Size = new Size(488, 550);
             dgvDetalBill.TabIndex = 0;
             // 
             // pnlInformation
@@ -235,19 +277,20 @@
             pnlInformation.Location = new Point(0, 0);
             pnlInformation.Margin = new Padding(3, 2, 3, 2);
             pnlInformation.Name = "pnlInformation";
-            pnlInformation.Size = new Size(488, 428);
+            pnlInformation.Size = new Size(488, 630);
             pnlInformation.TabIndex = 0;
             // 
             // DetailBillForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1326, 428);
+            ClientSize = new Size(1347, 630);
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(pnlInformation);
             Margin = new Padding(3, 2, 3, 2);
             Name = "DetailBillForm";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "PromotionForm";
             Load += DetailFormMuaHang_Load;
             panel2.ResumeLayout(false);
@@ -260,6 +303,8 @@
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
             panel4.ResumeLayout(false);
+            panel5.ResumeLayout(false);
+            panel5.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvDetalBill).EndInit();
             pnlInformation.ResumeLayout(false);
             ResumeLayout(false);
@@ -283,5 +328,9 @@
         private Button btnXoa;
         private Button btnSua;
         private Button btnThem;
+        private Panel panel5;
+        private Button btnThanhToan;
+        private Label label2;
+        private TextBox txtQuantity;
     }
 }

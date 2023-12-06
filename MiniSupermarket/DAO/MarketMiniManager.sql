@@ -76,22 +76,22 @@ GO
 -- Rot du lieu bang san pham	
 insert into Product(ProductID,[Name],TypeID,Quantity,CurrentPrice,[Description],Unit)
 values
-	('P0001',N'Mì Kokomi','LSP2',0,5000,N'Mì Kokomi tôm chua cay 100g',N'Gói'),
-	('P0002',N'Sữa Milo','LSP7',0,4000,N'Sữa Milo vị ca cao lúa mạch 100ml',N'Hộp'),
-	('P0003',N'Bánh Slay','LSP1',0,9000,N'Bánh Slay khoai tây chiên vị tảo',N'Gói'),
-	('P0004',N'Mì Hảo hảo','LSP2',0,2500,N'Mì hảo hảo lẩu thái tôm',N'Gói'),
-	('P0005',N'Cafe G7','LSP3',0,58000,N'Hộp Cafe G7',N'Hộp 336g'),
-	('P0006',N'Cafe Trung Nguyên','LSP3',0,53000,N'Hộp Cafe Trung Nguyên',N'Hộp 300g'),
-	('P0007',N'Trà Lipton','LSP4',0,37500,N'Hộp Trà Lipton 16 gói',N'Hộp 300g'),
-	('P0008',N'Trà Cozy','LSP4',0,31000,N'Hộp Trà Cozy túi lọc vị gừng',N'Hộp 400g'),
-	('P0009',N'Dầu gội Clear Men','LSP5',0,193000,N'Dầu gội Clear Men than hoạt tính',N'Chai 900g'),
-	('P0010',N'Dầu gội Head And Shoulders','LSP5',0,148000,N'Dầu gội Head And Shoulders bạc hà mát lạnh',N'Chai 700g'),
-	('P0011',N'Sữa tắm Lifebuoy','LSP6',0,158000,N'Sữa tắm Lifebuoy hương khổ qua',N'Chai 800g'),
-	('P0012',N'Sữa tắm Nerman','LSP6',0,205000,N'Sữa tắm Nerman hương nước hoa cao cấp 3 in 1',N'Chai 350g'),
-	('P0013',N'Redbull','LSP7',0,15000,N'Redbull bò thái',N'Lon'),
-	('P0014',N'Sting','LSP7',0,10000,N'Nước tăng lực Sting Dâu',N'Chai'),
-	('P0015',N'Pate Cột Đèn','LSP8',0,25000,N'Pate Cột Đèn Hải Phòng',N'Hộp'),
-	('P0016',N'Khô bò Tasty Food','LSP8',0,171000,N'Khô bò Củ Chi Tasty Food miếng mềm',N'Hũ 500g');
+	('P0001',N'Mì Kokomi','LSP2',60,5000,N'Mì Kokomi tôm chua cay 100g',N'Gói'),
+	('P0002',N'Sữa Milo','LSP7',80,4000,N'Sữa Milo vị ca cao lúa mạch 100ml',N'Hộp'),
+	('P0003',N'Bánh Slay','LSP1',80,9000,N'Bánh Slay khoai tây chiên vị tảo',N'Gói'),
+	('P0004',N'Mì Hảo hảo','LSP2',70,2500,N'Mì hảo hảo lẩu thái tôm',N'Gói'),
+	('P0005',N'Cafe G7','LSP3',40,58000,N'Hộp Cafe G7',N'Hộp 336g'),
+	('P0006',N'Cafe Trung Nguyên','LSP3',40,53000,N'Hộp Cafe Trung Nguyên',N'Hộp 300g'),
+	('P0007',N'Trà Lipton','LSP4',40,37500,N'Hộp Trà Lipton 16 gói',N'Hộp 300g'),
+	('P0008',N'Trà Cozy','LSP4',90,31000,N'Hộp Trà Cozy túi lọc vị gừng',N'Hộp 400g'),
+	('P0009',N'Dầu gội Clear Men','LSP5',90,193000,N'Dầu gội Clear Men than hoạt tính',N'Chai 900g'),
+	('P0010',N'Dầu gội Head And Shoulders','LSP5',120,148000,N'Dầu gội Head And Shoulders bạc hà mát lạnh',N'Chai 700g'),
+	('P0011',N'Sữa tắm Lifebuoy','LSP6',120,158000,N'Sữa tắm Lifebuoy hương khổ qua',N'Chai 800g'),
+	('P0012',N'Sữa tắm Nerman','LSP6',105,205000,N'Sữa tắm Nerman hương nước hoa cao cấp 3 in 1',N'Chai 350g'),
+	('P0013',N'Redbull','LSP7',60,15000,N'Redbull bò thái',N'Lon'),
+	('P0014',N'Sting','LSP7',60,10000,N'Nước tăng lực Sting Dâu',N'Chai'),
+	('P0015',N'Pate Cột Đèn','LSP8',40,25000,N'Pate Cột Đèn Hải Phòng',N'Hộp'),
+	('P0016',N'Khô bò Tasty Food','LSP8',60,171000,N'Khô bò Củ Chi Tasty Food miếng mềm',N'Hũ 500g');
 GO
 
 --Tao bang khuyen mai
@@ -112,7 +112,8 @@ INSERT INTO Promotion (PromotionID, [Name], StartDate, EndDate, Discount, [Statu
 VALUES
     ('PM0001', N'Khuyến mãi giờ vàng', '2023-9-24', '2023-11-24', 10,N'Không hoạt động'),
     ('PM0002', N'Khuyến mãi lễ 2/9', '2023-08-30', '2023-09-03', 20, N'Không hoạt động'),
-    ('PM0003', N'Khuyến mãi điểm tích luỹ', '2023-03-01', '2040-03-01', 10, N'Không hoạt động');
+    ('PM0003', N'Khuyến mãi điểm tích luỹ', '2023-03-01', '2040-03-01', 10, N'Không hoạt động'),
+	('PM0004', N'Khuyến mãi cuối năm', '2023-12-01', '2023-12-30', 5, N'Đang hoạt động');
 GO
 
 --Tao bang khach hang
@@ -132,7 +133,30 @@ INSERT INTO Customer (CustomerID, [Name], PhoneNumber, Sex)
 VALUES
     ('C0001', N'Trần Thị D', '0123456789', N'Nữ'),
     ('C0002', N'Lê Hữu E', '09876543321', N'Nam'),
-    ('C0003', N'Võ Thị Vân F', '0206521773', N'Nữ');
+    ('C0003', N'Võ Thị Vân F', '0206521773', N'Nữ'),
+	('C0004', N'Trần Thị Lan Anh', '03748457125', N'Nữ'),
+    ('C0005', N'Nguyễn Trí Dũng', '09876543321', N'Nam'),
+    ('C0006', N'Lê Trung Trực', '0206521773', N'Nam'),
+	('C0007', N'Nguyễn Thị Ngọc', '0123456789', N'Nữ'),
+    ('C0008', N'Phạm Văn B', '09876543321', N'Nam'),
+    ('C0009', N'Trần Thị Thu Hương', '0206521773', N'Nữ'),
+    ('C0010', N'Lê Văn Đức', '03748457125', N'Nam'),
+    ('C0011', N'Nguyễn Thị An', '09876543321', N'Nữ'),
+    ('C0012', N'Đỗ Văn Tùng', '0206521773', N'Nam'),
+    ('C0013', N'Phạm Thị Lan', '0123456789', N'Nữ'),
+    ('C0014', N'Hoàng Văn Phú', '09876543321', N'Nam'),
+    ('C0015', N'Nguyễn Thị Trang', '0206521773', N'Nữ'),
+    ('C0016', N'Trần Văn Tú', '03748457125', N'Nam'),
+    ('C0017', N'Nguyễn Thị Hà', '09876543321', N'Nữ'),
+    ('C0018', N'Phan Văn Thành', '0206521773', N'Nam'),
+    ('C0019', N'Lê Thị Mai', '0123456789', N'Nữ'),
+    ('C0020', N'Trần Văn Cường', '09876543321', N'Nam'),
+    ('C0021', N'Vũ Thị Bình', '0206521773', N'Nữ'),
+    ('C0022', N'Lê Văn Quốc', '03748457125', N'Nam'),
+    ('C0023', N'Nguyễn Thị Ngân', '09876543321', N'Nữ'),
+    ('C0024', N'Đặng Văn Thắng', '0206521773', N'Nam'),
+    ('C0025', N'Bùi Thị Hương', '0123456789', N'Nữ');
+
 GO
 
 --Tao bang hoa don
@@ -154,7 +178,7 @@ GO
 -- Rot du lieu vao bang hoa don
 INSERT INTO Bill (BillID, [Date], EmployeeID, CustomerID, EstimatedPrice, ReducePrice, TotalPrice, [Status])
 VALUES
-    ('B0001', '2023-09-23', 'E0002', 'C0001', 40000, 0, 40000, 1);
+    ('B0001', '2023-09-23', 'E0002', 'C0001', 0, 0, 0, 1);
 GO
 
 --Tao bang nha cung cap
@@ -172,7 +196,11 @@ GO
 -- Rot du lieu vao bang nha cung cap
 INSERT INTO Supplier (SupplierID, Name, Address, PhoneNumber, Email)
 VALUES
-    ('S0001', N'Công ty TNHH MTV Đại', N'135 Lê Đại Hành, Phường 4, Quận 7, TPHCM', '0803174618', 'dai@gmail.com');
+    ('S0001', N'Công ty TNHH MTV Đại', N'135 Lê Đại Hành, Phường 4, Quận 7, TPHCM', '0803174618', 'dai@gmail.com'),
+	('S0002', N'Công ty TNHH ABC', N'123 Nguyễn Văn A, Phường 5, Quận 1, TPHCM', '0123456789', 'abc@gmail.com'),
+    ('S0003', N'Công ty XYZ', N'456 Trần Hưng Đạo, Phường 6, Quận 3, TPHCM', '0987654321', 'xyz@gmail.com'),
+    ('S0004', N'Công ty PQR', N'789 Lê Lợi, Phường 7, Quận 5, TPHCM', '0909090909', 'pqr@gmail.com'),
+    ('S0005', N'Công ty MNO', N'101 Lý Thường Kiệt, Phường 8, Quận 4, TPHCM', '0765432109', 'mno@gmail.com');
 GO
 
 --Tao bang phieu nhap
@@ -191,7 +219,10 @@ GO
 -- Rot du lieu vao bang phieu nhap
 INSERT INTO PurchaseOrder (OrderID, EmployeeID, SupplierID, importDate, TotalPrice, [Status])
 VALUES
-    ('PO0001', 'E0003', 'S0001', '2023-01-01', 1200000, 1);
+    ('PO0001', 'E0003', 'S0001', '2023-01-01', 1200000, 1),
+	('PO0002', 'E0003', 'S0002', '2023-02-24', 2400000, 1),
+	('PO0003', 'E0002', 'S0001', '2023-07-25', 1800000, 1),
+	('PO0004', 'E0002', 'S0003', '2023-09-16', 3200000, 1);
 GO
 
 --Tao bang chi tiet hoa don
@@ -199,6 +230,7 @@ create table DetailBill(
 	BillID varchar(10) not null,
 	ProductID varchar(10) not null,
 	OrderID varchar(10) not null,
+	PromotionID nvarchar(50),
 	SalePrice float(50) not null,
 	Quantity int not null,
 	primary key (BillID,ProductID,OrderID)
@@ -206,11 +238,11 @@ create table DetailBill(
 GO
 
 -- Rot du lieu vao bang chi tiet hoa don
-INSERT INTO DetailBill (BillID, ProductID, OrderID, SalePrice, Quantity)
+INSERT INTO DetailBill (BillID, ProductID, OrderID, PromotionID, SalePrice, Quantity)
 VALUES
-    ('B0001', 'P0001', 'PO0001', 5000, 1),
-    ('B0001', 'P0002', 'PO0001', 4000, 2),
-    ('B0001', 'P0003', 'PO0001', 9000, 3);
+    ('B0001', 'P0001', 'PO0001', 'PM0004', 5000, 1),
+    ('B0001', 'P0002', 'PO0002', 'PM0004', 4000, 2),
+    ('B0001', 'P0003', 'PO0001', 'PM0004',9000, 3);
 GO
 
 -- Tao bang chi tiet phieu nhap
@@ -261,10 +293,49 @@ GO
 --Rot du lieu vao bang hang ton kho
 INSERT INTO Inventory (ProductID, OrderID, CurrentQuantity)
 VALUES
-    ('P0001', 'PO0001', 99),
-    ('P0002', 'PO0001', 98),
-    ('P0003', 'PO0001', 97);
+	('P0001', 'PO0001', 30),
+    ('P0002', 'PO0001', 40),
+    ('P0003', 'PO0001', 40),
+    ('P0004', 'PO0001', 35),
+    ('P0005', 'PO0001', 20),
+    ('P0006', 'PO0001', 20),
+    ('P0007', 'PO0001', 20),
+    ('P0008', 'PO0001', 30),
+    ('P0009', 'PO0001', 30),
+    ('P0010', 'PO0001', 40),
+    ('P0011', 'PO0001', 40),
+    ('P0012', 'PO0001', 35),
+    ('P0013', 'PO0001', 20),
+    ('P0014', 'PO0001', 20),
+    ('P0015', 'PO0001', 20),
+    ('P0016', 'PO0001', 30),
+    ('P0001', 'PO0002', 30),
+    ('P0002', 'PO0002', 40),
+    ('P0003', 'PO0002', 40),
+    ('P0004', 'PO0002', 35),
+    ('P0005', 'PO0002', 20),
+    ('P0006', 'PO0002', 20),
+    ('P0007', 'PO0002', 20),
+    ('P0008', 'PO0002', 30),
+    ('P0009', 'PO0002', 30),
+    ('P0010', 'PO0002', 40),
+    ('P0011', 'PO0002', 40),
+    ('P0012', 'PO0002', 35),
+    ('P0013', 'PO0002', 20),
+    ('P0014', 'PO0002', 20),
+    ('P0015', 'PO0002', 20),
+    ('P0016', 'PO0002', 30),
+	('P0008', 'PO0003', 30),
+    ('P0009', 'PO0003', 30),
+    ('P0010', 'PO0003', 40),
+    ('P0011', 'PO0003', 40),
+    ('P0012', 'PO0003', 35),
+    ('P0013', 'PO0003', 20),
+    ('P0014', 'PO0003', 20),
+    ('P0015', 'PO0003', 20),
+    ('P0016', 'PO0003', 30);
 GO
+
 
 --Tao bang quan ly quyen
 create table [Role](
@@ -1495,8 +1566,7 @@ BEGIN
         DB.[ProductID],
         DB.[OrderID],
         P.[Name],
-        P.[CurrentPrice],
-        P.[Unit],
+		P.[PromotionID],
         DB.[SalePrice],
         DB.[Quantity]
     FROM
@@ -1506,120 +1576,240 @@ BEGIN
 END;
 GO
 
+CREATE PROCEDURE [dbo].[GetDetailBill]
+   @BillID varchar(10)
+AS
+BEGIN
+    SELECT
+        DB.[BillID],
+        DB.[ProductID],
+        P.[Name],
+		P.[PromotionID],
+        SUM(DB.[SalePrice]) AS TotalSalePrice,
+        SUM(DB.[Quantity]) AS TotalQuantity
+    FROM
+        DetailBill DB
+    INNER JOIN
+        Product P ON DB.[ProductID] = P.[ProductID]
+    WHERE
+        DB.BillID = @BillID
+    GROUP BY
+        DB.[BillID],
+        DB.[ProductID],
+        P.[Name], -- Chỉ giữ lại các cột cần thiết
+		P.[PromotionID]
+    ORDER BY
+        DB.[BillID],
+        DB.[ProductID];
+END;
+
+
+GO
+
 CREATE PROCEDURE [dbo].[AddDetailBill]
-    @BillID varchar(10),
+	@BillID varchar(10),
     @ProductID varchar(10),
-    @OrderID varchar(10),
-    @SalePrice float,
     @Quantity int
 AS
 BEGIN
-    -- Thêm DetailBill
-    INSERT INTO DetailBill (BillID, ProductID, OrderID, SalePrice, Quantity)
-    VALUES (@BillID, @ProductID, @OrderID, @SalePrice, @Quantity);
+    DECLARE @RemainingQuantity int = @Quantity;
+    DECLARE @PromotionID varchar(10);
+    DECLARE @CurrentOrderID varchar(10);
+    DECLARE @ImportDate datetime;
+    DECLARE @CurrentPrice float;
 
-    -- Kiểm tra xem INSERT có thành công hay không
-    --@ROWCOUNT sẽ trả về số dòng bị ảnh hưởng bởi câu lệnh INSERT
-    IF @@ROWCOUNT > 0
+	-- Lấy PromotionID và CurrentPrice từ bảng Product
+	SELECT
+		@PromotionID = PromotionID,
+		@CurrentPrice = CurrentPrice
+	FROM Product WHERE ProductID = @ProductID;
+
+    -- Mở con trỏ để lấy danh sách các đơn hàng chưa được xử lý
+    DECLARE ordersCursor CURSOR FOR
+    SELECT I.OrderID, PO.importDate
+    FROM Inventory I
+    JOIN PurchaseOrder PO ON I.OrderID = PO.OrderID
+    WHERE I.ProductID = @ProductID
+    ORDER BY PO.importDate ASC;
+
+    OPEN ordersCursor;
+
+    -- Lấy bản ghi đầu tiên từ con trỏ
+    FETCH NEXT FROM ordersCursor INTO @CurrentOrderID, @ImportDate;
+
+    -- Bắt đầu vòng lặp, kiểm tra điều kiện để xử lý từng đơn hàng
+    WHILE @RemainingQuantity > 0 AND @@FETCH_STATUS = 0
     BEGIN
-        -- Cập nhật Quantity từ Product và Iventory
-        UPDATE Product
-        SET Quantity = Quantity - @Quantity
-        WHERE ProductID = @ProductID;
+        -- Kiểm tra số lượng có đủ không
+        IF (SELECT CurrentQuantity FROM Inventory WHERE ProductID = @ProductID AND OrderID = @CurrentOrderID) >= @RemainingQuantity
+        BEGIN
+            -- Thêm PromotionID vào DetailBill
+            INSERT INTO DetailBill (BillID, ProductID, OrderID, PromotionID, SalePrice, Quantity)
+            VALUES (@BillID, @ProductID, @CurrentOrderID, @PromotionID, @CurrentPrice * @RemainingQuantity, @RemainingQuantity);
 
-        UPDATE Inventory
-        SET CurrentQuantity = CurrentQuantity - @Quantity
-        WHERE ProductID = @ProductID AND OrderID = @OrderID;
+            -- Cập nhật Quantity từ Product và Inventory
+            UPDATE Product
+            SET Quantity = Quantity - @RemainingQuantity
+            WHERE ProductID = @ProductID;
+
+            UPDATE Inventory
+            SET CurrentQuantity = CurrentQuantity - @RemainingQuantity
+            WHERE ProductID = @ProductID AND OrderID = @CurrentOrderID;
+
+            -- Đã cập nhật đủ số lượng, thoát khỏi vòng lặp
+            BREAK;
+        END
+        ELSE
+        BEGIN
+            -- Lấy số lượng còn trong OrderID mới
+            DECLARE @OrderQuantity int;
+            SET @OrderQuantity = (SELECT CurrentQuantity FROM Inventory WHERE ProductID = @ProductID AND OrderID = @CurrentOrderID);
+
+            -- Thêm PromotionID vào DetailBill
+            INSERT INTO DetailBill (BillID, ProductID, OrderID, PromotionID, SalePrice, Quantity)
+            VALUES (@BillID, @ProductID, @CurrentOrderID, @PromotionID, @CurrentPrice * @OrderQuantity, @OrderQuantity);
+
+            -- Cập nhật Quantity từ Product và Inventory
+            UPDATE Product
+            SET Quantity = Quantity - @OrderQuantity
+            WHERE ProductID = @ProductID;
+
+            UPDATE Inventory
+            SET CurrentQuantity = CurrentQuantity - @OrderQuantity
+            WHERE ProductID = @ProductID AND OrderID = @CurrentOrderID;
+
+            -- Giảm lượng còn lại
+            SET @RemainingQuantity = @RemainingQuantity - @OrderQuantity;
+        END
+
+        -- Lấy bản ghi tiếp theo từ con trỏ
+        FETCH NEXT FROM ordersCursor INTO @CurrentOrderID, @ImportDate;
     END
+
+    -- Đóng và giải phóng con trỏ sau khi hoàn thành
+    CLOSE ordersCursor;
+    DEALLOCATE ordersCursor;
 END;
+
+
 GO
 
 CREATE PROCEDURE [dbo].[UpdateDetailBill]
-    @BillID varchar(10),
-    @ProductID varchar(10),
-    @OrderID varchar(10),
-    @SalePrice float,
-    @Quantity int
+   @BillID varchar(10),
+   @ProductID varchar(10),
+   @NewQuantity int
 AS
 BEGIN
-    -- Lấy giá trị Quantity hiện tại từ DetailBill để so sánh
-    DECLARE @CurrentQuantity int;
-    SELECT @CurrentQuantity = Quantity
-    FROM DetailBill
-    WHERE BillID = @BillID AND ProductID = @ProductID AND OrderID = @OrderID;
+    -- Lấy thông tin cần thiết từ DetailBill
+    DECLARE @RemainingQuantity int = @NewQuantity;
+    DECLARE @CurrentOrderID varchar(10);
+    DECLARE @ImportDate datetime;
+    DECLARE @PromotionID varchar(10);
+    DECLARE @CurrentPrice float;
 
-    -- Cập nhật DetailBill
-    UPDATE DetailBill
-    SET OrderID = @OrderID, SalePrice = @SalePrice, Quantity = @Quantity
-    WHERE BillID = @BillID AND ProductID = @ProductID AND OrderID = @OrderID;
+    -- Lấy PromotionID và CurrentPrice từ bảng Product
+    SELECT
+        @PromotionID = PromotionID,
+        @CurrentPrice = CurrentPrice
+    FROM Product
+    WHERE ProductID = @ProductID;
 
-    -- Kiểm tra xem UPDATE có thành công hay không
-    --@ROWCOUNT sẽ trả về số dòng bị ảnh hưởng bởi câu lệnh UPDATE
-    IF @@ROWCOUNT > 0
+    -- Khai báo biến lưu tổng số lượng
+    DECLARE @TotalQuantity int = 0;
+
+    -- Lặp qua các bản ghi cần cập nhật
+    WHILE @RemainingQuantity <> 0
     BEGIN
-        -- Cập nhật Quantity từ Product và Iventory
-        IF @Quantity > @CurrentQuantity
-        BEGIN
-            -- Tăng Quantity
-            UPDATE Product
-            SET Quantity = Quantity - (@Quantity - @CurrentQuantity)
-            WHERE ProductID = @ProductID;
+        -- Lấy OrderID và Quantity hiện tại từ DetailBill
+        SELECT TOP 1
+            @CurrentOrderID = OrderID,
+            @TotalQuantity = Quantity
+        FROM DetailBill
+        WHERE BillID = @BillID
+            AND ProductID = @ProductID
+            AND Quantity < @NewQuantity
+        ORDER BY Quantity;
 
-            -- Giảm CurrentQuantity
-            UPDATE Inventory
-            SET CurrentQuantity = CurrentQuantity - (@Quantity - @CurrentQuantity)
-            WHERE ProductID = @ProductID AND OrderID = @OrderID;
-        END
-        ELSE IF @Quantity < @CurrentQuantity
+        -- Kiểm tra nếu không còn bản ghi cần cập nhật
+        IF @@ROWCOUNT = 0
         BEGIN
-            -- Giảm Quantity
-            UPDATE Product
-            SET Quantity = Quantity + (@CurrentQuantity - @Quantity)
-            WHERE ProductID = @ProductID;
-
-            -- Tăng CurrentQuantity
-            UPDATE Inventory
-            SET CurrentQuantity = CurrentQuantity + (@CurrentQuantity - @Quantity)
-            WHERE ProductID = @ProductID AND OrderID = @OrderID;
+            BREAK;
         END
-        -- Trường hợp không thay đổi Quantity, không cần làm gì cả
+
+        -- Cập nhật Quantity trong DetailBill
+        UPDATE DetailBill
+        SET Quantity = @NewQuantity
+        WHERE
+            BillID = @BillID
+            AND ProductID = @ProductID
+            AND OrderID = @CurrentOrderID;
+
+        -- Cập nhật số lượng trong Inventory và Product
+        DECLARE @QuantityChange int = @NewQuantity - @TotalQuantity;
+
+        UPDATE I
+        SET I.CurrentQuantity = I.CurrentQuantity - @QuantityChange
+        FROM Inventory I
+        WHERE I.OrderID = @CurrentOrderID AND I.ProductID = @ProductID;
+
+        UPDATE P
+        SET P.Quantity = P.Quantity - @QuantityChange
+        FROM Product P
+        WHERE P.ProductID = @ProductID;
+
+        SET @RemainingQuantity = @RemainingQuantity - @QuantityChange;
     END
 END;
+
+
 GO
 
-SET QUOTED_IDENTIFIER ON
-GO
 CREATE PROCEDURE [dbo].[DeleteDetailBill]
-    @BillID varchar(10),
-    @ProductID varchar(10),
-    @OrderID varchar(10)
+   @BillID varchar(10),
+   @ProductID varchar(10)
 AS
 BEGIN
-    -- Lấy giá trị Quantity từ DetailBill để giảm đi từ bảng Product
-    DECLARE @Quantity int;
-    SELECT @Quantity = Quantity
+    -- Lấy thông tin cần thiết từ DetailBill
+    DECLARE @QuantityToDelete int;
+    DECLARE @OrderIDToDelete varchar(10);
+
+    -- Khai báo con trỏ để duyệt qua các bản ghi cần xóa
+    DECLARE deleteCursor CURSOR FOR
+    SELECT OrderID, Quantity
     FROM DetailBill
-    WHERE BillID = @BillID AND ProductID = @ProductID AND OrderID = @OrderID;
+    WHERE BillID = @BillID AND ProductID = @ProductID;
 
-    -- Xóa DetailBill
-    DELETE FROM DetailBill
-    WHERE BillID = @BillID AND ProductID = @ProductID AND OrderID = @OrderID;
+    OPEN deleteCursor;
 
-    -- Kiểm tra xem DELETE có thành công hay không
-    -- @ROWCOUNT sẽ trả về số dòng bị ảnh hưởng bởi câu lệnh DetailBill.
-    IF @@ROWCOUNT > 0
+    FETCH NEXT FROM deleteCursor INTO @OrderIDToDelete, @QuantityToDelete;
+
+    WHILE @@FETCH_STATUS = 0
     BEGIN
-        -- Giảm Quantity từ bảng Product
-        UPDATE Product
-        SET Quantity = Quantity + @Quantity
-        WHERE ProductID = @ProductID;
+        -- Xóa bản ghi từ DetailBill
+        DELETE FROM DetailBill
+        WHERE
+            BillID = @BillID
+            AND ProductID = @ProductID
+            AND OrderID = @OrderIDToDelete;
 
-        -- Cập nhật lại CurrentQuantity trong bảng Inventory
-        UPDATE Inventory
-        SET CurrentQuantity = CurrentQuantity - @Quantity
-        WHERE ProductID = @ProductID AND OrderID = @OrderID;
+        -- Cập nhật số lượng trong Inventory
+        UPDATE I
+        SET I.CurrentQuantity = I.CurrentQuantity + @QuantityToDelete
+        FROM Inventory I
+        WHERE I.OrderID = @OrderIDToDelete;
+
+        -- Cập nhật số lượng trong Product
+        UPDATE P
+        SET P.Quantity = P.Quantity + @QuantityToDelete
+        FROM Product P
+        WHERE P.ProductID = @ProductID;
+
+        FETCH NEXT FROM deleteCursor INTO @OrderIDToDelete, @QuantityToDelete;
     END
-END;
-GO
--- =========================================================End Tiến
 
+    CLOSE deleteCursor;
+    DEALLOCATE deleteCursor;
+END;
+
+
+GO

@@ -79,7 +79,6 @@
             this.grb_ThongTin.TabIndex = 0;
             this.grb_ThongTin.TabStop = false;
             this.grb_ThongTin.Text = "Thông tin";
-            this.grb_ThongTin.Enter += new System.EventHandler(this.grb_ThongTin_Enter);
             // 
             // grb_ChiTiet
             // 
@@ -196,7 +195,6 @@
             this.lb_DenNgay.Size = new System.Drawing.Size(72, 20);
             this.lb_DenNgay.TabIndex = 3;
             this.lb_DenNgay.Text = "Đến ngày";
-            this.lb_DenNgay.Click += new System.EventHandler(this.label2_Click);
             // 
             // cbx_TimKiem
             // 
@@ -223,7 +221,6 @@
             this.lb_TuNgay.Size = new System.Drawing.Size(62, 20);
             this.lb_TuNgay.TabIndex = 2;
             this.lb_TuNgay.Text = "Từ ngày";
-            this.lb_TuNgay.Click += new System.EventHandler(this.label1_Click);
             // 
             // btn_ThongKe
             // 
@@ -262,7 +259,6 @@
             this.Controls.Add(this.panel1);
             this.Name = "Statistics";
             this.Text = "Statistics";
-            this.Load += new System.EventHandler(this.Statistics_Load);
             this.panel1.ResumeLayout(false);
             this.grb_ThongTin.ResumeLayout(false);
             this.grb_ThongTin.PerformLayout();
