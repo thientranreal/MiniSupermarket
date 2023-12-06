@@ -728,7 +728,8 @@ BEGIN
 END;
 GO
 --Lấy thông tin sản phẩm
-CREATE PROCEDURE AllProduct
+ALTER PROCEDURE AllProduct
+	@ID varchar(50)
 AS
 BEGIN
 	SELECT 
@@ -737,7 +738,8 @@ BEGIN
 	Product.TypeID AS Loại,
 	Product.CurrentPrice AS Giá
 	FROM Product
-	WHERE Product.isDeleted=1;
+	WHERE NOT EXISTS (SELECT * FROM SupplierProduct WHERE Product.ProductID=SupplierProduct.ProductID);
+		
 END;
 GO
 
