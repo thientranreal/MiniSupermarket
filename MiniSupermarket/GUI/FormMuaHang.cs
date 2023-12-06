@@ -39,7 +39,7 @@ namespace MiniSupermarket.GUI {
         }
 
         private void DetailFormMuaHang_Load(object sender, EventArgs e) {
-            dgvDetalBill.DataSource = detalBillBus.getAllDetalBills();
+            dgvDetalBill.DataSource = detalBillBus.getAllDetalBill();
             dgvProduct.DataSource = productBUS.getAllProducts();
             dgvProduct.Columns["ProductID"].HeaderText = "Mã sản phẩm";
             dgvProduct.Columns["Name"].HeaderText = "Tên sản phẩm";

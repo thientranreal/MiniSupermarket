@@ -70,7 +70,7 @@ namespace MiniSupermarket.GUI {
             dgvProduct.DataSource = productBUS.getAllProduct();
             dgvProduct.Columns["ProductID"].HeaderText = "Mã sản phẩm";
             dgvProduct.Columns["Name"].HeaderText = "Tên sản phẩm";
-            dgvProduct.Columns["TypeID"].HeaderText = "Mã loại";
+            dgvProduct.Columns["ProductTypeName"].HeaderText = "Tên loại";
             dgvProduct.Columns["Quantity"].HeaderText = "Số lượng";
             dgvProduct.Columns["CurrentPrice"].HeaderText = "Đơn giá";
             dgvProduct.Columns["Description"].HeaderText = "Mô tả";
