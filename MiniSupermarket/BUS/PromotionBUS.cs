@@ -155,14 +155,14 @@ namespace MiniSupermarket.BUS
             return types.Select(t => $"[{t.Id}] {t.Name}").ToArray();
         }
 
-        public string GetNameFromID(string id)
+        public string GetIDFromName(string id)
         {
             foreach (DataRow row in promotions.Rows)
             {
                 // Nếu TypeID khớp với ID cần tìm, trả về Name tương ứng
-                if (row["ID"].ToString().Equals(id, StringComparison.OrdinalIgnoreCase))
+                if (row["Name"].ToString().Equals(id, StringComparison.OrdinalIgnoreCase))
                 {
-                    return row["Name"].ToString();
+                    return row["ID"].ToString();
                 }else 
                 {
                     return null;

@@ -1248,7 +1248,7 @@ BEGIN
         Product.CurrentPrice,
         Product.[Description],
         Product.Unit,
-        Product.PromotionID,
+        Promotion.[Name] AS PromotionName,
         Product.isDeleted
     FROM Product
     INNER JOIN ProductType ON Product.TypeID = ProductType.TypeID
