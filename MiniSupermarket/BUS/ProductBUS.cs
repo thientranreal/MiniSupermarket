@@ -67,7 +67,7 @@ namespace MiniSupermarket.BUS
                 ++i;
             }
         }
-        public bool addProduct(string name, string typeid, string quantity, string price, string des, string unit , string id=null)
+        public bool addProduct(string name, string typeid, string quantity, string price, string des, string unit, string promotionID, string id=null)
         {
             // Nếu không nhập mã id thì sẽ tự tạo mã mới
             if (id == null)
@@ -86,7 +86,7 @@ namespace MiniSupermarket.BUS
                 new SqlParameter("@Description",des),
                 new SqlParameter("@Unit", unit),
 
-                new SqlParameter("@PromotionID", DBNull.Value)
+                new SqlParameter("@PromotionID", promotionID)
             };
 
             bool result = Connection.ExecuteNonQuery(storedProcedureName, parameters);
@@ -113,7 +113,7 @@ namespace MiniSupermarket.BUS
             }
             return result;
         }
-        public bool updateProduct(string name, string id, string typeid, string quantity, string price, string des, string unit)
+        public bool updateProduct(string name, string id, string typeid, string quantity, string price, string des, string unit,string promotionID)
         {
             string storedProcedureName = "UpdateProduct";
             
@@ -127,7 +127,7 @@ namespace MiniSupermarket.BUS
                 new SqlParameter("@Description",des),
                 new SqlParameter("@Unit", unit),
               
-                new SqlParameter("@PromotionID", DBNull.Value)
+                new SqlParameter("@PromotionID", promotionID)
             };
             bool result = Connection.ExecuteNonQuery(storedProcedureName, parameters);
             // Nếu cập nhật thành công thì cập nhật lại danh sách
@@ -146,7 +146,7 @@ namespace MiniSupermarket.BUS
             // Thêm tên cột
             result.Columns.Add("ProductID", typeof(string));
             result.Columns.Add("Name", typeof(string));
-            result.Columns.Add("TypeID", typeof(string));
+            result.Columns.Add("ProductTypeName", typeof(string));
             result.Columns.Add("Quantity", typeof(string));
             result.Columns.Add("CurrentPrice", typeof(string));
             result.Columns.Add("Description", typeof(string));
@@ -164,7 +164,7 @@ namespace MiniSupermarket.BUS
                         rowTemp = result.NewRow();
                         rowTemp["ProductID"] = row["ProductID"].ToString();
                         rowTemp["Name"] = row["Name"].ToString();
-                        rowTemp["TypeID"] = row["TypeID"].ToString();
+                        rowTemp["ProductTypeName"] = row["ProductTypeName"].ToString();
                         rowTemp["Quantity"] = row["Quantity"].ToString();
                         rowTemp["CurrentPrice"] = row["CurrentPrice"].ToString();
                         rowTemp["Description"] = row["Description"].ToString();
@@ -178,7 +178,7 @@ namespace MiniSupermarket.BUS
             return result;
         }
 
-        //Lấy sản phẩm từ ten sản phẩm
+        //Lấy sản phẩm từ tên sản phẩm
         public DataTable getProductsByProductName(string name)
         {
             DataTable result = new DataTable();
@@ -186,7 +186,7 @@ namespace MiniSupermarket.BUS
             // Thêm tên cột
             result.Columns.Add("ProductID", typeof(string));
             result.Columns.Add("Name", typeof(string));
-            result.Columns.Add("TypeID", typeof(string));
+            result.Columns.Add("ProductTypeName", typeof(string));
             result.Columns.Add("Quantity", typeof(string));
             result.Columns.Add("CurrentPrice", typeof(string));
             result.Columns.Add("Description", typeof(string));
@@ -204,7 +204,7 @@ namespace MiniSupermarket.BUS
                         rowTemp = result.NewRow();
                         rowTemp["ProductID"] = row["ProductID"].ToString();
                         rowTemp["Name"] = row["Name"].ToString();
-                        rowTemp["TypeID"] = row["TypeID"].ToString();
+                        rowTemp["ProductTypeName"] = row["ProductTypeName"].ToString();
                         rowTemp["Quantity"] = row["Quantity"].ToString();
                         rowTemp["CurrentPrice"] = row["CurrentPrice"].ToString();
                         rowTemp["Description"] = row["Description"].ToString();
@@ -225,7 +225,7 @@ namespace MiniSupermarket.BUS
             // Thêm tên cột
             result.Columns.Add("ProductID", typeof(string));
             result.Columns.Add("Name", typeof(string));
-            result.Columns.Add("TypeID", typeof(string));
+            result.Columns.Add("ProductTypeName", typeof(string));
             result.Columns.Add("Quantity", typeof(string));
             result.Columns.Add("CurrentPrice", typeof(string));
             result.Columns.Add("Description", typeof(string));
@@ -237,13 +237,13 @@ namespace MiniSupermarket.BUS
                 if (row["isDeleted"].ToString() == "1")
                 {
                     // Nếu dòng đó chứa TypeID như TypeID cần tìm thì thêm dòng đó vào result
-                    if (row["TypeID"].ToString().ToLower().Contains(typeId.ToLower()))
+                    if (row["ProductTypeName"].ToString().ToLower().Contains(typeId.ToLower()))
                     {
                         // Thêm dữ liệu
                         rowTemp = result.NewRow();
                         rowTemp["ProductID"] = row["ProductID"].ToString();
                         rowTemp["Name"] = row["Name"].ToString();
-                        rowTemp["TypeID"] = row["TypeID"].ToString();
+                        rowTemp["ProductTypeName"] = row["ProductTypeName"].ToString();
                         rowTemp["Quantity"] = row["Quantity"].ToString();
                         rowTemp["CurrentPrice"] = row["CurrentPrice"].ToString();
                         rowTemp["Description"] = row["Description"].ToString();

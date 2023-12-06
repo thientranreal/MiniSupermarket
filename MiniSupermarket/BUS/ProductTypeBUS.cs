@@ -232,15 +232,15 @@ namespace MiniSupermarket.BUS
         }
 
         //lấy ra tên từ mã loại sản phẩm
-        public string GetNameFromId(string id)
+        public string GetIDFromName(string id)
         {
             foreach (DataRow row in productTypes.Rows)
             {
                 // Nếu TypeID khớp với ID cần tìm, trả về Name tương ứng
-                if (row["TypeID"].ToString().Equals(id, StringComparison.OrdinalIgnoreCase) 
+                if (row["Name"].ToString().Equals(id, StringComparison.OrdinalIgnoreCase) 
                     && row["isDeleted"].ToString() == "1")
                 {
-                    return row["Name"].ToString();
+                    return row["TypeID"].ToString();
                 }
             }
 

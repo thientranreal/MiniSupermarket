@@ -15,6 +15,7 @@ namespace MiniSupermarket.BUS
 
         public PromotionBUS() {
             promotions = getAllPromotions();
+            
         }
 
         public DataTable getAllPromotions()
@@ -130,6 +131,46 @@ namespace MiniSupermarket.BUS
                 new SqlParameter("@PromotionID",ID)
             };
             return Connection.ExecuteNonQuery(storedProcedure, parameters);
+        }
+
+
+
+        //Công ANh thêm==============
+        //Lấy ra id và tên khuyến mãi theo dạng: [id]name
+        public string[] getPromotionsWithIdAndName()
+        {
+            List<(string Id, string Name)> types = new List<(string Id, string Name)>();
+
+            // Kiểm tra xem promotions có dữ liệu không trước khi truy cập
+            if (promotions != null && promotions.Rows.Count > 0 && promotions.Columns.Contains("ID") && promotions.Columns.Contains("Name"))
+            {
+                foreach (DataRow row in promotions.Rows)
+                {
+                    // Lấy thông tin mã khuyến mãi mà không cần kiểm tra isDeleted
+                    string PromotionID = row["ID"].ToString();
+                    string name = row["Name"].ToString();
+                    types.Add((PromotionID, name));
+                }
+            }
+            return types.Select(t => $"[{t.Id}] {t.Name}").ToArray();
+        }
+
+        public string GetNameFromID(string id)
+        {
+            foreach (DataRow row in promotions.Rows)
+            {
+                // Nếu TypeID khớp với ID cần tìm, trả về Name tương ứng
+                if (row["ID"].ToString().Equals(id, StringComparison.OrdinalIgnoreCase))
+                {
+                    return row["Name"].ToString();
+                }else 
+                {
+                    return null;
+                }
+            }
+
+            // Trường hợp không tìm thấy
+            return "Không tìm thấy"; // hoặc có thể trả về một giá trị mặc định khác
         }
     }
 }
