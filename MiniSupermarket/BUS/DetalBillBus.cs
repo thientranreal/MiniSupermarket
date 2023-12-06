@@ -1,4 +1,5 @@
-﻿using MiniSupermarket.DAO;
+﻿using Irony.Parsing;
+using MiniSupermarket.DAO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -11,35 +12,35 @@ using System.Xml.Linq;
 
 namespace MiniSupermarket.BUS {
     internal class DetalBillBus {
-        List<DetailBill> detailBillList = new List<DetailBill>();
-        public DetalBillBus() {
 
-            DataTable dt = getAllDetalBill();
+        //public DetalBillBus() {
+        //    detalbill = getDetalBill();
+        //}
 
-            foreach (DataRow row in dt.Rows) {
-                DetailBill detailBill = new DetailBill {
-                    BillID = row["BillID"].ToString(),
-                    ProductID = row["ProductID"].ToString(),
-                    OrderID = row["OrderID"].ToString(),
-                    ProductName = row["Name"].ToString(),
-                    ProductCurrentPrice = float.Parse(row["CurrentPrice"].ToString()),
-                    ProductUnit = row["Unit"].ToString(),
-                    SalePrice = float.Parse(row["SalePrice"].ToString()),
-                    Quantity = int.Parse(row["Quantity"].ToString())
-                };
-
-                detailBillList.Add(detailBill);
-            }
-        }
-
-        private DataTable getAllDetalBill() {
+        public DataTable getAllDetalBill() {
             string storedProcedureName = "GetAllDetailBills";
             return Connection.Execute(storedProcedureName, null);
         }
-        public List<DetailBill> getAllDetalBills() {
-            return detailBillList;
+
+        public DataTable getDetalBill(string billID) {
+            string storedProcedureName = "GetDetailBill";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@BillID", billID),
+            };
+            return Connection.Execute(storedProcedureName, parameters);
         }
-        // Nếu tồn tại trả về true, nếu không tồn tại trả về false
+
+        public bool checkIdExist(string billID, string productID) {
+            // TypeID, Name
+            DataTable detailbill = getDetalBill(billID);
+            foreach (DataRow row in detailbill.Rows) {
+                if (row["ProductID"].ToString() == productID) {
+                    return true;
+                }
+            }
+            return false;
+        }
 
         //Sản phẩm bán chạy nhất
         public string GetMostSoldProduct()
@@ -159,76 +160,38 @@ namespace MiniSupermarket.BUS {
             return 0;
         }
         
-        public bool AddDetailBill(DetailBill detailBill) {
+        public bool AddDetailBill(string billID, string productID, int quantity) {
             string storedProcedureName = "AddDetailBill";
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@BillID", detailBill.BillID),
-                new SqlParameter("@ProductID", detailBill.ProductID),
-                new SqlParameter("@OrderID", detailBill.OrderID),
-                new SqlParameter("@SalePrice", detailBill.SalePrice),
-                new SqlParameter("@Quantity", detailBill.Quantity),
+                new SqlParameter("@BillID", billID),
+                new SqlParameter("@ProductID", productID),
+                new SqlParameter("@Quantity", quantity),
             };
 
-            bool result = Connection.ExecuteNonQuery(storedProcedureName, parameters);
-
-            if (result) {
-                // Thêm DetailBill mới vào List nếu thêm thành công
-                detailBillList.Add(detailBill);
-            }
-
-            return result;
+            return Connection.ExecuteNonQuery(storedProcedureName, parameters);
         }
 
-        public bool UpdateDetailBill(DetailBill detailBill) {
+        public bool UpdateDetailBill(string billID, string productID, int quantity) {
             string storedProcedureName = "UpdateDetailBill";
-            float salePrice = detailBill.ProductCurrentPrice * detailBill.Quantity;
             SqlParameter[] parameters = new SqlParameter[]
             {
-                new SqlParameter("@BillID", detailBill.BillID),
-                new SqlParameter("@ProductID", detailBill.ProductID),
-                new SqlParameter("@OrderID", detailBill.OrderID),
-                new SqlParameter("@SalePrice", detailBill.SalePrice),
-                new SqlParameter("@Quantity", detailBill.Quantity),
-                // Các tham số khác tương ứng
+                new SqlParameter("@BillID", billID),
+                new SqlParameter("@ProductID", productID),
+                new SqlParameter("@NewQuantity", quantity),
             };
+            return Connection.ExecuteNonQuery(storedProcedureName, parameters);
 
-            bool result = Connection.ExecuteNonQuery(storedProcedureName, parameters);
-
-            if (result) {
-                // Cập nhật DetailBill trong List nếu sửa thành công
-                DetailBill existingDetailBill = detailBillList.FirstOrDefault(d => d.BillID == detailBill.BillID && d.ProductID == detailBill.ProductID && d.OrderID == detailBill.OrderID);
-
-                if (existingDetailBill != null) {
-                    existingDetailBill.Quantity = detailBill.Quantity;
-                    existingDetailBill.SalePrice = salePrice; // Gán giá trị đã tính toán
-                }
-            }
-
-            return result;
         }
 
-        public bool DeleteDetailBill(string billID, string productID, string orderID) {
+        public bool DeleteDetailBill(string billID, string productID) {
             string storedProcedureName = "DeleteDetailBill";
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@BillID", billID),
                 new SqlParameter("@ProductID", productID),
-                new SqlParameter("@OrderID", orderID),
-            };
-
-            bool result = Connection.ExecuteNonQuery(storedProcedureName, parameters);
-
-            if (result) {
-                // Xóa DetailBill khỏi List nếu xóa thành công
-                DetailBill detailBillToRemove = detailBillList.FirstOrDefault(d => d.BillID == billID && d.ProductID == productID && d.OrderID == orderID);
-
-                if (detailBillToRemove != null) {
-                    detailBillList.Remove(detailBillToRemove);
-                }
-            }
-
-            return result;
+            }; 
+            return Connection.ExecuteNonQuery(storedProcedureName, parameters);
         }
     }
 }

@@ -483,20 +483,15 @@ namespace MiniSupermarket.GUI {
         }
 
         private void grbCustomerInfo_Enter(object sender, EventArgs e) {
-
-        }
-
-        private void btnDetalBill_Click(object sender, EventArgs e) {
-            
-
-            // Kiểm tra xem có hàng nào được chọn không
-            if (dgv_bill.SelectedRows.Count> 0 && dgv_bill.SelectedRows[0].Cells[0].Value != null) {
+            if (dgv_bill.SelectedRows.Count > 0 && dgv_bill.SelectedRows[0].Cells[0].Value != null) {
                 DataGridViewRow selectedRow = dgv_bill.SelectedRows[0];
                 string selectedBillID = (selectedRow.Cells["BillID"].Value).ToString();
+                bool selectedStatus = (bool)selectedRow.Cells["Status"].Value;
+                //bool selectedStatus = (selectedRow.Cells["Status"].Value).ToString();
 
                 // Mở DetailBillForm và truyền ID của hóa đơn được chọn
-                if (selectedBillID!="") {
-                    DetailBillForm detailBillForm = new DetailBillForm(selectedBillID); 
+                if (selectedBillID != "") {
+                    DetailBillForm detailBillForm = new DetailBillForm(selectedBillID, selectedStatus);
                     detailBillForm.ShowDialog();
                 } else {
                     MessageBox.Show("Mã hóa đơn không hợp lệ. Vui lòng chọn một hóa đơn để xem chi tiết.");
@@ -504,6 +499,13 @@ namespace MiniSupermarket.GUI {
             } else {
                 MessageBox.Show("Chưa chọn hóa đơn. Vui lòng chọn một hóa đơn để xem chi tiết.");
             }
+        }
+
+        private void btnDetalBill_Click(object sender, EventArgs e) {
+            
+
+            // Kiểm tra xem có hàng nào được chọn không
+            
         }
 
     }
