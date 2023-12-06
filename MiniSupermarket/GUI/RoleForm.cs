@@ -169,7 +169,7 @@ namespace MiniSupermarket.GUI
             ds_qlcv.Columns["RoleID"].Width = 120;
             ds_qlcv.Columns["Name"].Width = 340;
 
-            ds_qlcv.ClearSelection();
+            ds_qlcv_CellClick(ds_qlcv, new DataGridViewCellEventArgs(0, 0));
         }
 
         private void bt_delete_Click(object sender, EventArgs e)

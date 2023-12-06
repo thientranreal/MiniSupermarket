@@ -20,11 +20,11 @@ namespace MiniSupermarket.GUI
         private string[] names;
         private string[] ids;
         private string[] typeids;
-       
+
         // khai bao controller
         private ProductBUS ptBus = new ProductBUS();
         AutoCompleteStringCollection allowedTypes = new AutoCompleteStringCollection();
-        
+
         public ProductManage()
         {
             InitializeComponent();
@@ -102,7 +102,7 @@ namespace MiniSupermarket.GUI
             lb_MoTa.Font = ProjectFont.getNormalFont();
             lb_Soluong.Font = ProjectFont.getNormalFont();
             lb_TenSp.Font = ProjectFont.getNormalFont();
-             lb_MaKm.Font = ProjectFont.getNormalFont();
+            lb_MaKm.Font = ProjectFont.getNormalFont();
 
         }
 
@@ -115,7 +115,7 @@ namespace MiniSupermarket.GUI
         {
 
         }
-       
+
         private void ProductManage_Load(object sender, EventArgs e)
         {
             // Tải dữ liệu lên data grid view
@@ -179,13 +179,13 @@ namespace MiniSupermarket.GUI
 
                 txt_MaSp.Text = row.Cells["ProductID"].Value.ToString();
                 txt_TenSp.Text = row.Cells["Name"].Value.ToString();
-               
+
                 txt_SoLuong.Text = row.Cells["Quantity"].Value.ToString();
                 txt_DonGia.Text = row.Cells["CurrentPrice"].Value.ToString();
                 txt_MoTa.Text = row.Cells["Description"].Value.ToString();
                 txt_Kieu.Text = row.Cells["Unit"].Value.ToString();
 
-                
+
                 if (row.Cells["PromotionID"].Value != null && !string.IsNullOrWhiteSpace(row.Cells["PromotionID"].Value.ToString()))
                 {
                     // Kiểm tra xem PromotionID có giá trị rỗng không
@@ -229,7 +229,7 @@ namespace MiniSupermarket.GUI
                                 foreach (var cell in row.Cells())
                                 {
 
-                                     if (cell.DataType == XLDataType.DateTime)
+                                    if (cell.DataType == XLDataType.DateTime)
                                     {
                                         cellValues.Add(cell.GetDateTime().ToString()); // Xử lý kiểu dữ liệu ngày tháng
                                     }
@@ -308,7 +308,7 @@ namespace MiniSupermarket.GUI
             int indexOfOpenBracket = selectedValue.IndexOf('[');
             int indexOfCloseBracket = selectedValue.IndexOf(']');
 
-           
+
             string maloai = selectedValue.Substring(indexOfOpenBracket + 1, indexOfCloseBracket - indexOfOpenBracket - 1).Trim();
 
 
@@ -344,7 +344,7 @@ namespace MiniSupermarket.GUI
             // Nếu mà mã sản phẩm rỗng thì sẽ tự tạo mã id
             if (id.Length == 0)
             {
-                if (ptBus.addProduct(name, maloai, soluong, dongia, mota, kieu,makm))
+                if (ptBus.addProduct(name, maloai, soluong, dongia, mota, kieu, makm))
                 {
                     MessageBox.Show("Thêm thành công!",
                         "Thông báo",
@@ -370,13 +370,13 @@ namespace MiniSupermarket.GUI
             }
             else // Nếu mà nhập đầy đủ thông tin thì thêm đầy đủ
             {
-                if (ptBus.addProduct(name, maloai, soluong, dongia, mota, kieu,makm, id))
+                if (ptBus.addProduct(name, maloai, soluong, dongia, mota, kieu, makm, id))
                 {
                     MessageBox.Show("Thêm thành công!",
                         "Thông báo",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information); // Thêm thành công
-                  
+
                     // Xóa nội dung của các ô nhập liệu sau khi thêm thành công
                     txt_MaSp.Clear();
                     txt_TenSp.Clear();
@@ -460,7 +460,7 @@ namespace MiniSupermarket.GUI
             dssp_DSSP.DataSource = ptBus.getAllProducts();
         }
 
-        
+
         private void btn_Sua_Click(object sender, EventArgs e)
         {
 
@@ -511,13 +511,13 @@ namespace MiniSupermarket.GUI
             string mota = ProjectFont.upperFirstLetter(txt_MoTa.Text);
             string kieu = ProjectFont.upperFirstLetter(txt_Kieu.Text);
 
-            if (ptBus.updateProduct(name, id, maloai, soluong, dongia, mota, kieu,makm))
+            if (ptBus.updateProduct(name, id, maloai, soluong, dongia, mota, kieu, makm))
             {
                 MessageBox.Show("Cập nhật thành công!",
                         "Thông báo",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information); // Cập nhật thành công
-              // Xóa nội dung của các ô nhập liệu sau khi cập nhật thành công
+                                                     // Xóa nội dung của các ô nhập liệu sau khi cập nhật thành công
                 txt_MaSp.Clear();
                 txt_TenSp.Clear();
                 cbx_MaLoai.SelectedIndex = -1; // Đặt lại ComboBox để không có mục nào được chọn
@@ -532,7 +532,7 @@ namespace MiniSupermarket.GUI
                         "Thông báo",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Error); // Cập nhật thất bại
-               
+
                 return;
             }
             // Load lại danh sách
@@ -589,6 +589,6 @@ namespace MiniSupermarket.GUI
 
             }
         }
-        
+
     }
 }
