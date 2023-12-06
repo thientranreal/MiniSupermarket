@@ -271,6 +271,7 @@ namespace MiniSupermarket.GUI {
         private void btnImport_Click(object sender, EventArgs e) {
             PurchaseOderForm temp = (PurchaseOderForm)forms["Quản lý nhập hàng"];
             OpenChildForm(temp, sender, "Quản lý nhập hàng");
+            temp.ShowComboboxSupplier();
         }
 
         private void btnEmployees_Click(object sender, EventArgs e) {

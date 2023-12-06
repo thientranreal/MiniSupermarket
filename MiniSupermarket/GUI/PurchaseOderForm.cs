@@ -324,6 +324,7 @@ namespace MiniSupermarket.GUI
         private void btnReset_Click(object sender, EventArgs e)
         {
             setNull();
+            ShowComboboxSupplier();
         }
 
         private void btnPrintOrder_Click(object sender, EventArgs e)
