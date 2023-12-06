@@ -142,7 +142,7 @@ namespace MiniSupermarket.GUI
             if (cbx_TimKiem.Text == "Hóa đơn")
             {
                 // Tải dữ liệu lên data grid view
-                dshd_sp.DataSource = saleBUS.getAllBills();
+                dshd_sp.DataSource = saleBUS.getAllBillsForStatus();
                 // Đổi tên cột
                 dshd_sp.Columns["BillID"].HeaderText = "Mã hóa đơn";
                 dshd_sp.Columns["Date"].HeaderText = "Ngày tạo";

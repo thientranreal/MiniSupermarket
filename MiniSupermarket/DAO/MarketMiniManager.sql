@@ -1194,7 +1194,7 @@ BEGIN
     SELECT BillID, [Date], EmployeeID, CustomerID, EstimatedPrice, ReducePrice, TotalPrice, [Status]
     FROM Bill
     WHERE [Date] BETWEEN @FromDate AND @ToDate
-      AND isDeleted = 1; -- Chỉ lấy những hóa đơn chưa bị xóa
+      AND isDeleted = 1 AND [Status] = 1; -- Chỉ lấy những hóa đơn chưa bị xóa
 END;
 GO
 
@@ -1216,12 +1216,12 @@ BEGIN
         Employee ON Bill.EmployeeID = Employee.EmployeeID 
     WHERE 
         Bill.[Date] BETWEEN @FromDate AND @ToDate
-        AND Bill.isDeleted = 1; -- Chỉ lấy những hóa đơn chưa bị xóa
+        AND Bill.isDeleted = 1 AND Bill.[Status] = 1; -- Chỉ lấy những hóa đơn chưa bị xóa
 END;
 GO
 
 
---Lấy một thông tin nhân viên của hóa đơn
+--Lấy một số thông tin nhân viên của hóa đơn
 CREATE PROCEDURE SelectBillInformation
 AS
 BEGIN
@@ -1230,8 +1230,8 @@ BEGIN
 	Bill.BillID, 
 	Bill.[Date],  
     Bill.TotalPrice
-	FROM Bill INNER JOIN Employee
-	ON Bill.EmployeeID = Employee.EmployeeID 
+	FROM Bill INNER JOIN Employee ON Bill.EmployeeID = Employee.EmployeeID 
+    WHERE  Bill.isDeleted = 1 AND Bill.[Status] = 1;
 END;
 GO
 

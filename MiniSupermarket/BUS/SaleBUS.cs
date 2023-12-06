@@ -168,6 +168,22 @@ namespace MiniSupermarket.BUS
 
 
         //=============================Công Anh thêm====================================
+        //Lấy những hóa đơn đã thanh toán
+        public DataTable getAllBillsForStatus()
+        {
+            // Lấy những bill chưa xóa và có status = 1
+            updateBills();
+            DataRow[] selectedRows = bills.Select("isDeleted = 1 AND status = 1");
+            DataTable newTable = selectedRows.CopyToDataTable();
+
+            if (newTable.Columns.Contains("isDeleted"))
+            {
+                newTable.Columns.Remove("isDeleted");
+            }
+
+            return newTable;
+        }
+
         // Lấy các hóa đơn trong khoảng thời gian từ fromDate đến toDate
         public DataTable GetBillsByDateRange(DateTime fromDate, DateTime toDate)
         {
