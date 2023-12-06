@@ -728,7 +728,7 @@ BEGIN
 END;
 GO
 --Lấy thông tin sản phẩm
-ALTER PROCEDURE AllProduct
+CREATE PROCEDURE AllProduct
 	@ID varchar(50)
 AS
 BEGIN
