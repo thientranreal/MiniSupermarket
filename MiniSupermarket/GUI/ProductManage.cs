@@ -40,7 +40,6 @@ namespace MiniSupermarket.GUI
             txt_SoLuong.ReadOnly = true;
 
 
-
             cbx_TimKiem.Font = ProjectFont.getNormalFont();
             lb_MaSp.Font = ProjectFont.getNormalFont();
             lb_MaLoaiSp.Font = ProjectFont.getNormalFont();
@@ -200,7 +199,7 @@ namespace MiniSupermarket.GUI
 
 
             string soluong = "0";
-            string dongia = ProjectFont.upperFirstLetter(txt_DonGia.Text);
+            string dongia = txt_DonGia.Text.Trim();
             string mota = ProjectFont.upperFirstLetter(txt_MoTa.Text);
             string kieu = ProjectFont.upperFirstLetter(txt_Kieu.Text);
 
@@ -230,7 +229,13 @@ namespace MiniSupermarket.GUI
                         "Thông báo",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information); // Thêm thành công
-
+                    // Xóa nội dung của các ô nhập liệu sau khi thêm thành công
+                    txt_MaSp.Clear();
+                    txt_TenSp.Clear();
+                    cbx_MaLoai.SelectedIndex = -1; // Đặt lại ComboBox để không có mục nào được chọn
+                    txt_DonGia.Clear();
+                    txt_MoTa.Clear();
+                    txt_Kieu.Clear();
                 }
                 else
                 {
