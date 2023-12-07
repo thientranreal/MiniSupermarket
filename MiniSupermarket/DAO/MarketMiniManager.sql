@@ -950,9 +950,9 @@ CREATE PROC SelectProductToPromotion
 	@PromotionID varchar(10)
 AS
 BEGIN
-	SELECT ProductID, P.[Name], PT.Name, PromotionID, [Description]
+	SELECT DISTINCT ProductID, P.[Name], PT.Name, PromotionID, [Description]
 	FROM Product P, ProductType PT
-	WHERE (PromotionID != @PromotionID and P.TypeID = PT.TypeID and P.isDeleted = '1') or PromotionID is null
+	WHERE (PromotionID != @PromotionID or PromotionID is null) and P.TypeID = PT.TypeID and P.isDeleted = '1'
 END;
 GO
 
