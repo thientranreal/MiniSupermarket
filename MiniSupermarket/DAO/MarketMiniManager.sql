@@ -1499,6 +1499,9 @@ CREATE PROCEDURE GetRoles
 AS
 BEGIN
     SELECT RoleID FROM Role;
+    SELECT RoleID FROM Role
+	WHERE isDeleted = 1;
+
 END;
 GO
 -- ===================================================End Sang

@@ -155,6 +155,7 @@ namespace MiniSupermarket.BUS
                         "Thông báo",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information); // Thêm thành công
+                        ds_qlnv.DataSource = employeeBUS.getAllEmployee();
 
                 }
                 else
@@ -174,6 +175,7 @@ namespace MiniSupermarket.BUS
                         "Thông báo",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information); // Thêm thành công
+                        ds_qlnv.DataSource = employeeBUS.getAllEmployee();
 
                 }
                 else
@@ -192,6 +194,7 @@ namespace MiniSupermarket.BUS
         {
             ds_qlnv.DataSource = employeeBUS.getAllEmployee();
             EmployeeBUS.Reset(gb_Info.Controls, ds_qlnv, gb_Function.Controls);
+            Roles();
         }
 
         void setNull()
