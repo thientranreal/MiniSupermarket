@@ -27,6 +27,7 @@ namespace MiniSupermarket.BUS
         }
         public DataTable getAllProducts()
         {
+            product = getAllProduct();
             // Chỉ hiển thị những sản phẩm mà is deleted là 1
             DataRow[] selectedRows = product.Select("isDeleted = 1");
             DataTable newTable = selectedRows.CopyToDataTable();

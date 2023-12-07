@@ -248,6 +248,7 @@ namespace MiniSupermarket.GUI
         private void btnProducts_Click(object sender, EventArgs e)
         {
             ProductManage temp = (ProductManage)forms["Quản lý sản phẩm"];
+            temp.taiDSSP();
             OpenChildForm(temp, sender, "Quản lý sản phẩm");
             temp.LoadTheme();
             // Gọi lại phương thức Combobox của ProductManage để cập nhật ComboBox

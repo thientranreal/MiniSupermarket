@@ -108,6 +108,12 @@ namespace MiniSupermarket.GUI {
 
         }
 
+        public void taiDSSP()
+        {
+            // Tải dữ liệu lên data grid view
+            dssp_DSSP.DataSource = ptBus.getAllProducts();
+        }
+
         private void ProductManage_Load(object sender, EventArgs e) {
             // Tải dữ liệu lên data grid view
             dssp_DSSP.DataSource = ptBus.getAllProducts();

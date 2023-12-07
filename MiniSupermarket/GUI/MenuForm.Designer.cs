@@ -338,7 +338,7 @@
             panelTitleBar.Location = new Point(250, 0);
             panelTitleBar.Margin = new Padding(3, 4, 3, 4);
             panelTitleBar.Name = "panelTitleBar";
-            panelTitleBar.Size = new Size(1367, 107);
+            panelTitleBar.Size = new Size(1489, 107);
             panelTitleBar.TabIndex = 1;
             panelTitleBar.MouseMove += panelTitleBar_MouseMove;
             // 
@@ -349,7 +349,7 @@
             bntMinimize.FlatStyle = FlatStyle.Flat;
             bntMinimize.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
             bntMinimize.ForeColor = Color.White;
-            bntMinimize.Location = new Point(1247, 4);
+            bntMinimize.Location = new Point(1369, 4);
             bntMinimize.Margin = new Padding(3, 4, 3, 4);
             bntMinimize.Name = "bntMinimize";
             bntMinimize.Size = new Size(34, 39);
@@ -365,7 +365,7 @@
             btnMaximize.FlatStyle = FlatStyle.Flat;
             btnMaximize.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnMaximize.ForeColor = Color.White;
-            btnMaximize.Location = new Point(1287, 4);
+            btnMaximize.Location = new Point(1409, 4);
             btnMaximize.Margin = new Padding(3, 4, 3, 4);
             btnMaximize.Name = "btnMaximize";
             btnMaximize.Size = new Size(34, 39);
@@ -381,7 +381,7 @@
             btnClose.FlatStyle = FlatStyle.Flat;
             btnClose.Font = new Font("Microsoft Sans Serif", 12F, FontStyle.Regular, GraphicsUnit.Point);
             btnClose.ForeColor = Color.White;
-            btnClose.Location = new Point(1328, 4);
+            btnClose.Location = new Point(1450, 4);
             btnClose.Margin = new Padding(3, 4, 3, 4);
             btnClose.Name = "btnClose";
             btnClose.Size = new Size(34, 39);
@@ -410,7 +410,7 @@
             lblTitle.AutoSize = true;
             lblTitle.Font = new Font("Microsoft Sans Serif", 16.2F, FontStyle.Regular, GraphicsUnit.Point);
             lblTitle.ForeColor = Color.White;
-            lblTitle.Location = new Point(556, 12);
+            lblTitle.Location = new Point(617, 12);
             lblTitle.Name = "lblTitle";
             lblTitle.Size = new Size(98, 32);
             lblTitle.TabIndex = 0;
@@ -422,14 +422,14 @@
             panelDesktopPane.Location = new Point(250, 107);
             panelDesktopPane.Margin = new Padding(3, 4, 3, 4);
             panelDesktopPane.Name = "panelDesktopPane";
-            panelDesktopPane.Size = new Size(1367, 760);
+            panelDesktopPane.Size = new Size(1489, 760);
             panelDesktopPane.TabIndex = 2;
             // 
             // MenuForm
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1617, 867);
+            ClientSize = new Size(1739, 867);
             Controls.Add(panelDesktopPane);
             Controls.Add(panelTitleBar);
             Controls.Add(panelMenu);

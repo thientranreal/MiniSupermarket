@@ -685,85 +685,30 @@ namespace MiniSupermarket.GUI
 
         private void btnInHoaDon_Click(object sender, EventArgs e)
         {
-
-
-            // Lấy hàng đang được chọn trong DataGridView
-            DataGridViewRow selectedRow = dgv_bill.SelectedRows[0];
-
-            // Lấy giá trị của cột "BillID"
-            string selectedBillID = selectedRow.Cells["BillID"].Value.ToString();
-
-            // Gọi phương thức để lấy DataTable
-            DetalBillBus detalBillBus = new DetalBillBus();
-            DataTable detailTable = detalBillBus.getDetalBill(selectedBillID);
-
-            // Gọi phương thức để in hóa đơn
-            PrintPdfInvoice(selectedRow, detailTable);
-        }
-
-        public void PrintPdfInvoice(DataGridViewRow selectedRow, DataTable detailBillTable)
-        {
-            // Khởi tạo hộp thoại SaveFileDialog
-            using (SaveFileDialog saveFileDialog = new SaveFileDialog())
+            if (dgv_bill.SelectedRows.Count > 0 && dgv_bill.SelectedRows[0].Cells["BillID"].Value != null)
             {
-                saveFileDialog.Filter = "PDF file|*.pdf";
-                saveFileDialog.Title = "Chọn đường dẫn để lưu file PDF";
-
-                // Hiển thị hộp thoại và xác nhận nếu người dùng đã chọn
-                if (saveFileDialog.ShowDialog() == DialogResult.OK)
+                //Chỉ in những hóa đơn đã thanh toán
+                if (((bool)(object)dgv_bill.SelectedRows[0].Cells["Status"].Value))
                 {
-                    // Lấy đường dẫn đã chọn từ hộp thoại
-                    string pdfFilePath = saveFileDialog.FileName;
+                    // Lấy hàng đang được chọn trong DataGridView
+                    DataGridViewRow selectedRow = dgv_bill.SelectedRows[0];
 
-                    // Gọi phương thức để tạo và lưu hóa đơn PDF
-                    CreateAndSavePdf(selectedRow, detailBillTable, pdfFilePath);
+                    // Lấy giá trị của cột "BillID"
+                    string selectedBillID = selectedRow.Cells["BillID"].Value.ToString();
 
-                    // Mở tệp PDF bằng ứng dụng xem PDF mặc định của hệ thống
-                    //Process.Start(pdfFilePath);
+                    // Gọi phương thức để lấy DataTable
+                    DetalBillBus detalBillBus = new DetalBillBus();
+                    DataTable detailTable = detalBillBus.getDetalBill(selectedBillID);
+                    Invorice invoriceForm = new Invorice(selectedRow, detailTable);
+                    invoriceForm.ShowDialog();
+                }
+                else
+                {
+                    MessageBox.Show("Vui lòng thanh toán hóa đơn trước khi in", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
         }
 
-        private void CreateAndSavePdf(DataGridViewRow selectedRow, DataTable detailBillTable, string filePath)
-        {
-            // Tạo đối tượng FileStream để lưu file PDF
-            using (var fs = new FileStream(filePath, FileMode.Create))
-            {
-                using (var document = new Document())
-                {
-                    // Sử dụng PdfWriter.GetInstance với FileStream thay vì PdfWriter.GetInstance với PdfWriter.GetInstance(document, fs);
-                    PdfWriter.GetInstance(document, fs);
-                    document.Open();
-
-                    // Thêm nội dung vào hóa đơn
-                    var titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12f);
-                    var boldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10f);
-
-                    document.Add(new Paragraph("Cửa Hàng Siêu Thị MiniMarket Family", titleFont));
-                    document.Add(new Paragraph("273 Đ. An Dương Vương, Phường 3, Quận 5, Thành phố Hồ Chí Minh 700000"));
-                    document.Add(new Paragraph("Số Điện thoai: 03997814"));
-                    document.Add(new Paragraph("Hotline: 1900 1880"));
-                    document.Add(new Paragraph("Hóa Đơn", titleFont));
-
-                    document.Add(new Paragraph("Description", titleFont));
-                    document.Add(new Paragraph("------------------------------------"));
-
-                    foreach (DataRow row in detailBillTable.Rows)
-                    {
-                        document.Add(new Paragraph($"{row["Name"]}".PadRight(30) + $"{row["TotalQuantity"]}".PadRight(10) + $"{row["PromotionID"]}".PadRight(30) + $"{Convert.ToDecimal(row["TotalSalePrice"]).ToString("C")}"));
-                    }
-
-                    document.Add(new Paragraph("------------------------------------"));
-                    document.Add(new Paragraph($"Ước tính : {selectedRow.Cells["EstimatedPrice"].Value:C}", boldFont));
-                    document.Add(new Paragraph($"Giảm giá : {selectedRow.Cells["ReducePrice"].Value:C}", boldFont));
-                    document.Add(new Paragraph($"Tổng tiền : {selectedRow.Cells["TotalPrice"].Value:C}", boldFont));
-
-
-                    // Đóng document để hoàn thành quá trình lưu
-                    document.Close();
-                }
-            }
-        }
 
         private void gbSearch_Enter(object sender, EventArgs e)
         {
