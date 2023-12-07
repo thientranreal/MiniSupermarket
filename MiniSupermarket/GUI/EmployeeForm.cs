@@ -49,15 +49,20 @@ namespace MiniSupermarket.BUS
             gb_Info.Font = ProjectFont.getTitleFont();
 
             // Thêm màu và chỉnh font cho các button
-            foreach (Control btns in this.gb_Function.Controls)
+            foreach (Control control in this.gb_Function.Controls)
             {
-                if (btns.GetType() == typeof(Button))
+                if (control.GetType() == typeof(Button))
                 {
-                    Button btn = (Button)btns;
+                    Button btn = (Button)control;
                     btn.BackColor = ThemeColor.PrimaryColor;
                     btn.ForeColor = Color.White;
                     btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
                     btn.Font = ProjectFont.getNormalFont();
+                }
+                else if (control.GetType() == typeof(ComboBox))
+                {
+                    ComboBox cb = (ComboBox)control;
+                    cb.Font = ProjectFont.getNormalFont();
                 }
             }
 
@@ -103,6 +108,15 @@ namespace MiniSupermarket.BUS
               cb_sex.SelectedItem == null)
             {
                 MessageBox.Show("Vui lòng điền đầy đủ thông tin.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DateTime currentDate = DateTime.Now;
+            int age = currentDate.Year - dtp_birth.Value.Year;
+
+            if (age < 18 || age > 30)
+            {
+                MessageBox.Show("Tuổi của nhân viên phải từ 18 đến 30.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
 
@@ -203,6 +217,7 @@ namespace MiniSupermarket.BUS
             tb_email.Text = "";
             tb_address.Text = "";
             tb_pNumber.Text = "";
+            txtUserName.Text = "";
         }
 
         private void EmployeeForm_Load(object sender, EventArgs e)
@@ -246,6 +261,7 @@ namespace MiniSupermarket.BUS
                 tb_email.Text = ds_qlnv.SelectedRows[0].Cells["Email"].Value.ToString();
                 cb_sex.Text = ds_qlnv.SelectedRows[0].Cells["Sex"].Value.ToString();
                 tb_pass.Text = ds_qlnv.SelectedRows[0].Cells["Password"].Value.ToString();
+                cb_role.Text = ds_qlnv.SelectedRows[0].Cells["RoleName"].Value.ToString();
                 txtUserName.Text = ds_qlnv.SelectedRows[0].Cells["UserName"].Value.ToString();
 
                 object birthDateValue = ds_qlnv.SelectedRows[0].Cells["BirthDate"].Value;
@@ -321,6 +337,15 @@ namespace MiniSupermarket.BUS
                   cb_sex.SelectedItem == null)
                 {
                     MessageBox.Show("Vui lòng điền đầy đủ thông tin.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
+
+                DateTime currentDate = DateTime.Now;
+                int age = currentDate.Year - dtp_birth.Value.Year;
+
+                if (age < 18 || age > 30)
+                {
+                    MessageBox.Show("Tuổi của nhân viên phải từ 18 đến 30.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     return;
                 }
 
