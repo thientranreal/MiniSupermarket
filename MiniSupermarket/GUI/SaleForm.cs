@@ -27,7 +27,6 @@ namespace MiniSupermarket.GUI
         private string sex;
         private string selectedBillID;
         public SaleForm() {
-
             InitializeComponent();
             this.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
         }
@@ -590,20 +589,6 @@ namespace MiniSupermarket.GUI
                 e.Handled = true;  // Chặn ký tự không mong muốn
             }
         }
-        private void dgv_bill_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        //        // Mở DetailBillForm và truyền ID của hóa đơn được chọn
-        //        if (selectedBillID != "") {
-        //            DetailBillForm detailBillForm = new DetailBillForm(selectedBillID, selectedStatus);
-        //            detailBillForm.ShowDialog();
-        //        } else {
-        //            MessageBox.Show("Mã hóa đơn không hợp lệ. Vui lòng chọn một hóa đơn để xem chi tiết.");
-        //        }
-        //    } else {
-        //        MessageBox.Show("Chưa chọn hóa đơn. Vui lòng chọn một hóa đơn để xem chi tiết.");
-        //    }
-        }
 
         private void dgv_bill_DoubleClick(object sender, EventArgs e) {
             if (dgv_bill.SelectedRows.Count > 0 && dgv_bill.SelectedRows[0].Cells["BillID"].Value != null) {
@@ -643,19 +628,25 @@ namespace MiniSupermarket.GUI
             }
         }
 
-        private void cbChonDenNgay_CheckedChanged(object sender, EventArgs e) {
-            if (cbChonDenNgay.Checked) {
+        private void cbChonDenNgay_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbChonDenNgay.Checked)
+            {
                 dtpToDate.Enabled = true;
-            } else {
+            }
+            else
+            {
                 dtpToDate.Enabled = false;
             }
         }
-
-        private void cbPay_CheckedChanged(object sender, EventArgs e) {
-            if (cbPay.Checked) {
+        private void cbPay_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbPay.Checked)
+            {
                 cbNotPay.Checked = false;
             }
         }
+
         private void cbNotPay_CheckedChanged(object sender, EventArgs e) {
             if (cbNotPay.Checked) {
                 cbPay.Checked = false;

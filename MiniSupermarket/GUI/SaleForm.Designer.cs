@@ -149,11 +149,21 @@
             grbCustomerInfo.Dock = DockStyle.Top;
             grbCustomerInfo.Location = new Point(0, 0);
             grbCustomerInfo.Name = "grbCustomerInfo";
-            grbCustomerInfo.Padding = new Padding(3, 2, 3, 2);
-            grbCustomerInfo.Size = new Size(621, 205);
+            grbCustomerInfo.Size = new Size(709, 273);
             grbCustomerInfo.TabIndex = 1;
             grbCustomerInfo.TabStop = false;
             grbCustomerInfo.Text = "Thông tin khách hàng";
+            // 
+            // btnDetalBill
+            // 
+            //btnDetalBill.FlatAppearance.BorderSize = 0;
+            //btnDetalBill.FlatStyle = FlatStyle.Flat;
+            //btnDetalBill.Location = new Point(510, 219);
+            //btnDetalBill.Name = "btnDetalBill";
+            //btnDetalBill.Size = new Size(139, 37);
+            //btnDetalBill.TabIndex = 2;
+            //btnDetalBill.Text = "Chi tiết hóa đơn";
+            //btnDetalBill.UseVisualStyleBackColor = true;
             // 
             // btnReset
             // 
@@ -292,11 +302,10 @@
             gbSearch.Controls.Add(lbToDate);
             gbSearch.Controls.Add(lbFromDate);
             gbSearch.Dock = DockStyle.Right;
-            gbSearch.Location = new Point(621, 0);
-            gbSearch.Margin = new Padding(3, 2, 3, 2);
+
+            gbSearch.Location = new Point(709, 0);
             gbSearch.Name = "gbSearch";
-            gbSearch.Padding = new Padding(3, 2, 3, 2);
-            gbSearch.Size = new Size(515, 264);
+            gbSearch.Size = new Size(589, 352);
             gbSearch.TabIndex = 1;
             gbSearch.TabStop = false;
             gbSearch.Text = "Tìm kiếm";
@@ -304,10 +313,10 @@
             // cbChonDenNgay
             // 
             cbChonDenNgay.AutoSize = true;
-            cbChonDenNgay.Location = new Point(358, 58);
-            cbChonDenNgay.Margin = new Padding(3, 2, 3, 2);
+
+            cbChonDenNgay.Location = new Point(409, 77);
             cbChonDenNgay.Name = "cbChonDenNgay";
-            cbChonDenNgay.Size = new Size(107, 19);
+            cbChonDenNgay.Size = new Size(130, 24);
             cbChonDenNgay.TabIndex = 16;
             cbChonDenNgay.Text = "Chọn đến ngày";
             cbChonDenNgay.UseVisualStyleBackColor = true;
@@ -316,10 +325,10 @@
             // cbChonTuNgay
             // 
             cbChonTuNgay.AutoSize = true;
-            cbChonTuNgay.Location = new Point(358, 25);
-            cbChonTuNgay.Margin = new Padding(3, 2, 3, 2);
+
+            cbChonTuNgay.Location = new Point(409, 33);
             cbChonTuNgay.Name = "cbChonTuNgay";
-            cbChonTuNgay.Size = new Size(98, 19);
+            cbChonTuNgay.Size = new Size(119, 24);
             cbChonTuNgay.TabIndex = 16;
             cbChonTuNgay.Text = "Chọn từ ngày";
             cbChonTuNgay.UseVisualStyleBackColor = true;
@@ -328,19 +337,19 @@
             // cbNotPay
             // 
             cbNotPay.AutoSize = true;
-            cbNotPay.Location = new Point(145, 194);
-            cbNotPay.Margin = new Padding(3, 2, 3, 2);
+
+            cbNotPay.Location = new Point(166, 259);
             cbNotPay.Name = "cbNotPay";
-            cbNotPay.Size = new Size(115, 19);
+            cbNotPay.Size = new Size(140, 24);
             cbNotPay.TabIndex = 15;
             cbNotPay.Text = "Chưa thanh toán";
             cbNotPay.UseVisualStyleBackColor = true;
             cbNotPay.CheckedChanged += cbNotPay_CheckedChanged;
             // 
             // txtToTotal
-            // 
-            txtToTotal.Location = new Point(249, 156);
-            txtToTotal.Margin = new Padding(3, 2, 3, 2);
+            //
+
+            txtToTotal.Location = new Point(285, 208);
             txtToTotal.Name = "txtToTotal";
             txtToTotal.Size = new Size(106, 27);
             txtToTotal.TabIndex = 14;
@@ -350,8 +359,7 @@
             // 
             // txtFromTotal
             // 
-            txtFromTotal.Location = new Point(123, 156);
-            txtFromTotal.Margin = new Padding(3, 2, 3, 2);
+            txtFromTotal.Location = new Point(141, 208);
             txtFromTotal.Name = "txtFromTotal";
             txtFromTotal.Size = new Size(106, 27);
             txtFromTotal.TabIndex = 14;
@@ -372,8 +380,8 @@
             // 
             btnClearSearch.FlatAppearance.BorderSize = 0;
             btnClearSearch.FlatStyle = FlatStyle.Flat;
-            btnClearSearch.Location = new Point(259, 219);
-            btnClearSearch.Margin = new Padding(3, 2, 3, 2);
+
+            btnClearSearch.Location = new Point(296, 292);
             btnClearSearch.Name = "btnClearSearch";
             btnClearSearch.Size = new Size(117, 53);
             btnClearSearch.TabIndex = 12;
@@ -403,8 +411,8 @@
             // 
             btnSearch.FlatAppearance.BorderSize = 0;
             btnSearch.FlatStyle = FlatStyle.Flat;
-            btnSearch.Location = new Point(142, 219);
-            btnSearch.Margin = new Padding(3, 2, 3, 2);
+
+            btnSearch.Location = new Point(162, 292);
             btnSearch.Name = "btnSearch";
             btnSearch.Size = new Size(117, 53);
             btnSearch.TabIndex = 9;
@@ -425,24 +433,23 @@
             // 
             // txtEmployeeSearch
             // 
-            txtEmployeeSearch.Location = new Point(123, 123);
-            txtEmployeeSearch.Margin = new Padding(3, 2, 3, 2);
+            txtEmployeeSearch.Location = new Point(141, 164);
             txtEmployeeSearch.Name = "txtEmployeeSearch";
             txtEmployeeSearch.Size = new Size(250, 27);
             txtEmployeeSearch.TabIndex = 6;
             // 
             // txtCustomerSearch
             // 
-            txtCustomerSearch.Location = new Point(123, 90);
-            txtCustomerSearch.Margin = new Padding(3, 2, 3, 2);
+
+            txtCustomerSearch.Location = new Point(141, 120);
             txtCustomerSearch.Name = "txtCustomerSearch";
             txtCustomerSearch.Size = new Size(250, 27);
             txtCustomerSearch.TabIndex = 5;
             // 
             // dtpToDate
             // 
-            dtpToDate.Location = new Point(123, 57);
-            dtpToDate.Margin = new Padding(3, 2, 3, 2);
+
+            dtpToDate.Location = new Point(141, 76);
             dtpToDate.Name = "dtpToDate";
             dtpToDate.Size = new Size(250, 27);
             dtpToDate.TabIndex = 2;
@@ -450,8 +457,8 @@
             // 
             // dtpFromDate
             // 
-            dtpFromDate.Location = new Point(123, 24);
-            dtpFromDate.Margin = new Padding(3, 2, 3, 2);
+
+            dtpFromDate.Location = new Point(141, 32);
             dtpFromDate.Name = "dtpFromDate";
             dtpFromDate.Size = new Size(250, 27);
             dtpFromDate.TabIndex = 1;
@@ -481,7 +488,8 @@
             pnl_bottom.Dock = DockStyle.Fill;
             pnl_bottom.Location = new Point(0, 352);
             pnl_bottom.Name = "pnl_bottom";
-            pnl_bottom.Size = new Size(1136, 200);
+
+            pnl_bottom.Size = new Size(1298, 267);
             pnl_bottom.TabIndex = 1;
             // 
             // dgv_bill
@@ -494,7 +502,8 @@
             dgv_bill.RowHeadersWidth = 51;
             dgv_bill.RowTemplate.Height = 29;
             dgv_bill.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgv_bill.Size = new Size(1136, 200);
+
+            dgv_bill.Size = new Size(1298, 267);
             dgv_bill.TabIndex = 0;
             dgv_bill.CellClick += dgv_bill_CellClick;
             dgv_bill.DoubleClick += dgv_bill_DoubleClick;
@@ -513,7 +522,8 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1136, 464);
+
+            ClientSize = new Size(1298, 619);
             Controls.Add(pnl_bottom);
             Controls.Add(pnl_top);
             Name = "SaleForm";
@@ -572,5 +582,10 @@
         private CheckBox cbChonTuNgay;
         private CheckBox cbChonDenNgay;
         private Button btnInHoaDon;
+
+        //private Button btnDetalBill;
+        //private CheckBox cbNotPay;
+        //private CheckBox cbChonTuNgay;
+        //private CheckBox cbChonDenNgay;
     }
 }
