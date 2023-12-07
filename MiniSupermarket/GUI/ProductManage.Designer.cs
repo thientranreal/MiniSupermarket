@@ -333,6 +333,7 @@
             dssp_DSSP.Name = "dssp_DSSP";
             dssp_DSSP.RowHeadersWidth = 51;
             dssp_DSSP.RowTemplate.Height = 29;
+            dssp_DSSP.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dssp_DSSP.Size = new Size(1093, 250);
             dssp_DSSP.TabIndex = 0;
             dssp_DSSP.CellClick += dssp_DSSP_CellClick;
