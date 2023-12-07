@@ -178,7 +178,7 @@ GO
 -- Rot du lieu vao bang hoa don
 INSERT INTO Bill (BillID, [Date], EmployeeID, CustomerID, EstimatedPrice, ReducePrice, TotalPrice, [Status])
 VALUES
-    ('B0001', '2023-09-23', 'E0002', 'C0001', 0, 0, 0, 1);
+    ('B0001', '2023-09-23', 'E0002', 'C0001', 0, 0, 0, 0);
 GO
 
 --Tao bang nha cung cap
@@ -1315,9 +1315,9 @@ GO
 CREATE PROCEDURE SelectAllFromEmployee
 AS
 BEGIN
-		SELECT Employee.EmployeeID, [Password], [Name], Sex, BirthDate, PhoneNumber, Email, [Address], RoleID
-		FROM Employee
-		WHERE isDeleted = 1;
+		SELECT Employee.EmployeeID, UserName, [Password], Employee.[Name], Sex, BirthDate, PhoneNumber, Email, [Address], [Role].[Name] RoleName
+		FROM Employee, [Role]
+		WHERE Employee.isDeleted = 1 and Employee.RoleID = [Role].RoleID;
 
 END;
 GO
@@ -1498,8 +1498,7 @@ GO
 CREATE PROCEDURE GetRoles
 AS
 BEGIN
-    SELECT RoleID FROM Role;
-    SELECT RoleID FROM Role
+    SELECT RoleID, [Name] FROM [Role]
 	WHERE isDeleted = 1;
 
 END;

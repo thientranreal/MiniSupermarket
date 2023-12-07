@@ -276,6 +276,7 @@ namespace MiniSupermarket.GUI {
 
         private void btnEmployees_Click(object sender, EventArgs e) {
             EmployeeForm temp = (EmployeeForm)forms["Quản lý nhân viên"];
+            temp.Roles();
             OpenChildForm(temp, sender, "Quản lý nhân viên");
             temp.LoadTheme();
         }
