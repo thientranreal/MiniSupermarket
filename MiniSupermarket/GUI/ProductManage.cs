@@ -442,14 +442,18 @@ namespace MiniSupermarket.GUI {
 
             string maloai = selectedValue.Substring(indexOfOpenBracket + 1, indexOfCloseBracket - indexOfOpenBracket - 1).Trim();
 
-            string selectedValue2 = cbx_MaKm.Text;
+            string makm = "";
 
-            // Tìm vị trí của ký tự '[' và ']'
-            int indexOfOpenBracket2 = selectedValue2.IndexOf('[');
-            int indexOfCloseBracket2 = selectedValue2.IndexOf(']');
+            if (cbx_MaKm.SelectedIndex != -1)
+            {
+                string selectedValue2 = cbx_MaKm.Text;
+                // Tìm vị trí của ký tự '[' và ']'
+                int indexOfOpenBracket2 = selectedValue2.IndexOf('[');
+                int indexOfCloseBracket2 = selectedValue2.IndexOf(']');
 
 
-            string makm = selectedValue2.Substring(indexOfOpenBracket2 + 1, indexOfCloseBracket2 - indexOfOpenBracket2 - 1).Trim();
+                makm = selectedValue2.Substring(indexOfOpenBracket2 + 1, indexOfCloseBracket2 - indexOfOpenBracket2 - 1).Trim();
+            }
             string soluong = ProjectFont.upperFirstLetter(txt_SoLuong.Text);
             string dongia = ProjectFont.upperFirstLetter(txt_DonGia.Text);
             string mota = ProjectFont.upperFirstLetter(txt_MoTa.Text);
