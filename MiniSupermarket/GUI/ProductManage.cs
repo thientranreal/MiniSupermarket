@@ -280,16 +280,18 @@ namespace MiniSupermarket.GUI {
             string dongia = txt_DonGia.Text.Trim();
             string mota = ProjectFont.upperFirstLetter(txt_MoTa.Text);
             string kieu = ProjectFont.upperFirstLetter(txt_Kieu.Text);
+            string makm = "";
+            
+            if (cbx_MaKm.SelectedIndex != -1)
+            {
+                string selectedValue2 = cbx_MaKm.Text;
+                // Tìm vị trí của ký tự '[' và ']'
+                int indexOfOpenBracket2 = selectedValue2.IndexOf('[');
+                int indexOfCloseBracket2 = selectedValue2.IndexOf(']');
 
-            string selectedValue2 = cbx_MaKm.Text;
 
-            // Tìm vị trí của ký tự '[' và ']'
-            int indexOfOpenBracket2 = selectedValue2.IndexOf('[');
-            int indexOfCloseBracket2 = selectedValue2.IndexOf(']');
-
-
-            string makm = selectedValue2.Substring(indexOfOpenBracket2 + 1, indexOfCloseBracket2 - indexOfOpenBracket2 - 1).Trim();
-
+                makm = selectedValue2.Substring(indexOfOpenBracket2 + 1, indexOfCloseBracket2 - indexOfOpenBracket2 - 1).Trim();
+            }
 
             if (id.Length != 0) // Nếu người dùng nhập mã sản phẩm
             {
@@ -393,6 +395,7 @@ namespace MiniSupermarket.GUI {
                 txt_MoTa.Clear();
                 txt_Kieu.Clear();
                 cbx_MaKm.SelectedIndex = -1;
+                txt_SoLuong.Clear();
             } else {
                 MessageBox.Show("Xóa thất bại!",
                         "Thông báo",
@@ -465,6 +468,7 @@ namespace MiniSupermarket.GUI {
                 txt_MoTa.Clear();
                 txt_Kieu.Clear();
                 cbx_MaKm.SelectedIndex = -1;
+                txt_SoLuong.Clear();
             } else {
                 MessageBox.Show("Cập nhật thất bại!",
                         "Thông báo",
