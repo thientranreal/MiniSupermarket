@@ -669,7 +669,6 @@ namespace MiniSupermarket.GUI
                 dtpToDate.Enabled = false;
             }
         }
-
         private void cbPay_CheckedChanged(object sender, EventArgs e)
         {
             if (cbPay.Checked)

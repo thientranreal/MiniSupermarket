@@ -302,8 +302,8 @@
             gbSearch.Controls.Add(lbToDate);
             gbSearch.Controls.Add(lbFromDate);
             gbSearch.Dock = DockStyle.Right;
-            gbSearch.Location = new Point(621, 0);
-            gbSearch.Margin = new Padding(3, 2, 3, 2);
+
+            gbSearch.Location = new Point(709, 0);
             gbSearch.Name = "gbSearch";
             gbSearch.Padding = new Padding(3, 2, 3, 2);
             gbSearch.Size = new Size(562, 352);
@@ -575,5 +575,10 @@
         private CheckBox cbChonTuNgay;
         private CheckBox cbChonDenNgay;
         private Button btnInHoaDon;
+
+        //private Button btnDetalBill;
+        //private CheckBox cbNotPay;
+        //private CheckBox cbChonTuNgay;
+        //private CheckBox cbChonDenNgay;
     }
 }
