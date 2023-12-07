@@ -12,6 +12,12 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Xml.Linq;
+using iText.Kernel.Geom;
+using System.Data;
+using System.IO;
+using iTextSharp.text;
+using iTextSharp.text.pdf;
+using System.Diagnostics;
 
 namespace MiniSupermarket.GUI
 {
@@ -19,8 +25,13 @@ namespace MiniSupermarket.GUI
     {
         private SaleBUS saleBus = new SaleBUS();
         private string sex;
+<<<<<<< HEAD
+        private string selectedBillID;
+        public SaleForm() {
+=======
         public SaleForm()
         {
+>>>>>>> main
             InitializeComponent();
             this.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
         }
@@ -171,8 +182,8 @@ namespace MiniSupermarket.GUI
             }
 
             // Chỉnh size chữ cho date time picker
-            dtpFromDate.Font = new Font("Microsoft Sans Serif", 8.5F);
-            dtpToDate.Font = new Font("Microsoft Sans Serif", 8.5F);
+            //dtpFromDate.Font = new Font("Microsoft Sans Serif", 8.5F);
+            //dtpToDate.Font = new Font("Microsoft Sans Serif", 8.5F);
         }
 
         private void btnAddBill_Click(object sender, EventArgs e)
@@ -355,6 +366,20 @@ namespace MiniSupermarket.GUI
         }
 
         // Sự kiện tìm kiếm hóa đơn
+<<<<<<< HEAD
+        private void btnSearch_Click(object sender, EventArgs e) {
+            DateTime dateFrom, dateTo;
+
+            if (!cbChonTuNgay.Checked) {
+                dateFrom = DateTime.Parse("1900-01-01");
+            } else {
+                dateFrom = dtpFromDate.Value;
+            }
+
+            if (!cbChonDenNgay.Checked) {
+                dateTo = DateTime.Parse("2100-01-01");
+            } else {
+=======
         private void btnSearch_Click(object sender, EventArgs e)
         {
             DateTime dateFrom, dateTo;
@@ -374,6 +399,7 @@ namespace MiniSupermarket.GUI
             }
             else
             {
+>>>>>>> main
                 dateTo = dtpToDate.Value;
             }
 
@@ -392,8 +418,7 @@ namespace MiniSupermarket.GUI
             }
 
             // Nếu giá từ lớn hơn giá đến thì sẽ đổi chỗ 2 giá
-            if (giaTu > giaDen)
-            {
+            if (giaTu > giaDen) {
                 int temp = giaTu;
                 giaTu = giaDen;
                 giaDen = temp;
@@ -425,6 +450,14 @@ namespace MiniSupermarket.GUI
                     (dr["CustomerID"].ToString().Contains(customer) || dr["CustomerName"].ToString().Contains(customer) &&
                     (dr["EmployeeID"].ToString().Contains(employee) || dr["EmployeeName"].ToString().Contains(employee))) &&
                     (int.Parse(dr["TotalPrice"].ToString()) >= giaTu &&
+<<<<<<< HEAD
+                    int.Parse(dr["TotalPrice"].ToString()) <= giaDen)) {
+                    if (cbPay.Checked && dr["Status"].Equals(true)) {
+                        resultSearch.ImportRow(dr);
+                    } else if (cbNotPay.Checked && dr["Status"].Equals(false)) {
+                        resultSearch.ImportRow(dr);
+                    } else if (!cbPay.Checked && !cbNotPay.Checked) { resultSearch.ImportRow(dr); }
+=======
                     int.Parse(dr["TotalPrice"].ToString()) <= giaDen))
                 {
                     if (cbPay.Checked && dr["Status"].Equals(true))
@@ -436,6 +469,7 @@ namespace MiniSupermarket.GUI
                         resultSearch.ImportRow(dr);
                     }
                     else if (!cbPay.Checked && !cbNotPay.Checked) { resultSearch.ImportRow(dr); }
+>>>>>>> main
                 }
             }
 
@@ -585,24 +619,52 @@ namespace MiniSupermarket.GUI
             }
         }
 
+<<<<<<< HEAD
+        //private void grbCustomerInfo_Enter(object sender, EventArgs e) {
+        //    if (dgv_bill.SelectedRows.Count > 0 && dgv_bill.SelectedRows[0].Cells[0].Value != null) {
+        //        DataGridViewRow selectedRow = dgv_bill.SelectedRows[0];
+        //        string selectedBillID = (selectedRow.Cells["BillID"].Value).ToString();
+        //        bool selectedStatus = (bool)selectedRow.Cells["Status"].Value;
+        //        //bool selectedStatus = (selectedRow.Cells["Status"].Value).ToString();
+=======
         private void dgv_bill_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+>>>>>>> main
 
-        }
+        //        // Mở DetailBillForm và truyền ID của hóa đơn được chọn
+        //        if (selectedBillID != "") {
+        //            DetailBillForm detailBillForm = new DetailBillForm(selectedBillID, selectedStatus);
+        //            detailBillForm.ShowDialog();
+        //        } else {
+        //            MessageBox.Show("Mã hóa đơn không hợp lệ. Vui lòng chọn một hóa đơn để xem chi tiết.");
+        //        }
+        //    } else {
+        //        MessageBox.Show("Chưa chọn hóa đơn. Vui lòng chọn một hóa đơn để xem chi tiết.");
+        //    }
+        //}
 
+<<<<<<< HEAD
+        private void dgv_bill_DoubleClick(object sender, EventArgs e) {
+            if (dgv_bill.SelectedRows.Count > 0 && dgv_bill.SelectedRows[0].Cells["BillID"].Value != null) {
+=======
         private void grbCustomerInfo_Enter(object sender, EventArgs e)
         {
             if (dgv_bill.SelectedRows.Count > 0 && dgv_bill.SelectedRows[0].Cells[0].Value != null)
             {
+>>>>>>> main
                 DataGridViewRow selectedRow = dgv_bill.SelectedRows[0];
-                string selectedBillID = (selectedRow.Cells["BillID"].Value).ToString();
+                selectedBillID = selectedRow.Cells["BillID"].Value.ToString();
                 bool selectedStatus = (bool)selectedRow.Cells["Status"].Value;
-                //bool selectedStatus = (selectedRow.Cells["Status"].Value).ToString();
 
                 // Mở DetailBillForm và truyền ID của hóa đơn được chọn
+<<<<<<< HEAD
+                if (!string.IsNullOrEmpty(selectedBillID)) {
+=======
                 if (selectedBillID != "")
                 {
+>>>>>>> main
                     DetailBillForm detailBillForm = new DetailBillForm(selectedBillID, selectedStatus);
+                    detailBillForm.FormClosed += DetailBillForm_FormClosed; // Đăng ký sự kiện FormClosed
                     detailBillForm.ShowDialog();
                 }
                 else
@@ -616,6 +678,19 @@ namespace MiniSupermarket.GUI
             }
         }
 
+<<<<<<< HEAD
+        private void DetailBillForm_FormClosed(object sender, FormClosedEventArgs e) {
+            DetalBillBus billBus = new DetalBillBus();
+            billBus.updateBillPrice(this.selectedBillID);
+            billBus.payTheBill(this.selectedBillID);
+            resetBillGridView();
+        }
+
+        private void cbChonTuNgay_CheckedChanged(object sender, EventArgs e) {
+            if (cbChonTuNgay.Checked) {
+                dtpFromDate.Enabled = true;
+            } else {
+=======
         private void btnDetalBill_Click(object sender, EventArgs e)
         {
 
@@ -632,10 +707,17 @@ namespace MiniSupermarket.GUI
             }
             else
             {
+>>>>>>> main
                 dtpFromDate.Enabled = false;
             }
         }
 
+<<<<<<< HEAD
+        private void cbChonDenNgay_CheckedChanged(object sender, EventArgs e) {
+            if (cbChonDenNgay.Checked) {
+                dtpToDate.Enabled = true;
+            } else {
+=======
         private void cbChonDenNgay_CheckedChanged(object sender, EventArgs e)
         {
             if (cbChonDenNgay.Checked)
@@ -644,18 +726,105 @@ namespace MiniSupermarket.GUI
             }
             else
             {
+>>>>>>> main
                 dtpToDate.Enabled = false;
             }
         }
 
+<<<<<<< HEAD
+        private void cbPay_CheckedChanged(object sender, EventArgs e) {
+            if (cbPay.Checked) {
+=======
         private void cbPay_CheckedChanged(object sender, EventArgs e)
         {
             if (cbPay.Checked)
             {
+>>>>>>> main
                 cbNotPay.Checked = false;
             }
         }
 
+<<<<<<< HEAD
+        private void cbNotPay_CheckedChanged(object sender, EventArgs e) {
+            if (cbNotPay.Checked) {
+                cbPay.Checked = false;
+            }
+        }
+
+        private void btnInHoaDon_Click(object sender, EventArgs e) {
+            
+
+            // Lấy hàng đang được chọn trong DataGridView
+            DataGridViewRow selectedRow = dgv_bill.SelectedRows[0];
+
+            // Lấy giá trị của cột "BillID"
+            string selectedBillID = selectedRow.Cells["BillID"].Value.ToString();
+
+            // Gọi phương thức để lấy DataTable
+            DetalBillBus detalBillBus = new DetalBillBus();
+            DataTable detailTable = detalBillBus.getDetalBill(selectedBillID);
+
+            // Gọi phương thức để in hóa đơn
+            PrintPdfInvoice(selectedRow, detailTable);
+        }
+
+        public void PrintPdfInvoice(DataGridViewRow selectedRow, DataTable detailBillTable) {
+            // Khởi tạo hộp thoại SaveFileDialog
+            using (SaveFileDialog saveFileDialog = new SaveFileDialog()) {
+                saveFileDialog.Filter = "PDF file|*.pdf";
+                saveFileDialog.Title = "Chọn đường dẫn để lưu file PDF";
+
+                // Hiển thị hộp thoại và xác nhận nếu người dùng đã chọn
+                if (saveFileDialog.ShowDialog() == DialogResult.OK) {
+                    // Lấy đường dẫn đã chọn từ hộp thoại
+                    string pdfFilePath = saveFileDialog.FileName;
+
+                    // Gọi phương thức để tạo và lưu hóa đơn PDF
+                    CreateAndSavePdf(selectedRow, detailBillTable, pdfFilePath);
+
+                    // Mở tệp PDF bằng ứng dụng xem PDF mặc định của hệ thống
+                    //Process.Start(pdfFilePath);
+                }
+            }
+        }
+
+        private void CreateAndSavePdf(DataGridViewRow selectedRow, DataTable detailBillTable, string filePath) {
+            // Tạo đối tượng FileStream để lưu file PDF
+            using (var fs = new FileStream(filePath, FileMode.Create)) {
+                using (var document = new Document()) {
+                    // Sử dụng PdfWriter.GetInstance với FileStream thay vì PdfWriter.GetInstance với PdfWriter.GetInstance(document, fs);
+                    PdfWriter.GetInstance(document, fs);
+                    document.Open();
+
+                    // Thêm nội dung vào hóa đơn
+                    var titleFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 12f);
+                    var boldFont = FontFactory.GetFont(FontFactory.HELVETICA_BOLD, 10f);
+
+                    document.Add(new Paragraph("Cửa Hàng Siêu Thị MiniMarket Family", titleFont));
+                    document.Add(new Paragraph("273 Đ. An Dương Vương, Phường 3, Quận 5, Thành phố Hồ Chí Minh 700000"));
+                    document.Add(new Paragraph("Số Điện thoai: 03997814"));
+                    document.Add(new Paragraph("Hotline: 1900 1880"));
+                    document.Add(new Paragraph("Hóa Đơn", titleFont));
+
+                    document.Add(new Paragraph("Description", titleFont));
+                    document.Add(new Paragraph("------------------------------------"));
+
+                    foreach (DataRow row in detailBillTable.Rows) {
+                        document.Add(new Paragraph($"{row["Name"]}".PadRight(30) + $"{row["TotalQuantity"]}".PadRight(10) + $"{row["PromotionID"]}".PadRight(30) + $"{Convert.ToDecimal(row["TotalSalePrice"]).ToString("C")}"));
+                    }
+
+                    document.Add(new Paragraph("------------------------------------"));
+                    document.Add(new Paragraph($"Ước tính : {selectedRow.Cells["EstimatedPrice"].Value:C}", boldFont));
+                    document.Add(new Paragraph($"Giảm giá : {selectedRow.Cells["ReducePrice"].Value:C}", boldFont));
+                    document.Add(new Paragraph($"Tổng tiền : {selectedRow.Cells["TotalPrice"].Value:C}", boldFont));
+
+
+                    // Đóng document để hoàn thành quá trình lưu
+                    document.Close();
+                }
+            }
+        }
+=======
         private void cbNotPay_CheckedChanged(object sender, EventArgs e)
         {
             if (cbNotPay.Checked)
@@ -663,5 +832,6 @@ namespace MiniSupermarket.GUI
                 cbPay.Checked = false;
             }
         }
+>>>>>>> main
     }
 }

@@ -270,7 +270,6 @@ namespace MiniSupermarket.BUS
                     }
                 }
             }
-
             // Trường hợp không tìm thấy
             return "Không tìm thấy"; // hoặc có thể trả về một giá trị mặc định khác
         }

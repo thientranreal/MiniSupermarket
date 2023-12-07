@@ -23,14 +23,10 @@
         /// the contents of this method with the code editor.
         /// </summary>
         private void InitializeComponent() {
-            panel2 = new Panel();
-            groupBox2 = new GroupBox();
-            comboBox1 = new ComboBox();
-            groupBox1 = new GroupBox();
-            txtFind = new TextBox();
-            cboFind = new ComboBox();
-            lblTitleProduct = new Label();
             panel3 = new Panel();
+            grb_TimKiem = new GroupBox();
+            cbx_TimKiem = new ComboBox();
+            txt_TimKiem = new TextBox();
             dgvProduct = new DataGridView();
             panel1 = new Panel();
             btnXoa = new Button();
@@ -44,10 +40,8 @@
             btnThanhToan = new Button();
             dgvDetalBill = new DataGridView();
             pnlInformation = new Panel();
-            panel2.SuspendLayout();
-            groupBox2.SuspendLayout();
-            groupBox1.SuspendLayout();
             panel3.SuspendLayout();
+            grb_TimKiem.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProduct).BeginInit();
             panel1.SuspendLayout();
             panel4.SuspendLayout();
@@ -56,96 +50,54 @@
             pnlInformation.SuspendLayout();
             SuspendLayout();
             // 
-            // panel2
-            // 
-            panel2.Controls.Add(groupBox2);
-            panel2.Controls.Add(groupBox1);
-            panel2.Controls.Add(lblTitleProduct);
-            panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(488, 0);
-            panel2.Margin = new Padding(3, 2, 3, 2);
-            panel2.Name = "panel2";
-            panel2.Size = new Size(859, 80);
-            panel2.TabIndex = 1;
-            // 
-            // groupBox2
-            // 
-            groupBox2.Controls.Add(comboBox1);
-            groupBox2.Location = new Point(506, 18);
-            groupBox2.Margin = new Padding(3, 2, 3, 2);
-            groupBox2.Name = "groupBox2";
-            groupBox2.Padding = new Padding(3, 2, 3, 2);
-            groupBox2.Size = new Size(208, 54);
-            groupBox2.TabIndex = 4;
-            groupBox2.TabStop = false;
-            groupBox2.Text = "Loại sản phẩm";
-            // 
-            // comboBox1
-            // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Items.AddRange(new object[] { "Mã khách hàng", "Tên khách hàng", "Số điện thoại", "" });
-            comboBox1.Location = new Point(19, 20);
-            comboBox1.Margin = new Padding(3, 2, 3, 2);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(171, 23);
-            comboBox1.TabIndex = 0;
-            // 
-            // groupBox1
-            // 
-            groupBox1.Controls.Add(txtFind);
-            groupBox1.Controls.Add(cboFind);
-            groupBox1.Location = new Point(78, 18);
-            groupBox1.Margin = new Padding(3, 2, 3, 2);
-            groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(3, 2, 3, 2);
-            groupBox1.Size = new Size(399, 54);
-            groupBox1.TabIndex = 4;
-            groupBox1.TabStop = false;
-            groupBox1.Text = "Tìm kiếm theo";
-            // 
-            // txtFind
-            // 
-            txtFind.Location = new Point(215, 20);
-            txtFind.Margin = new Padding(3, 2, 3, 2);
-            txtFind.Name = "txtFind";
-            txtFind.Size = new Size(171, 23);
-            txtFind.TabIndex = 1;
-            // 
-            // cboFind
-            // 
-            cboFind.FormattingEnabled = true;
-            cboFind.Items.AddRange(new object[] { "Mã khách hàng", "Tên khách hàng", "Số điện thoại", "" });
-            cboFind.Location = new Point(19, 20);
-            cboFind.Margin = new Padding(3, 2, 3, 2);
-            cboFind.Name = "cboFind";
-            cboFind.Size = new Size(171, 23);
-            cboFind.TabIndex = 0;
-            // 
-            // lblTitleProduct
-            // 
-            lblTitleProduct.AutoSize = true;
-            lblTitleProduct.Location = new Point(432, 1);
-            lblTitleProduct.Name = "lblTitleProduct";
-            lblTitleProduct.Size = new Size(119, 15);
-            lblTitleProduct.TabIndex = 3;
-            lblTitleProduct.Text = "Danh Sách Sản Phẩm";
-            // 
             // panel3
             // 
+            panel3.Controls.Add(grb_TimKiem);
             panel3.Controls.Add(dgvProduct);
             panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(488, 80);
+            panel3.Location = new Point(488, 0);
             panel3.Margin = new Padding(3, 2, 3, 2);
             panel3.Name = "panel3";
-            panel3.Size = new Size(859, 550);
+            panel3.Size = new Size(859, 630);
             panel3.TabIndex = 2;
+            // 
+            // grb_TimKiem
+            // 
+            grb_TimKiem.Controls.Add(cbx_TimKiem);
+            grb_TimKiem.Controls.Add(txt_TimKiem);
+            grb_TimKiem.Dock = DockStyle.Top;
+            grb_TimKiem.Location = new Point(0, 0);
+            grb_TimKiem.Margin = new Padding(3, 2, 3, 2);
+            grb_TimKiem.Name = "grb_TimKiem";
+            grb_TimKiem.Padding = new Padding(3, 2, 3, 2);
+            grb_TimKiem.Size = new Size(859, 80);
+            grb_TimKiem.TabIndex = 1;
+            grb_TimKiem.TabStop = false;
+            grb_TimKiem.Text = "Tìm kiếm";
+            // 
+            // cbx_TimKiem
+            // 
+            cbx_TimKiem.FormattingEnabled = true;
+            cbx_TimKiem.Location = new Point(181, 19);
+            cbx_TimKiem.Margin = new Padding(3, 2, 3, 2);
+            cbx_TimKiem.Name = "cbx_TimKiem";
+            cbx_TimKiem.Size = new Size(177, 23);
+            cbx_TimKiem.TabIndex = 1;
+            // 
+            // txt_TimKiem
+            // 
+            txt_TimKiem.Location = new Point(363, 19);
+            txt_TimKiem.Margin = new Padding(3, 2, 3, 2);
+            txt_TimKiem.Name = "txt_TimKiem";
+            txt_TimKiem.Size = new Size(284, 23);
+            txt_TimKiem.TabIndex = 0;
+            txt_TimKiem.TextChanged += txt_TimKiem_TextChanged;
+            txt_TimKiem.KeyDown += txt_TimKiem_KeyDown;
             // 
             // dgvProduct
             // 
-            dgvProduct.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dgvProduct.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvProduct.Dock = DockStyle.Fill;
-            dgvProduct.Location = new Point(0, 0);
+            dgvProduct.Location = new Point(0, 80);
             dgvProduct.Margin = new Padding(3, 2, 3, 2);
             dgvProduct.Name = "dgvProduct";
             dgvProduct.RowHeadersWidth = 51;
@@ -227,15 +179,15 @@
             panel5.Controls.Add(txtQuantity);
             panel5.Controls.Add(btnThanhToan);
             panel5.Dock = DockStyle.Bottom;
-            panel5.Location = new Point(0, 450);
+            panel5.Location = new Point(0, 459);
             panel5.Name = "panel5";
-            panel5.Size = new Size(488, 100);
+            panel5.Size = new Size(488, 91);
             panel5.TabIndex = 1;
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(24, 25);
+            label2.Location = new Point(29, 34);
             label2.Name = "label2";
             label2.Size = new Size(54, 15);
             label2.TabIndex = 4;
@@ -243,19 +195,20 @@
             // 
             // txtQuantity
             // 
-            txtQuantity.Location = new Point(84, 17);
+            txtQuantity.Location = new Point(89, 26);
             txtQuantity.Name = "txtQuantity";
             txtQuantity.Size = new Size(85, 23);
             txtQuantity.TabIndex = 3;
             // 
             // btnThanhToan
             // 
-            btnThanhToan.Location = new Point(321, 16);
+            btnThanhToan.Location = new Point(326, 25);
             btnThanhToan.Name = "btnThanhToan";
             btnThanhToan.Size = new Size(139, 33);
             btnThanhToan.TabIndex = 0;
             btnThanhToan.Text = "Thanh Toán";
             btnThanhToan.UseVisualStyleBackColor = true;
+            btnThanhToan.Click += btnThanhToan_Click;
             // 
             // dgvDetalBill
             // 
@@ -286,19 +239,15 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(1347, 630);
             Controls.Add(panel3);
-            Controls.Add(panel2);
             Controls.Add(pnlInformation);
             Margin = new Padding(3, 2, 3, 2);
             Name = "DetailBillForm";
             StartPosition = FormStartPosition.CenterScreen;
             Text = "PromotionForm";
             Load += DetailFormMuaHang_Load;
-            panel2.ResumeLayout(false);
-            panel2.PerformLayout();
-            groupBox2.ResumeLayout(false);
-            groupBox1.ResumeLayout(false);
-            groupBox1.PerformLayout();
             panel3.ResumeLayout(false);
+            grb_TimKiem.ResumeLayout(false);
+            grb_TimKiem.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)dgvProduct).EndInit();
             panel1.ResumeLayout(false);
             panel1.PerformLayout();
@@ -311,15 +260,8 @@
         }
 
         #endregion
-        private Panel panel2;
         private Panel panel3;
         private DataGridView dgvProduct;
-        private GroupBox groupBox1;
-        private TextBox txtFind;
-        private ComboBox cboFind;
-        private Label lblTitleProduct;
-        private GroupBox groupBox2;
-        private ComboBox comboBox1;
         private Panel pnlInformation;
         private Panel panel4;
         private DataGridView dgvDetalBill;
@@ -332,5 +274,8 @@
         private Button btnThanhToan;
         private Label label2;
         private TextBox txtQuantity;
+        private GroupBox grb_TimKiem;
+        private ComboBox cbx_TimKiem;
+        private TextBox txt_TimKiem;
     }
 }

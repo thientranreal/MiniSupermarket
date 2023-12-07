@@ -1,7 +1,5 @@
-﻿namespace MiniSupermarket.GUI
-{
-    partial class CustomerForm
-    {
+﻿namespace MiniSupermarket.GUI {
+    partial class CustomerForm {
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -11,10 +9,8 @@
         /// Clean up any resources being used.
         /// </summary>
         /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing && (components != null))
-            {
+        protected override void Dispose(bool disposing) {
+            if (disposing && (components != null)) {
                 components.Dispose();
             }
             base.Dispose(disposing);
@@ -26,8 +22,7 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-        private void InitializeComponent()
-        {
+        private void InitializeComponent() {
             components = new System.ComponentModel.Container();
             pnlInformation = new Panel();
             rdoNu = new RadioButton();
@@ -86,18 +81,17 @@
             pnlInformation.Controls.Add(lblTitle);
             pnlInformation.Dock = DockStyle.Top;
             pnlInformation.Location = new Point(0, 0);
-            pnlInformation.Margin = new Padding(4, 3, 4, 3);
+            pnlInformation.Margin = new Padding(3, 2, 3, 2);
             pnlInformation.Name = "pnlInformation";
-            pnlInformation.Size = new Size(1924, 422);
+            pnlInformation.Size = new Size(1132, 253);
             pnlInformation.TabIndex = 0;
             // 
             // rdoNu
             // 
             rdoNu.AutoSize = true;
-            rdoNu.Location = new Point(1449, 170);
-            rdoNu.Margin = new Padding(4, 5, 4, 5);
+            rdoNu.Location = new Point(921, 102);
             rdoNu.Name = "rdoNu";
-            rdoNu.Size = new Size(61, 29);
+            rdoNu.Size = new Size(41, 19);
             rdoNu.TabIndex = 0;
             rdoNu.TabStop = true;
             rdoNu.Text = "Nữ";
@@ -107,10 +101,10 @@
             // 
             btnUpdate.FlatAppearance.BorderSize = 0;
             btnUpdate.FlatStyle = FlatStyle.Flat;
-            btnUpdate.Location = new Point(1153, 340);
-            btnUpdate.Margin = new Padding(4, 3, 4, 3);
+            btnUpdate.Location = new Point(714, 204);
+            btnUpdate.Margin = new Padding(3, 2, 3, 2);
             btnUpdate.Name = "btnUpdate";
-            btnUpdate.Size = new Size(174, 38);
+            btnUpdate.Size = new Size(122, 23);
             btnUpdate.TabIndex = 23;
             btnUpdate.Text = "Sửa";
             btnUpdate.UseVisualStyleBackColor = true;
@@ -119,10 +113,9 @@
             // rdoNam
             // 
             rdoNam.AutoSize = true;
-            rdoNam.Location = new Point(1319, 170);
-            rdoNam.Margin = new Padding(4, 5, 4, 5);
+            rdoNam.Location = new Point(830, 102);
             rdoNam.Name = "rdoNam";
-            rdoNam.Size = new Size(75, 29);
+            rdoNam.Size = new Size(51, 19);
             rdoNam.TabIndex = 0;
             rdoNam.TabStop = true;
             rdoNam.Text = "Nam";
@@ -132,10 +125,10 @@
             // 
             btnDelete.FlatAppearance.BorderSize = 0;
             btnDelete.FlatStyle = FlatStyle.Flat;
-            btnDelete.Location = new Point(1394, 340);
-            btnDelete.Margin = new Padding(4, 3, 4, 3);
+            btnDelete.Location = new Point(883, 204);
+            btnDelete.Margin = new Padding(3, 2, 3, 2);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(117, 38);
+            btnDelete.Size = new Size(82, 23);
             btnDelete.TabIndex = 22;
             btnDelete.Text = "Xoá";
             btnDelete.UseVisualStyleBackColor = true;
@@ -145,10 +138,10 @@
             // 
             btnRefresh.FlatAppearance.BorderSize = 0;
             btnRefresh.FlatStyle = FlatStyle.Flat;
-            btnRefresh.Location = new Point(1579, 340);
-            btnRefresh.Margin = new Padding(4, 3, 4, 3);
+            btnRefresh.Location = new Point(1012, 204);
+            btnRefresh.Margin = new Padding(3, 2, 3, 2);
             btnRefresh.Name = "btnRefresh";
-            btnRefresh.Size = new Size(117, 38);
+            btnRefresh.Size = new Size(82, 23);
             btnRefresh.TabIndex = 20;
             btnRefresh.Text = "Làm Mới";
             btnRefresh.UseVisualStyleBackColor = true;
@@ -158,10 +151,10 @@
             // 
             btnAdd.FlatAppearance.BorderSize = 0;
             btnAdd.FlatStyle = FlatStyle.Flat;
-            btnAdd.Location = new Point(969, 340);
-            btnAdd.Margin = new Padding(4, 3, 4, 3);
+            btnAdd.Location = new Point(585, 204);
+            btnAdd.Margin = new Padding(3, 2, 3, 2);
             btnAdd.Name = "btnAdd";
-            btnAdd.Size = new Size(117, 38);
+            btnAdd.Size = new Size(82, 23);
             btnAdd.TabIndex = 19;
             btnAdd.Text = "Thêm";
             btnAdd.UseVisualStyleBackColor = true;
@@ -170,94 +163,88 @@
             // lblCustomerID
             // 
             lblCustomerID.AutoSize = true;
-            lblCustomerID.Location = new Point(206, 168);
-            lblCustomerID.Margin = new Padding(4, 0, 4, 0);
+            lblCustomerID.Location = new Point(51, 101);
             lblCustomerID.Name = "lblCustomerID";
-            lblCustomerID.Size = new Size(137, 25);
+            lblCustomerID.Size = new Size(92, 15);
             lblCustomerID.TabIndex = 12;
             lblCustomerID.Text = "Mã Khách Hàng";
             // 
             // txtCustomerID
             // 
-            txtCustomerID.Location = new Point(444, 165);
-            txtCustomerID.Margin = new Padding(4, 3, 4, 3);
+            txtCustomerID.Location = new Point(218, 99);
+            txtCustomerID.Margin = new Padding(3, 2, 3, 2);
             txtCustomerID.Name = "txtCustomerID";
             txtCustomerID.ReadOnly = true;
-            txtCustomerID.Size = new Size(267, 31);
+            txtCustomerID.Size = new Size(188, 23);
             txtCustomerID.TabIndex = 11;
             // 
             // lblPoint
             // 
             lblPoint.AutoSize = true;
-            lblPoint.Location = new Point(1161, 245);
-            lblPoint.Margin = new Padding(4, 0, 4, 0);
+            lblPoint.Location = new Point(720, 147);
             lblPoint.Name = "lblPoint";
-            lblPoint.Size = new Size(54, 25);
+            lblPoint.Size = new Size(35, 15);
             lblPoint.TabIndex = 4;
             lblPoint.Text = "Điểm";
             // 
             // txtPoint
             // 
-            txtPoint.Location = new Point(1319, 235);
-            txtPoint.Margin = new Padding(4, 3, 4, 3);
+            txtPoint.Location = new Point(830, 141);
+            txtPoint.Margin = new Padding(3, 2, 3, 2);
             txtPoint.Name = "txtPoint";
-            txtPoint.Size = new Size(187, 31);
+            txtPoint.Size = new Size(132, 23);
             txtPoint.TabIndex = 3;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(229, 312);
-            label1.Margin = new Padding(4, 0, 4, 0);
+            label1.Location = new Point(67, 187);
             label1.Name = "label1";
-            label1.Size = new Size(117, 25);
+            label1.Size = new Size(76, 15);
             label1.TabIndex = 4;
             label1.Text = "Số điện thoại";
             // 
             // txtPhoneNumber
             // 
-            txtPhoneNumber.Location = new Point(444, 305);
-            txtPhoneNumber.Margin = new Padding(4, 3, 4, 3);
+            txtPhoneNumber.Location = new Point(218, 183);
+            txtPhoneNumber.Margin = new Padding(3, 2, 3, 2);
             txtPhoneNumber.Name = "txtPhoneNumber";
-            txtPhoneNumber.Size = new Size(267, 31);
+            txtPhoneNumber.Size = new Size(188, 23);
             txtPhoneNumber.TabIndex = 3;
             // 
             // lblPhoneNumber
             // 
             lblPhoneNumber.AutoSize = true;
-            lblPhoneNumber.Location = new Point(1134, 170);
-            lblPhoneNumber.Margin = new Padding(4, 0, 4, 0);
+            lblPhoneNumber.Location = new Point(701, 102);
             lblPhoneNumber.Name = "lblPhoneNumber";
-            lblPhoneNumber.Size = new Size(81, 25);
+            lblPhoneNumber.Size = new Size(54, 15);
             lblPhoneNumber.TabIndex = 4;
             lblPhoneNumber.Text = "Giới Tính";
             // 
             // lblCustomerName
             // 
             lblCustomerName.AutoSize = true;
-            lblCustomerName.Location = new Point(204, 240);
-            lblCustomerName.Margin = new Padding(4, 0, 4, 0);
+            lblCustomerName.Location = new Point(50, 144);
             lblCustomerName.Name = "lblCustomerName";
-            lblCustomerName.Size = new Size(138, 25);
+            lblCustomerName.Size = new Size(93, 15);
             lblCustomerName.TabIndex = 2;
             lblCustomerName.Text = "Tên Khách Hàng";
             // 
             // txtCustomerName
             // 
-            txtCustomerName.Location = new Point(444, 235);
-            txtCustomerName.Margin = new Padding(4, 3, 4, 3);
+            txtCustomerName.Location = new Point(218, 141);
+            txtCustomerName.Margin = new Padding(3, 2, 3, 2);
             txtCustomerName.Name = "txtCustomerName";
-            txtCustomerName.Size = new Size(267, 31);
+            txtCustomerName.Size = new Size(188, 23);
             txtCustomerName.TabIndex = 1;
             // 
             // lblTitle
             // 
             lblTitle.AutoSize = true;
             lblTitle.Font = new Font("Segoe UI", 10.8F, FontStyle.Bold, GraphicsUnit.Point);
-            lblTitle.Location = new Point(856, 40);
-            lblTitle.Margin = new Padding(4, 0, 4, 0);
+            lblTitle.Location = new Point(506, 24);
             lblTitle.Name = "lblTitle";
-            lblTitle.Size = new Size(238, 30);
+            lblTitle.Size = new Size(161, 20);
             lblTitle.TabIndex = 0;
             lblTitle.Text = "Thông tin khách hàng";
             // 
@@ -267,21 +254,19 @@
             panel2.Controls.Add(groupBox1);
             panel2.Controls.Add(lblTitleProduct);
             panel2.Dock = DockStyle.Top;
-            panel2.Location = new Point(0, 422);
-            panel2.Margin = new Padding(4, 3, 4, 3);
+            panel2.Location = new Point(0, 253);
+            panel2.Margin = new Padding(3, 2, 3, 2);
             panel2.Name = "panel2";
-            panel2.Size = new Size(1924, 157);
+            panel2.Size = new Size(1132, 94);
             panel2.TabIndex = 1;
             // 
             // groupBox2
             // 
             groupBox2.Controls.Add(grb_rdoNu);
             groupBox2.Controls.Add(grb_rdoNam);
-            groupBox2.Location = new Point(1269, 68);
-            groupBox2.Margin = new Padding(4, 5, 4, 5);
+            groupBox2.Location = new Point(816, 32);
             groupBox2.Name = "groupBox2";
-            groupBox2.Padding = new Padding(4, 5, 4, 5);
-            groupBox2.Size = new Size(250, 75);
+            groupBox2.Size = new Size(175, 45);
             groupBox2.TabIndex = 5;
             groupBox2.TabStop = false;
             groupBox2.Text = "Giới tính";
@@ -289,10 +274,9 @@
             // grb_rdoNu
             // 
             grb_rdoNu.AutoSize = true;
-            grb_rdoNu.Location = new Point(139, 27);
-            grb_rdoNu.Margin = new Padding(4, 5, 4, 5);
+            grb_rdoNu.Location = new Point(97, 16);
             grb_rdoNu.Name = "grb_rdoNu";
-            grb_rdoNu.Size = new Size(61, 29);
+            grb_rdoNu.Size = new Size(41, 19);
             grb_rdoNu.TabIndex = 0;
             grb_rdoNu.TabStop = true;
             grb_rdoNu.Text = "Nữ";
@@ -302,10 +286,9 @@
             // grb_rdoNam
             // 
             grb_rdoNam.AutoSize = true;
-            grb_rdoNam.Location = new Point(29, 27);
-            grb_rdoNam.Margin = new Padding(4, 5, 4, 5);
+            grb_rdoNam.Location = new Point(20, 16);
             grb_rdoNam.Name = "grb_rdoNam";
-            grb_rdoNam.Size = new Size(75, 29);
+            grb_rdoNam.Size = new Size(51, 19);
             grb_rdoNam.TabIndex = 0;
             grb_rdoNam.TabStop = true;
             grb_rdoNam.Text = "Nam";
@@ -316,21 +299,21 @@
             // 
             groupBox1.Controls.Add(txtFind);
             groupBox1.Controls.Add(cboFind);
-            groupBox1.Location = new Point(463, 53);
-            groupBox1.Margin = new Padding(4, 3, 4, 3);
+            groupBox1.Location = new Point(252, 23);
+            groupBox1.Margin = new Padding(3, 2, 3, 2);
             groupBox1.Name = "groupBox1";
-            groupBox1.Padding = new Padding(4, 3, 4, 3);
-            groupBox1.Size = new Size(756, 83);
+            groupBox1.Padding = new Padding(3, 2, 3, 2);
+            groupBox1.Size = new Size(529, 50);
             groupBox1.TabIndex = 4;
             groupBox1.TabStop = false;
             groupBox1.Text = "Tìm kiếm theo";
             // 
             // txtFind
             // 
-            txtFind.Location = new Point(381, 33);
-            txtFind.Margin = new Padding(4, 3, 4, 3);
+            txtFind.Location = new Point(267, 20);
+            txtFind.Margin = new Padding(3, 2, 3, 2);
             txtFind.Name = "txtFind";
-            txtFind.Size = new Size(355, 31);
+            txtFind.Size = new Size(250, 23);
             txtFind.TabIndex = 1;
             txtFind.TextChanged += Find_Changed;
             // 
@@ -338,20 +321,19 @@
             // 
             cboFind.FormattingEnabled = true;
             cboFind.Items.AddRange(new object[] { "Mã khách hàng", "Tên khách hàng", "Số điện thoại", "" });
-            cboFind.Location = new Point(27, 33);
-            cboFind.Margin = new Padding(4, 3, 4, 3);
+            cboFind.Location = new Point(19, 20);
+            cboFind.Margin = new Padding(3, 2, 3, 2);
             cboFind.Name = "cboFind";
-            cboFind.Size = new Size(303, 33);
+            cboFind.Size = new Size(213, 23);
             cboFind.TabIndex = 0;
             cboFind.SelectedIndexChanged += Find_Changed;
             // 
             // lblTitleProduct
             // 
             lblTitleProduct.AutoSize = true;
-            lblTitleProduct.Location = new Point(869, 18);
-            lblTitleProduct.Margin = new Padding(4, 0, 4, 0);
+            lblTitleProduct.Location = new Point(536, 2);
             lblTitleProduct.Name = "lblTitleProduct";
-            lblTitleProduct.Size = new Size(196, 25);
+            lblTitleProduct.Size = new Size(131, 15);
             lblTitleProduct.TabIndex = 3;
             lblTitleProduct.Text = "Danh Sách Khách Hàng";
             // 
@@ -359,10 +341,10 @@
             // 
             panel3.Controls.Add(dgvCustomer);
             panel3.Dock = DockStyle.Fill;
-            panel3.Location = new Point(0, 579);
-            panel3.Margin = new Padding(4, 3, 4, 3);
+            panel3.Location = new Point(0, 347);
+            panel3.Margin = new Padding(3, 2, 3, 2);
             panel3.Name = "panel3";
-            panel3.Size = new Size(1924, 279);
+            panel3.Size = new Size(1132, 283);
             panel3.TabIndex = 2;
             // 
             // dgvCustomer
@@ -371,11 +353,11 @@
             dgvCustomer.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvCustomer.Dock = DockStyle.Fill;
             dgvCustomer.Location = new Point(0, 0);
-            dgvCustomer.Margin = new Padding(4, 3, 4, 3);
+            dgvCustomer.Margin = new Padding(3, 2, 3, 2);
             dgvCustomer.Name = "dgvCustomer";
             dgvCustomer.RowHeadersWidth = 51;
             dgvCustomer.RowTemplate.Height = 29;
-            dgvCustomer.Size = new Size(1924, 279);
+            dgvCustomer.Size = new Size(1132, 283);
             dgvCustomer.TabIndex = 0;
             dgvCustomer.CellClick += dgvCustomer_CellClick;
             // 
@@ -385,13 +367,13 @@
             // 
             // CustomerForm
             // 
-            AutoScaleDimensions = new SizeF(10F, 25F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1924, 858);
+            ClientSize = new Size(1132, 630);
             Controls.Add(panel3);
             Controls.Add(panel2);
             Controls.Add(pnlInformation);
-            Margin = new Padding(4, 3, 4, 3);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "CustomerForm";
             Text = "PromotionForm";
             Load += CustomerForm_Load;

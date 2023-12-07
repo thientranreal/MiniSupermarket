@@ -43,29 +43,23 @@ namespace MiniSupermarket.BUS {
         }
 
         //Sản phẩm bán chạy nhất
-        public string GetMostSoldProduct()
-        {
+        public string GetMostSoldProduct() {
             Dictionary<string, int> productSales = new Dictionary<string, int>();
 
             DataTable detalBill = getAllDetalBill();
 
-            foreach (DataRow row in detalBill.Rows)
-            {
+            foreach (DataRow row in detalBill.Rows) {
                 string productId = row.Field<string>("ProductID");
                 int quantity = row.Field<int>("Quantity");
 
-                if (productSales.ContainsKey(productId))
-                {
+                if (productSales.ContainsKey(productId)) {
                     productSales[productId] += quantity;
-                }
-                else
-                {
+                } else {
                     productSales.Add(productId, quantity);
                 }
             }
 
-            if (productSales.Count > 0)
-            {
+            if (productSales.Count > 0) {
                 string mostSoldProduct = productSales.Aggregate((x, y) => x.Value > y.Value ? x : y).Key;
                 return mostSoldProduct;
             }
@@ -73,28 +67,22 @@ namespace MiniSupermarket.BUS {
             return "No data available";
         }
         //Sản phẩm bán ít nhất
-        public string GetLeastSoldProduct()
-        {
+        public string GetLeastSoldProduct() {
             Dictionary<string, int> productSales = new Dictionary<string, int>();
             DataTable detalBill = getAllDetalBill();
 
-            foreach (DataRow row in detalBill.Rows)
-            {
+            foreach (DataRow row in detalBill.Rows) {
                 string productId = row.Field<string>("ProductID");
                 int quantity = row.Field<int>("Quantity");
 
-                if (productSales.ContainsKey(productId))
-                {
+                if (productSales.ContainsKey(productId)) {
                     productSales[productId] += quantity;
-                }
-                else
-                {
+                } else {
                     productSales.Add(productId, quantity);
                 }
             }
 
-            if (productSales.Count > 0)
-            {
+            if (productSales.Count > 0) {
                 string leastSoldProduct = productSales.Aggregate((x, y) => x.Value < y.Value ? x : y).Key;
                 return leastSoldProduct;
             }
@@ -102,28 +90,22 @@ namespace MiniSupermarket.BUS {
             return "No data available";
         }
         //Số lượng bán ra của sản phẩm bán chạy
-        public int GetMostSoldProductQuantity()
-        {
+        public int GetMostSoldProductQuantity() {
             Dictionary<string, int> productSales = new Dictionary<string, int>();
             DataTable detalBill = getAllDetalBill();
 
-            foreach (DataRow row in detalBill.Rows)
-            {
+            foreach (DataRow row in detalBill.Rows) {
                 string productId = row.Field<string>("ProductID");
                 int quantity = row.Field<int>("Quantity");
 
-                if (productSales.ContainsKey(productId))
-                {
+                if (productSales.ContainsKey(productId)) {
                     productSales[productId] += quantity;
-                }
-                else
-                {
+                } else {
                     productSales.Add(productId, quantity);
                 }
             }
 
-            if (productSales.Count > 0)
-            {
+            if (productSales.Count > 0) {
                 var mostSoldProduct = productSales.Aggregate((x, y) => x.Value > y.Value ? x : y);
                 return mostSoldProduct.Value;
             }
@@ -131,35 +113,29 @@ namespace MiniSupermarket.BUS {
             return 0;
         }
         //Số lượng bán ra của sản phẩm bán ít
-        public int GetLeastSoldProductQuantity()
-        {
+        public int GetLeastSoldProductQuantity() {
             Dictionary<string, int> productSales = new Dictionary<string, int>();
             DataTable detalBill = getAllDetalBill();
 
-            foreach (DataRow row in detalBill.Rows)
-            {
+            foreach (DataRow row in detalBill.Rows) {
                 string productId = row.Field<string>("ProductID");
                 int quantity = row.Field<int>("Quantity");
 
-                if (productSales.ContainsKey(productId))
-                {
+                if (productSales.ContainsKey(productId)) {
                     productSales[productId] += quantity;
-                }
-                else
-                {
+                } else {
                     productSales.Add(productId, quantity);
                 }
             }
 
-            if (productSales.Count > 0)
-            {
+            if (productSales.Count > 0) {
                 var leastSoldProduct = productSales.Aggregate((x, y) => x.Value < y.Value ? x : y);
                 return leastSoldProduct.Value;
             }
 
             return 0;
         }
-        
+
         public bool AddDetailBill(string billID, string productID, int quantity) {
             string storedProcedureName = "AddDetailBill";
             SqlParameter[] parameters = new SqlParameter[]
@@ -172,17 +148,19 @@ namespace MiniSupermarket.BUS {
             return Connection.ExecuteNonQuery(storedProcedureName, parameters);
         }
 
-        public bool UpdateDetailBill(string billID, string productID, int quantity) {
-            string storedProcedureName = "UpdateDetailBill";
-            SqlParameter[] parameters = new SqlParameter[]
-            {
-                new SqlParameter("@BillID", billID),
-                new SqlParameter("@ProductID", productID),
-                new SqlParameter("@NewQuantity", quantity),
-            };
-            return Connection.ExecuteNonQuery(storedProcedureName, parameters);
+        //public bool UpdateDetailBill(string billID, string productID, int quantity) {
+        //    string storedProcedureName = "UpdateDetailBill";
+        //    SqlParameter[] parameters = new SqlParameter[]
+        //    {
+        //        new SqlParameter("@BillID", billID),
+        //        new SqlParameter("@ProductID", productID),
+        //        new SqlParameter("@NewQuantity", quantity),
+        //    };
+        //    return Connection.ExecuteNonQuery(storedProcedureName, parameters);
 
-        }
+        //}
+
+
 
         public bool DeleteDetailBill(string billID, string productID) {
             string storedProcedureName = "DeleteDetailBill";
@@ -190,7 +168,25 @@ namespace MiniSupermarket.BUS {
             {
                 new SqlParameter("@BillID", billID),
                 new SqlParameter("@ProductID", productID),
-            }; 
+            };
+            return Connection.ExecuteNonQuery(storedProcedureName, parameters);
+        }
+
+        public bool updateBillPrice(string billID) {
+            string storedProcedureName = "UpdateBillPrice";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@BillID", billID),
+            };
+            return Connection.ExecuteNonQuery(storedProcedureName, parameters);
+        }
+
+        public bool payTheBill(string billID) {
+            string storedProcedureName = "UpdateBillPrice";
+            SqlParameter[] parameters = new SqlParameter[]
+            {
+                new SqlParameter("@BillID", billID),
+            };
             return Connection.ExecuteNonQuery(storedProcedureName, parameters);
         }
     }

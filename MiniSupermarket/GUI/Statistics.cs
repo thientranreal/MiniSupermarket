@@ -11,16 +11,13 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace MiniSupermarket.GUI
-{
-    public partial class Statistics : Form
-    {
+namespace MiniSupermarket.GUI {
+    public partial class Statistics : Form {
         SaleBUS saleBUS = new SaleBUS();
         StatisticsBUS statisticsBUS = new StatisticsBUS();
         DetalBillBus DetalBillBus = new DetalBillBus();
         ProductBUS productBUS = new ProductBUS();
-        public Statistics()
-        {
+        public Statistics() {
             InitializeComponent();
             this.AutoSize = true;
             this.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
@@ -39,7 +36,7 @@ namespace MiniSupermarket.GUI
             lb_DTHDCaoNhat.Font = ProjectFont.getNormalFont();
             lb_DTHDThapNhat.Font = ProjectFont.getNormalFont();
             lb_DoanhThuMaxNv.Font = ProjectFont.getNormalFont();
-            lb_DoanhThuMinNv.Font = ProjectFont.getNormalFont();    
+            lb_DoanhThuMinNv.Font = ProjectFont.getNormalFont();
 
             cbx_TimKiem.DropDownStyle = ComboBoxStyle.DropDownList;
             cbx_TimKiem.Items.Add("Hóa đơn");
@@ -52,10 +49,9 @@ namespace MiniSupermarket.GUI
             dshd_sp.BackgroundColor = Color.White;
             // Chỉ cho đọc data grid view
             dshd_sp.ReadOnly = true;
-            
+
         }
-        public void LoadTheme()
-        {
+        public void LoadTheme() {
             // Thêm màu và chỉnh font cho các tiêu đề group box
             grb_ThongTin.ForeColor = ThemeColor.SecondaryColor;
             grb_ThongTin.Font = ProjectFont.getTitleFont();
@@ -63,10 +59,8 @@ namespace MiniSupermarket.GUI
             grb_ChiTiet.Font = ProjectFont.getTitleFont();
 
             // Thêm màu và chỉnh font cho các nút
-            foreach (Control btns in this.grb_ThongTin.Controls)
-            {
-                if (btns.GetType() == typeof(Button))
-                {
+            foreach (Control btns in this.grb_ThongTin.Controls) {
+                if (btns.GetType() == typeof(Button)) {
                     Button btn = (Button)btns;
                     btn.BackColor = ThemeColor.PrimaryColor;
                     btn.ForeColor = Color.White;
@@ -90,59 +84,61 @@ namespace MiniSupermarket.GUI
             lb_DTHDThapNhat.Font = ProjectFont.getNormalFont();
             lb_DoanhThuMinNv.Font = ProjectFont.getNormalFont();
             lb_DoanhThuMaxNv.Font = ProjectFont.getNormalFont();
-          
-        }
-
-        private void label1_Click(object sender, EventArgs e)
-        {
 
         }
 
-        private void label2_Click(object sender, EventArgs e)
-        {
+        private void label1_Click(object sender, EventArgs e) {
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            
+        private void label2_Click(object sender, EventArgs e) {
+
         }
 
-        private void Statistics_Load(object sender, EventArgs e)
-        {
+        private void button1_Click(object sender, EventArgs e) {
+
+        }
+
+        private void Statistics_Load(object sender, EventArgs e) {
 
 
 
         }
 
-        private void lb_DoanhThu_Click(object sender, EventArgs e)
-        {
+        private void lb_DoanhThu_Click(object sender, EventArgs e) {
 
         }
 
-        private void grb_ThongTin_Enter(object sender, EventArgs e)
-        {
+        private void grb_ThongTin_Enter(object sender, EventArgs e) {
 
         }
 
-        private void lb_TongDoanhThu_Click(object sender, EventArgs e)
-        {
+        private void lb_TongDoanhThu_Click(object sender, EventArgs e) {
 
         }
 
-        private void cbx_TimKiem_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
+        private void cbx_TimKiem_SelectedIndexChanged(object sender, EventArgs e) {
+
 
         }
 
-        private void cbx_TimKiem_TextChanged(object sender, EventArgs e)
-        {
+        private void cbx_TimKiem_TextChanged(object sender, EventArgs e) {
 
-            if (cbx_TimKiem.Text == "Hóa đơn")
-            {
+            if (cbx_TimKiem.Text == "Hóa đơn") {
                 // Tải dữ liệu lên data grid view
                 dshd_sp.DataSource = saleBUS.getAllBillsForStatus();
+<<<<<<< HEAD
+                // Đổi tên cột
+                dshd_sp.Columns["BillID"].HeaderText = "Mã hóa đơn";
+                dshd_sp.Columns["Date"].HeaderText = "Ngày tạo";
+                dshd_sp.Columns["EmployeeID"].HeaderText = "Mã nhân viên";
+                dshd_sp.Columns["CustomerID"].HeaderText = "Mã khách hàng";
+                dshd_sp.Columns["EstimatedPrice"].HeaderText = "Giá ước tính";
+                dshd_sp.Columns["ReducePrice"].HeaderText = "Giá giảm";
+                dshd_sp.Columns["TotalPrice"].HeaderText = "Tổng giá";
+                dshd_sp.Columns["Status"].HeaderText = "status";
+
+=======
                 if (dshd_sp.RowCount > 0)
                 {
                     // Đổi tên cột
@@ -156,6 +152,7 @@ namespace MiniSupermarket.GUI
                     dshd_sp.Columns["Status"].HeaderText = "status";
                 }
                    
+>>>>>>> main
                 dtp_TuNgay.Visible = true;
                 dtp_DenNgay.Visible = true;
                 lb_TuNgay.Visible = true;
@@ -189,9 +186,7 @@ namespace MiniSupermarket.GUI
                 btn_ThongKe.Click -= new EventHandler(button1_Click);
                 btn_ThongKe.Click += new EventHandler(ShowInvoices);
 
-            }
-            else if (cbx_TimKiem.Text == "Sản phẩm")
-            {
+            } else if (cbx_TimKiem.Text == "Sản phẩm") {
                 dshd_sp.DataSource = DetalBillBus.getAllDetalBill();
                 if (dshd_sp.RowCount > 0 )
                 {
@@ -222,9 +217,7 @@ namespace MiniSupermarket.GUI
                 lb_HoaDonThapNhat.Text = $"Sản phẩm bán ít nhất:";
                 lb_DTHDThapNhat.Text = $"";
                 lb_DoanhThuMinNv.Text = $"-> Số lượng bán ra: ";
-            }
-            else if (cbx_TimKiem.Text == "Nhân viên")
-            {
+            } else if (cbx_TimKiem.Text == "Nhân viên") {
                 dshd_sp.DataSource = statisticsBUS.getAllBillInfor();
                 if (dshd_sp.RowCount > 0 )
                 {
@@ -246,7 +239,7 @@ namespace MiniSupermarket.GUI
                 lb_DoanhThuMinNv.Visible = true;
 
                 //Lấy thông tin mã nhân viên
-                string maxTotalPriceForAllBills = statisticsBUS.GetEmployeeWithMaxTotalSales();         
+                string maxTotalPriceForAllBills = statisticsBUS.GetEmployeeWithMaxTotalSales();
                 string minTotalPriceForAllBills = statisticsBUS.GetEmployeeWithMinTotalSales();
 
                 // Lấy thông tin nhân viên từ ID
@@ -268,11 +261,10 @@ namespace MiniSupermarket.GUI
                 btn_ThongKe.Text = "Hiển thị nhân viên";
                 btn_ThongKe.Click -= new EventHandler(button1_Click);
                 btn_ThongKe.Click += new EventHandler(ShowEmployeeInfo);
-               
+
             }
         }
-        private void ShowInvoices(object sender, EventArgs e)
-        {
+        private void ShowInvoices(object sender, EventArgs e) {
             lb_HoaDonCaoNhat.Text = $"Hóa đơn cao nhất            :";
             lb_HoaDonThapNhat.Text = $"Hóa đơn thấp nhất           :";
             DateTime fromDate = dtp_TuNgay.Value;
@@ -293,11 +285,10 @@ namespace MiniSupermarket.GUI
             string MinID = saleBUS.GetIDfromTotalPrice(minTotalPrice);
             lb_DTHDCaoNhat.Text = $" [{MaxBillID}] Giá: {maxTotalPrice.ToString()}";
             lb_DTHDThapNhat.Text = $" [{MinID}] Giá: {minTotalPrice.ToString()}";
-           
+
         }
 
-        private void ShowProducts(object sender, EventArgs e)
-        {
+        private void ShowProducts(object sender, EventArgs e) {
             dshd_sp.DataSource = DetalBillBus.getAllDetalBill();
             if (dshd_sp.RowCount > 0 )
             {
@@ -330,8 +321,7 @@ namespace MiniSupermarket.GUI
 
         }
 
-        private void ShowEmployeeInfo(object sender, EventArgs e)
-        {
+        private void ShowEmployeeInfo(object sender, EventArgs e) {
 
             DateTime fromDate = dtp_TuNgay.Value;
             DateTime toDate = dtp_DenNgay.Value;
@@ -358,8 +348,7 @@ namespace MiniSupermarket.GUI
             lb_DoanhThuMinNv.Text = $"-> Doanh thu: {MinNv}";
         }
 
-        private void label2_Click_1(object sender, EventArgs e)
-        {
+        private void label2_Click_1(object sender, EventArgs e) {
 
         }
     }
