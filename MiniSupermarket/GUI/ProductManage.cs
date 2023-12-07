@@ -198,7 +198,7 @@ namespace MiniSupermarket.GUI
                 else
                 {
                     // PromotionID rỗng, có thể đặt giá trị mặc định cho cbx_MaKm
-                    cbx_MaKm.Text = "Không có khuyến mãi";
+                    cbx_MaKm.SelectedIndex = -1;
                     // Hoặc cbx_MaKm.Text = string.Empty; để để trống
                 }
 
@@ -588,6 +588,19 @@ namespace MiniSupermarket.GUI
                 }
 
             }
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Tải dữ liệu lên data grid view
+            dssp_DSSP.DataSource = ptBus.getAllProducts();
+            txt_MaSp.Clear();
+            txt_TenSp.Clear();
+            cbx_MaLoai.SelectedIndex = -1; // Đặt lại ComboBox để không có mục nào được chọn
+            txt_DonGia.Clear();
+            txt_MoTa.Clear();
+            txt_Kieu.Clear();
+            txt_SoLuong.Clear();
+            cbx_MaKm.SelectedIndex = -1;
         }
 
     }
