@@ -74,24 +74,24 @@ create table Product(
 GO
 
 -- Rot du lieu bang san pham	
-insert into Product(ProductID,[Name],TypeID,Quantity,CurrentPrice,[Description],Unit)
+insert into Product(ProductID,[Name],TypeID,Quantity,CurrentPrice,[Description],Unit, PromotionID)
 values
-	('P0001',N'Mì Kokomi','LSP2',60,5000,N'Mì Kokomi tôm chua cay 100g',N'Gói'),
-	('P0002',N'Sữa Milo','LSP7',80,4000,N'Sữa Milo vị ca cao lúa mạch 100ml',N'Hộp'),
-	('P0003',N'Bánh Slay','LSP1',80,9000,N'Bánh Slay khoai tây chiên vị tảo',N'Gói'),
-	('P0004',N'Mì Hảo hảo','LSP2',70,2500,N'Mì hảo hảo lẩu thái tôm',N'Gói'),
-	('P0005',N'Cafe G7','LSP3',40,58000,N'Hộp Cafe G7',N'Hộp 336g'),
-	('P0006',N'Cafe Trung Nguyên','LSP3',40,53000,N'Hộp Cafe Trung Nguyên',N'Hộp 300g'),
-	('P0007',N'Trà Lipton','LSP4',40,37500,N'Hộp Trà Lipton 16 gói',N'Hộp 300g'),
-	('P0008',N'Trà Cozy','LSP4',90,31000,N'Hộp Trà Cozy túi lọc vị gừng',N'Hộp 400g'),
-	('P0009',N'Dầu gội Clear Men','LSP5',90,193000,N'Dầu gội Clear Men than hoạt tính',N'Chai 900g'),
-	('P0010',N'Dầu gội Head And Shoulders','LSP5',120,148000,N'Dầu gội Head And Shoulders bạc hà mát lạnh',N'Chai 700g'),
-	('P0011',N'Sữa tắm Lifebuoy','LSP6',120,158000,N'Sữa tắm Lifebuoy hương khổ qua',N'Chai 800g'),
-	('P0012',N'Sữa tắm Nerman','LSP6',105,205000,N'Sữa tắm Nerman hương nước hoa cao cấp 3 in 1',N'Chai 350g'),
-	('P0013',N'Redbull','LSP7',60,15000,N'Redbull bò thái',N'Lon'),
-	('P0014',N'Sting','LSP7',60,10000,N'Nước tăng lực Sting Dâu',N'Chai'),
-	('P0015',N'Pate Cột Đèn','LSP8',40,25000,N'Pate Cột Đèn Hải Phòng',N'Hộp'),
-	('P0016',N'Khô bò Tasty Food','LSP8',60,171000,N'Khô bò Củ Chi Tasty Food miếng mềm',N'Hũ 500g');
+	('P0001',N'Mì Kokomi','LSP2',60,5000,N'Mì Kokomi tôm chua cay 100g',N'Gói', 'PM0001'),
+	('P0002',N'Sữa Milo','LSP7',80,4000,N'Sữa Milo vị ca cao lúa mạch 100ml',N'Hộp','PM0001'),
+	('P0003',N'Bánh Slay','LSP1',80,9000,N'Bánh Slay khoai tây chiên vị tảo',N'Gói','PM0001'),
+	('P0004',N'Mì Hảo hảo','LSP2',70,2500,N'Mì hảo hảo lẩu thái tôm',N'Gói', 'PM0003'),
+	('P0005',N'Cafe G7','LSP3',40,58000,N'Hộp Cafe G7',N'Hộp 336g', 'PM0004'),
+	('P0006',N'Cafe Trung Nguyên','LSP3',40,53000,N'Hộp Cafe Trung Nguyên',N'Hộp 300g', 'PM0002'),
+	('P0007',N'Trà Lipton','LSP4',40,37500,N'Hộp Trà Lipton 16 gói',N'Hộp 300g', 'PM0004'),
+	('P0008',N'Trà Cozy','LSP4',90,31000,N'Hộp Trà Cozy túi lọc vị gừng',N'Hộp 400g', 'PM0001'),
+	('P0009',N'Dầu gội Clear Men','LSP5',90,193000,N'Dầu gội Clear Men than hoạt tính',N'Chai 900g', 'PO0004'),
+	('P0010',N'Dầu gội Head And Shoulders','LSP5',120,148000,N'Dầu gội Head And Shoulders bạc hà mát lạnh',N'Chai 700g', 'PM0001'),
+	('P0011',N'Sữa tắm Lifebuoy','LSP6',120,158000,N'Sữa tắm Lifebuoy hương khổ qua',N'Chai 800g', 'PM0001'),
+	('P0012',N'Sữa tắm Nerman','LSP6',105,205000,N'Sữa tắm Nerman hương nước hoa cao cấp 3 in 1',N'Chai 350g', 'PM0001'),
+	('P0013',N'Redbull','LSP7',60,15000,N'Redbull bò thái',N'Lon', 'PM0001'),
+	('P0014',N'Sting','LSP7',60,10000,N'Nước tăng lực Sting Dâu',N'Chai', 'PM0001'),
+	('P0015',N'Pate Cột Đèn','LSP8',40,25000,N'Pate Cột Đèn Hải Phòng',N'Hộp', 'PM0002'),
+	('P0016',N'Khô bò Tasty Food','LSP8',60,171000,N'Khô bò Củ Chi Tasty Food miếng mềm',N'Hũ 500g', 'PM0001');
 GO
 
 --Tao bang khuyen mai
@@ -412,9 +412,9 @@ GO
 alter table Product
 add constraint fk_Product_ProductType foreign key (TypeID) references ProductType (TypeID)
 GO
-alter table Product
-add constraint fk_Product_Promotion foreign key (PromotionID) references Promotion (PromotionID)
-GO
+--alter table Product
+--add constraint fk_Product_Promotion foreign key (PromotionID) references Promotion (PromotionID)
+--GO
 
 --Bang Bill
 alter table Bill
@@ -1812,4 +1812,59 @@ BEGIN
 END;
 
 
+GO
+
+CREATE PROCEDURE GetProductQuantity
+    @ProductID NVARCHAR(10)
+AS
+BEGIN
+    SELECT Quantity
+    FROM Product
+    WHERE ProductID = @ProductID;
+END;
+GO
+
+
+CREATE PROCEDURE UpdateBillPrice
+    @BillID varchar(10)
+AS
+BEGIN
+    -- Cập nhật EstimatedPrice
+    UPDATE Bill
+    SET EstimatedPrice = ISNULL((
+        SELECT SUM(SalePrice)
+        FROM DetailBill
+        WHERE BillID = @BillID
+    ), 0);
+
+    -- Cập nhật ReducePrice
+    UPDATE Bill
+    SET ReducePrice = ISNULL((
+        SELECT SUM(CASE WHEN P.Status = N'Đang hoạt động' THEN SalePrice * P.Discount / 100 ELSE 0 END)
+        FROM DetailBill D
+        JOIN Promotion P ON D.PromotionID = P.PromotionID
+        WHERE D.BillID = @BillID
+    ), 0);
+
+    -- Cập nhật TotalPrice
+    UPDATE Bill
+    SET TotalPrice = EstimatedPrice - ReducePrice
+    WHERE BillID = @BillID;
+
+END;
+GO
+
+
+CREATE PROCEDURE PayTheBill
+    @BillID varchar(10)
+AS
+BEGIN
+    -- Cập nhật EstimatedPrice
+    EXEC updateBillPrice @BillID;
+
+    -- Cập nhật Status
+    UPDATE Bill
+    SET Status = 0
+    WHERE BillID = @BillID;
+END;
 GO

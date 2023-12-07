@@ -52,5 +52,12 @@ namespace MiniSupermarket.RegularExpression
             }
             return true;
         }
+
+        public static bool checkSoNguyenDuong(string input) {
+            // Biểu thức chính quy để kiểm tra số nguyên dương
+            Regex regex = new Regex(@"^\d+$");
+
+            return regex.IsMatch(input);
+        }
     }
 }
