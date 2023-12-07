@@ -642,7 +642,6 @@ namespace MiniSupermarket.GUI
         {
             DetalBillBus billBus = new DetalBillBus();
             billBus.updateBillPrice(this.selectedBillID);
-            billBus.payTheBill(this.selectedBillID);
             resetBillGridView();
         }
 

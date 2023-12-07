@@ -76,22 +76,22 @@ GO
 -- Rot du lieu bang san pham	
 insert into Product(ProductID,[Name],TypeID,Quantity,CurrentPrice,[Description],Unit, PromotionID)
 values
-	('P0001',N'Mì Kokomi','LSP2',60,5000,N'Mì Kokomi tôm chua cay 100g',N'Gói', 'PM0001'),
-	('P0002',N'Sữa Milo','LSP7',80,4000,N'Sữa Milo vị ca cao lúa mạch 100ml',N'Hộp','PM0001'),
-	('P0003',N'Bánh Slay','LSP1',80,9000,N'Bánh Slay khoai tây chiên vị tảo',N'Gói','PM0001'),
-	('P0004',N'Mì Hảo hảo','LSP2',70,2500,N'Mì hảo hảo lẩu thái tôm',N'Gói', 'PM0003'),
-	('P0005',N'Cafe G7','LSP3',40,58000,N'Hộp Cafe G7',N'Hộp 336g', 'PM0004'),
-	('P0006',N'Cafe Trung Nguyên','LSP3',40,53000,N'Hộp Cafe Trung Nguyên',N'Hộp 300g', 'PM0002'),
-	('P0007',N'Trà Lipton','LSP4',40,37500,N'Hộp Trà Lipton 16 gói',N'Hộp 300g', 'PM0004'),
-	('P0008',N'Trà Cozy','LSP4',90,31000,N'Hộp Trà Cozy túi lọc vị gừng',N'Hộp 400g', 'PM0001'),
-	('P0009',N'Dầu gội Clear Men','LSP5',90,193000,N'Dầu gội Clear Men than hoạt tính',N'Chai 900g', 'PO0004'),
-	('P0010',N'Dầu gội Head And Shoulders','LSP5',120,148000,N'Dầu gội Head And Shoulders bạc hà mát lạnh',N'Chai 700g', 'PM0001'),
-	('P0011',N'Sữa tắm Lifebuoy','LSP6',120,158000,N'Sữa tắm Lifebuoy hương khổ qua',N'Chai 800g', 'PM0001'),
-	('P0012',N'Sữa tắm Nerman','LSP6',105,205000,N'Sữa tắm Nerman hương nước hoa cao cấp 3 in 1',N'Chai 350g', 'PM0001'),
-	('P0013',N'Redbull','LSP7',60,15000,N'Redbull bò thái',N'Lon', 'PM0001'),
-	('P0014',N'Sting','LSP7',60,10000,N'Nước tăng lực Sting Dâu',N'Chai', 'PM0001'),
-	('P0015',N'Pate Cột Đèn','LSP8',40,25000,N'Pate Cột Đèn Hải Phòng',N'Hộp', 'PM0002'),
-	('P0016',N'Khô bò Tasty Food','LSP8',60,171000,N'Khô bò Củ Chi Tasty Food miếng mềm',N'Hũ 500g', 'PM0001');
+	('P0001',N'Mì Kokomi','LSP2',99,5000,N'Mì Kokomi tôm chua cay 100g',N'Gói', 'PM0001'),
+	('P0002',N'Sữa Milo','LSP7',98,4000,N'Sữa Milo vị ca cao lúa mạch 100ml',N'Hộp','PM0001'),
+	('P0003',N'Bánh Slay','LSP1',97,9000,N'Bánh Slay khoai tây chiên vị tảo',N'Gói','PM0001'),
+	('P0004',N'Mì Hảo hảo','LSP2',0,2500,N'Mì hảo hảo lẩu thái tôm',N'Gói', 'PM0003'),
+	('P0005',N'Cafe G7','LSP3',0,58000,N'Hộp Cafe G7',N'Hộp 336g', 'PM0004'),
+	('P0006',N'Cafe Trung Nguyên','LSP3',0,53000,N'Hộp Cafe Trung Nguyên',N'Hộp 300g', 'PM0002'),
+	('P0007',N'Trà Lipton','LSP4',0,37500,N'Hộp Trà Lipton 16 gói',N'Hộp 300g', 'PM0004'),
+	('P0008',N'Trà Cozy','LSP4',0,31000,N'Hộp Trà Cozy túi lọc vị gừng',N'Hộp 400g', 'PM0001'),
+	('P0009',N'Dầu gội Clear Men','LSP5',0,193000,N'Dầu gội Clear Men than hoạt tính',N'Chai 900g', 'PO0004'),
+	('P0010',N'Dầu gội Head And Shoulders','LSP5',0,148000,N'Dầu gội Head And Shoulders bạc hà mát lạnh',N'Chai 700g', 'PM0001'),
+	('P0011',N'Sữa tắm Lifebuoy','LSP6',0,158000,N'Sữa tắm Lifebuoy hương khổ qua',N'Chai 800g', 'PM0001'),
+	('P0012',N'Sữa tắm Nerman','LSP6',0,205000,N'Sữa tắm Nerman hương nước hoa cao cấp 3 in 1',N'Chai 350g', 'PM0001'),
+	('P0013',N'Redbull','LSP7',0,15000,N'Redbull bò thái',N'Lon', 'PM0001'),
+	('P0014',N'Sting','LSP7',0,10000,N'Nước tăng lực Sting Dâu',N'Chai', 'PM0001'),
+	('P0015',N'Pate Cột Đèn','LSP8',0,25000,N'Pate Cột Đèn Hải Phòng',N'Hộp', 'PM0002'),
+	('P0016',N'Khô bò Tasty Food','LSP8',0,171000,N'Khô bò Củ Chi Tasty Food miếng mềm',N'Hũ 500g', 'PM0001');
 GO
 
 --Tao bang khuyen mai
@@ -113,7 +113,7 @@ VALUES
     ('PM0001', N'Khuyến mãi giờ vàng', '2023-9-24', '2023-11-24', 10,N'Không hoạt động'),
     ('PM0002', N'Khuyến mãi lễ 2/9', '2023-08-30', '2023-09-03', 20, N'Không hoạt động'),
     ('PM0003', N'Khuyến mãi điểm tích luỹ', '2023-03-01', '2040-03-01', 10, N'Không hoạt động'),
-	('PM0004', N'Khuyến mãi cuối năm', '2023-12-01', '2023-12-30', 5, N'Đang hoạt động');
+	('PM0004', N'Khuyến mãi cuối năm', '2023-12-01', '2023-12-30', 5, N'Không hoạt động');
 GO
 
 --Tao bang khach hang
@@ -178,7 +178,7 @@ GO
 -- Rot du lieu vao bang hoa don
 INSERT INTO Bill (BillID, [Date], EmployeeID, CustomerID, EstimatedPrice, ReducePrice, TotalPrice, [Status])
 VALUES
-    ('B0001', '2023-09-23', 'E0002', 'C0001', 0, 0, 0, 1);
+    ('B0001', '2023-09-23', 'E0002', 'C0001', 40000, 0, 40000, 1);
 GO
 
 --Tao bang nha cung cap
@@ -219,10 +219,7 @@ GO
 -- Rot du lieu vao bang phieu nhap
 INSERT INTO PurchaseOrder (OrderID, EmployeeID, SupplierID, importDate, TotalPrice, [Status])
 VALUES
-    ('PO0001', 'E0003', 'S0001', '2023-01-01', 1200000, 1),
-	('PO0002', 'E0003', 'S0002', '2023-02-24', 2400000, 1),
-	('PO0003', 'E0002', 'S0001', '2023-07-25', 1800000, 1),
-	('PO0004', 'E0002', 'S0003', '2023-09-16', 3200000, 1);
+    ('PO0001', 'E0003', 'S0001', '2023-01-01', 1200000, 1);
 GO
 
 --Tao bang chi tiet hoa don
@@ -241,8 +238,8 @@ GO
 INSERT INTO DetailBill (BillID, ProductID, OrderID, PromotionID, SalePrice, Quantity)
 VALUES
     ('B0001', 'P0001', 'PO0001', 'PM0004', 5000, 1),
-    ('B0001', 'P0002', 'PO0002', 'PM0004', 4000, 2),
-    ('B0001', 'P0003', 'PO0001', 'PM0004',9000, 3);
+    ('B0001', 'P0002', 'PO0001', 'PM0004', 8000, 2),
+    ('B0001', 'P0003', 'PO0001', 'PM0004', 27000, 3);
 GO
 
 -- Tao bang chi tiet phieu nhap
@@ -293,47 +290,9 @@ GO
 --Rot du lieu vao bang hang ton kho
 INSERT INTO Inventory (ProductID, OrderID, CurrentQuantity)
 VALUES
-	('P0001', 'PO0001', 30),
-    ('P0002', 'PO0001', 40),
-    ('P0003', 'PO0001', 40),
-    ('P0004', 'PO0001', 35),
-    ('P0005', 'PO0001', 20),
-    ('P0006', 'PO0001', 20),
-    ('P0007', 'PO0001', 20),
-    ('P0008', 'PO0001', 30),
-    ('P0009', 'PO0001', 30),
-    ('P0010', 'PO0001', 40),
-    ('P0011', 'PO0001', 40),
-    ('P0012', 'PO0001', 35),
-    ('P0013', 'PO0001', 20),
-    ('P0014', 'PO0001', 20),
-    ('P0015', 'PO0001', 20),
-    ('P0016', 'PO0001', 30),
-    ('P0001', 'PO0002', 30),
-    ('P0002', 'PO0002', 40),
-    ('P0003', 'PO0002', 40),
-    ('P0004', 'PO0002', 35),
-    ('P0005', 'PO0002', 20),
-    ('P0006', 'PO0002', 20),
-    ('P0007', 'PO0002', 20),
-    ('P0008', 'PO0002', 30),
-    ('P0009', 'PO0002', 30),
-    ('P0010', 'PO0002', 40),
-    ('P0011', 'PO0002', 40),
-    ('P0012', 'PO0002', 35),
-    ('P0013', 'PO0002', 20),
-    ('P0014', 'PO0002', 20),
-    ('P0015', 'PO0002', 20),
-    ('P0016', 'PO0002', 30),
-	('P0008', 'PO0003', 30),
-    ('P0009', 'PO0003', 30),
-    ('P0010', 'PO0003', 40),
-    ('P0011', 'PO0003', 40),
-    ('P0012', 'PO0003', 35),
-    ('P0013', 'PO0003', 20),
-    ('P0014', 'PO0003', 20),
-    ('P0015', 'PO0003', 20),
-    ('P0016', 'PO0003', 30);
+	('P0001', 'PO0001', 99),
+    ('P0002', 'PO0001', 98),
+    ('P0003', 'PO0001', 97);
 GO
 
 

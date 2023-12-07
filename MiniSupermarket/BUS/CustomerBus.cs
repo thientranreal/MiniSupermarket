@@ -12,10 +12,13 @@ namespace MiniSupermarket.BUS {
         private DataTable customers;
         public static List<Customer> customerList = new List<Customer>();
 
-        public CustomerBus() {
+        public CustomerBus()
+        {
             customers = getAllCustomer();
+            customerList.Clear();
 
-            foreach (DataRow row in customers.Rows) {
+            foreach (DataRow row in customers.Rows)
+            {
                 Customer customer = new Customer(row);
                 customerList.Add(customer);
             }

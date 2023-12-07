@@ -182,7 +182,7 @@ namespace MiniSupermarket.BUS {
         }
 
         public bool payTheBill(string billID) {
-            string storedProcedureName = "UpdateBillPrice";
+            string storedProcedureName = "PayTheBill";
             SqlParameter[] parameters = new SqlParameter[]
             {
                 new SqlParameter("@BillID", billID),

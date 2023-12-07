@@ -20,6 +20,10 @@ namespace MiniSupermarket.GUI
         {
             InitializeComponent();
             this.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
+            dtpkEndDate.Format = DateTimePickerFormat.Custom;
+            dtpkEndDate.CustomFormat = "dd-MM-yyyy";
+            dtpkStartDate.Format = DateTimePickerFormat.Custom;
+            dtpkStartDate.CustomFormat = "dd-MM-yyyy";
         }
 
         public void LoadTheme()
@@ -141,6 +145,9 @@ namespace MiniSupermarket.GUI
             string Name = txtPromotionName.Text.Trim();
             string StartDate = String.Format("{0:dd/MM/yyyy}", dtpkStartDate.Value);
             string EndDate = String.Format("{0:dd/MM/yyyy}", dtpkEndDate.Value);
+
+            //string StartDate = dtpkStartDate.Value.ToString();
+            //string EndDate = dtpkEndDate.Value.ToString();
             string Discount = txtDiscount.Text.Trim();
             if (txtPromotionID.Text.Length != 0)
             {

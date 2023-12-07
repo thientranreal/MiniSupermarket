@@ -94,6 +94,7 @@ namespace MiniSupermarket.GUI {
             // Ẩn các cột không cần thiết
             dgvDetalBill.Columns["BillID"].Visible = false;
             dgvDetalBill.Columns["ProductID"].Visible = false;
+            
 
 
             dgvProduct.DataSource = productBUS.getAllProduct();
@@ -105,6 +106,7 @@ namespace MiniSupermarket.GUI {
             dgvProduct.Columns["Description"].HeaderText = "Mô tả";
             dgvProduct.Columns["Unit"].HeaderText = "Kiểu";
             dgvProduct.Columns["PromotionName"].HeaderText = "Tên khuyến mãi";
+            dgvProduct.Columns["isDeleted"].Visible = false;
         }
 
         private void btnThem_Click(object sender, EventArgs e) {
@@ -183,11 +185,21 @@ namespace MiniSupermarket.GUI {
             }
         }
 
-        private void btnThanhToan_Click(object sender, EventArgs e) {
-            detalBillBus.updateBillPrice(this.idBill);
-            detalBillBus.payTheBill(this.idBill);
-            MessageBox.Show("Thanh toán thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            this.Close();
+        private void btnThanhToan_Click(object sender, EventArgs e)
+        {
+            if (dgvDetalBill.Rows.Count > 1)
+            {
+                // Cập nhật giá và thanh toán hóa đơn
+                detalBillBus.updateBillPrice(this.idBill);
+                detalBillBus.payTheBill(this.idBill);
+                MessageBox.Show("Thanh toán thành công.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                this.Close();
+            }
+            else
+            {
+                // Thông báo giỏ hàng đang rỗng
+                MessageBox.Show("Giỏ hàng đang rỗng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
         }
 
         private void txt_TimKiem_TextChanged(object sender, EventArgs e) {
