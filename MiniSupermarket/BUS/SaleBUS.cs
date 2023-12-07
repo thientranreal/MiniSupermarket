@@ -154,7 +154,6 @@ namespace MiniSupermarket.BUS {
             updateBills();
             DataRow[] selectedRows = bills.Select("isDeleted = 1 AND status = 1");
             DataTable newTable = new DataTable();
-
             if (selectedRows.Length > 0)
             {
                 newTable = selectedRows.CopyToDataTable();

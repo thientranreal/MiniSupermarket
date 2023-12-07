@@ -1,5 +1,6 @@
 ﻿using MiniSupermarket.BUS;
 using MiniSupermarket.CustomControl;
+using MiniSupermarket.ImageAndFont;
 using MiniSupermarket.RegularExpression;
 using System;
 using System.Collections.Generic;
@@ -31,12 +32,65 @@ namespace MiniSupermarket.GUI
             dateTimePickerNgayNhap.Enabled = false;
 
         }
+        public void LoadTheme()
+        {
+            // Thêm màu cho tất cả các nút ở panel top
+            foreach (Control btns in this.groupBoxChucNang.Controls)
+            {
+                if (btns.GetType() == typeof(Button))
+                {
+                    Button btn = (Button)btns;
+                    btn.BackColor = ThemeColor.PrimaryColor;
+                    btn.ForeColor = Color.White;
+                    btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
+                }
+                else if (btns.GetType() == typeof(Label))
+                {
+                    Label lb = (Label)btns;
+                    lb.ForeColor = ThemeColor.SecondaryColor;
+                    lb.Font = ProjectFont.getNormalFont();
+                }
+            }
+            foreach (Control btns in this.groupBoxLoaiSanPham.Controls)
+            {
+                if (btns.GetType() == typeof(Button))
+                {
+                    Button btn = (Button)btns;
+                    btn.BackColor = ThemeColor.PrimaryColor;
+                    btn.ForeColor = Color.White;
+                    btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
+                }
+                else if (btns.GetType() == typeof(Label))
+                {
+                    Label lb = (Label)btns;
+                    lb.ForeColor = ThemeColor.SecondaryColor;
+                    lb.Font = ProjectFont.getNormalFont();
+                }
+            }
+            foreach (Control btns in this.groupBoxThongTinNCC.Controls)
+            {
+                if (btns.GetType() == typeof(Button))
+                {
+                    Button btn = (Button)btns;
+                    btn.BackColor = ThemeColor.PrimaryColor;
+                    btn.ForeColor = Color.White;
+                    btn.FlatAppearance.BorderColor = ThemeColor.SecondaryColor;
+                }
+                else if (btns.GetType() == typeof(Label))
+                {
+                    Label lb = (Label)btns;
+                    lb.ForeColor = ThemeColor.SecondaryColor;
+                    lb.Font = ProjectFont.getNormalFont();
+                }
+            }
+        }
 
         private void Supplier_Load(object sender, EventArgs e)
         {
             dataSupplier = supplierBUS.getAllFromSupplier();
             dtgvSupplier.DataSource = dataSupplier;
             comboBoxTimKiem.SelectedText = "ID";
+            LoadTheme();
         }
 
         private void dtgvSupplier_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -74,7 +128,7 @@ namespace MiniSupermarket.GUI
                     c.Text = "";
                 }
             }
-            DataTable dt=new DataTable();
+            DataTable dt = new DataTable();
             dt = supplierBUS.getAllSupplierWithout();
             int count = dt.Rows.Count;
             count = count + 1;
@@ -107,7 +161,7 @@ namespace MiniSupermarket.GUI
         private void btnXacNhan_Click(object sender, EventArgs e)
         {
             int count = 0;
-            
+
             foreach (Control c in groupBoxThongTinNCC.Controls)
             {
                 if (c.GetType() == typeof(TextBox) && c.Text.Equals(""))
@@ -118,11 +172,12 @@ namespace MiniSupermarket.GUI
             }
             name = textBoxTen.Text;
             address = textBoxDiaChi.Text;
-            
+
             if (ProjectRegex.IsPhoneNumber(textBoxSDT.Text))
             {
                 phoneNumber = textBoxSDT.Text;
-            } else
+            }
+            else
             {
                 count = count + 1;
             }
@@ -376,15 +431,15 @@ namespace MiniSupermarket.GUI
                     break;
                 case "Địa chỉ":
                     dataSupplier = supplierBUS.getSupplierWithAddress(textBoxTimKiem.Text);
-                    dtgvSupplier.DataSource=dataSupplier;
+                    dtgvSupplier.DataSource = dataSupplier;
                     break;
                 case "SĐT":
-                    dataSupplier=supplierBUS.getSupplierWithPhoneNumber(textBoxTimKiem.Text);
-                    dtgvSupplier.DataSource=dataSupplier;
+                    dataSupplier = supplierBUS.getSupplierWithPhoneNumber(textBoxTimKiem.Text);
+                    dtgvSupplier.DataSource = dataSupplier;
                     break;
                 case "Email":
-                    dataSupplier=supplierBUS.getSupplierWithEmail(textBoxTimKiem.Text);
-                    dtgvSupplier.DataSource=dataSupplier;
+                    dataSupplier = supplierBUS.getSupplierWithEmail(textBoxTimKiem.Text);
+                    dtgvSupplier.DataSource = dataSupplier;
                     break;
             }
         }

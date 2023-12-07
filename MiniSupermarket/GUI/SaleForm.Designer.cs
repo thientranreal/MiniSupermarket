@@ -93,7 +93,6 @@
             pnlAddBill.Dock = DockStyle.Fill;
             pnlAddBill.Location = new Point(0, 0);
             pnlAddBill.Name = "pnlAddBill";
-
             pnlAddBill.Size = new Size(709, 352);
             pnlAddBill.TabIndex = 2;
             // 
@@ -104,7 +103,6 @@
             pnlAddBtn.Dock = DockStyle.Fill;
             pnlAddBtn.Location = new Point(0, 273);
             pnlAddBtn.Name = "pnlAddBtn";
-
             pnlAddBtn.Size = new Size(709, 79);
             pnlAddBtn.TabIndex = 2;
             // 
@@ -349,7 +347,7 @@
             cbNotPay.CheckedChanged += cbNotPay_CheckedChanged;
             // 
             // txtToTotal
-            // 
+            //
 
             txtToTotal.Location = new Point(285, 208);
             txtToTotal.Name = "txtToTotal";

@@ -351,7 +351,6 @@
             this.panel2.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dssp_DSSP)).EndInit();
             this.ResumeLayout(false);
-
             // 
             // grb_TimKiem
             // 

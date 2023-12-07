@@ -430,7 +430,6 @@ namespace MiniSupermarket.GUI
                     (dr["CustomerID"].ToString().Contains(customer) || dr["CustomerName"].ToString().Contains(customer) &&
                     (dr["EmployeeID"].ToString().Contains(employee) || dr["EmployeeName"].ToString().Contains(employee))) &&
                     (int.Parse(dr["TotalPrice"].ToString()) >= giaTu &&
-
                     int.Parse(dr["TotalPrice"].ToString()) <= giaDen))
                 {
                     if (cbPay.Checked && dr["Status"].Equals(true))
@@ -593,14 +592,12 @@ namespace MiniSupermarket.GUI
 
         private void dgv_bill_DoubleClick(object sender, EventArgs e) {
             if (dgv_bill.SelectedRows.Count > 0 && dgv_bill.SelectedRows[0].Cells["BillID"].Value != null) {
-
                 DataGridViewRow selectedRow = dgv_bill.SelectedRows[0];
                 selectedBillID = selectedRow.Cells["BillID"].Value.ToString();
                 bool selectedStatus = (bool)selectedRow.Cells["Status"].Value;
 
                 // Mở DetailBillForm và truyền ID của hóa đơn được chọn
                 if (!string.IsNullOrEmpty(selectedBillID)) {
-
                     DetailBillForm detailBillForm = new DetailBillForm(selectedBillID, selectedStatus);
                     detailBillForm.FormClosed += DetailBillForm_FormClosed; // Đăng ký sự kiện FormClosed
                     detailBillForm.ShowDialog();
@@ -642,7 +639,6 @@ namespace MiniSupermarket.GUI
                 dtpToDate.Enabled = false;
             }
         }
-
         private void cbPay_CheckedChanged(object sender, EventArgs e)
         {
             if (cbPay.Checked)

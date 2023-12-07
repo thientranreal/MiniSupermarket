@@ -141,7 +141,6 @@ namespace MiniSupermarket.GUI {
             cbx_MaKm.Items.Clear();
             // Load danh sách mã km vào ComboBox
             PromotionBUS promotionBUS = new PromotionBUS();
-
             string[] danhSachKMNames = promotionBUS.getActivePromotionsWithIdAndName(); // Lấy danh sách tên mã km
             foreach (var loaiKM in danhSachKMNames)
             {
@@ -512,7 +511,6 @@ namespace MiniSupermarket.GUI {
 
             }
         }
-
         private void button1_Click(object sender, EventArgs e)
         {
             // Tải dữ liệu lên data grid view

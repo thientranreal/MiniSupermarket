@@ -127,7 +127,6 @@ namespace MiniSupermarket.GUI {
             if (cbx_TimKiem.Text == "Hóa đơn") {
                 // Tải dữ liệu lên data grid view
                 dshd_sp.DataSource = saleBUS.getAllBillsForStatus();
-
                 if (dshd_sp.RowCount > 0)
                 {
                     // Đổi tên cột
@@ -140,7 +139,6 @@ namespace MiniSupermarket.GUI {
                     dshd_sp.Columns["TotalPrice"].HeaderText = "Tổng giá";
                     dshd_sp.Columns["Status"].HeaderText = "status";
                 }
-                   
                 dtp_TuNgay.Visible = true;
                 dtp_DenNgay.Visible = true;
                 lb_TuNgay.Visible = true;
