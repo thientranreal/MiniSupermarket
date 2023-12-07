@@ -47,8 +47,6 @@ namespace MiniSupermarket.BUS
             gb_Function.Font = ProjectFont.getTitleFont();
             gb_Info.ForeColor = ThemeColor.SecondaryColor;
             gb_Info.Font = ProjectFont.getTitleFont();
-            gb_List.ForeColor = ThemeColor.SecondaryColor;
-            gb_List.Font = ProjectFont.getTitleFont();
 
             // Thêm màu và chỉnh font cho các button
             foreach (Control btns in this.gb_Function.Controls)
@@ -87,20 +85,21 @@ namespace MiniSupermarket.BUS
         {
             // Viết hoa id và chữ cái đầu 
             string id = tb_id.Text.Trim().ToUpper();
-            string name = ProjectFont.upperFirstLetter(tb_name.Text);
+            string name = ProjectFont.CapitalizeEachWord(tb_name.Text);
             string address = ProjectFont.upperFirstLetter(tb_address.Text);
-            string pnumber = ProjectFont.upperFirstLetter(tb_pNumber.Text);
-            string email = ProjectFont.upperFirstLetter(tb_email.Text);
-            string password = ProjectFont.upperFirstLetter(tb_pass.Text);
-            string sex = ProjectFont.upperFirstLetter(cb_sex.Text);
-            string username = ProjectFont.upperFirstLetter(tb_id.Text);
-            string roleid = ProjectFont.upperFirstLetter(cb_role.Text);
+            string pnumber = tb_pNumber.Text;
+            string email = tb_email.Text.Trim();
+            string password = tb_pass.Text;
+            string sex = cb_sex.Text;
+            string username = txtUserName.Text.Trim();
+            string roleid = cb_role.SelectedValue.ToString();
 
             if (string.IsNullOrWhiteSpace(tb_name.Text) ||
               string.IsNullOrWhiteSpace(tb_address.Text) ||
               string.IsNullOrWhiteSpace(tb_pNumber.Text) ||
               string.IsNullOrWhiteSpace(tb_email.Text) ||
               string.IsNullOrWhiteSpace(tb_pass.Text) ||
+              string.IsNullOrWhiteSpace(txtUserName.Text) ||
               cb_sex.SelectedItem == null)
             {
                 MessageBox.Show("Vui lòng điền đầy đủ thông tin.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -138,7 +137,7 @@ namespace MiniSupermarket.BUS
                 if (employeeBUS.checkIdExist(id))
                 {
                     MessageBox.Show(
-                        "Mã sản phẩm đã tồn tại trong hệ thống",
+                        "Mã nhân viên đã tồn tại trong hệ thống",
                         "Warning",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Warning); // cho cảnh báo
@@ -155,6 +154,7 @@ namespace MiniSupermarket.BUS
                         "Thông báo",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information); // Thêm thành công
+                    ds_qlnv.DataSource = employeeBUS.getAllEmployee();
 
                 }
                 else
@@ -174,6 +174,7 @@ namespace MiniSupermarket.BUS
                         "Thông báo",
                         MessageBoxButtons.OK,
                         MessageBoxIcon.Information); // Thêm thành công
+                    ds_qlnv.DataSource = employeeBUS.getAllEmployee();
 
                 }
                 else
@@ -192,6 +193,7 @@ namespace MiniSupermarket.BUS
         {
             ds_qlnv.DataSource = employeeBUS.getAllEmployee();
             EmployeeBUS.Reset(gb_Info.Controls, ds_qlnv, gb_Function.Controls);
+            Roles();
         }
 
         void setNull()
@@ -209,27 +211,24 @@ namespace MiniSupermarket.BUS
 
             ds_qlnv.DataSource = employeeBUS.getAllEmployee();
 
-            ds_qlnv.Columns["EmployeeID"].HeaderText = "Mã nhân viên";
-            ds_qlnv.Columns["Name"].HeaderText = "Tên nhân viên";
-            ds_qlnv.Columns["BirthDate"].HeaderText = "Ngày sinh";
-            if (ds_qlnv.Columns["BirthDate"] != null)
+            if (ds_qlnv.RowCount > 0)
             {
+                ds_qlnv.Columns["EmployeeID"].HeaderText = "Mã nhân viên";
+                ds_qlnv.Columns["Name"].HeaderText = "Tên nhân viên";
                 ds_qlnv.Columns["BirthDate"].HeaderText = "Ngày sinh";
+                if (ds_qlnv.Columns["BirthDate"] != null)
+                {
+                    ds_qlnv.Columns["BirthDate"].HeaderText = "Ngày sinh";
+                }
+                ds_qlnv.Columns["Address"].HeaderText = "Địa chỉ";
+                ds_qlnv.Columns["PhoneNumber"].HeaderText = "Số điện thoại";
+                ds_qlnv.Columns["Email"].HeaderText = "Email";
+                ds_qlnv.Columns["Sex"].HeaderText = "Giới tính";
+                ds_qlnv.Columns["Password"].HeaderText = "Mật khẩu";
+                ds_qlnv.Columns["RoleName"].HeaderText = "Quyền";
             }
-            ds_qlnv.Columns["Address"].HeaderText = "Địa chỉ";
-            ds_qlnv.Columns["PhoneNumber"].HeaderText = "Số điện thoại";
-            ds_qlnv.Columns["Email"].HeaderText = "Email";
-            ds_qlnv.Columns["Sex"].HeaderText = "Giới tính";
-            ds_qlnv.Columns["Password"].HeaderText = "Mật khẩu";
-            ds_qlnv.Columns["RoleID"].HeaderText = "Quyền";
 
-            ds_qlnv.Columns["EmployeeID"].Width = 115;
-            ds_qlnv.Columns["Password"].Width = 90;
-            ds_qlnv.Columns["Sex"].Width = 100;
-            ds_qlnv.Columns["BirthDate"].Width = 180;
-            ds_qlnv.Columns["PhoneNumber"].Width = 200;
-            ds_qlnv.Columns["Email"].Width = 200;
-            ds_qlnv.Columns["RoleID"].Width = 115;
+            ds_qlnv.AutoResizeColumns(DataGridViewAutoSizeColumnsMode.AllCells);
 
             LoadTheme();
             Roles();
@@ -247,7 +246,7 @@ namespace MiniSupermarket.BUS
                 tb_email.Text = ds_qlnv.SelectedRows[0].Cells["Email"].Value.ToString();
                 cb_sex.Text = ds_qlnv.SelectedRows[0].Cells["Sex"].Value.ToString();
                 tb_pass.Text = ds_qlnv.SelectedRows[0].Cells["Password"].Value.ToString();
-                cb_role.Text = ds_qlnv.SelectedRows[0].Cells["RoleID"].Value.ToString();
+                txtUserName.Text = ds_qlnv.SelectedRows[0].Cells["UserName"].Value.ToString();
 
                 object birthDateValue = ds_qlnv.SelectedRows[0].Cells["BirthDate"].Value;
                 if (birthDateValue != DBNull.Value)
@@ -302,22 +301,23 @@ namespace MiniSupermarket.BUS
         {
             if (ds_qlnv.SelectedRows.Count > 0)
             {
-                // Lấy dữ liệu từ các ô trên DataGridView
+                // Viết hoa id và chữ cái đầu 
                 string id = tb_id.Text.Trim().ToUpper();
-                string name = ProjectFont.upperFirstLetter(tb_name.Text);
+                string name = ProjectFont.CapitalizeEachWord(tb_name.Text);
                 string address = ProjectFont.upperFirstLetter(tb_address.Text);
-                string pnumber = ProjectFont.upperFirstLetter(tb_pNumber.Text);
-                string email = ProjectFont.upperFirstLetter(tb_email.Text);
-                string sex = ProjectFont.upperFirstLetter(cb_sex.Text);
-                string password = ProjectFont.upperFirstLetter(tb_pass.Text);
-                string username = ProjectFont.upperFirstLetter(tb_id.Text);
-                string roleid = ProjectFont.upperFirstLetter(cb_role.Text);
+                string pnumber = tb_pNumber.Text;
+                string email = tb_email.Text.Trim();
+                string password = tb_pass.Text;
+                string sex = cb_sex.Text;
+                string username = txtUserName.Text.Trim();
+                string roleid = cb_role.SelectedValue.ToString();
 
                 if (string.IsNullOrWhiteSpace(tb_name.Text) ||
                   string.IsNullOrWhiteSpace(tb_address.Text) ||
                   string.IsNullOrWhiteSpace(tb_pNumber.Text) ||
                   string.IsNullOrWhiteSpace(tb_email.Text) ||
                   string.IsNullOrWhiteSpace(tb_pass.Text) ||
+                  string.IsNullOrWhiteSpace(txtUserName.Text) ||
                   cb_sex.SelectedItem == null)
                 {
                     MessageBox.Show("Vui lòng điền đầy đủ thông tin.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -406,13 +406,14 @@ namespace MiniSupermarket.BUS
             ds_qlnv.DataSource = searchResult;
         }
 
-        private void Roles()
+        public void Roles()
         {
             DataTable roles = employeeBUS.GetRoles();
 
             if (roles != null && roles.Rows.Count > 0)
             {
                 cb_role.ValueMember = "RoleID";
+                cb_role.DisplayMember = "Name";
                 cb_role.DataSource = roles;
                 cb_role.SelectedIndex = 0;
             }

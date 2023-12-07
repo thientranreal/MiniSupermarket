@@ -19,17 +19,25 @@ using iTextSharp.text;
 using iTextSharp.text.pdf;
 using System.Diagnostics;
 
-namespace MiniSupermarket.GUI {
-    public partial class SaleForm : Form {
+namespace MiniSupermarket.GUI
+{
+    public partial class SaleForm : Form
+    {
         private SaleBUS saleBus = new SaleBUS();
         private string sex;
+<<<<<<< HEAD
         private string selectedBillID;
         public SaleForm() {
+=======
+        public SaleForm()
+        {
+>>>>>>> main
             InitializeComponent();
             this.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
         }
 
-        private void SaleForm_Load(object sender, EventArgs e) {
+        private void SaleForm_Load(object sender, EventArgs e)
+        {
             // chuyển định dạng cho date time picker
             dtpFromDate.Format = DateTimePickerFormat.Custom;
             dtpFromDate.CustomFormat = "yyyy-MM-dd";
@@ -74,7 +82,8 @@ namespace MiniSupermarket.GUI {
             rdMale.Enabled = false;
         }
 
-        public void LoadTheme() {
+        public void LoadTheme()
+        {
             // Thêm màu cho tiêu đề group box
             grbCustomerInfo.ForeColor = ThemeColor.SecondaryColor;
             grbCustomerInfo.Font = ProjectFont.getTitleFont();
@@ -82,8 +91,10 @@ namespace MiniSupermarket.GUI {
             gbSearch.Font = ProjectFont.getTitleFont();
 
             // Thêm màu cho tất cả các nút thêm hóa đơn
-            foreach (Control control in this.pnlAddBtn.Controls) {
-                if (control.GetType() == typeof(Button)) {
+            foreach (Control control in this.pnlAddBtn.Controls)
+            {
+                if (control.GetType() == typeof(Button))
+                {
                     Button btn = (Button)control;
                     btn.BackColor = ThemeColor.PrimaryColor;
                     btn.ForeColor = Color.White;
@@ -98,29 +109,35 @@ namespace MiniSupermarket.GUI {
             btnReset.Font = ProjectFont.getNormalFont();
 
             // Thêm màu cho group box tìm kiếm
-            foreach (Control control in this.gbSearch.Controls) {
+            foreach (Control control in this.gbSearch.Controls)
+            {
                 // Nếu control là label thì thêm màu và chỉnh font
-                if (control.GetType() == typeof(Label)) {
+                if (control.GetType() == typeof(Label))
+                {
                     Label lb = (Label)control;
                     lb.Font = ProjectFont.getNormalFont();
                 }
                 // Nếu control là text box thì chỉnh font
-                else if (control.GetType() == typeof(TextBox)) {
+                else if (control.GetType() == typeof(TextBox))
+                {
                     TextBox tb = (TextBox)control;
                     tb.Font = ProjectFont.getNormalFont();
                 }
                 // Nếu control là combobox thì chỉnh font
-                else if (control.GetType() == typeof(ComboBox)) {
+                else if (control.GetType() == typeof(ComboBox))
+                {
                     ComboBox cb = (ComboBox)control;
                     cb.Font = ProjectFont.getNormalFont();
                 }
                 // Nếu control là check box thì chỉnh font
-                else if (control.GetType() == typeof(CheckBox)) {
+                else if (control.GetType() == typeof(CheckBox))
+                {
                     CheckBox chk = (CheckBox)control;
                     chk.Font = ProjectFont.getNormalFont();
                 }
                 // Nếu control là button thì chỉnh font
-                else if (control.GetType() == typeof(Button)) {
+                else if (control.GetType() == typeof(Button))
+                {
                     Button btn = (Button)control;
                     btn.BackColor = ThemeColor.PrimaryColor;
                     btn.ForeColor = Color.White;
@@ -130,29 +147,35 @@ namespace MiniSupermarket.GUI {
             }
 
             // Thêm màu cho group box thông tin khách hàng
-            foreach (Control control in this.grbCustomerInfo.Controls) {
+            foreach (Control control in this.grbCustomerInfo.Controls)
+            {
                 // Nếu control là label thì thêm màu và chỉnh font
-                if (control.GetType() == typeof(Label)) {
+                if (control.GetType() == typeof(Label))
+                {
                     Label lb = (Label)control;
                     lb.Font = ProjectFont.getNormalFont();
                 }
                 // Nếu control là text box thì chỉnh font
-                else if (control.GetType() == typeof(TextBox)) {
+                else if (control.GetType() == typeof(TextBox))
+                {
                     TextBox tb = (TextBox)control;
                     tb.Font = ProjectFont.getNormalFont();
                 }
                 // Nếu control là combobox thì chỉnh font
-                else if (control.GetType() == typeof(ComboBox)) {
+                else if (control.GetType() == typeof(ComboBox))
+                {
                     ComboBox cb = (ComboBox)control;
                     cb.Font = ProjectFont.getNormalFont();
                 }
                 // Nếu control là radio button thì chỉnh font
-                else if (control.GetType() == typeof(RadioButton)) {
+                else if (control.GetType() == typeof(RadioButton))
+                {
                     RadioButton radio = (RadioButton)control;
                     radio.Font = ProjectFont.getNormalFont();
                 }
                 // Nếu control là check box thì chỉnh font
-                else if (control.GetType() == typeof(CheckBox)) {
+                else if (control.GetType() == typeof(CheckBox))
+                {
                     CheckBox checkBox = (CheckBox)control;
                     checkBox.Font = ProjectFont.getNormalFont();
                 }
@@ -163,12 +186,15 @@ namespace MiniSupermarket.GUI {
             //dtpToDate.Font = new Font("Microsoft Sans Serif", 8.5F);
         }
 
-        private void btnAddBill_Click(object sender, EventArgs e) {
+        private void btnAddBill_Click(object sender, EventArgs e)
+        {
             string currentDate = DateTime.Now.ToString("yyyy-MM-dd");
             // Nếu chọn khách hàng mới thì phải nhập đầy đủ thông tin khách hàng
-            if (ckNewCustomer.Checked) {
+            if (ckNewCustomer.Checked)
+            {
                 // Yêu cầu nhập tên khách hàng
-                if (txtCustomerName.Text.Trim().Length == 0) {
+                if (txtCustomerName.Text.Trim().Length == 0)
+                {
                     // Hiện thông báo
                     MessageBox.Show("Vui lòng nhập tên khách hàng",
                             "Thông báo",
@@ -178,7 +204,8 @@ namespace MiniSupermarket.GUI {
                     return;
                 }
                 // Yêu cầu nhập số điện thoại
-                if (txtPhone.Text.Trim().Length == 0) {
+                if (txtPhone.Text.Trim().Length == 0)
+                {
                     // Hiện thông báo
                     MessageBox.Show("Vui lòng nhập số điện thoại",
                             "Thông báo",
@@ -188,7 +215,8 @@ namespace MiniSupermarket.GUI {
                     return;
                 }
                 // Yêu cầu chọn giới tính
-                if (!rdMale.Checked && !rdFemale.Checked) {
+                if (!rdMale.Checked && !rdFemale.Checked)
+                {
                     // Hiện thông báo
                     MessageBox.Show("Vui lòng chọn giới tính",
                             "Thông báo",
@@ -197,7 +225,8 @@ namespace MiniSupermarket.GUI {
                     return;
                 }
                 // Kiểm tra số điện thoại có hợp lệ
-                if (!ProjectRegex.IsPhoneNumber(txtPhone.Text)) {
+                if (!ProjectRegex.IsPhoneNumber(txtPhone.Text))
+                {
                     // Hiện thông báo
                     MessageBox.Show("Số điện thoại không hợp lệ",
                             "Thông báo",
@@ -209,12 +238,14 @@ namespace MiniSupermarket.GUI {
                 // Tạo một mã khách hàng mới
                 string customerId = new CustomerBus().generateNewID();
                 string customerName = txtCustomerName.Text.Trim();
-                if (saleBus.InsertCustomerSale(customerId, customerName, txtPhone.Text, sex)) {
+                if (saleBus.InsertCustomerSale(customerId, customerName, txtPhone.Text, sex))
+                {
                     CustomerBus.customerList.Add(new Customer(customerId, customerName, txtPhone.Text, sex, "0", "1"));
                     // Thêm khách hàng mới tạo vào combo box chọn khách hàng
                     cbChooseCustomer.Items.Add($"[{customerId}] {customerName}");
 
-                    if (saleBus.InsertIntoBill(GlobalState.employeeId, customerId, currentDate)) {
+                    if (saleBus.InsertIntoBill(GlobalState.employeeId, customerId, currentDate))
+                    {
                         // Hiện thông báo thành công
                         MessageBox.Show("Tạo hóa đơn thành công",
                                 "Thông báo",
@@ -224,7 +255,9 @@ namespace MiniSupermarket.GUI {
                         // Cập nhật lại data grid view
                         resetBillGridView();
                         return;
-                    } else {
+                    }
+                    else
+                    {
                         // Hiện thông báo thất bại
                         MessageBox.Show("Tạo hóa đơn thất bại",
                                 "Thông báo",
@@ -233,16 +266,20 @@ namespace MiniSupermarket.GUI {
                         return;
                     }
                 }
-            } else {
+            }
+            else
+            {
                 // Nếu đã chọn khách hàng
                 string input = txtSearchCustomer.Text.Trim();
                 string customerId = null;
                 Match match = Regex.Match(input, @"\[(.*?)\]");
-                if (match.Success) {
+                if (match.Success)
+                {
                     customerId = match.Groups[1].Value;
                 }
 
-                if (saleBus.InsertIntoBill(GlobalState.employeeId, customerId, currentDate)) {
+                if (saleBus.InsertIntoBill(GlobalState.employeeId, customerId, currentDate))
+                {
                     // Hiện thông báo thành công
                     MessageBox.Show("Tạo hóa đơn thành công",
                             "Thông báo",
@@ -252,7 +289,9 @@ namespace MiniSupermarket.GUI {
                     // Cập nhật lại data grid view
                     resetBillGridView();
                     return;
-                } else {
+                }
+                else
+                {
                     // Hiện thông báo thất bại
                     MessageBox.Show("Tạo hóa đơn thất bại",
                             "Thông báo",
@@ -263,13 +302,16 @@ namespace MiniSupermarket.GUI {
             }
         }
 
-        private void txtPhone_KeyPress(object sender, KeyPressEventArgs e) {
-            if (char.IsWhiteSpace(e.KeyChar) || !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar)) {
+        private void txtPhone_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsWhiteSpace(e.KeyChar) || !char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar))
+            {
                 e.Handled = true;
             }
         }
 
-        public void updateDataForSaleForm() {
+        public void updateDataForSaleForm()
+        {
             cbChooseCustomer.Items.Clear();
             // Thêm danh sách khách hàng cho combo box
             saleBus.updateCustomers();
@@ -277,7 +319,8 @@ namespace MiniSupermarket.GUI {
         }
 
         // Khi text change của combo box thì lựa chọn sẽ hiển thị tương ứng
-        private void txtSearchCustomer_TextChanged(object sender, EventArgs e) {
+        private void txtSearchCustomer_TextChanged(object sender, EventArgs e)
+        {
             string typedText = txtSearchCustomer.Text.ToLower();
             List<string> filteredItems = saleBus.getCustomers().Where(item => item.ToLower().Contains(typedText)).ToList();
 
@@ -285,14 +328,18 @@ namespace MiniSupermarket.GUI {
             cbChooseCustomer.Items.AddRange(filteredItems.ToArray());
         }
 
-        private void ckNewCustomer_CheckedChanged(object sender, EventArgs e) {
+        private void ckNewCustomer_CheckedChanged(object sender, EventArgs e)
+        {
             CheckBox newCustomer = (CheckBox)sender;
-            if (newCustomer.Checked) {
+            if (newCustomer.Checked)
+            {
                 txtCustomerName.Enabled = true;
                 txtPhone.Enabled = true;
                 rdFemale.Enabled = true;
                 rdMale.Enabled = true;
-            } else {
+            }
+            else
+            {
                 txtCustomerName.Enabled = false;
                 txtPhone.Enabled = false;
                 rdFemale.Enabled = false;
@@ -301,21 +348,25 @@ namespace MiniSupermarket.GUI {
             }
         }
 
-        private void btnReset_Click(object sender, EventArgs e) {
+        private void btnReset_Click(object sender, EventArgs e)
+        {
             txtSearchCustomer.Clear();
             txtCustomerName.Clear();
             txtPhone.Clear();
         }
 
-        private void rdMale_CheckedChanged(object sender, EventArgs e) {
+        private void rdMale_CheckedChanged(object sender, EventArgs e)
+        {
             sex = "Nam";
         }
 
-        private void rdFemale_CheckedChanged(object sender, EventArgs e) {
+        private void rdFemale_CheckedChanged(object sender, EventArgs e)
+        {
             sex = "Nữ";
         }
 
         // Sự kiện tìm kiếm hóa đơn
+<<<<<<< HEAD
         private void btnSearch_Click(object sender, EventArgs e) {
             DateTime dateFrom, dateTo;
 
@@ -328,6 +379,27 @@ namespace MiniSupermarket.GUI {
             if (!cbChonDenNgay.Checked) {
                 dateTo = DateTime.Parse("2100-01-01");
             } else {
+=======
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            DateTime dateFrom, dateTo;
+
+            if (!cbChonTuNgay.Checked)
+            {
+                dateFrom = DateTime.Parse("1900-01-01");
+            }
+            else
+            {
+                dateFrom = dtpFromDate.Value;
+            }
+
+            if (!cbChonDenNgay.Checked)
+            {
+                dateTo = DateTime.Parse("2100-01-01");
+            }
+            else
+            {
+>>>>>>> main
                 dateTo = dtpToDate.Value;
             }
 
@@ -335,11 +407,13 @@ namespace MiniSupermarket.GUI {
             int giaTu;
             int giaDen;
             // Gán giá trị cho giá từ và giá đến
-            if (!int.TryParse(txtFromTotal.Text, out giaTu)) {
+            if (!int.TryParse(txtFromTotal.Text, out giaTu))
+            {
                 giaTu = 0; // Giá trị mặc định khi không parse được
             }
 
-            if (!int.TryParse(txtToTotal.Text, out giaDen)) {
+            if (!int.TryParse(txtToTotal.Text, out giaDen))
+            {
                 giaDen = int.MaxValue; // Giá trị mặc định khi không parse được
             }
 
@@ -351,7 +425,8 @@ namespace MiniSupermarket.GUI {
             }
 
 
-            if (dateFrom > dateTo) {
+            if (dateFrom > dateTo)
+            {
                 // Hiện thông báo cảnh báo từ ngày phải nhỏ hơn đến ngày
                 MessageBox.Show("Từ ngày phải nhỏ hơn đến ngày",
                         "Thông báo",
@@ -367,19 +442,34 @@ namespace MiniSupermarket.GUI {
             DataTable resultSearch = bills.Clone();
 
             // Lấy những hóa đơn từ ngày
-            foreach (DataRow dr in bills.Rows) {
+            foreach (DataRow dr in bills.Rows)
+            {
                 DateTime itemDate;
                 if (DateTime.TryParse(dr["Date"].ToString(), out itemDate) &&
                     itemDate >= dateFrom && itemDate <= dateTo &&
                     (dr["CustomerID"].ToString().Contains(customer) || dr["CustomerName"].ToString().Contains(customer) &&
                     (dr["EmployeeID"].ToString().Contains(employee) || dr["EmployeeName"].ToString().Contains(employee))) &&
                     (int.Parse(dr["TotalPrice"].ToString()) >= giaTu &&
+<<<<<<< HEAD
                     int.Parse(dr["TotalPrice"].ToString()) <= giaDen)) {
                     if (cbPay.Checked && dr["Status"].Equals(true)) {
                         resultSearch.ImportRow(dr);
                     } else if (cbNotPay.Checked && dr["Status"].Equals(false)) {
                         resultSearch.ImportRow(dr);
                     } else if (!cbPay.Checked && !cbNotPay.Checked) { resultSearch.ImportRow(dr); }
+=======
+                    int.Parse(dr["TotalPrice"].ToString()) <= giaDen))
+                {
+                    if (cbPay.Checked && dr["Status"].Equals(true))
+                    {
+                        resultSearch.ImportRow(dr);
+                    }
+                    else if (cbNotPay.Checked && dr["Status"].Equals(false))
+                    {
+                        resultSearch.ImportRow(dr);
+                    }
+                    else if (!cbPay.Checked && !cbNotPay.Checked) { resultSearch.ImportRow(dr); }
+>>>>>>> main
                 }
             }
 
@@ -387,28 +477,36 @@ namespace MiniSupermarket.GUI {
         }
 
         // Sự kiện chọn combo box
-        private void cbChooseCustomer_SelectedIndexChanged(object sender, EventArgs e) {
+        private void cbChooseCustomer_SelectedIndexChanged(object sender, EventArgs e)
+        {
             txtSearchCustomer.Text = cbChooseCustomer.Text;
         }
 
-        private void dgv_bill_CellClick(object sender, DataGridViewCellEventArgs e) {
+        private void dgv_bill_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
             object status = dgv_bill.SelectedRows[0].Cells["Status"].Value;
-            if (status.ToString() == "") {
+            if (status.ToString() == "")
+            {
                 btnDelBill.Enabled = false;
                 return;
             }
             bool isCheckOut = (bool)status;
             // Nếu đã thanh toán hóa đơn thì disable nút xóa và ngược lại
-            if (isCheckOut) {
+            if (isCheckOut)
+            {
                 btnDelBill.Enabled = false;
-            } else {
+            }
+            else
+            {
                 btnDelBill.Enabled = true;
             }
         }
 
-        private void btnDelBill_Click(object sender, EventArgs e) {
+        private void btnDelBill_Click(object sender, EventArgs e)
+        {
             string billId = dgv_bill.SelectedRows[0].Cells["BillID"].Value.ToString();
-            if (saleBus.DeleteBill(billId)) {
+            if (saleBus.DeleteBill(billId))
+            {
                 // Hiện thông báo thành công
                 MessageBox.Show("Xóa hóa đơn thành công",
                         "Thông báo",
@@ -417,7 +515,9 @@ namespace MiniSupermarket.GUI {
                 resetBillGridView();
 
                 return;
-            } else {
+            }
+            else
+            {
                 // Hiện thông báo thất bại
                 MessageBox.Show("Xóa hóa đơn thất bại",
                         "Thông báo",
@@ -427,22 +527,26 @@ namespace MiniSupermarket.GUI {
             }
         }
 
-        private void dtpFromDate_KeyDown(object sender, KeyEventArgs e) {
+        private void dtpFromDate_KeyDown(object sender, KeyEventArgs e)
+        {
             e.SuppressKeyPress = true;
         }
 
-        private void dtpToDate_KeyDown(object sender, KeyEventArgs e) {
+        private void dtpToDate_KeyDown(object sender, KeyEventArgs e)
+        {
             e.SuppressKeyPress = true;
         }
 
-        public void resetBillGridView() {
+        public void resetBillGridView()
+        {
             // Cập nhật lại data grid view
             saleBus.updateBills();
             dgv_bill.DataSource = saleBus.getAllBills();
         }
 
         // Sự kiện tải lại cho tìm kiếm
-        private void btnClearSearch_Click(object sender, EventArgs e) {
+        private void btnClearSearch_Click(object sender, EventArgs e)
+        {
             txtCustomerSearch.Clear();
             txtEmployeeSearch.Clear();
             txtToTotal.Text = "Giá đến";
@@ -452,61 +556,80 @@ namespace MiniSupermarket.GUI {
             resetBillGridView();
         }
 
-        private void txtCustomerName_KeyPress(object sender, KeyPressEventArgs e) {
+        private void txtCustomerName_KeyPress(object sender, KeyPressEventArgs e)
+        {
             // Chỉ cho phép nhập các ký tự chữ cái và ký tự điều khiển (như Backspace)
-            if (!char.IsWhiteSpace(e.KeyChar) && !char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar)) {
+            if (!char.IsWhiteSpace(e.KeyChar) && !char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
                 e.Handled = true;  // Chặn ký tự không mong muốn
             }
         }
 
-        private void txtFromTotal_Leave(object sender, EventArgs e) {
-            if (txtFromTotal.Text == "") {
+        private void txtFromTotal_Leave(object sender, EventArgs e)
+        {
+            if (txtFromTotal.Text == "")
+            {
                 txtFromTotal.Text = "Giá từ";
                 txtFromTotal.ForeColor = Color.Gray;
             }
         }
 
-        private void txtFromTotal_Enter(object sender, EventArgs e) {
-            if (txtFromTotal.Text == "Giá từ") {
+        private void txtFromTotal_Enter(object sender, EventArgs e)
+        {
+            if (txtFromTotal.Text == "Giá từ")
+            {
                 txtFromTotal.Text = "";
                 txtFromTotal.ForeColor = Color.Black;
             }
         }
 
-        private void txtToTotal_Leave(object sender, EventArgs e) {
-            if (txtToTotal.Text == "") {
+        private void txtToTotal_Leave(object sender, EventArgs e)
+        {
+            if (txtToTotal.Text == "")
+            {
                 txtToTotal.Text = "Giá đến";
                 txtToTotal.ForeColor = Color.Gray;
             }
         }
 
-        private void txtToTotal_Enter(object sender, EventArgs e) {
-            if (txtToTotal.Text == "Giá đến") {
+        private void txtToTotal_Enter(object sender, EventArgs e)
+        {
+            if (txtToTotal.Text == "Giá đến")
+            {
                 txtToTotal.Text = "";
                 txtToTotal.ForeColor = Color.Black;
             }
         }
 
-        private void txtFromTotal_KeyPress(object sender, KeyPressEventArgs e) {
+        private void txtFromTotal_KeyPress(object sender, KeyPressEventArgs e)
+        {
             // Chỉ cho phép nhập các ký tự số và ký tự điều khiển (như Backspace)
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
                 e.Handled = true;  // Chặn ký tự không mong muốn
             }
         }
 
-        private void txtToTotal_KeyPress(object sender, KeyPressEventArgs e) {
+        private void txtToTotal_KeyPress(object sender, KeyPressEventArgs e)
+        {
             // Chỉ cho phép nhập các ký tự số và ký tự điều khiển (như Backspace)
-            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar)) {
+            if (!char.IsDigit(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
                 e.Handled = true;  // Chặn ký tự không mong muốn
             }
         }
 
+<<<<<<< HEAD
         //private void grbCustomerInfo_Enter(object sender, EventArgs e) {
         //    if (dgv_bill.SelectedRows.Count > 0 && dgv_bill.SelectedRows[0].Cells[0].Value != null) {
         //        DataGridViewRow selectedRow = dgv_bill.SelectedRows[0];
         //        string selectedBillID = (selectedRow.Cells["BillID"].Value).ToString();
         //        bool selectedStatus = (bool)selectedRow.Cells["Status"].Value;
         //        //bool selectedStatus = (selectedRow.Cells["Status"].Value).ToString();
+=======
+        private void dgv_bill_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+>>>>>>> main
 
         //        // Mở DetailBillForm và truyền ID của hóa đơn được chọn
         //        if (selectedBillID != "") {
@@ -520,25 +643,42 @@ namespace MiniSupermarket.GUI {
         //    }
         //}
 
+<<<<<<< HEAD
         private void dgv_bill_DoubleClick(object sender, EventArgs e) {
             if (dgv_bill.SelectedRows.Count > 0 && dgv_bill.SelectedRows[0].Cells["BillID"].Value != null) {
+=======
+        private void grbCustomerInfo_Enter(object sender, EventArgs e)
+        {
+            if (dgv_bill.SelectedRows.Count > 0 && dgv_bill.SelectedRows[0].Cells[0].Value != null)
+            {
+>>>>>>> main
                 DataGridViewRow selectedRow = dgv_bill.SelectedRows[0];
                 selectedBillID = selectedRow.Cells["BillID"].Value.ToString();
                 bool selectedStatus = (bool)selectedRow.Cells["Status"].Value;
 
                 // Mở DetailBillForm và truyền ID của hóa đơn được chọn
+<<<<<<< HEAD
                 if (!string.IsNullOrEmpty(selectedBillID)) {
+=======
+                if (selectedBillID != "")
+                {
+>>>>>>> main
                     DetailBillForm detailBillForm = new DetailBillForm(selectedBillID, selectedStatus);
                     detailBillForm.FormClosed += DetailBillForm_FormClosed; // Đăng ký sự kiện FormClosed
                     detailBillForm.ShowDialog();
-                } else {
+                }
+                else
+                {
                     MessageBox.Show("Mã hóa đơn không hợp lệ. Vui lòng chọn một hóa đơn để xem chi tiết.");
                 }
-            } else {
+            }
+            else
+            {
                 MessageBox.Show("Chưa chọn hóa đơn. Vui lòng chọn một hóa đơn để xem chi tiết.");
             }
         }
 
+<<<<<<< HEAD
         private void DetailBillForm_FormClosed(object sender, FormClosedEventArgs e) {
             DetalBillBus billBus = new DetalBillBus();
             billBus.updateBillPrice(this.selectedBillID);
@@ -550,24 +690,61 @@ namespace MiniSupermarket.GUI {
             if (cbChonTuNgay.Checked) {
                 dtpFromDate.Enabled = true;
             } else {
+=======
+        private void btnDetalBill_Click(object sender, EventArgs e)
+        {
+
+
+            // Kiểm tra xem có hàng nào được chọn không
+
+        }
+
+        private void cbChonTuNgay_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbChonTuNgay.Checked)
+            {
+                dtpFromDate.Enabled = true;
+            }
+            else
+            {
+>>>>>>> main
                 dtpFromDate.Enabled = false;
             }
         }
 
+<<<<<<< HEAD
         private void cbChonDenNgay_CheckedChanged(object sender, EventArgs e) {
             if (cbChonDenNgay.Checked) {
                 dtpToDate.Enabled = true;
             } else {
+=======
+        private void cbChonDenNgay_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbChonDenNgay.Checked)
+            {
+                dtpToDate.Enabled = true;
+            }
+            else
+            {
+>>>>>>> main
                 dtpToDate.Enabled = false;
             }
         }
 
+<<<<<<< HEAD
         private void cbPay_CheckedChanged(object sender, EventArgs e) {
             if (cbPay.Checked) {
+=======
+        private void cbPay_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbPay.Checked)
+            {
+>>>>>>> main
                 cbNotPay.Checked = false;
             }
         }
 
+<<<<<<< HEAD
         private void cbNotPay_CheckedChanged(object sender, EventArgs e) {
             if (cbNotPay.Checked) {
                 cbPay.Checked = false;
@@ -647,5 +824,14 @@ namespace MiniSupermarket.GUI {
                 }
             }
         }
+=======
+        private void cbNotPay_CheckedChanged(object sender, EventArgs e)
+        {
+            if (cbNotPay.Checked)
+            {
+                cbPay.Checked = false;
+            }
+        }
+>>>>>>> main
     }
 }

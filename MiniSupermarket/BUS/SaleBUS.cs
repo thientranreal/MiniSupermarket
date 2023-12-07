@@ -153,10 +153,21 @@ namespace MiniSupermarket.BUS {
             // Lấy những bill chưa xóa và có status = 1
             updateBills();
             DataRow[] selectedRows = bills.Select("isDeleted = 1 AND status = 1");
-            DataTable newTable = selectedRows.CopyToDataTable();
+            DataTable newTable = new DataTable();
 
+<<<<<<< HEAD
             if (newTable.Columns.Contains("isDeleted")) {
                 newTable.Columns.Remove("isDeleted");
+=======
+            if (selectedRows.Length > 0)
+            {
+                newTable = selectedRows.CopyToDataTable();
+
+                if (newTable.Columns.Contains("isDeleted"))
+                {
+                    newTable.Columns.Remove("isDeleted");
+                }
+>>>>>>> main
             }
 
             return newTable;

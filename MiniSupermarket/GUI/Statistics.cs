@@ -127,6 +127,7 @@ namespace MiniSupermarket.GUI {
             if (cbx_TimKiem.Text == "Hóa đơn") {
                 // Tải dữ liệu lên data grid view
                 dshd_sp.DataSource = saleBUS.getAllBillsForStatus();
+<<<<<<< HEAD
                 // Đổi tên cột
                 dshd_sp.Columns["BillID"].HeaderText = "Mã hóa đơn";
                 dshd_sp.Columns["Date"].HeaderText = "Ngày tạo";
@@ -137,6 +138,21 @@ namespace MiniSupermarket.GUI {
                 dshd_sp.Columns["TotalPrice"].HeaderText = "Tổng giá";
                 dshd_sp.Columns["Status"].HeaderText = "status";
 
+=======
+                if (dshd_sp.RowCount > 0)
+                {
+                    // Đổi tên cột
+                    dshd_sp.Columns["BillID"].HeaderText = "Mã hóa đơn";
+                    dshd_sp.Columns["Date"].HeaderText = "Ngày tạo";
+                    dshd_sp.Columns["EmployeeID"].HeaderText = "Mã nhân viên";
+                    dshd_sp.Columns["CustomerID"].HeaderText = "Mã khách hàng";
+                    dshd_sp.Columns["EstimatedPrice"].HeaderText = "Giá ước tính";
+                    dshd_sp.Columns["ReducePrice"].HeaderText = "Giá giảm";
+                    dshd_sp.Columns["TotalPrice"].HeaderText = "Tổng giá";
+                    dshd_sp.Columns["Status"].HeaderText = "status";
+                }
+                   
+>>>>>>> main
                 dtp_TuNgay.Visible = true;
                 dtp_DenNgay.Visible = true;
                 lb_TuNgay.Visible = true;
@@ -172,12 +188,15 @@ namespace MiniSupermarket.GUI {
 
             } else if (cbx_TimKiem.Text == "Sản phẩm") {
                 dshd_sp.DataSource = DetalBillBus.getAllDetalBill();
-                // Đổi tên cột
-                dshd_sp.Columns["BillID"].HeaderText = "Mã hóa đơn";
-                dshd_sp.Columns["ProductID"].HeaderText = "Mã sản phẩm";
-                dshd_sp.Columns["OrderID"].HeaderText = "Mã nhà cung cấp";
-                dshd_sp.Columns["SalePrice"].HeaderText = "Giá bán";
-                dshd_sp.Columns["Quantity"].HeaderText = "Số lượng";
+                if (dshd_sp.RowCount > 0 )
+                {
+                    // Đổi tên cột
+                    dshd_sp.Columns["BillID"].HeaderText = "Mã hóa đơn";
+                    dshd_sp.Columns["ProductID"].HeaderText = "Mã sản phẩm";
+                    dshd_sp.Columns["OrderID"].HeaderText = "Mã nhà cung cấp";
+                    dshd_sp.Columns["SalePrice"].HeaderText = "Giá bán";
+                    dshd_sp.Columns["Quantity"].HeaderText = "Số lượng";
+                }
 
                 btn_ThongKe.Text = "Thống kê";
                 btn_ThongKe.Click -= new EventHandler(button1_Click);
@@ -200,12 +219,15 @@ namespace MiniSupermarket.GUI {
                 lb_DoanhThuMinNv.Text = $"-> Số lượng bán ra: ";
             } else if (cbx_TimKiem.Text == "Nhân viên") {
                 dshd_sp.DataSource = statisticsBUS.getAllBillInfor();
-                // Đổi tên cột
-                dshd_sp.Columns["EmployeeID"].HeaderText = "Mã nhân viên";
-                dshd_sp.Columns["EmployeeName"].HeaderText = "Tên nhân viên";
-                dshd_sp.Columns["BillID"].HeaderText = "Mã hóa đơn";
-                dshd_sp.Columns["Date"].HeaderText = "Ngày tạo";
-                dshd_sp.Columns["TotalPrice"].HeaderText = "Tổng giá";
+                if (dshd_sp.RowCount > 0 )
+                {
+                    // Đổi tên cột
+                    dshd_sp.Columns["EmployeeID"].HeaderText = "Mã nhân viên";
+                    dshd_sp.Columns["EmployeeName"].HeaderText = "Tên nhân viên";
+                    dshd_sp.Columns["BillID"].HeaderText = "Mã hóa đơn";
+                    dshd_sp.Columns["Date"].HeaderText = "Ngày tạo";
+                    dshd_sp.Columns["TotalPrice"].HeaderText = "Tổng giá";
+                }
 
                 lb_DoanhThu.Visible = false;
                 dtp_TuNgay.Visible = true;
@@ -268,12 +290,15 @@ namespace MiniSupermarket.GUI {
 
         private void ShowProducts(object sender, EventArgs e) {
             dshd_sp.DataSource = DetalBillBus.getAllDetalBill();
-            // Đổi tên cột
-            dshd_sp.Columns["BillID"].HeaderText = "Mã hóa đơn";
-            dshd_sp.Columns["ProductID"].HeaderText = "Mã sản phẩm";
-            dshd_sp.Columns["OrderID"].HeaderText = "Mã nhà cung cấp";
-            dshd_sp.Columns["SalePrice"].HeaderText = "Giá bán";
-            dshd_sp.Columns["Quantity"].HeaderText = "Số lượng";
+            if (dshd_sp.RowCount > 0 )
+            {
+                // Đổi tên cột
+                dshd_sp.Columns["BillID"].HeaderText = "Mã hóa đơn";
+                dshd_sp.Columns["ProductID"].HeaderText = "Mã sản phẩm";
+                dshd_sp.Columns["OrderID"].HeaderText = "Mã nhà cung cấp";
+                dshd_sp.Columns["SalePrice"].HeaderText = "Giá bán";
+                dshd_sp.Columns["Quantity"].HeaderText = "Số lượng";
+            }
 
             //Mã sản phẩm
             string MaxProductIdSale = DetalBillBus.GetMostSoldProduct();

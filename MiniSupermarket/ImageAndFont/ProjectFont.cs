@@ -31,5 +31,29 @@ namespace MiniSupermarket.ImageAndFont
             }
             return temp;
         }
+
+        public static string CapitalizeEachWord(string input)
+        {
+            if (string.IsNullOrEmpty(input))
+            {
+                return string.Empty;
+            }
+
+            // Tách chuỗi theo khoảng trắng
+            var words = input.Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+
+            // Viết hoa chữ cái đầu của mỗi từ
+            for (int i = 0; i < words.Length; i++)
+            {
+                var word = words[i];
+                if (word.Length > 0)
+                {
+                    words[i] = char.ToUpper(word[0]) + word.Substring(1).ToLower();
+                }
+            }
+
+            // Nối lại các từ với nhau, cách nhau 1 khoảng trắng
+            return string.Join(" ", words);
+        }
     }
 }

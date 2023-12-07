@@ -141,8 +141,14 @@ namespace MiniSupermarket.GUI {
             cbx_MaKm.Items.Clear();
             // Load danh sách mã km vào ComboBox
             PromotionBUS promotionBUS = new PromotionBUS();
+<<<<<<< HEAD
             string[] danhSachKMNames = promotionBUS.getPromotionsWithIdAndName(); // Lấy danh sách tên mã km
             foreach (var loaiKM in danhSachKMNames) {
+=======
+            string[] danhSachKMNames = promotionBUS.getActivePromotionsWithIdAndName(); // Lấy danh sách tên mã km
+            foreach (var loaiKM in danhSachKMNames)
+            {
+>>>>>>> main
 
                 cbx_MaKm.Items.Add(loaiKM); // Thêm từng loại mã km vào ComboBox
             }
@@ -182,8 +188,8 @@ namespace MiniSupermarket.GUI {
                     cbx_MaKm.Text = display;
                 } else {
                     // PromotionID rỗng, có thể đặt giá trị mặc định cho cbx_MaKm
-                    cbx_MaKm.Text = "Không có khuyến mãi";
-                    // Hoặc cbx_MaKm.Text = string.Empty; để để trống
+                    cbx_MaKm.SelectedIndex = -1;
+                    
                 }
 
             }
@@ -511,5 +517,22 @@ namespace MiniSupermarket.GUI {
 
             }
         }
+<<<<<<< HEAD
+=======
+        private void button1_Click(object sender, EventArgs e)
+        {
+            // Tải dữ liệu lên data grid view
+            dssp_DSSP.DataSource = ptBus.getAllProducts();
+            txt_MaSp.Clear();
+            txt_TenSp.Clear();
+            cbx_MaLoai.SelectedIndex = -1; // Đặt lại ComboBox để không có mục nào được chọn
+            txt_DonGia.Clear();
+            txt_MoTa.Clear();
+            txt_Kieu.Clear();
+            txt_SoLuong.Clear();
+            cbx_MaKm.SelectedIndex = -1;
+        }
+
+>>>>>>> main
     }
 }
