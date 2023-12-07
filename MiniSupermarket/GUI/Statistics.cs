@@ -127,16 +127,18 @@ namespace MiniSupermarket.GUI {
             if (cbx_TimKiem.Text == "Hóa đơn") {
                 // Tải dữ liệu lên data grid view
                 dshd_sp.DataSource = saleBUS.getAllBillsForStatus();
-                // Đổi tên cột
-                dshd_sp.Columns["BillID"].HeaderText = "Mã hóa đơn";
-                dshd_sp.Columns["Date"].HeaderText = "Ngày tạo";
-                dshd_sp.Columns["EmployeeID"].HeaderText = "Mã nhân viên";
-                dshd_sp.Columns["CustomerID"].HeaderText = "Mã khách hàng";
-                dshd_sp.Columns["EstimatedPrice"].HeaderText = "Giá ước tính";
-                dshd_sp.Columns["ReducePrice"].HeaderText = "Giá giảm";
-                dshd_sp.Columns["TotalPrice"].HeaderText = "Tổng giá";
-                dshd_sp.Columns["Status"].HeaderText = "status";
-
+                if (dshd_sp.RowCount > 0)
+                {
+                    // Đổi tên cột
+                    dshd_sp.Columns["BillID"].HeaderText = "Mã hóa đơn";
+                    dshd_sp.Columns["Date"].HeaderText = "Ngày tạo";
+                    dshd_sp.Columns["EmployeeID"].HeaderText = "Mã nhân viên";
+                    dshd_sp.Columns["CustomerID"].HeaderText = "Mã khách hàng";
+                    dshd_sp.Columns["EstimatedPrice"].HeaderText = "Giá ước tính";
+                    dshd_sp.Columns["ReducePrice"].HeaderText = "Giá giảm";
+                    dshd_sp.Columns["TotalPrice"].HeaderText = "Tổng giá";
+                    dshd_sp.Columns["Status"].HeaderText = "status";
+                }
                 dtp_TuNgay.Visible = true;
                 dtp_DenNgay.Visible = true;
                 lb_TuNgay.Visible = true;
