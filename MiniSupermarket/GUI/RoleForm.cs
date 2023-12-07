@@ -27,6 +27,7 @@ namespace MiniSupermarket.GUI
             ds_qlcv.ReadOnly = true;
             ds_qlcv.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             ds_qlcv.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            ds_qlcv.SelectionChanged += DataGridView_SelectionChanged;
 
             // set biến toàn cục cho role id
             string temp = GlobalState.employeeId;
@@ -154,6 +155,14 @@ namespace MiniSupermarket.GUI
                     richTextBox.Text = string.Empty;
                 }
             }
+            foreach (Control control in gb_Info.Controls)
+            {
+                if (control is CheckBox checkBox)
+                {
+                    checkBox.Checked = false;
+                }
+            }
+            ds_qlcv.ClearSelection();
         }
 
         private void RoleForm_Load(object sender, EventArgs e)
@@ -267,6 +276,15 @@ namespace MiniSupermarket.GUI
         {
             tb_name.Clear();
             rtb_explain.Clear();
+        }
+
+        private void DataGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            if (ds_qlcv.SelectedRows.Count > 0)
+            {
+                tb_name.Text = ds_qlcv.SelectedRows[0].Cells["Name"].Value.ToString();
+                rtb_explain.Text = ds_qlcv.SelectedRows[0].Cells["Description"].Value.ToString();
+            }
         }
         private void btnUpdateFunction_Click(object sender, EventArgs e)
         {
