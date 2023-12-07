@@ -22,43 +22,6 @@
         /// Required method for Designer support - do not modify
         /// the contents of this method with the code editor.
         /// </summary>
-<<<<<<< HEAD
-        private void InitializeComponent() {
-            grb_TimKiem = new GroupBox();
-            cbx_TimKiem = new ComboBox();
-            txt_TimKiem = new TextBox();
-            panel1 = new Panel();
-            grb_TextField = new GroupBox();
-            cbx_MaKm = new ComboBox();
-            lb_MaKm = new Label();
-            cbx_MaLoai = new ComboBox();
-            btn_NhapExcel = new Button();
-            txt_MaSp = new TextBox();
-            btn_XuatExcel = new Button();
-            lb_MaSp = new Label();
-            btn_Xoa = new Button();
-            lb_TenSp = new Label();
-            btn_Sua = new Button();
-            lb_MaLoaiSp = new Label();
-            btn_Them = new Button();
-            lb_Soluong = new Label();
-            lb_DonGia = new Label();
-            txt_Kieu = new TextBox();
-            lb_MoTa = new Label();
-            txt_MoTa = new TextBox();
-            lb_Kieu = new Label();
-            txt_DonGia = new TextBox();
-            txt_SoLuong = new TextBox();
-            txt_TenSp = new TextBox();
-            panel2 = new Panel();
-            dssp_DSSP = new DataGridView();
-            grb_TimKiem.SuspendLayout();
-            panel1.SuspendLayout();
-            grb_TextField.SuspendLayout();
-            panel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dssp_DSSP).BeginInit();
-            SuspendLayout();
-=======
         private void InitializeComponent()
         {
             this.grb_TimKiem = new System.Windows.Forms.GroupBox();
@@ -389,7 +352,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.dssp_DSSP)).EndInit();
             this.ResumeLayout(false);
 
->>>>>>> main
             // 
             // grb_TimKiem
             // 
@@ -683,12 +645,9 @@
             dssp_DSSP.Name = "dssp_DSSP";
             dssp_DSSP.RowHeadersWidth = 51;
             dssp_DSSP.RowTemplate.Height = 29;
-<<<<<<< HEAD
-            dssp_DSSP.Size = new Size(956, 188);
-=======
+
             dssp_DSSP.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dssp_DSSP.Size = new Size(1093, 250);
->>>>>>> main
             dssp_DSSP.TabIndex = 0;
             dssp_DSSP.CellClick += dssp_DSSP_CellClick;
             dssp_DSSP.CellContentClick += dssp_DSSP_CellContentClick;

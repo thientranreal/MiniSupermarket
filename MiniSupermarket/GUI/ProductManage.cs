@@ -141,15 +141,10 @@ namespace MiniSupermarket.GUI {
             cbx_MaKm.Items.Clear();
             // Load danh sách mã km vào ComboBox
             PromotionBUS promotionBUS = new PromotionBUS();
-<<<<<<< HEAD
-            string[] danhSachKMNames = promotionBUS.getPromotionsWithIdAndName(); // Lấy danh sách tên mã km
-            foreach (var loaiKM in danhSachKMNames) {
-=======
+
             string[] danhSachKMNames = promotionBUS.getActivePromotionsWithIdAndName(); // Lấy danh sách tên mã km
             foreach (var loaiKM in danhSachKMNames)
             {
->>>>>>> main
-
                 cbx_MaKm.Items.Add(loaiKM); // Thêm từng loại mã km vào ComboBox
             }
 
@@ -517,8 +512,7 @@ namespace MiniSupermarket.GUI {
 
             }
         }
-<<<<<<< HEAD
-=======
+
         private void button1_Click(object sender, EventArgs e)
         {
             // Tải dữ liệu lên data grid view
@@ -532,7 +526,5 @@ namespace MiniSupermarket.GUI {
             txt_SoLuong.Clear();
             cbx_MaKm.SelectedIndex = -1;
         }
-
->>>>>>> main
     }
 }

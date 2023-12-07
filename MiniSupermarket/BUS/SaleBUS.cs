@@ -155,10 +155,6 @@ namespace MiniSupermarket.BUS {
             DataRow[] selectedRows = bills.Select("isDeleted = 1 AND status = 1");
             DataTable newTable = new DataTable();
 
-<<<<<<< HEAD
-            if (newTable.Columns.Contains("isDeleted")) {
-                newTable.Columns.Remove("isDeleted");
-=======
             if (selectedRows.Length > 0)
             {
                 newTable = selectedRows.CopyToDataTable();
@@ -167,7 +163,6 @@ namespace MiniSupermarket.BUS {
                 {
                     newTable.Columns.Remove("isDeleted");
                 }
->>>>>>> main
             }
 
             return newTable;

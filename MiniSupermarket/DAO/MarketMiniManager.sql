@@ -178,7 +178,7 @@ GO
 -- Rot du lieu vao bang hoa don
 INSERT INTO Bill (BillID, [Date], EmployeeID, CustomerID, EstimatedPrice, ReducePrice, TotalPrice, [Status])
 VALUES
-    ('B0001', '2023-09-23', 'E0002', 'C0001', 0, 0, 0, 0);
+    ('B0001', '2023-09-23', 'E0002', 'C0001', 0, 0, 0, 1);
 GO
 
 --Tao bang nha cung cap
@@ -1837,7 +1837,8 @@ BEGIN
         SELECT SUM(SalePrice)
         FROM DetailBill
         WHERE BillID = @BillID
-    ), 0);
+    ), 0)
+    WHERE BillID = @BillID;
 
     -- Cập nhật ReducePrice
     UPDATE Bill
@@ -1846,7 +1847,8 @@ BEGIN
         FROM DetailBill D
         JOIN Promotion P ON D.PromotionID = P.PromotionID
         WHERE D.BillID = @BillID
-    ), 0);
+    ), 0)
+    WHERE BillID = @BillID;
 
     -- Cập nhật TotalPrice
     UPDATE Bill
@@ -1861,12 +1863,9 @@ CREATE PROCEDURE PayTheBill
     @BillID varchar(10)
 AS
 BEGIN
-    -- Cập nhật EstimatedPrice
-    EXEC updateBillPrice @BillID;
-
     -- Cập nhật Status
     UPDATE Bill
-    SET Status = 0
+    SET Status = 1
     WHERE BillID = @BillID;
 END;
 GO

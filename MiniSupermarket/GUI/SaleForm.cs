@@ -25,13 +25,8 @@ namespace MiniSupermarket.GUI
     {
         private SaleBUS saleBus = new SaleBUS();
         private string sex;
-<<<<<<< HEAD
         private string selectedBillID;
         public SaleForm() {
-=======
-        public SaleForm()
-        {
->>>>>>> main
             InitializeComponent();
             this.Padding = new System.Windows.Forms.Padding(5, 5, 5, 5);
         }
@@ -366,20 +361,6 @@ namespace MiniSupermarket.GUI
         }
 
         // Sự kiện tìm kiếm hóa đơn
-<<<<<<< HEAD
-        private void btnSearch_Click(object sender, EventArgs e) {
-            DateTime dateFrom, dateTo;
-
-            if (!cbChonTuNgay.Checked) {
-                dateFrom = DateTime.Parse("1900-01-01");
-            } else {
-                dateFrom = dtpFromDate.Value;
-            }
-
-            if (!cbChonDenNgay.Checked) {
-                dateTo = DateTime.Parse("2100-01-01");
-            } else {
-=======
         private void btnSearch_Click(object sender, EventArgs e)
         {
             DateTime dateFrom, dateTo;
@@ -399,7 +380,6 @@ namespace MiniSupermarket.GUI
             }
             else
             {
->>>>>>> main
                 dateTo = dtpToDate.Value;
             }
 
@@ -450,14 +430,7 @@ namespace MiniSupermarket.GUI
                     (dr["CustomerID"].ToString().Contains(customer) || dr["CustomerName"].ToString().Contains(customer) &&
                     (dr["EmployeeID"].ToString().Contains(employee) || dr["EmployeeName"].ToString().Contains(employee))) &&
                     (int.Parse(dr["TotalPrice"].ToString()) >= giaTu &&
-<<<<<<< HEAD
-                    int.Parse(dr["TotalPrice"].ToString()) <= giaDen)) {
-                    if (cbPay.Checked && dr["Status"].Equals(true)) {
-                        resultSearch.ImportRow(dr);
-                    } else if (cbNotPay.Checked && dr["Status"].Equals(false)) {
-                        resultSearch.ImportRow(dr);
-                    } else if (!cbPay.Checked && !cbNotPay.Checked) { resultSearch.ImportRow(dr); }
-=======
+
                     int.Parse(dr["TotalPrice"].ToString()) <= giaDen))
                 {
                     if (cbPay.Checked && dr["Status"].Equals(true))
@@ -469,7 +442,6 @@ namespace MiniSupermarket.GUI
                         resultSearch.ImportRow(dr);
                     }
                     else if (!cbPay.Checked && !cbNotPay.Checked) { resultSearch.ImportRow(dr); }
->>>>>>> main
                 }
             }
 
@@ -619,50 +591,16 @@ namespace MiniSupermarket.GUI
             }
         }
 
-<<<<<<< HEAD
-        //private void grbCustomerInfo_Enter(object sender, EventArgs e) {
-        //    if (dgv_bill.SelectedRows.Count > 0 && dgv_bill.SelectedRows[0].Cells[0].Value != null) {
-        //        DataGridViewRow selectedRow = dgv_bill.SelectedRows[0];
-        //        string selectedBillID = (selectedRow.Cells["BillID"].Value).ToString();
-        //        bool selectedStatus = (bool)selectedRow.Cells["Status"].Value;
-        //        //bool selectedStatus = (selectedRow.Cells["Status"].Value).ToString();
-=======
-        private void dgv_bill_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
->>>>>>> main
-
-        //        // Mở DetailBillForm và truyền ID của hóa đơn được chọn
-        //        if (selectedBillID != "") {
-        //            DetailBillForm detailBillForm = new DetailBillForm(selectedBillID, selectedStatus);
-        //            detailBillForm.ShowDialog();
-        //        } else {
-        //            MessageBox.Show("Mã hóa đơn không hợp lệ. Vui lòng chọn một hóa đơn để xem chi tiết.");
-        //        }
-        //    } else {
-        //        MessageBox.Show("Chưa chọn hóa đơn. Vui lòng chọn một hóa đơn để xem chi tiết.");
-        //    }
-        //}
-
-<<<<<<< HEAD
         private void dgv_bill_DoubleClick(object sender, EventArgs e) {
             if (dgv_bill.SelectedRows.Count > 0 && dgv_bill.SelectedRows[0].Cells["BillID"].Value != null) {
-=======
-        private void grbCustomerInfo_Enter(object sender, EventArgs e)
-        {
-            if (dgv_bill.SelectedRows.Count > 0 && dgv_bill.SelectedRows[0].Cells[0].Value != null)
-            {
->>>>>>> main
+
                 DataGridViewRow selectedRow = dgv_bill.SelectedRows[0];
                 selectedBillID = selectedRow.Cells["BillID"].Value.ToString();
                 bool selectedStatus = (bool)selectedRow.Cells["Status"].Value;
 
                 // Mở DetailBillForm và truyền ID của hóa đơn được chọn
-<<<<<<< HEAD
                 if (!string.IsNullOrEmpty(selectedBillID)) {
-=======
-                if (selectedBillID != "")
-                {
->>>>>>> main
+
                     DetailBillForm detailBillForm = new DetailBillForm(selectedBillID, selectedStatus);
                     detailBillForm.FormClosed += DetailBillForm_FormClosed; // Đăng ký sự kiện FormClosed
                     detailBillForm.ShowDialog();
@@ -678,7 +616,6 @@ namespace MiniSupermarket.GUI
             }
         }
 
-<<<<<<< HEAD
         private void DetailBillForm_FormClosed(object sender, FormClosedEventArgs e) {
             DetalBillBus billBus = new DetalBillBus();
             billBus.updateBillPrice(this.selectedBillID);
@@ -690,34 +627,10 @@ namespace MiniSupermarket.GUI
             if (cbChonTuNgay.Checked) {
                 dtpFromDate.Enabled = true;
             } else {
-=======
-        private void btnDetalBill_Click(object sender, EventArgs e)
-        {
-
-
-            // Kiểm tra xem có hàng nào được chọn không
-
-        }
-
-        private void cbChonTuNgay_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbChonTuNgay.Checked)
-            {
-                dtpFromDate.Enabled = true;
-            }
-            else
-            {
->>>>>>> main
                 dtpFromDate.Enabled = false;
             }
         }
 
-<<<<<<< HEAD
-        private void cbChonDenNgay_CheckedChanged(object sender, EventArgs e) {
-            if (cbChonDenNgay.Checked) {
-                dtpToDate.Enabled = true;
-            } else {
-=======
         private void cbChonDenNgay_CheckedChanged(object sender, EventArgs e)
         {
             if (cbChonDenNgay.Checked)
@@ -726,25 +639,18 @@ namespace MiniSupermarket.GUI
             }
             else
             {
->>>>>>> main
                 dtpToDate.Enabled = false;
             }
         }
 
-<<<<<<< HEAD
-        private void cbPay_CheckedChanged(object sender, EventArgs e) {
-            if (cbPay.Checked) {
-=======
         private void cbPay_CheckedChanged(object sender, EventArgs e)
         {
             if (cbPay.Checked)
             {
->>>>>>> main
                 cbNotPay.Checked = false;
             }
         }
 
-<<<<<<< HEAD
         private void cbNotPay_CheckedChanged(object sender, EventArgs e) {
             if (cbNotPay.Checked) {
                 cbPay.Checked = false;
@@ -824,14 +730,5 @@ namespace MiniSupermarket.GUI
                 }
             }
         }
-=======
-        private void cbNotPay_CheckedChanged(object sender, EventArgs e)
-        {
-            if (cbNotPay.Checked)
-            {
-                cbPay.Checked = false;
-            }
-        }
->>>>>>> main
     }
 }
