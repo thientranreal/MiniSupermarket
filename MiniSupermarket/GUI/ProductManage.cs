@@ -152,7 +152,7 @@ namespace MiniSupermarket.GUI
             cbx_MaKm.Items.Clear();
             // Load danh sách mã km vào ComboBox
             PromotionBUS promotionBUS = new PromotionBUS();
-            string[] danhSachKMNames = promotionBUS.getPromotionsWithIdAndName(); // Lấy danh sách tên mã km
+            string[] danhSachKMNames = promotionBUS.getActivePromotionsWithIdAndName(); // Lấy danh sách tên mã km
             foreach (var loaiKM in danhSachKMNames)
             {
 
@@ -199,7 +199,7 @@ namespace MiniSupermarket.GUI
                 {
                     // PromotionID rỗng, có thể đặt giá trị mặc định cho cbx_MaKm
                     cbx_MaKm.SelectedIndex = -1;
-                    // Hoặc cbx_MaKm.Text = string.Empty; để để trống
+                    
                 }
 
             }
