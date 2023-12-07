@@ -137,36 +137,39 @@ namespace MiniSupermarket.BUS
 
         //Công ANh thêm==============
         //Lấy ra id và tên khuyến mãi theo dạng: [id]name
-        public string[] getPromotionsWithIdAndName()
+        public string[] getActivePromotionsWithIdAndName()
         {
-            List<(string Id, string Name)> types = new List<(string Id, string Name)>();
+            List<(string Id, string Name)> activePromotions = new List<(string Id, string Name)>();
 
             // Kiểm tra xem promotions có dữ liệu không trước khi truy cập
-            if (promotions != null && promotions.Rows.Count > 0 && promotions.Columns.Contains("ID") && promotions.Columns.Contains("Name"))
+            if (promotions != null && promotions.Rows.Count > 0 && promotions.Columns.Contains("ID") && promotions.Columns.Contains("Name") && promotions.Columns.Contains("Status"))
             {
                 foreach (DataRow row in promotions.Rows)
                 {
-                    // Lấy thông tin mã khuyến mãi mà không cần kiểm tra isDeleted
-                    string PromotionID = row["ID"].ToString();
-                    string name = row["Name"].ToString();
-                    types.Add((PromotionID, name));
+                    // Kiểm tra nếu trạng thái là "đang hoạt động"
+                    if (row["Status"].ToString().Equals("Đang hoạt động", StringComparison.OrdinalIgnoreCase))
+                    {
+                        string PromotionID = row["ID"].ToString();
+                        string name = row["Name"].ToString();
+                        activePromotions.Add((PromotionID, name));
+                    }
                 }
             }
-            return types.Select(t => $"[{t.Id}] {t.Name}").ToArray();
+            return activePromotions.Select(t => $"[{t.Id}] {t.Name}").ToArray();
         }
+
 
         public string GetIDFromName(string id)
         {
+
             foreach (DataRow row in promotions.Rows)
             {
                 // Nếu TypeID khớp với ID cần tìm, trả về Name tương ứng
                 if (row["Name"].ToString().Equals(id, StringComparison.OrdinalIgnoreCase))
                 {
                     return row["ID"].ToString();
-                }else 
-                {
-                    return null;
-                }
+                }              
+                
             }
 
             // Trường hợp không tìm thấy
