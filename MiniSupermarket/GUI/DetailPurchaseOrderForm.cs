@@ -239,6 +239,7 @@ namespace MiniSupermarket.GUI
                     setNull();
                     Payed();
                     OrderForm.HienThiPhieuNhap();
+                    this.Close();
                     return;
                 }
             }
