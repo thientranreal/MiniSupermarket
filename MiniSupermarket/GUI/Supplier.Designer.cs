@@ -80,9 +80,9 @@
             groupBoxThongTinNCC.Controls.Add(labelDiaChi);
             groupBoxThongTinNCC.Controls.Add(labelTen);
             groupBoxThongTinNCC.Controls.Add(labelID);
-            groupBoxThongTinNCC.Location = new Point(8, 0);
+            groupBoxThongTinNCC.Location = new Point(12, 0);
             groupBoxThongTinNCC.Name = "groupBoxThongTinNCC";
-            groupBoxThongTinNCC.Size = new Size(362, 230);
+            groupBoxThongTinNCC.Size = new Size(395, 230);
             groupBoxThongTinNCC.TabIndex = 0;
             groupBoxThongTinNCC.TabStop = false;
             groupBoxThongTinNCC.Text = "Thông tin nhà cung cấp";
@@ -91,42 +91,42 @@
             // 
             dateTimePickerNgayNhap.CustomFormat = "dd/MM/yyyy";
             dateTimePickerNgayNhap.Format = DateTimePickerFormat.Custom;
-            dateTimePickerNgayNhap.Location = new Point(81, 183);
+            dateTimePickerNgayNhap.Location = new Point(124, 175);
             dateTimePickerNgayNhap.Name = "dateTimePickerNgayNhap";
             dateTimePickerNgayNhap.Size = new Size(233, 23);
             dateTimePickerNgayNhap.TabIndex = 11;
             // 
             // textBoxEmail
             // 
-            textBoxEmail.Location = new Point(81, 149);
+            textBoxEmail.Location = new Point(124, 141);
             textBoxEmail.Name = "textBoxEmail";
             textBoxEmail.Size = new Size(233, 23);
             textBoxEmail.TabIndex = 10;
             // 
             // textBoxSDT
             // 
-            textBoxSDT.Location = new Point(81, 122);
+            textBoxSDT.Location = new Point(124, 114);
             textBoxSDT.Name = "textBoxSDT";
             textBoxSDT.Size = new Size(233, 23);
             textBoxSDT.TabIndex = 9;
             // 
             // textBoxDiaChi
             // 
-            textBoxDiaChi.Location = new Point(81, 95);
+            textBoxDiaChi.Location = new Point(124, 87);
             textBoxDiaChi.Name = "textBoxDiaChi";
             textBoxDiaChi.Size = new Size(233, 23);
             textBoxDiaChi.TabIndex = 8;
             // 
             // textBoxTen
             // 
-            textBoxTen.Location = new Point(81, 68);
+            textBoxTen.Location = new Point(124, 60);
             textBoxTen.Name = "textBoxTen";
             textBoxTen.Size = new Size(233, 23);
             textBoxTen.TabIndex = 7;
             // 
             // textBoxID
             // 
-            textBoxID.Location = new Point(81, 41);
+            textBoxID.Location = new Point(124, 33);
             textBoxID.Name = "textBoxID";
             textBoxID.Size = new Size(233, 23);
             textBoxID.TabIndex = 6;
@@ -193,9 +193,9 @@
             groupBoxLoaiSanPham.Controls.Add(btnHuyThemLoai);
             groupBoxLoaiSanPham.Controls.Add(btnThemLoai);
             groupBoxLoaiSanPham.Controls.Add(dtgvLoaiSanPham);
-            groupBoxLoaiSanPham.Location = new Point(376, 0);
+            groupBoxLoaiSanPham.Location = new Point(413, 0);
             groupBoxLoaiSanPham.Name = "groupBoxLoaiSanPham";
-            groupBoxLoaiSanPham.Size = new Size(527, 230);
+            groupBoxLoaiSanPham.Size = new Size(559, 230);
             groupBoxLoaiSanPham.TabIndex = 1;
             groupBoxLoaiSanPham.TabStop = false;
             groupBoxLoaiSanPham.Text = "Loại sản phẩm";
@@ -252,13 +252,13 @@
             dtgvLoaiSanPham.Anchor = AnchorStyles.Top;
             dtgvLoaiSanPham.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dtgvLoaiSanPham.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dtgvLoaiSanPham.Location = new Point(3, 19);
+            dtgvLoaiSanPham.Location = new Point(-3, 22);
             dtgvLoaiSanPham.Name = "dtgvLoaiSanPham";
             dtgvLoaiSanPham.ReadOnly = true;
             dtgvLoaiSanPham.RowHeadersVisible = false;
             dtgvLoaiSanPham.RowTemplate.Height = 25;
             dtgvLoaiSanPham.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dtgvLoaiSanPham.Size = new Size(521, 153);
+            dtgvLoaiSanPham.Size = new Size(556, 153);
             dtgvLoaiSanPham.TabIndex = 0;
             dtgvLoaiSanPham.CellClick += dtgvLoaiSanPham_CellClick;
             dtgvLoaiSanPham.DataBindingComplete += dtgvLoaiSanPham_DataBindingComplete;
@@ -272,13 +272,13 @@
             dtgvSupplier.Anchor = AnchorStyles.Top;
             dtgvSupplier.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dtgvSupplier.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dtgvSupplier.Location = new Point(8, 404);
+            dtgvSupplier.Location = new Point(12, 404);
             dtgvSupplier.Name = "dtgvSupplier";
             dtgvSupplier.ReadOnly = true;
             dtgvSupplier.RowHeadersVisible = false;
             dtgvSupplier.RowTemplate.Height = 25;
             dtgvSupplier.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dtgvSupplier.Size = new Size(895, 174);
+            dtgvSupplier.Size = new Size(960, 174);
             dtgvSupplier.TabIndex = 3;
             dtgvSupplier.CellClick += dtgvSupplier_CellClick;
             dtgvSupplier.DataBindingComplete += dtgvSupplier_DataBindingComplete;
@@ -291,7 +291,7 @@
             groupBoxChucNang.Controls.Add(btnXacNhan);
             groupBoxChucNang.Controls.Add(btnSua);
             groupBoxChucNang.Controls.Add(btnThem);
-            groupBoxChucNang.Location = new Point(8, 235);
+            groupBoxChucNang.Location = new Point(45, 235);
             groupBoxChucNang.Name = "groupBoxChucNang";
             groupBoxChucNang.Size = new Size(895, 103);
             groupBoxChucNang.TabIndex = 4;
@@ -353,7 +353,7 @@
             // textBoxTimKiem
             // 
             textBoxTimKiem.Anchor = AnchorStyles.Top;
-            textBoxTimKiem.Location = new Point(339, 355);
+            textBoxTimKiem.Location = new Point(376, 355);
             textBoxTimKiem.Name = "textBoxTimKiem";
             textBoxTimKiem.Size = new Size(233, 23);
             textBoxTimKiem.TabIndex = 12;
@@ -363,7 +363,7 @@
             comboBoxTimKiem.Anchor = AnchorStyles.Top;
             comboBoxTimKiem.FormattingEnabled = true;
             comboBoxTimKiem.Items.AddRange(new object[] { "ID", "Tên", "Địa chỉ", "SĐT", "Email" });
-            comboBoxTimKiem.Location = new Point(578, 355);
+            comboBoxTimKiem.Location = new Point(615, 355);
             comboBoxTimKiem.Name = "comboBoxTimKiem";
             comboBoxTimKiem.Size = new Size(77, 23);
             comboBoxTimKiem.TabIndex = 13;
@@ -371,7 +371,7 @@
             // btnTimKiem
             // 
             btnTimKiem.Anchor = AnchorStyles.Top;
-            btnTimKiem.Location = new Point(258, 355);
+            btnTimKiem.Location = new Point(295, 355);
             btnTimKiem.Name = "btnTimKiem";
             btnTimKiem.Size = new Size(75, 23);
             btnTimKiem.TabIndex = 14;
@@ -382,7 +382,7 @@
             // btnLoad
             // 
             btnLoad.Anchor = AnchorStyles.Top;
-            btnLoad.Location = new Point(418, 584);
+            btnLoad.Location = new Point(455, 584);
             btnLoad.Name = "btnLoad";
             btnLoad.Size = new Size(75, 23);
             btnLoad.TabIndex = 15;
@@ -394,7 +394,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(910, 618);
+            ClientSize = new Size(984, 618);
             Controls.Add(btnLoad);
             Controls.Add(btnTimKiem);
             Controls.Add(comboBoxTimKiem);
