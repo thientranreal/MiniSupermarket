@@ -45,7 +45,7 @@ namespace MiniSupermarket.GUI
             forms = new Dictionary<string, Form>();
             forms.Add("Quản lý sản phẩm", new ProductManage());
             forms.Add("Quản lý loại sản phẩm", new ProductTypeManage());
-            forms.Add("Quản lý nhà cung cấp",new Supplier());
+            forms.Add("Quản lý nhà cung cấp", new Supplier());
             forms.Add("Quản lý bán hàng", new SaleForm());
             forms.Add("Quản lý chương trình khuyến mãi", new PromotionForm());
             forms.Add("Tài khoản", new UserAccount());

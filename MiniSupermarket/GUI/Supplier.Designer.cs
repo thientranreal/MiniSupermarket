@@ -252,13 +252,13 @@
             dtgvLoaiSanPham.Anchor = AnchorStyles.Top;
             dtgvLoaiSanPham.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dtgvLoaiSanPham.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dtgvLoaiSanPham.Location = new Point(-3, 22);
+            dtgvLoaiSanPham.Location = new Point(6, 22);
             dtgvLoaiSanPham.Name = "dtgvLoaiSanPham";
             dtgvLoaiSanPham.ReadOnly = true;
             dtgvLoaiSanPham.RowHeadersVisible = false;
             dtgvLoaiSanPham.RowTemplate.Height = 25;
             dtgvLoaiSanPham.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dtgvLoaiSanPham.Size = new Size(556, 153);
+            dtgvLoaiSanPham.Size = new Size(547, 153);
             dtgvLoaiSanPham.TabIndex = 0;
             dtgvLoaiSanPham.CellClick += dtgvLoaiSanPham_CellClick;
             dtgvLoaiSanPham.DataBindingComplete += dtgvLoaiSanPham_DataBindingComplete;
@@ -272,15 +272,16 @@
             dtgvSupplier.Anchor = AnchorStyles.Top;
             dtgvSupplier.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dtgvSupplier.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dtgvSupplier.Location = new Point(12, 404);
+            dtgvSupplier.Location = new Point(12, 400);
             dtgvSupplier.Name = "dtgvSupplier";
             dtgvSupplier.ReadOnly = true;
             dtgvSupplier.RowHeadersVisible = false;
             dtgvSupplier.RowTemplate.Height = 25;
             dtgvSupplier.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dtgvSupplier.Size = new Size(960, 174);
+            dtgvSupplier.Size = new Size(960, 196);
             dtgvSupplier.TabIndex = 3;
             dtgvSupplier.CellClick += dtgvSupplier_CellClick;
+            dtgvSupplier.CellContentClick += dtgvSupplier_CellContentClick;
             dtgvSupplier.DataBindingComplete += dtgvSupplier_DataBindingComplete;
             // 
             // groupBoxChucNang
@@ -382,7 +383,7 @@
             // btnLoad
             // 
             btnLoad.Anchor = AnchorStyles.Top;
-            btnLoad.Location = new Point(455, 584);
+            btnLoad.Location = new Point(698, 355);
             btnLoad.Name = "btnLoad";
             btnLoad.Size = new Size(75, 23);
             btnLoad.TabIndex = 15;

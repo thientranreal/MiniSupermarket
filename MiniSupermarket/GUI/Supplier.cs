@@ -121,6 +121,8 @@ namespace MiniSupermarket.GUI
 
         private void btnThem_Click(object sender, EventArgs e)
         {
+            btnThemLoai.Enabled = false;
+            btnXoaLoai.Enabled = false;
             foreach (Control c in groupBoxThongTinNCC.Controls)
             {
                 if (c.GetType() == typeof(TextBox))
@@ -179,7 +181,8 @@ namespace MiniSupermarket.GUI
             }
             else
             {
-                count = count + 1;
+                MessageBox.Show("Số điện thoại không hợp lệ", "Thông báo", MessageBoxButtons.OK);
+
             }
             if (ProjectRegex.IsEmail(textBoxEmail.Text))
             {
@@ -187,7 +190,8 @@ namespace MiniSupermarket.GUI
             }
             else
             {
-                count = count + 1;
+                MessageBox.Show("Email không hợp lệ", "Thông báo", MessageBoxButtons.OK);
+
             }
             if (count == 0)
             {
@@ -218,7 +222,7 @@ namespace MiniSupermarket.GUI
             }
             else
             {
-                MessageBox.Show("Thông tin bị bỏ trống hoặc không đúng format");
+                MessageBox.Show("Thông tin không được bỏ trống");
             }
         }
 
@@ -234,6 +238,8 @@ namespace MiniSupermarket.GUI
             btnHuy.Enabled = false;
             btnXacNhan.Enabled = false;
             btnThem.Enabled = true;
+            btnThemLoai.Enabled = true;
+            btnXoaLoai.Enabled = true;
 
             clickSua = false;
 
@@ -384,6 +390,7 @@ namespace MiniSupermarket.GUI
             btnThemLoai.Enabled = true;
             btnXacNhanLoai.Enabled = false;
             btnHuyThemLoai.Enabled = false;
+            dateTimePickerNgayNhap.Enabled = false;
 
             dataLoaiSanPham = supplierBUS.getAllFromSupplierDetail(textBoxID.Text);
             dtgvLoaiSanPham.DataSource = dataLoaiSanPham;
@@ -448,6 +455,11 @@ namespace MiniSupermarket.GUI
         {
             dataSupplier = supplierBUS.getAllFromSupplier();
             dtgvSupplier.DataSource = dataSupplier;
+        }
+
+        private void dtgvSupplier_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+
         }
     }
 }

@@ -569,7 +569,7 @@ BEGIN
 END;
 GO
 --Tìm thông tin theo ID nhà cung cấp
-Create PROCEDURE FindSupplierWithID
+ALTER PROCEDURE FindSupplierWithID
 	@ID varchar(10)
 AS
 BEGIN
@@ -580,11 +580,11 @@ BEGIN
 	Supplier.PhoneNumber AS [Số điện thoại],
 	Supplier.Email
 	FROM Supplier 
-	WHERE Supplier.SupplierID=@ID
+	WHERE Supplier.SupplierID=@ID AND Supplier.isDeleted=1
 END;
 GO
 --Tìm thông tin theo tên nhà cung cấp
-CREATE PROCEDURE FindSupplierWithName
+ALTER PROCEDURE FindSupplierWithName
 	@Name varchar(50)
 AS 
 BEGIN
@@ -595,7 +595,7 @@ BEGIN
 	Supplier.PhoneNumber AS [Số điện thoại],
 	Supplier.Email
 	FROM Supplier 
-	WHERE Supplier.[Name]=@Name
+	WHERE Supplier.[Name]=@Name AND Supplier.isDeleted=1
 END;
 GO
 --Tìm thông tin theo địa chỉ nhà cung cấp
@@ -738,7 +738,7 @@ BEGIN
 	Product.TypeID AS Loại,
 	Product.CurrentPrice AS Giá
 	FROM Product
-	WHERE NOT EXISTS (SELECT * FROM SupplierProduct WHERE Product.ProductID=SupplierProduct.ProductID);
+	WHERE NOT EXISTS (SELECT * FROM SupplierProduct WHERE Product.ProductID=SupplierProduct.ProductID AND SupplierProduct.SupplierID=@ID);
 		
 END;
 GO
