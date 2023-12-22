@@ -376,5 +376,25 @@ namespace MiniSupermarket.GUI
                 }
             }
         }
+
+        private void ckRoleManage_CheckedChanged(object sender, EventArgs e)
+        {
+            if (ds_qlcv.SelectedRows.Count > 0)
+            {
+                string roleName = ds_qlcv.SelectedRows[0].Cells["Name"].Value.ToString().ToLower();
+
+                // Check if the role name contains the word "admin" (case-insensitive)
+                if (roleName.Contains("admin"))
+                {
+                    ckRoleManage.Checked = true;
+
+                    ckRoleManage.Enabled = false;
+                }
+                else
+                {
+                    ckRoleManage.Enabled = true;
+                }
+            }
+        }
     }
 }
